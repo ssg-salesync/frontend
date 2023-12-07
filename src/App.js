@@ -1,3 +1,8 @@
+// import { useState } from 'react';
+import './App.css'
+// import GlobalStyle from './styles/GlobalStyle';
+// import Button from 'react-bootstrap/Button';
+import OrderModal from './components/OrderPopup';
 import { Reset } from "styled-reset"
 import { Route, Routes } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
@@ -20,6 +25,26 @@ import Footer from "./components/common/Footer";
 function App() {
   return (
     <>
+      {/* <GlobalStyle/>  */}
+    {/* <OrderModal show={orderModalOn} onHide={()=>setOrderModalOn(false)}/> */}
+    <header>
+      <div>
+        header
+      </div>
+      <OrderModal/>
+    </header>
+    <main>
+      <div>
+        main
+      </div>
+      </main>
+    <footer>
+      <div>
+       footer
+      </div>
+    </footer>
+    
+    
       <Header/>
       <Reset/>
       <GlobalStyle/>
@@ -39,8 +64,9 @@ function App() {
           <Route path="/order/:id/payment/cash" element={<CashPage/>}/>
         </Routes>
       <Footer/>
+
     </>
   );
 };
 
-export default App
+export default App;

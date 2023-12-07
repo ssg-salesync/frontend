@@ -1,0 +1,18 @@
+header{
+    height: 10vh;
+    width: 100%;
+    background: grey;
+}
+/* .header_main{
+    height: 8rem;
+    background: grey;
+} */
+main{
+    height: 80vh;
+    width: 100%;
+}
+footer{
+    height: 10vh;
+    width: 100%;
+    background: grey;
+}
