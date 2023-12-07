@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import Modal from 'react-modal';
+import { useState } from 'react';
 import { styled } from 'styled-components';
 import OrderItem from './OrderItem';
 import OrderList from './OrderList';
