@@ -1,9 +1,9 @@
-.itemImg {
+.item-image {
     width: 200px;
     height: 200px;
 }
   
-.cardContainer {
+.table-container {
     border-radius: 5px;
     box-shadow: 8px 10px 15px -2px rgba(0, 0, 0, 0.29);
     -webkit-box-shadow: 8px 10px 15px -2px rgba(0, 0, 0, 0.29);
@@ -11,7 +11,7 @@
     transition: transform 0.3s;
 }
   
-.cardContainer:hover {
+.table-container:hover {
     transform: scale(1.1) rotate(2deg);
 }
   
