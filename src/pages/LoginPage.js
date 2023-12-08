@@ -70,7 +70,7 @@ function LoginPage() {
             <Link to="/home">
               <LoginButton type="submit">로그인</LoginButton>
             </Link>
-            <Link to="/Login">
+            <Link to="/signup">
               <SignupButton type="submit">회원가입</SignupButton>
             </Link>
         </InsertDiv>
