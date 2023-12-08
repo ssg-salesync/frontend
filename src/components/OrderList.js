@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 const ListTable = styled.table`
     width : 90%;
     height : 5%;
