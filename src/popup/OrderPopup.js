@@ -4,7 +4,6 @@ import { styled } from 'styled-components';
 import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
 
-
 const modalStyle ={
     content: {
         top: '50%',
@@ -19,6 +18,7 @@ const modalStyle ={
         flexDirection: 'row',
       },
 };
+
 const PayDiv = styled.div`
     width: 30%;
     height: 20%;
@@ -50,7 +50,7 @@ function OrderPopup () {
 
     return(
         <>
-        <input type="button" value= "popup" onClick={openModal}/>
+        <input type="button" value= "orderPopup" onClick={openModal}/>
 
         <Modal isOpen={orderModalOn} onRequestClose={closeModal} style={modalStyle} contentLabel="Example Modal">
             {/* <ModalContent/> */}

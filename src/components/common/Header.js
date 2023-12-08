@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import OrderPopup from "../../popup/OrderPopup";
+import PaymentPopup from "../../popup/PaymentPopup";
 
 const HeaderDiv = styled.header`
     height: 10vh;
@@ -9,8 +10,9 @@ const HeaderDiv = styled.header`
 function Header() {
     return (
         <HeaderDiv>
-            header
-            <OrderPopup/>
+            <p>header</p>
+            <p>orderPopup : <OrderPopup/> </p>
+            <p>paymentPopup : <PaymentPopup/> </p>
         </HeaderDiv>    
     );
 };
