@@ -1,6 +1,18 @@
+import { styled } from "styled-components";
+
+const FooterDiv = styled.footer`
+    height: 10vh;
+    width: 100%;
+    background: grey;
+`
+
 function Footer() {
     return (
-        <h1>푸터컴포넌트입니다.</h1>
+        <FooterDiv>
+            <div>
+                footer
+            </div>
+        </FooterDiv>
     );
 };
 

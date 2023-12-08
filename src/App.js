@@ -2,9 +2,8 @@
 import './App.css'
 // import GlobalStyle from './styles/GlobalStyle';
 // import Button from 'react-bootstrap/Button';
-import { Reset } from "styled-reset"
-import OrderModal from './components/OrderPopup';
-import GlobalStyle from "./styles/GlobalStyle";
+// import { Reset } from "styled-reset"
+// import GlobalStyle from "./styles/GlobalStyle";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import Routing from './routes/Routing';
@@ -15,30 +14,19 @@ function App() {
     <>
       {/* <GlobalStyle/>  */}
     {/* <OrderModal show={orderModalOn} onHide={()=>setOrderModalOn(false)}/> */}
-    <header>
-      <div>
-        header
-      </div>
-      <OrderModal/>
-    </header>
+    <Header/>
     <main>
       <div>
-        main
+        <Routing/>
       </div>
-      </main>
-    <footer>
-      <div>
-       footer
-      </div>
-    </footer>
-    
-    
-      <Header/>
+    </main>
+    <Footer/>    
+{/*       
       <Reset/>
-      <GlobalStyle/>
-      <Routing/>
+      <GlobalStyle/> */}
+
        
-      <Footer/>
+
 
     </>
   );

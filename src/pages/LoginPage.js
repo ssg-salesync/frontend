@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 function LoginPage() {
     return (
         <>
-            <h1>로그인페이지입니다.</h1>
+            {/* <h1>로그인페이지입니다.</h1> */}
             <div>
                 <h2>Log In</h2>
                 <br/>
