@@ -3,24 +3,37 @@ import styled from 'styled-components';
 
 // 로그인 영역
 const LoginDiv = styled.div`
-width: 95%; /* 변경된 부분 */
-max-width: 600px; /* 변경된 부분 */
-height: auto; /* 변경된 부분 */
-margin: 4rem auto 0; /* 변경된 부분 */
+width: 95%;
+max-width: 600px;
+height: auto;
+margin: 4rem auto 0;
 overflow: hidden;
 background-color: white;
-padding: 40px; /* 변경된 부분 */
-border-radius: 20px; /* 변경된 부분 */
+padding: 40px;
+border-radius: 20px;
 `;
 
 // 로그인 영역 제목
 const LoginDivTitle = styled.div`
-height: 12rem; /* 변경된 부분 */
-font-size: 1.8rem; /* 변경된 부분 */
+height: 12rem;
+font-size: 1.8rem;
 font-weight: lighter;
 display: flex;
 align-items: center;
 justify-content: center;
+`;
+
+// 아이디, 비밀번호 입력 영역
+const InsertDiv = styled.div`
+margin: 30px auto;
+width: 400px;
+text-align: center;
+`;
+
+// 아이디, 비밀번호 입력칸
+const InputField = styled.input`
+  border: none;
+  border-bottom: 2px solid #289AFF;
 `;
 
 // 로그인 버튼
@@ -45,27 +58,14 @@ const SignupButton = styled.button`
   color: white;
 `;
 
-// 로그인, 회원가입 입력 영역
-const InsertDiv = styled.div`
-margin: 30px auto; /* 변경된 부분 */
-width: 400px; /* 변경된 부분 */
-text-align: center;
-`;
-
-// 로그인, 회원가입 입력칸
-const InputField = styled.input`
-  border: none;
-  border-bottom: 2px solid #289AFF;
-`;
-
 function LoginPage() {
     return (
       <LoginDiv>
         <LoginDivTitle>로그인</LoginDivTitle>
         <InsertDiv>
-          <InputField type="text" placeholder="아이디" />
+          <InputField type="text" placeholder="아이디"/>
           <br />
-          <InputField type="password" placeholder="비밀번호" />
+          <InputField type="password" placeholder="비밀번호"/>
           <br />
             <Link to="/home">
               <LoginButton type="submit">로그인</LoginButton>
@@ -77,6 +77,5 @@ function LoginPage() {
       </LoginDiv>
     );
 };
-  
 
 export default LoginPage;
