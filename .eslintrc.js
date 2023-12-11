@@ -27,6 +27,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off', // 해결할 수 없는 import 경로에 대한 경고 무시
     '@babel/plugin-proposal-private-property-in-object': 'off',
     "react/function-component-definition": 'off',
-    "react/prop-types": 'off'
+    "react/prop-types": 'off',
+    'no-unused-vars': 'off', // 사용하지 않는 함수 or 변수 사용시 오류  
   },
 };
