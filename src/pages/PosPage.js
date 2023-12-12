@@ -5,20 +5,33 @@ import PosItem from "../components/pos/PosItem";
 
 const FlexContainer = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 150px;
+    transition: padding-left 0.3s;
+    
+    @media (max-width: 768px) {
+        padding-left: 0px;
+    }
 `;
 
 const VerticalLine = styled.div`
-    border-left: 1px solid #ccc; /* 변경: border-left을 사용하여 선을 그림 */
-    height: 100vh; /* 화면 높이의 80%로 조정 (조정 가능) */
-    margin: 0 200px;
+    border-left: 1px solid #ccc;
+    height: 100vh;
+    display: block;
+    margin-left: 150px;
+    transition: margin-left 0.3s;
+    margin-right: 150px;
+    transition: margin-right 0.3s;
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+    }
 `;
 
 function PosPage() {
     return (
         <>
-            
             <FlexContainer>
                 <div>
                     <PosCategory />
@@ -26,13 +39,12 @@ function PosPage() {
                 <VerticalLine />
                 <div>
                     <PosItem />
+                    <Link to='/home'>
+                        <button type="submit">완료</button>
+                    </Link>
                 </div>
             </FlexContainer>
-            <div>
-                <Link to='/home'>
-                    <button type="submit">완료</button>
-                </Link>
-            </div>
+            <div />
         </>
     );
 };
