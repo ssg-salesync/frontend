@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
@@ -48,6 +48,11 @@ function OrderPopup () {
         setOrderModalOn(false)
     }
 
+    const [items,setItems] = useState(
+        [{ name: '품목 1', price: 1000, count: 2 },
+        { name: '품목 2', price: 2000, count: 1 },
+        { name: '품목 3', price: 1500, count: 3 }])
+
     return(
         <>
         <input type="button" value= "orderPopup" onClick={openModal}/>
@@ -57,14 +62,14 @@ function OrderPopup () {
             {/* 왼쪽 탭 화면 */}
             <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
-                <OrderItem/>
+                <OrderItem items = {items}/>
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}
             <div style={{ flex: 1.5, padding: '20px'}}>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
                 <h2>주문 목록</h2>                
-                <OrderList closeModal={closeModal}/>
+                <OrderList items ={items}/>
                 {/* <PayButton type='button' value="Close" onClick={()=>closeModal}/> */}
                 <PayDiv onClick={closeModal}>
                     <div style={{ flex: 3, borderRight: '1px solid #ccc'}}>
