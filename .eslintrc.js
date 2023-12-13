@@ -28,6 +28,7 @@ module.exports = {
     '@babel/plugin-proposal-private-property-in-object': 'off',
     "react/function-component-definition": 'off',
     "react/prop-types": 'off',
-    'no-unused-vars': 'off', // 사용하지 않는 함수 or 변수 사용시 오류  
+    'no-unused-vars': 'off', // 사용하지 않는 함수 or 변수 사용시 오류
+    'import/prefer-default-export': 'off'
   },
 };
