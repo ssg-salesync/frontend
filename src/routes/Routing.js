@@ -26,10 +26,10 @@ function Routing() {
             <Route path="/mypage/myprofile" element={<MyProfilePage/>}/>
             <Route path="/mypage/storeprofile" element={<StoreProfilePage/>}/>
             <Route path="/mypage/dashboard" element={<DashboardPage/>}/>
-            <Route path="/order/:id" element={<OrderPopup/>}/>
-            <Route path="/order/:id/payment" element={<PaymentPage/>}/>
-            <Route path="/order/:id/payment/card" element={<CardPage/>}/>
-            <Route path="/order/:id/payment/cash" element={<CashPage/>}/>
+            <Route path="/order/:tableId" element={<OrderPopup/>}/>
+            <Route path="/order/:tableId/payment" element={<PaymentPage/>}/>
+            <Route path="/order/:tableId/payment/card" element={<CardPage/>}/>
+            <Route path="/order/:tableId/payment/cash" element={<CashPage/>}/>
         </Routes>
     );
 };

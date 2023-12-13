@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
-import { useState } from 'react';
 // import { styled } from 'styled-components';
+import {  useLocation } from 'react-router-dom';
 import PaymentList from "../components/payment/PaymentList";
 import PaymentWay from "../components/payment/PaymentWay";
 
@@ -22,36 +22,40 @@ const modalStyle ={
 // 모달을 위한 루트 엘리먼트 설정
 Modal.setAppElement('#root');
 
-function PaymentPopup() {
+/* eslint-disable*/
+function PaymentPopup({openPaymentPopup,closePaymentPopup,closeOrderPopup, tableId}) {
+console.log("PaymentPopup-tableId",tableId)
+    // const [payModalOn, setPayModalOn] = useState(false); 
 
-    const [payModalOn, setPayModalOn] = useState(false); 
+    // const openModal = () => {
+    //     /* eslint-disable no-console */
+    //     console.log(payModalOn)
 
-    const openModal = () => {
-        /* eslint-disable no-console */
-        console.log(payModalOn)
-
-        setPayModalOn(true)
-    }
-    const closeModal = () => {
-        setPayModalOn(false)
-    }
+    //     setPayModalOn(true)
+    // }
+    // const closeModal = () => {
+    //     setPayModalOn(false)
+    // }
+    const location = useLocation();
 
     return (
         <>
-        <input type="button" value= "PayPopup" onClick={openModal}/>
+        {/* <input type="button" value= "PayPopup" onClick={openModal}/> */}
 
-        <Modal isOpen={payModalOn} onRequestClose={closeModal} style={modalStyle} contentLabel="Example Modal">
+        <Modal isOpen={openPaymentPopup} onRequestClose={closePaymentPopup} style={modalStyle} contentLabel="PaymentPopup">
             {/* <ModalContent/> */}
+            <p>{location.pathname}</p>
             {/* 왼쪽 탭 화면 */}
+            <button type='button' onClick={closePaymentPopup}>OrderPopup</button>
             <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
-                <PaymentList closeModal={closeModal}/>
+                <PaymentList closeModal={closePaymentPopup}/>
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}
             <div style={{ flex: 1.5, padding: '20px'}}>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}              
-                <PaymentWay closeModal={closeModal}/>
+                <PaymentWay closePaymentPopup={closePaymentPopup} closeOrderPopup={closeOrderPopup} tableId={tableId}/>
             </div>
         </Modal>
         </>

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Modal from 'react-modal';
 import { styled } from 'styled-components';
 
@@ -41,21 +40,19 @@ const PayIngDiv = styled.div`
     flex-direction: column;
 `
 
-function CardPopup() {
-    const [cardModalOn, setCardModalOn] = useState(false);
+function CardPopup({openCardPopup, closeCardPopup}) {
+    // const [cardModalOn, setCardModalOn] = useState(false);
 
-    const openModal =() =>{
-        setCardModalOn(true);
-    }
+    // const openModal =() =>{
+    //     setCardModalOn(true);
+    // }
 
-    const closeModal = () =>{
-        setCardModalOn(false);
-    }
+    // const closeModal = () =>{
+    //     setCardModalOn(false);
+    // }
     return (
-        <>
-        {/* <input type="button" value= "cardPopup" onClick={openModal}/> */}
-        <Button type='button' onClick={openModal}>카드</Button>
-        <Modal isOpen={cardModalOn} onRequestClose={closeModal} style={modalStyle} contentLabel="Example Modal">
+
+        <Modal isOpen={openCardPopup} isClose={closeCardPopup} style={modalStyle} contentLabel="CardPopup">
             {/* <ModalContent/> */}
             <CardDiv style={{width: '100%', height: '100%', }}>
             <PayIngDiv>
@@ -64,7 +61,6 @@ function CardPopup() {
             </PayIngDiv>
             </CardDiv>
         </Modal>
-        </>
     );
 };
 
