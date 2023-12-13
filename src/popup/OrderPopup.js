@@ -1,8 +1,11 @@
 import Modal from 'react-modal';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
+import PaymentPopup from './PaymentPopup';
+
 
 const modalStyle ={
     content: {
@@ -34,19 +37,33 @@ const PayDiv = styled.div`
 // 모달을 위한 루트 엘리먼트 설정
 Modal.setAppElement('#root');
 
-function OrderPopup () {
+function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
+    /* eslint-disable no-console */
+    console.log("OrderPopup-tableId",tableId)
+    // const [orderModalOn, setOrderModalOn] = useState(false); 
 
-    const [orderModalOn, setOrderModalOn] = useState(false); 
+    // const openOrderPopup = () => {
+    //     /* eslint-disable no-console */
+    //     console.log(orderModalOn)
 
-    const openModal = () => {
-        /* eslint-disable no-console */
-        console.log(orderModalOn)
-
-        setOrderModalOn(true)
+    //     setOrderModalOn(true)
+    // }
+    // const closeOrderPopup = () => {
+    //     setOrderModalOn(false)
+    // }
+    const [paymentPopupOn, setPaymentPopupOn] = useState(false);
+    const openPaymentPopup =() =>{
+        setPaymentPopupOn(true)
     }
-    const closeModal = () => {
-        setOrderModalOn(false)
+    const closePaymentPopup =() =>{       
+        /* eslint-disable no-console */ 
+        console.log("3-closePaymentPopup함수")
+        setPaymentPopupOn(false)
+        closeOrderPopup()        
     }
+
+    // 팝업주소
+    const location = useLocation();
 
     const [items,setItems] = useState(
         [{ name: '품목 1', price: 1000, count: 2 },
@@ -54,12 +71,15 @@ function OrderPopup () {
         { name: '품목 3', price: 1500, count: 3 }])
 
     return(
+        // {/* <input type="button" value= "orderPopup" onClick={openOrderPopup}/> */}
         <>
-        <input type="button" value= "orderPopup" onClick={openModal}/>
-
-        <Modal isOpen={orderModalOn} onRequestClose={closeModal} style={modalStyle} contentLabel="Example Modal">
+        <Modal isOpen={openOrderPopup} isClose={closeOrderPopup} style={modalStyle} contentLabel="orderPopup">
             {/* <ModalContent/> */}
+            <div>
+            <p>useLocation : {location.pathname}</p>
             {/* 왼쪽 탭 화면 */}
+            <button type='button' onClick={closeOrderPopup}>테이블</button>
+            </div>
             <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
                 <OrderItem items = {items}/>
@@ -70,17 +90,20 @@ function OrderPopup () {
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
                 <h2>주문 목록</h2>                
                 <OrderList items ={items}/>
-                {/* <PayButton type='button' value="Close" onClick={()=>closeModal}/> */}
-                <PayDiv onClick={closeModal}>
-                    <div style={{ flex: 3, borderRight: '1px solid #ccc'}}>
+                {/* <PayButton type='button' value="Close" onClick={()=>closeOrderPopup}/> */}
+                <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); openPaymentPopup(); }}>
+                <PayDiv>
+                    <div style={{ flex: 3, display:'flex', 'alignItems': 'center','justify-content': 'center'}}>
                         총 결제금액
                     </div>
-                    <div style={{ flex: 1.5}}>
+                    <div style={{ flex: 1.5, display:'flex', 'alignItems': 'center','justify-content': 'center'}}>
                         결제하기
                     </div>
                 </PayDiv>
+                </Link>
             </div>
         </Modal>
+        {paymentPopupOn && <PaymentPopup openPaymentPopup={openPaymentPopup} closePaymentPopup={closePaymentPopup} closeOrderPopup={closeOrderPopup} tableId={tableId}/>}
         </>
     )
 };

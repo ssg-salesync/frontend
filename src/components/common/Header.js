@@ -11,7 +11,6 @@ function Header() {
     return (
         <HeaderDiv>
             <p>header</p>
-            <p>orderPopup : <OrderPopup/> </p>
             <p>paymentPopup : <PaymentPopup/> </p>
         </HeaderDiv>    
     );

@@ -1,6 +1,7 @@
-import React from "react";
+import {React ,useState} from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import OrderPopup from "../../popup/OrderPopup";
 
 const TableDiv = styled.div`
     display: grid;
@@ -24,7 +25,6 @@ const TableDiv = styled.div`
         grid-template-columns: 200px;
     }
 `;
-
 const TableContainer = styled.div`
     width: 200px;
     height: 200px;
@@ -41,25 +41,46 @@ const TableContainer = styled.div`
         transform: scale(1.1) rotate(2deg);
     }
 `;
-
+/* eslint-disable*/
 function HomeTable() {
+    const [orderModalOn, setOrderModalOn] = useState(false);
+    const [selectedTableId, setSelectedTableId] = useState(null);
 
+    const openOrderPopup = (tableId) => {
+        // console.log("openOrderPopup-tableId",tableId)
+        setOrderModalOn(true)
+        setSelectedTableId(tableId)
+        // console.log("openOrderPopup-tableId",tableId)
+    }
+    const closeOrderPopup = () => {
+         console.log("4-closeOrderPopup답")
+        setSelectedTableId(null)
+        setOrderModalOn(false)
+        
+        // console.log("closeOrderPopup-tableId",tableId)
+    }
     // 테이블1 ~ 테이블8 더미데이터
     const tables = Array.from({ length: 8 }, (_, index) => index + 1);
+    // const [tables,setTables] = useState([...Array(8).keys()]);
 
     return (
+        <>
         <TableDiv>
-            {tables.map((id) => (
-                <Link to={`/order/${id}`} key={id}>
+            {tables.map((tableId) => (
+                <Link to={`/order/${tableId}`} key={tableId} onClick={(e) => { e.preventDefault(); openOrderPopup(tableId); }}>
                     <TableContainer>
                         <div>
-                            <span>테이블 {id}</span>
+                            <span>테이블{tableId}</span>
                         </div>
                     </TableContainer>
                 </Link>
             ))}
         </TableDiv>
+
+        {orderModalOn && <OrderPopup openOrderPopup={openOrderPopup} closeOrderPopup={closeOrderPopup} tableId={selectedTableId}/>}        
+        {/* {orderModalOn && <OrderPopup openOrderPopup={openOrderPopup} closeOrderPopup={closeOrderPopup}/>}         */}
+        
+        </>
     );
 }
-
 export default HomeTable;
