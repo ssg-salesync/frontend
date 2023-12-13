@@ -8,7 +8,7 @@ const ListTable = styled.table`
 `
 /* eslint-disable */
 function OrderList(items){
-
+    console.log(items)
     return(
         <ListTable>
             <tbody>
