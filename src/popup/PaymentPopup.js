@@ -1,6 +1,5 @@
 import Modal from 'react-modal';
 // import { styled } from 'styled-components';
-import {  useLocation } from 'react-router-dom';
 import PaymentList from "../components/payment/PaymentList";
 import PaymentWay from "../components/payment/PaymentWay";
 
@@ -36,17 +35,14 @@ console.log("PaymentPopup-tableId",tableId)
     // const closeModal = () => {
     //     setPayModalOn(false)
     // }
-    const location = useLocation();
-
     return (
         <>
         {/* <input type="button" value= "PayPopup" onClick={openModal}/> */}
 
         <Modal isOpen={openPaymentPopup} onRequestClose={closePaymentPopup} style={modalStyle} contentLabel="PaymentPopup">
             {/* <ModalContent/> */}
-            <p>{location.pathname}</p>
             {/* 왼쪽 탭 화면 */}
-            <button type='button' onClick={closePaymentPopup}>OrderPopup</button>
+            <button type='button' onClick={closePaymentPopup} style={{width:'10%',height:'5%'}}>Back</button>
             <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
                 <PaymentList closeModal={closePaymentPopup}/>
