@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { ItemState } from "../../recoil/atoms/ItemState";
 
 const TabDiv = styled.div`
     height : 90%;
@@ -45,43 +47,63 @@ const Menu = styled.div`
     background-color : gray;    
 `
 /* eslint-disable */
-function OrderItem(items) {
+function OrderItem() {
     // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
-    const [currentTab, setCurrentTab] = useState("0");
-    console.log("Item:", items.items)
-    const menuArr = items.items;
-    // const [menuArr, setMenuArr] = useState([
-    //     { name: '커피', content1: {menu:'아메리카노',price: 3000, count : 3 }, content2: {menu:'카페라떼',price: 3500, count : 0 }},
-    //     { name: '디저트', content1: {menu: '초코케이크',price: 7500, count : 4 },content2:{ menu:'생크림케이크',price : 8000, count:0 }},
-    //     { name: '기타', content1: {menu: '시럽',price: 500, count : 4 }}
-    // ]);
-    // menuArr = [
-    //     { name: '커피', content1: {menu:'아메리카노',price: 3000, count : 3 }, content2: {menu:'카페라떼',price: 3500, count : 0 }},
-    //     { name: '디저트', content1: {menu: '초코케이크',price: 7500, count : 4 },content2:{ menu:'생크림케이크',price : 8000, count:0 }},
-    //     { name: '기타', content1: {menu: '시럽',price: 500, count : 4 }}
-    // ];
+    const [currentTab, setCurrentTab] = useState("");
 
-    const selectMenuHandler = (name) => {
+    const [menu,setMenu] = useRecoilState(ItemState);
+
+    const selectMenuHandler = (category) => {
         // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
         // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
-        setCurrentTab(name);
+        setCurrentTab(category);
       };
 
-    const countMinus = (key)=>{
-        const updatedMenuArr = [...menuArr];            
-        const menuIndex = menuArr.findIndex(item => item.name === currentTab);
-        const contentIndex = key.split('content')[1];
-        updatedMenuArr[menuIndex][`content${contentIndex}`].count-= 1;
-        setMenuArr(updatedMenuArr);
+    const countMinus = (itemIdx, cateIdx)=>{
+        const newData = menu.map(category => ({
+            ...category,
+            items: category.items.map(item => {
+            
+            if (item.item_id === itemIdx && category.category_id === cateIdx) {
+                // 특정 category_id와 item_id에 해당하는 아이템의 count를 업데이트
+                if (item.count > 0){
+                    return {
+                        ...item,
+                        count: item.count -1, // 원하는 값으로 변경
+                      };
+                }                
+            }
+              return item;
+            }),
+          }));        
+        setMenu(newData);
     };
-    const countPlus = (key)=>{
-            const updatedMenuArr = [...menuArr];            
-            const menuIndex = menuArr.findIndex(item => item.name === currentTab);
-            const contentIndex = key.split('content')[1];
-            updatedMenuArr[menuIndex][`content${contentIndex}`].count+= 1;
-            setMenuArr(updatedMenuArr);
+    const countPlus = (itemIdx,cateIdx)=>{
+        const newData = menu.map(category => ({
+            ...category,
+            items: category.items.map(item => {
+              if (item.item_id === itemIdx && category.category_id === cateIdx) {
+                // 특정 category_id와 item_id에 해당하는 아이템의 count를 업데이트
+                return {
+                  ...item,
+                  count: item.count +1, // 원하는 값으로 변경
+                };
+              }
+              return item;
+            }),
+          }));
+        setMenu(newData);
     };
+    // const uniqueCategories = Array.from(new Set(items.items.map(item => item.category_id)));
+    useEffect(()=>{
+        // 처음 화면 렌더링될때 첫번째 탭에 focus
+        //console.log(menu)
+        setCurrentTab(menu[0].category_id)
+        
+    },[])
+    useEffect(()=>{
 
+    },[menu])
     return(
         <TabDiv>
             <TabMemu>
@@ -90,33 +112,37 @@ function OrderItem(items) {
                 {/* <li className="submenu">{menuArr[0].name}</li>
                     <li className="submenu">{menuArr[1].name}</li>
                     <li className="submenu">{menuArr[2].name}</li> */}
-                {menuArr.map((el) => (
-                    <SubMenu
-                        key={el.name}
-                        className={el.name === currentTab ? "tab focused" : "tab"}
-                        onClick={() => selectMenuHandler(el.name)}>{el.name}</SubMenu>
+                {menu.map((cate) => (
+                    // console.log("===",cate)
+                    <SubMenu key={cate.category_id} className={cate.category_id === currentTab ? "tab focused" : "tab"} onClick={() => selectMenuHandler(cate.category_id)}>{cate.category_name}</SubMenu>
                 ))}
+
+                {/* {uniqueCategories.map(categoryId => (
+                    <SubMenu key={categoryId} onClick={() => setActiveCategory(categoryId)}>
+                        Category {categoryId}
+                    </SubMenu>
+                ))} */}
+
+
             </TabMemu>
-            {menuArr.map((menu) => (menu.name === currentTab && (
-            <Item key={menu.name}>
-                {Object.keys(menu).map((key) => key.startsWith('content') ? (
-                    <Menu key={key} className="menu-item">
-                        <div>
-                            <p>{menu[key].menu}</p>
-                            <p>가격: {menu[key].price}원</p>
-                        </div>
-                        <div>
-                            <button type="button" onClick={() =>countMinus(key)}>-</button>
-                            <button type="button">{menu[key].count}</button>  
-                            <button type="button" onClick={()=>countPlus(key)}>+</button> 
-                        </div>
-                        
-                    </Menu>
-                    ) : null
-                )}
-            </Item>
+            {menu.map((cate, cateIdx) => (cate.category_id === currentTab && (
+                <Item key={cate.category_id}>
+                    {cate.items.map((item,itemIdx) => (
+                        <Menu key={item.item_id}>
+                            <div>
+                                <p>{item.name}</p>
+                                <p>{item.price} </p>                                
+                            </div>
+                            <div>
+                                <button type="button" onClick={() =>countMinus(item.item_id,cate.category_id)}>-</button>
+                                <button type="button">{item.count}</button>  
+                                <button type="button" onClick={()=>countPlus(item.item_id,cate.category_id)}>+</button> 
+                            </div>
+                        </Menu>
+                    ))}
+                </Item>
                 )
-                ))}
+            ))}
         </TabDiv>
     )
 }
