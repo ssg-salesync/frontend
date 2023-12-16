@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";   // 읽기 전용
+import { ItemState } from "../../recoil/atoms/ItemState";
 
 const ListTable = styled.table`
     width : 80%;
@@ -28,28 +30,33 @@ const PayDiv = styled.div`
     flex-direction: column;
 
 `
-
 function PaymentList() {
-    // 각 품목의 정보를 배열로 정의
-    const items = [
-        { name: '품목 1', price: 1000, count: 2 },
-        { name: '품목 2', price: 2000, count: 1 },
-        { name: '품목 3', price: 1500, count: 3 },
-        { name: '품목 4', price: 1500, count: 4 },
-    ]
+    const menu = useRecoilValue(ItemState)
+    const totalAmountCalculate = () =>{
+        let totalPrice = 0;
 
+        menu.forEach((category) => {
+            category.items.forEach((item) => {
+              totalPrice += item.price * item.count;
+            });
+          });
+      
+          return totalPrice;
+    };
     return (
         <>
         <div style={{height:'60%','justify-content': 'center', display: 'flex', marginTop: '10%'}}>
             <ListTable>
                 <tbody>
                 {/* 각 품목을 나열하는 매핑 작업 */}
-                {items.map((item, index) => (
-                    <ListTableTr key={index.id}>
-                        <ListTableTd>{item.name}</ListTableTd>
-                        <ListTableTd>{item.price}원</ListTableTd>
-                        <ListTableTd>{item.count}개</ListTableTd>
-                    </ListTableTr>
+                {menu.map((category) => (category.items.map((item) => (
+                    item.count !== 0 && (<ListTableTr key={item.item_id}>
+                            <ListTableTd>{category.category_name}</ListTableTd>
+                            <ListTableTd>{item.name}</ListTableTd>
+                            <ListTableTd>{item.price}원</ListTableTd>
+                            <ListTableTd>{item.count}개</ListTableTd>
+                        </ListTableTr>)
+                    ))
                 ))}
                 </tbody>
             </ListTable>
@@ -63,7 +70,7 @@ function PaymentList() {
                     결제하기
                 </div> */}
                     <div>총 결제금액</div>
-                    <div>0000원</div>
+                    <div>{totalAmountCalculate()}원</div>
             </PayDiv>
         </div>
         </>
