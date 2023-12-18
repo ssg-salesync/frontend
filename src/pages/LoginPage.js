@@ -64,9 +64,9 @@ function LoginPage() {
         <LoginDivTitle>로그인</LoginDivTitle>
         <InsertDiv>
           <InputField type="text" placeholder="아이디"/>
-          <br />
+          <br/>
           <InputField type="password" placeholder="비밀번호"/>
-          <br />
+          <br/>
             <Link to="/home">
               <LoginButton type="submit">로그인</LoginButton>
             </Link>

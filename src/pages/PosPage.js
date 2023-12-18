@@ -1,51 +1,185 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import { useState } from "react";
 import PosCategory from "../components/pos/PosCategory";
 import PosItem from "../components/pos/PosItem";
 
-const FlexContainer = styled.div`
+// 이전 코드
+// const FlexContainer = styled.div`
+//     display: flex;
+//     justify-content: flex-start;
+//     align-items: center;
+//     padding-left: 150px;
+//     transition: padding-left 0.3s;
+//     @media (max-width: 768px) {
+//         padding-left: 0px;
+//     }
+// `;
+
+// 컴포넌트 전체 영역
+const ComponentDiv = styled.div`
+    height: 80vh;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 150px;
-    transition: padding-left 0.3s;
-    
-    @media (max-width: 768px) {
-        padding-left: 0px;
-    }
 `;
 
+// PosCategory 컴포넌트 영역
+const PosCategoryDiv = styled.div`
+    height: 100%;
+    width: 30%;
+`;
+
+// 세로선 영역
+const VerticalLineDiv = styled.div`
+    height: 100%;
+    width: 8%;
+    margin-left: 3%;
+`;
+
+// PosItem, 완료 버튼 전체 영역
+const PosItemSubmitButtonDiv = styled.div`
+    heigth: 100%;
+    width: 56%
+`;
+
+// PosItem 컴포넌트 영역
+const PosItemDiv = styled.div`
+    height: 80%;
+    width: 100%;
+`;
+
+// 완료 버튼 영역
+const SubmitButtonDiv = styled.div`
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+`;
+
+// 세로선
 const VerticalLine = styled.div`
     border-left: 1px solid #ccc;
-    height: 100vh;
-    display: block;
-    margin-left: 150px;
-    transition: margin-left 0.3s;
-    margin-right: 150px;
-    transition: margin-right 0.3s;
-
-    @media (max-width: 768px) {
-        margin-left: 0;
-    }
+    height: 100%;
+    display: flex;
 `;
 
+// 여백의 미
+const NoDiv = styled.div`
+    height: 100%;
+    width: 6%;
+    color: white;
+`;
+
+// 완료 버튼
+const SubmitButton = styled.button`
+  width: 150%;
+  height: 50%;
+  margin-right: 20%; 
+  border: 1px solid #ccc;
+  border-radius: 8%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 480px) {
+    font-size: 60%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    font-size: 80%;
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 120%;
+  }
+`;
+
+
 function PosPage() {
+
+    // 카테고리 dummydata
+    const categoryData = [
+        { id: 1, name: '카테고리 1' },
+        { id: 2, name: '카테고리 2' },
+        { id: 3, name: '카테고리 3' }
+      ];
+
+    // 아이템 dummydata
+    const itemData = [
+    {
+        "categories": [
+            {
+                "category_id": 1,
+                "category_name": "카테고리 1",
+                "items": [
+                    {
+                        "item_id": 1,
+                        "name": "아이템 1",
+                        "price": 1111
+                    },
+                    {
+                        "item_id": 2,
+                        "name": "아이템 2",
+                        "price": 2222
+                    },
+                    {
+                        "item_id": 3,
+                        "name": "아이템 3",
+                        "price": 3333
+                    }
+                ]
+            },
+            {
+                "category_id": 2,
+                "category_name": "카테고리 2",
+                "items": [
+                    {
+                        "item_id": 4,
+                        "name": "아이템 4",
+                        "price": 4444
+                    },
+                    {
+                        "item_id": 5,
+                        "name": "아이템 5",
+                        "price": 5555
+                    },
+                    {
+                        "item_id": 3,
+                        "name": "아이템 6",
+                        "price": 6666
+                    }
+                ]
+            }
+        ]
+    }
+    ];
+
+    // PosCategory에서 CategoryButton 클릭 시 받아올 Category 데이터 상태 저장
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
     return (
-        <>
-            <FlexContainer>
-                <div>
-                    <PosCategory />
-                </div>
-                <VerticalLine />
-                <div>
-                    <PosItem />
-                    <Link to='/home'>
-                        <button type="submit">완료</button>
+        <ComponentDiv>
+            <PosCategoryDiv>
+                <PosCategory categoryData={categoryData} setSelectedCategory={setSelectedCategory}/>
+            </PosCategoryDiv>
+            <VerticalLineDiv>
+                <VerticalLine/>
+            </VerticalLineDiv>
+            <PosItemSubmitButtonDiv>
+                <PosItemDiv>
+                    {/* Category의 id만 빼서 PosItem으로 전달 */}
+                    <PosItem  itemData={itemData}  selectedCategoryId={selectedCategory ? selectedCategory.id : null} />
+                </PosItemDiv>
+                <SubmitButtonDiv>
+                    <Link to="/home">
+                        <SubmitButton>완료</SubmitButton>
                     </Link>
-                </div>
-            </FlexContainer>
-            <div />
-        </>
+                </SubmitButtonDiv>
+            </PosItemSubmitButtonDiv>
+            <NoDiv/>
+        </ComponentDiv>
     );
 };
 
