@@ -1,9 +1,9 @@
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import { ItemState } from '../recoil/atoms/ItemState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { ItemState,TotalPrice } from '../recoil/atoms/ItemState';
 import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
 import PaymentPopup from './PaymentPopup';
@@ -56,19 +56,25 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
     //     { name: '기타', content1: {menu: '시럽',price: 500, count : 4 }}
     // ])
     const menu = useRecoilValue(ItemState)
+    const [totalPrice, setTotalPrice] = useRecoilState(TotalPrice)
     
     const totalAmountCalculate = () =>{
-        let totalPrice = 0;
+
+        let newTotalPrice =0 
 
         menu.forEach((category) => {
             category.items.forEach((item) => {
-              totalPrice += item.price * item.count;
+              newTotalPrice += item.price * item.count;
             });
           });
-      
-          return totalPrice;
+          
+        setTotalPrice(newTotalPrice)
+        // return newTotalPrice;
     };
 
+    useEffect(()=>{
+        totalAmountCalculate()
+    },[menu])
     return(
         // {/* <input type="button" value= "orderPopup" onClick={openOrderPopup}/> */}
         <>
@@ -90,7 +96,8 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
                 <button type='button' onClick={closeOrderPopup}>테이블</button>
                 <PayDiv>
                     <div style={{ flex: 3, display:'flex', 'alignItems': 'center','justify-content': 'center'}}>
-                        <p>총 결제금액 : {totalAmountCalculate()}원</p>
+                        {/* <p>총 결제금액 : {totalAmountCalculate()}원</p> */}
+                        <p>총 결제금액 : {totalPrice}원</p>
                     </div>
                     <div style={{ flex: 1.5, display:'flex', 'alignItems': 'center','justify-content': 'center'}}>
                         결제하기
