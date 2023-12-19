@@ -29,7 +29,7 @@ module.exports = {
     "react/function-component-definition": 'off',
     "react/prop-types": 'off',
     'no-unused-vars': 'off', // 사용하지 않는 함수 or 변수 사용시 오류
-    'react/no-array-index-key': 'off'  // 배열 내부 요소 고유한 키 없어서 각 요소 추적 어려움 무시
+    'react/no-array-index-key': 'off',  // 배열 내부 요소 고유한 키 없어서 각 요소 추적 어려움 무시
     'import/prefer-default-export': 'off'
   },
 };
