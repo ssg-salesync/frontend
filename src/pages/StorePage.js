@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
+import { useState } from "react";
+import { useRecoilState } from 'recoil';
+import { StoreState } from "../recoil/atoms/StoreState";
+import { StorePostApi } from "../api/Auth/StorePostApi";
+
+/* eslint-disable */
 
 // 매장정보 영역
 const StoreDiv = styled.div`
@@ -45,23 +51,83 @@ const NextButton = styled.button`
   border-color: #289AFF;
   background-color: #289AFF;
   color: white;
+  cursor: pointer;
 `;
 
 function StorePage() {
+
+  // 회원가입 페이지에서 등록한 recoil 전역상태 데이터
+  const signupData = useRecoilState(StoreState)
+
+  // console.log('데이터 : ', signupData[0])
+
+  // 나머지 매장 등록 데이터
+  const [storeData, setStoreData] = useState({
+    storeName: '',
+    address: '',
+    storeType: ''
+  });
+
+  // 모든 데이터 합치기
+  const storesData = { ...signupData[0], ...storeData };
+
+  // console.log(storesData)
+
+  const handlerNextClick = () => {
+    const data = {
+      username: storesData.username,
+      password: storesData.password,
+      owner_name: storesData.ownerName,
+      phone: storesData.phone,
+      store_name: storesData.storeName,
+      address: storesData.address,
+      store_type: storesData.storeType
+    };
+
+    StorePostApi(data)
+      .then(res => {
+        console.log('API 호출 성공:', res);
+      })
+      .catch(error => {
+        console.error('API 호출 실패:', error);
+      });
+  };
+
+  const handlerInputChange = (e) => {
+    const { name, value } = e.target;
+    setStoreData({ ...storeData, [name]: value });
+  };
+
     return (
       <StoreDiv>
         <StoreDivTitle>매장을 등록해주세요</StoreDivTitle>
         <InsertDiv>
-          <InputField type="text" placeholder="매장명"/>
+          <InputField
+            type="text"
+            name="storeName"
+            value={storeData.storeName}
+            onChange={handlerInputChange}
+            placeholder="매장명"
+          />
           <br/>
-          <InputField type="text" placeholder="매장명"/>
+          <InputField
+            type="text"
+            name="address"
+            value={storeData.address}
+            onChange={handlerInputChange}
+            placeholder="주소"
+          />
           <br/>
-          <InputField type="text" placeholder="주소"/>
-          <br/>
-          <InputField type="text" placeholder="업종"/>
+          <InputField
+            type="text"
+            name="storeType"
+            value={storeData.storeType}
+            onChange={handlerInputChange}
+            placeholder="업종"
+          />
           <br/>
             <Link to="/signup/stores/pos">
-              <NextButton type="submit">다음</NextButton>
+              <NextButton type="submit" onClick={handlerNextClick}>다음</NextButton>
             </Link>
         </InsertDiv>
       </StoreDiv>
