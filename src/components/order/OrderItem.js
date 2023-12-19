@@ -102,8 +102,9 @@ function OrderItem() {
         
     },[])
     useEffect(()=>{
-
+        setMenu(menu)
     },[menu])
+    
     return(
         <TabDiv>
             <TabMemu>

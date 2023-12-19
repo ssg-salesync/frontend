@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { useRecoilValue } from "recoil";   // 읽기 전용
 import { styled } from 'styled-components';
+import { TotalPrice } from '../recoil/atoms/ItemState';
 
 const modalStyle ={
     content: {
@@ -66,7 +68,8 @@ function CashPopup({openCashPopup, closeCashPopup}) {
     // 받은금액
     const [receiveAmount, setReceiveAmount] = useState(0);
     // 결제금액
-    const [paymentAmount, setPaymentAmount] = useState(15000);
+    // const [paymentAmount, setPaymentAmount] = useState(15000);
+    const totalPrice = useRecoilValue(TotalPrice)
     // 거스름돈
     const [change, setChange] = useState(0);
 
@@ -98,7 +101,7 @@ function CashPopup({openCashPopup, closeCashPopup}) {
     useEffect(() => {
         // 받은금액 변경될때마다 거스름돈 계산
         console.log("useEffect - receiveAmount ")
-        setChange(receiveAmount - paymentAmount)
+        setChange(receiveAmount - totalPrice)
     },[receiveAmount]);
 
     const payComplete =() =>{
@@ -122,7 +125,7 @@ function CashPopup({openCashPopup, closeCashPopup}) {
                     </ListDiv>
                     <ListDiv>
                         <ListTitle>결제금액</ListTitle>
-                        <ListContent type="number" value={paymentAmount} readOnly/>
+                        <ListContent type="number" value={totalPrice} readOnly/>
                         <ListGap>원</ListGap>
                     </ListDiv>
                     <ListDiv>

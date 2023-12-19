@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";   // 읽기 전용
-import { ItemState } from "../../recoil/atoms/ItemState";
+import { ItemState, TotalPrice } from "../../recoil/atoms/ItemState";
 
 const ListTable = styled.table`
     width : 80%;
@@ -32,17 +32,18 @@ const PayDiv = styled.div`
 `
 function PaymentList() {
     const menu = useRecoilValue(ItemState)
-    const totalAmountCalculate = () =>{
-        let totalPrice = 0;
+    const totalPrice = useRecoilValue(TotalPrice)
+    // const totalAmountCalculate = () =>{
+    //     let totalPrice = 0;
 
-        menu.forEach((category) => {
-            category.items.forEach((item) => {
-              totalPrice += item.price * item.count;
-            });
-          });
+    //     menu.forEach((category) => {
+    //         category.items.forEach((item) => {
+    //           totalPrice += item.price * item.count;
+    //         });
+    //       });
       
-          return totalPrice;
-    };
+    //       return totalPrice;
+    // };
     return (
         <>
         <div style={{height:'60%','justify-content': 'center', display: 'flex', marginTop: '10%'}}>
@@ -70,7 +71,7 @@ function PaymentList() {
                     결제하기
                 </div> */}
                     <div>총 결제금액</div>
-                    <div>{totalAmountCalculate()}원</div>
+                    <div>{totalPrice}원</div>
             </PayDiv>
         </div>
         </>
