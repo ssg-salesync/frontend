@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useRecoilValue } from "recoil";   // 읽기 전용
 import { styled } from 'styled-components';
-import { TotalPrice } from '../recoil/atoms/ItemState';
+import { ItemState, TotalPrice } from '../recoil/atoms/ItemState';
+import { OrdersPostApi } from '../api/Orders/OrdersPostApi';
 
 const modalStyle ={
     content: {
@@ -62,7 +63,7 @@ const ListContent = styled.input`
         background-color : white;
     }
 `
-    /* eslint-disable */
+/* eslint-disable */
 function CashPopup({openCashPopup, closeCashPopup}) {
     const [cashModalOn, setCashModalOn] = useState(false);
     // 받은금액
@@ -70,6 +71,7 @@ function CashPopup({openCashPopup, closeCashPopup}) {
     // 결제금액
     // const [paymentAmount, setPaymentAmount] = useState(15000);
     const totalPrice = useRecoilValue(TotalPrice)
+    const menu = useRecoilValue(ItemState)
     // 거스름돈
     const [change, setChange] = useState(0);
 
@@ -100,13 +102,31 @@ function CashPopup({openCashPopup, closeCashPopup}) {
     
     useEffect(() => {
         // 받은금액 변경될때마다 거스름돈 계산
-        console.log("useEffect - receiveAmount ")
+        //console.log("useEffect - receiveAmount ")
         setChange(receiveAmount - totalPrice)
     },[receiveAmount]);
 
     const payComplete =() =>{
         // 버튼클릭 시
-        // 1. 팝업 모두 닫힘
+        const orderItems = []
+        menu.forEach(category => {
+            category.items.forEach(item => {
+                const {item_id, count} = item;
+                // // count가 0이 아닌 경우에만 배열에 추가
+                if(item.count !== 0){
+                    orderItems.push({item_id,count})
+                }                
+            })
+        })
+        const data = {
+            total_price: totalPrice,
+            items: orderItems
+        }
+        console.log("data:",data)
+
+        const dataPost = OrdersPostApi(data);
+        console.log(dataPost)
+        // // 1. 팝업 모두 닫힘
         
             
         // 2. 테이블 초기화 
