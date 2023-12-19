@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2
-  S3_BUCKET_NAME: salesync-front-bucket
+  S3_BUCKET_NAME: salesync.site
   # CLOUDFRONT_NAME: E28M3K5TF5L3PV
   # AWS CloudFront, Route53 생각
 
@@ -62,6 +62,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
 
       # - name: CloudFront delete cache
       #   uses: chetan/invalidate-cloudfront-action@v2

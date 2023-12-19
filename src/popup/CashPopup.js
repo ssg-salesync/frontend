@@ -55,9 +55,13 @@ const ListContent = styled.input`
     text-align: right;
     border: none;
     overflow: hidden;
+
+    :focus{
+        background-color : white;
+    }
 `
     /* eslint-disable */
-function CashPopup() {
+function CashPopup({openCashPopup, closeCashPopup}) {
     const [cashModalOn, setCashModalOn] = useState(false);
     // 받은금액
     const [receiveAmount, setReceiveAmount] = useState(0);
@@ -106,9 +110,9 @@ function CashPopup() {
     }
     return (
         <>
-        <Button type='button' onClick={openModal}>현금</Button>
+        {/* <Button type='button' onClick={openModal}>현금</Button> */}
 
-        <Modal isOpen={cashModalOn} onRequestClose={closeModal} style={modalStyle} contentLabel="Example Modal">
+        <Modal isOpen={openCashPopup} onRequestClose={closeCashPopup} style={modalStyle} contentLabel="CashPopup">
             {/* <ModalContent/> */}
                 <div style={{height:'60%',width: '100%', 'justify-content': 'center', display: 'flex', flexDirection: 'column', 'align-items': 'center'}}>
                     <ListDiv>
