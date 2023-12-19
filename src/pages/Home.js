@@ -68,56 +68,7 @@ function Home() {
         console.log("getData")
         try{
             const defaultItems = await ItemsApi();
-            // 더미 데이터 dataDummy = defaultItems.categories
-            const dataDummy = [
-                {
-                    "category_id": 10,
-                    "category_name": "커피",
-                    "items": [
-                        {
-                            "item_id": 111,
-                            "name": "아메리카노",
-                            "price": 3500
-                        },
-                        {
-                            "item_id": 112,
-                            "name": "카페라떼",
-                            "price": 4000
-                        },
-                        {
-                            "item_id": 113,
-                            "name": "돌체라떼",
-                            "price": 4500
-                        }
-                    ]
-                },
-                {
-                    "category_id": 11,
-                    "category_name": "디저트",
-                    "items": [
-                        {
-                            "item_id": 116,
-                            "name": "초코케익",
-                            "price": 5500
-                        }
-                    ]
-                },
-                {
-                    "category_id": 12,
-                    "category_name": "기타",
-                    "items": [
-                        {
-                            "item_id": 121,
-                            "name": "물",
-                            "price": 1000
-                        },
-                        {
-                            "item_id": 122,
-                            "name": "얼음추가",
-                            "price": 500
-                        }
-                    ]
-                }]
+            const dataDummy = defaultItems.categories
             const newData = dataDummy.map(cate => ({
                 ...cate,
                 items: cate.items.map(item => ({
