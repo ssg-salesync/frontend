@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import { LoginPostApi } from "../api/auth/LoginPostApi";
+import { LoginPostApi } from "../api/Auth/LoginPostApi";
 
 /* eslint-disable */
 
@@ -113,7 +113,7 @@ function LoginPage() {
             onChange={handlerInputChange}
             placeholder="비밀번호"/>
           <br/>
-            <Link to="/home">
+            <Link to="/">
               <LoginButton type="submit" onClick={handlerLoginClick}>로그인</LoginButton>
             </Link>
             <Link to="/signup">
