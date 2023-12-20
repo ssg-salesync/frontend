@@ -7,51 +7,99 @@ import { StorePostApi } from "../api/Auth/StorePostApi";
 
 /* eslint-disable */
 
-// 매장정보 영역
-const StoreDiv = styled.div`
-width: 95%;
-max-width: 600px;
-height: auto;
-margin: 4rem auto 0;
-overflow: hidden;
-background-color: white;
-padding: 40px;
-border-radius: 20px;
+// 컴포넌트 전체 영역
+const ComponenDiv = styled.div`
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-// 매장정보 영역 제목
-const StoreDivTitle = styled.div`
-height: 12rem;
-font-size: 1.8rem;
-font-weight: lighter;
-display: flex;
-align-items: center;
-justify-content: center;
+// 매장정보 제목 영역
+const TitleDiv = styled.div`
+  height: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 480px) {
+    font-size: 100%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    font-size: 200%;
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 300%;
+  }
 `;
 
 // 매장명, 주소 등 입력 영역
 const InsertDiv = styled.div`
-margin: 30px auto;
-width: 400px;
-text-align: center;
+  height: 40%;
+  width: 100%;
+  margin: 30px auto;
+  width: 400px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+// 다음 버튼 영역
+const ButtonDiv = styled.div`
+  height: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 // 매장명, 주소 등 입력칸
 const InputField = styled.input`
   border: none;
   border-bottom: 2px solid #289AFF;
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 480px) {
+    font-size: 70%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    font-size: 85%;
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 100%;
+  }
 `;
 
 // 다음 버튼
 const NextButton = styled.button`
-  margin-top: 5px;
-  width: 100px;
-  height: 25px;
-  border-radius: 5px;
+  width: 200%;
+  height: 30%;
+  border-radius: 15%;
   border-color: #289AFF;
   background-color: #289AFF;
   color: white;
   cursor: pointer;
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 480px) {
+    font-size: 50%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    font-size: 100%;
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 150%;
+  }
 `;
 
 function StorePage() {
@@ -68,11 +116,16 @@ function StorePage() {
     storeType: ''
   });
 
+  // 각 필드 데이터 변경 시 해당 상태 변경
+  const handlerInputChange = (e) => {
+    const { name, value } = e.target;
+    setStoreData({ ...storeData, [name]: value });
+  };
+
   // 모든 데이터 합치기
   const storesData = { ...signupData[0], ...storeData };
 
-  // console.log(storesData)
-
+  // 다음 버튼 클릭 이벤트 핸들러
   const handlerNextClick = () => {
     const data = {
       username: storesData.username,
@@ -84,6 +137,7 @@ function StorePage() {
       store_type: storesData.storeType
     };
 
+    // api 호출
     StorePostApi(data)
       .then(res => {
         console.log('API 호출 성공:', res);
@@ -93,45 +147,45 @@ function StorePage() {
       });
   };
 
-  const handlerInputChange = (e) => {
-    const { name, value } = e.target;
-    setStoreData({ ...storeData, [name]: value });
-  };
+  console.log('넘어온 데이터: ', signupData[0])
+  console.log('api통신할 전체 데이터: ', storesData)
 
-    return (
-      <StoreDiv>
-        <StoreDivTitle>매장을 등록해주세요</StoreDivTitle>
-        <InsertDiv>
-          <InputField
-            type="text"
-            name="storeName"
-            value={storeData.storeName}
-            onChange={handlerInputChange}
-            placeholder="매장명"
-          />
-          <br/>
-          <InputField
-            type="text"
-            name="address"
-            value={storeData.address}
-            onChange={handlerInputChange}
-            placeholder="주소"
-          />
-          <br/>
-          <InputField
-            type="text"
-            name="storeType"
-            value={storeData.storeType}
-            onChange={handlerInputChange}
-            placeholder="업종"
-          />
-          <br/>
-            <Link to="/signup/stores/pos">
-              <NextButton type="submit" onClick={handlerNextClick}>다음</NextButton>
-            </Link>
-        </InsertDiv>
-      </StoreDiv>
-    );
+  return (
+    <ComponenDiv>
+      <TitleDiv>매장 등록</TitleDiv>
+      <InsertDiv>
+        <InputField
+          type="text"
+          name="storeName"
+          value={storeData.storeName}
+          onChange={handlerInputChange}
+          placeholder="매장명"
+        />
+        <br/>
+        <InputField
+          type="text"
+          name="address"
+          value={storeData.address}
+          onChange={handlerInputChange}
+          placeholder="주소"
+        />
+        <br/>
+        <InputField
+          type="text"
+          name="storeType"
+          value={storeData.storeType}
+          onChange={handlerInputChange}
+          placeholder="업종"
+        />
+        <br/>
+      </InsertDiv>
+      <ButtonDiv>
+        <Link to="/signup/stores/pos">
+          <NextButton type="submit" onClick={handlerNextClick}>다음</NextButton>
+        </Link>
+      </ButtonDiv>
+    </ComponenDiv>
+  );
 };
 
 export default StorePage
