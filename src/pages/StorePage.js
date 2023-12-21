@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useRecoilState } from 'recoil';
 import { StoreState } from "../recoil/atoms/StoreState";
 import { StorePostApi } from "../api/Auth/StorePostApi";
+import { StoreTokenPostApi } from "../api/Auth/StoreTokenPostApi";
 
 /* eslint-disable */
 
 // 컴포넌트 전체 영역
-const ComponenDiv = styled.div`
+const ComponentDiv = styled.div`
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -80,8 +81,9 @@ const InputField = styled.input`
 
 // 다음 버튼
 const NextButton = styled.button`
-  width: 200%;
-  height: 30%;
+  width: 170%;
+  height: 25%;
+  margin-left: -35%;
   border-radius: 15%;
   border-color: #289AFF;
   background-color: #289AFF;
@@ -137,21 +139,33 @@ function StorePage() {
       store_type: storesData.storeType
     };
 
-    // api 호출
+    // API 호출
     StorePostApi(data)
-      .then(res => {
-        console.log('API 호출 성공:', res);
-      })
-      .catch(error => {
-        console.error('API 호출 실패:', error);
-      });
-  };
+    .then(res => {
+      console.log('API 호출 성공:', res);
+
+      // 첫 번째 API 호출이 성공한 후에 두 번째 API 호출
+      const tokenData = {
+        username: storesData.username,
+        password: storesData.password
+      };
+
+      // StoreTokenPostApi 호출을 반환하여 다음 .then 블록에서 처리
+      return StoreTokenPostApi(tokenData);
+    })
+    .then(tokenRes => {
+      console.log('토큰 발급 성공: ', tokenRes);
+    })
+    .catch(err => {
+      console.error('API 호출 또는 토큰 발급 실패: ', err);
+    });
+};
 
   console.log('넘어온 데이터: ', signupData[0])
   console.log('api통신할 전체 데이터: ', storesData)
 
   return (
-    <ComponenDiv>
+    <ComponentDiv>
       <TitleDiv>매장 등록</TitleDiv>
       <InsertDiv>
         <InputField
@@ -184,7 +198,7 @@ function StorePage() {
           <NextButton type="submit" onClick={handlerNextClick}>다음</NextButton>
         </Link>
       </ButtonDiv>
-    </ComponenDiv>
+    </ComponentDiv>
   );
 };
 

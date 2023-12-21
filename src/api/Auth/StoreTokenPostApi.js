@@ -3,7 +3,7 @@ import URL from '../BaseUrl';
 
 /* eslint-disable */
 
-export async function LoginPostApi(data) {
+export async function StoreTokenPostApi(data) {
     try {
         const res = await axios.post(`${URL}/stores/login`, data);
         
