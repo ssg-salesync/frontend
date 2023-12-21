@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { StoreState } from "../recoil/atoms/StoreState";
+import { SignupPostApi } from "../api/Auth/SignupPostApi";
 
 /* eslint-disable */
 
 // 컴포넌트 전체 영역
-const ComponenDiv = styled.div`
+const ComponentDiv = styled.div`
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -79,8 +80,9 @@ const InputField = styled.input`
 
 // 다음 버튼
 const NextButton = styled.button`
-  width: 10%;
-  height: 30%;
+  width: 170%;
+  height: 25%;
+  margin-left: -35%;
   border-radius: 15%;
   border-color: #289AFF;
   background-color: #289AFF;
@@ -284,10 +286,12 @@ function SignupPage() {
   // 데이터 상태 전역 저장되게 recoil 세팅
   const [storeState, setStoreState] = useRecoilState(StoreState);
 
+  // 네비게이트 훅
   const navigate = useNavigate();
 
+
   // 다음 버튼 클릭 이벤트핸들러 => StorePage에 username, password, ownerName, phone 데이터가 넘어감
-  const handlerNextClick = () => {
+  const handlerNextClick = async () => {
 
     // 모든 필드가 입력되지 않으면 다음 페이지 안 넘어가게 조건 부여
     if (
@@ -298,10 +302,26 @@ function SignupPage() {
       !signupData.phone
     ) {
 
-      alert('모든 항목을 입력해주세요.');
+      alert('모든 항목을 입력해주세요.'); 
       return; // 다음 페이지로 넘어가지 않음
-    }
+    };
 
+    // 아이디 중복되면 다음 페이지 안 넘어가게 조건 부여
+    if (signupData.username) {
+      try {
+        const checkResult = await SignupPostApi(signupData.username);
+        if (checkResult.result === "failed") {
+
+          // 이미 존재하는 아이디인 경우 경고창 알림
+          alert(checkResult.message);
+          return; // 다음 페이지로 넘어가지 않음
+        };
+      } catch(err) {
+        console.error(err);
+      };
+    };
+
+    // 다음 페이지로 넘어갈 데이터 상태 저장
     setStoreState({ ...storeState, ...signupData });
 
     // 다음 페이지로 넘어감
@@ -312,7 +332,7 @@ function SignupPage() {
   console.log('비밀번호 확인 데이터: ', passwordData)
 
   return (
-    <ComponenDiv>
+    <ComponentDiv>
       <TitleDiv>회원가입</TitleDiv>
       <InsertDiv>
         <InputField
@@ -365,10 +385,12 @@ function SignupPage() {
         />
         </InsertDiv>
       <ButtonDiv>
-        <NextButton type="button" onClick={handlerNextClick}>다음</NextButton>
+        <div>
+          <NextButton type="button" onClick={handlerNextClick}>다음</NextButton>
+        </div>
       </ButtonDiv>
-    </ComponenDiv>
+    </ComponentDiv>
   );
-}
+};
 
 export default SignupPage;

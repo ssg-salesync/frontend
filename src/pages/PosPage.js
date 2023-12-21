@@ -173,7 +173,7 @@ function PosPage() {
                     <PosItem  itemData={itemData}  selectedCategoryId={selectedCategory ? selectedCategory.id : null} />
                 </PosItemDiv>
                 <SubmitButtonDiv>
-                    <Link to="/home">
+                    <Link to="/">
                         <SubmitButton>완료</SubmitButton>
                     </Link>
                 </SubmitButtonDiv>
