@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useState } from "react";
 import { useRecoilState } from 'recoil';
 import { StoreState } from "../recoil/atoms/StoreState";
-import { StorePostApi } from "../api/Auth/StorePostApi";
-import { StoreTokenPostApi } from "../api/Auth/StoreTokenPostApi";
+import { StorePostApi } from "../api/auth/StorePostApi";
+import { StoreTokenPostApi } from "../api/auth/StoreTokenPostApi";
 
 /* eslint-disable */
 

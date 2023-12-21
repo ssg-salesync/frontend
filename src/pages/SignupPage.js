@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { StoreState } from "../recoil/atoms/StoreState";
-import { SignupPostApi } from "../api/Auth/SignupPostApi";
+import { SignupPostApi } from "../api/auth/SignupPostApi";
 
 /* eslint-disable */
 
