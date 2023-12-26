@@ -1,6 +1,11 @@
-/* eslint-disable */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { ItemGetApi } from '../../api/pos/item/ItemGetApi';
+import { ItemDeleteApi } from '../../api/pos/item/ItemDeleteApi';
+import { ItemPostApi } from '../../api/pos/item/ItemPostApi';
+import { ItemPutApi } from '../../api/pos/item/ItemPutApi';
+
+/* eslint-disable */
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
@@ -9,9 +14,29 @@ const ComponentDiv = styled.div`
   flex-direction: column;
 `;
 
+// 선택한 카테고리 글자 영역
+const TitleDiv = styled.div`
+  height: 20%;
+  display: flex;
+  align-items: center;
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 480px) {
+    font-size: 70%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    font-size: 85%;
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 100%;
+  }
+`;
+
 // 아이템 전체 영역
 const ItemDiv = styled.div`
-  height: 80%;
+  height: 60%;
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -22,7 +47,7 @@ const ItemDiv = styled.div`
 // 아이템 추가 버튼
 const AddButton = styled.button`
   width: 30%;
-  height: 30%;
+  height: 40%;
   border-radius: 3%;
   border: 1px solid #ccc;
   display: flex;
@@ -53,7 +78,7 @@ const AddButton = styled.button`
 const ItemContainer = styled.div`
   position: relative;
   width: 30%;
-  height: 30%;
+  height: 40%;
   border-radius: 5%;
   border: 1px solid #ccc;
   display: flex;
@@ -84,12 +109,12 @@ const ItemWrapper = styled.div`
   margin-left: 5%;
 `;
 
-// 품목명, 가격 라벨
+// 품목명, 가격 라벨  
 const ItemLabel = styled.label`
 `;
 
 // 아이템 정보 입력칸
-const InputField = styled.textarea`
+const InputField = styled.input`
   width: 50%;
   height: 50%;
   resize: none;
@@ -136,119 +161,399 @@ const DeleteButton = styled.div`
 
 
 function PosItem( {itemData, selectedCategoryId}) {
-  
-  // PosCategory에서 카테고리 버튼눌렀을 때 온 id
-  console.log('category_id : ',selectedCategoryId)
-  
-  // 최대 아이템 갯수
-  const maxItems = 5;
 
-  // 아이템 상태 저장
-  const [items, setItems] = useState([]);
-
-
- // selectedCategoryId의 Id에 따른 item 데이터들을 items 상태로 설정
- useEffect(() => {
-  if (selectedCategoryId && itemData && itemData.length > 0) {
-    const foundCategory = itemData[0].categories.find(
-      (category) => category.category_id === selectedCategoryId
-    );
-
-    if (foundCategory && foundCategory.items) {
-      setItems(foundCategory.items.map(item => [item.name, item.price.toString()]));
-    } else {
-      setItems([]); // 해당하는 카테고리가 없을 경우 아이템을 빈 배열로 설정
-    }
-  } else {
-    setItems([]); // selectedCategoryId가 없거나 itemData가 없는 경우 아이템을 빈 배열로 설정
-}
-}, [selectedCategoryId, itemData]); 
-
-
-  // 수정모드 상태 저장
-  const [editModes, setEditModes] = useState([]);
-
-
-  // 아이템 수정 이벤트 핸들러
-   const handlerEditItem = (idx) => {
-    const newEditModes = [...editModes];
-    newEditModes[idx] = !newEditModes[idx];
-    setEditModes(newEditModes);
+  // 아이템 데이터가 로딩 중인 동안 보여줄 내용 (PosPage가 무거워서 랜더링 좀 걸릴 수도 있음)
+  if (!itemData) {
+  return <div><h1>Loading...</h1></div>;
   };
 
+  // 최대 아이템 갯수
+  const maxitems = 5;
 
-  // 카테고리 선택 안 했을 시 추가 버튼 클릭 비활성화
-  const [buttonDisabled] = useState(false);
+  // 아이템 상태 저장
+  const [items, setItems] = useState(itemData);
+
+  // 수정모드 상태 저장
+  const [editModes, setEditModes] = useState(Array((items && items.categories && items.categories.length) || 0).fill(false));
+
+  // 아이템 입력칸 포커스 ref
+  const inputRefs = useRef([]);
+
+  // console.log('items.categories: ', items.categories)
+
+  // 선택한 카테고리의 아이템을 가져옴
+  const getItemsBySelectedCategory = () => {
+    if (items && items.categories && selectedCategoryId !== null) {
+      const selectedCategory = items.categories.find(
+        (category) => category.category_id === selectedCategoryId
+      );
+      // console.log('선택한 카테고리 아이디(내부): ', selectedCategory)
+      
+      return selectedCategory ? selectedCategory.items : [];
+    } else {
+      return [];
+    };
+  };
+
+  // 선택한 카테고리의 이름을 가져옴
+  const getNameBySelectedCategory = () => {
+    if (items && items.categories && items.categories.length > 0) {
+      const selectedCategoryName = items.categories.find(
+        (category) => category.category_id === selectedCategoryId
+      );
+      // console.log('선택한 카테고리 이름: ', selectedCategoryName)
+      return selectedCategoryName ? selectedCategoryName.category_name : '';
+    } else {
+      return '';
+    };
+  };
+
+  console.log('선택한 카테고리 아이디(외부): ', selectedCategoryId)
+  
+
+  // console.log('itemData: ', itemData)
 
 
   // 아이템 추가 이벤트핸들러
+  // AddButton을 눌렀을 때 editModes를 추가하여 텍스트 입력칸을 생성하도록 변경
   const handlerAddItem = () => {
-    if (selectedCategoryId === null) {
-      alert('카테고리를 선택하세요.');
-      return; // 선택된 카테고리가 없는 경우 함수 실행 종료
-    }
 
-    if (items.length < maxItems) {
-      const newItems = [...items, ['', '']];
-      setItems(newItems);
+  // console.log('selectedCategoryId: ', selectedCategoryId)
+  // console.log('selectedCategory.items: ', selectedCategory.items)
+  // console.log('items.categories.items: ', items.categories.items)
+
+
+    // 선택된 카테고리가 없으면 경고창
+    if (!selectedCategoryId) {
+      alert('카테고리를 선택해주세요.'); // 선택된 카테고리가 없으면 경고창 띄우고
+      return;
+    };
+
+    // 선택된 카테고리의 해당 아이템을 찾음
+    const selectedCategory = items.categories.find(
+      (category) => category.category_id === selectedCategoryId
+    );
+
+    // 최대 아이템 등록 갯수 제한
+    if (selectedCategory && selectedCategory.items.length >= maxitems) {
+      alert(`최대 ${maxitems}개까지만 추가할 수 있습니다.`);
+      return;
+    };
+
+
+    // 등록 중인 아이템(입력칸 활성화 상태)이 하나라도 있으면 아이템 추가 금지
+    const isEdits = editModes.some((mode) => mode === true);
+
+    if (isEdits) {
+      alert('등록 중인 아이템이 있습니다. 완료 후 아이템을 추가해주세요.');
+      return;
+    };
+
+
+    try {
+      setItems((prevItems) => {
+        const selectedCategoryIndex = prevItems.categories.findIndex(
+          (category) => category.category_id === selectedCategoryId
+        );
+
+        const updatedCategories = [...prevItems.categories];
+        const newCategoryItems = [
+          ...updatedCategories[selectedCategoryIndex].items,
+          { name: '', price: '' },
+        ];
+
+        updatedCategories[selectedCategoryIndex].items = newCategoryItems;
+        const updatedItems = { ...prevItems, categories: updatedCategories };
+
+        // 새로운 아이템은 수정 모드(true)로 추가
+        const newEditModes = Array.from(
+          { length: newCategoryItems.length },
+          (_, index) => index === newCategoryItems.length - 1
+        );
+
+        console.log('New Edit Modes:', newEditModes); // 추가
+
+        setEditModes(newEditModes);
+
+        setTimeout(() => {
+          const lastIndex = newCategoryItems.length - 1;
+          inputRefs.current[lastIndex]?.focus();
+        }, 0);
+
+        return updatedItems;
+      });
+
+      
+    } catch (err) {
+      console.error('새로운 카테고리 추가 오류:', err);
+    }
+  };
+
+// console.log('items: ', items)
+// console.log('아이템 이름: ', items.categories[0].items[0].name.trim() )
+// console.log('아이템 가격: ', items.categories[0].items[0].price )
+
+// 수정, 완료 버튼 클릭 시 새로운 카테고리 등록
+const handlerEditMode = async (idx) => {
+  try {
+    const currentItem = getItemsBySelectedCategory()[idx];
+
+    if (editModes[idx]) {
+      const newItemName = currentItem.name.trim();
+      const newItemPrice = currentItem.price;
+
+      if (newItemName !== '' && newItemPrice !== '') {
+        const categoryId = selectedCategoryId;
+        if (currentItem.item_id) {
+          const itemId = currentItem.item_id;
+          const updatedItem = { name: newItemName, price: newItemPrice };
+          await ItemPutApi(itemId, updatedItem);
+
+          const updatedItems = getItemsBySelectedCategory().map((item, index) => {
+            if (index === idx) {
+              return { ...item, name: newItemName, price: newItemPrice };
+            };
+            return item;
+          });
+
+          const updatedCategories = itemData.categories.map((category) => {
+            if (category.category_id === selectedCategoryId) {
+              return { ...category, items: updatedItems };
+            };
+            return category;
+          });
+
+          setItems({ categories: updatedCategories });
+
+          const newEditModes = [...editModes];
+          newEditModes[idx] = false;
+          setEditModes(newEditModes);
+
+          inputRefs.current[idx]?.focus();
+        } else {
+          const newItem = { name: newItemName, price: newItemPrice };
+          await ItemPostApi(categoryId, newItem);
+
+          const latestItems = await ItemGetApi();
+          setItems(latestItems);
+
+           // 새로운 아이템이 추가될 때 해당하는 editModes를 false로 설정하여 완료 상태로 변경
+          const newEditModes = [...editModes];
+          newEditModes[idx] = false;
+          setEditModes(newEditModes);
+        };
+      } else {
+        alert('아이템 전체 정보를 입력해주세요.');
+        inputRefs.current[idx]?.focus();
+      };
     } else {
-      alert(`최대 ${maxItems}개의 아이템까지만 추가할 수 있습니다.`);
-    }
+      const newEditModes = [...editModes];
+      newEditModes[idx] = true;
+      setEditModes(newEditModes);
+    };
+  } catch (err) {
+    console.error(err);
+  };
+};
+
+
+// console.log('추가 버튼 눌렀을 때: ', editModes)
+// console.log('수정 버튼 눌렀을 때: ', editModes) 
+// console.log('등록 버튼 눌렀을 때: ', editModes)
+// console.log('삭제 버튼 눌렀을 때: ', editModes)
+
+
+// console.log(Array.isArray(items))
+// console.log(Array.isArray(itemData))
+
+// console.log('itemData: ', itemData)
+
+// [editModes: true => 수정상태 | editModes: false => 완료상태]
+// 아이템 수정 이벤트핸들러
+const handlerEditItem = (idx, e, field) => {
+  try {
+    // console.log('Editing item:', idx, e.target.value, field); // 변경된 아이템 및 값 로그
+    // console.log('items: ', items)
+    // console.log('itemData: ', itemData)
+    
+    if (items && items.categories) {
+      const selectedCategory = items.categories.find(
+        (category) => category.category_id === selectedCategoryId
+      );
+
+      if (selectedCategory && selectedCategory.items && selectedCategory.items[idx]) {
+        const updatedItems = [...selectedCategory.items]; // 선택된 카테고리 내 아이템 복사
+
+        // 선택된 카테고리 내 아이템의 필드 값 변경
+        updatedItems[idx][field] = e.target.value;
+
+        // 아이템 가격 입력 필드 숫자만 입력하게 조건 부여
+        if (field === 'price') {
+          const priceValue = e.target.value;
+
+          // 숫자가 아닌 경우 경고 메시지 출력
+          if (isNaN(priceValue)) {
+            alert('가격은 숫자만 입력해주세요.');
+            return;
+          };
+        };
+
+        // 카테고리 내 아이템 업데이트
+        const updatedCategories = items.categories.map((category) => {
+          if (category.category_id === selectedCategoryId) {
+            return { ...category, items: updatedItems };
+          };
+          return category;
+        });
+
+        // 상태 업데이트
+        setItems((prevItems) => ({
+          ...prevItems,
+          categories: updatedCategories,
+        }));
+      } else {
+        console.error('선택된 카테고리나 아이템을 찾을 수 없습니다.');
+      };
+    } else {
+      console.error('카테고리를 찾을 수 없습니다.');
+    };
+  } catch (err) {
+    console.error(err);
+  };
+};
+
+// console.log('itemData: ', itemData)
+// console.log('itemData.categories: ', itemData.categories)
+
+// 수정, 완료 버튼 로직
+// useEffect(() => {
+
+//   // 카테고리가 추가되었을 때, 추가된 카테고리의 editModes를 true로 설정하여 수정 중인 상태로 유지
+//   if (items.length > editModes.length) {
+//     const diff = items.length - editModes.length;
+//     const newEditModes = [...editModes, ...new Array(diff).fill(false)];
+//     setEditModes(newEditModes);
+//   };
+// }, [items, editModes]);
+
+// PosCategory에서 카테고리 신규 등록 후 상태가 렌더링 없이 유지되게 한번 더 [GET 요청]
+useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const itemData = await ItemGetApi();    // [GET: 카테고리,  실시간 랜더링]
+      setItems(itemData); // 가져온 아이템 목록으로 상태 업데이트
+    } catch (err) {
+      console.error(err);
+    };
   };
 
+  // selectedCategoryId가 변경될 때마다 새로운 아이템 목록을 가져옴
+  fetchItems();
+}, [selectedCategoryId]);
 
-  // 아이템 삭제 이벤트핸들러
-  const handlerRemoveItem = (idxToRemove) => {
-    const updatedItems = items.filter((_, idx) => idx !== idxToRemove);
-    setItems(updatedItems);
 
-    // 아이템 삭제하면 editModes를 초기화하여 전에 있던 상태가 영향을 주지않게함
-    const newEditModes = [...editModes];
-    newEditModes.splice(idxToRemove, 1);
-    setEditModes(newEditModes);
+useEffect(() => {
+  if (selectedCategoryId !== null && items && items.categories && items.categories.length > 0) {
+    // 선택된 카테고리 또는 아이템 배열의 길이가 변경될 때 editModes를 false 값으로 초기화
+    setEditModes(Array(items.categories.length).fill(false));
   };
+}, [selectedCategoryId, items?.categories?.length]);
 
 
-  // 아이템 입력 변경 이벤트핸들러
-  const handlerInputChange = (e, idx, inputIdx) => {
-    const { value } = e.target;
-    const updatedItems = [...items];
-    updatedItems[idx][inputIdx] = value;
-    setItems(updatedItems);
+
+
+
+// 아이템 정보 아래 버튼에 등록, 완료 텍스트 적용
+const getButtonText = (idx) => editModes[idx] ? '등록' : '수정';
+
+
+// 아이템 삭제 이벤트핸들러
+const handlerRemoveItem = async (idx) => {
+
+  const confirmDelete = window.confirm('아이템을 정말 삭제하겠습니까?');
+
+  if (confirmDelete) {
+
+    try {
+      const deleteItemId = getItemsBySelectedCategory()[idx].item_id; // 현재는 예시로 items 배열의 idx번째 아이템의 id를 사용한 것으로 가정합니다.
+  
+      // console.log('items[idx].id: ' items[idx].id)
+      // console.log(deleteItemId) 
+        
+      // 서버에서 아이템 데이터 삭제
+      await ItemDeleteApi(deleteItemId);
+
+      // 새로운 아이템 배열 생성 (삭제된 아이템을 제외한 나머지 아이템들)
+      setItems(prevItems => {
+        const updatedItems = prevItems.categories.map(category => {
+          if (category.category_id === selectedCategoryId) {
+            const newItems = category.items.filter((_, index) => index !== idx);
+            return { ...category, items: newItems };
+          };
+          return category;
+        });
+        return { categories: updatedItems };
+      });
+
+      // 삭제된 아이템에 해당하는 editModes도 업데이트
+      const newEditModes = editModes.filter((_, index) => index !== idx);
+      setEditModes(newEditModes);
+      alert('아이템이 삭제되었습니다.')
+    } catch (err) {
+      console.error(err);
+    };
+  } else {
+    alert('아이템 삭제가 취소되었습니다.')
   };
+};
 
+// console.log('Positem_카테고리 정보 : ', items)
 
-  console.log('PosItem_아이템 정보 : ', items)
+// console.log(editModes)
 
-
-  return (
-    <ComponentDiv>
+return (
+  <ComponentDiv>
+      <TitleDiv>
+        <h1>{getNameBySelectedCategory()}</h1>
+      </TitleDiv>
       <ItemDiv>
-        {items.map((item, idx) => (
-          <ItemContainer key={idx}>
+        {getItemsBySelectedCategory().map((item, itemIndex) => (
+          <ItemContainer key={itemIndex}>
             <ItemWrapper>
               <ItemLabel>품목명:</ItemLabel>
-              {editModes[idx] ? (
-                <InputField value={item[0]} onChange={(e) => handlerInputChange(e, idx, 0)} />
-              ) : (
-                <div>{item[0]}</div>
-              )}
+                {editModes[itemIndex] ? (
+                  <InputField
+                    type="text"
+                    ref={(ref) => (inputRefs.current[itemIndex] = ref)} // 입력 포커스용 ref
+                    value={item.name}
+                    onChange={(e) => handlerEditItem(itemIndex, e, 'name')}
+                  />
+                ) : (
+                <div>{item.name}</div>
+                )}
             </ItemWrapper>
             <ItemWrapper>
-              <ItemLabel>가&nbsp;&nbsp;&nbsp;격:</ItemLabel>
-              {editModes[idx] ? (
-                <InputField value={item[1]} onChange={(e) => handlerInputChange(e, idx, 1)} />
-              ) : (
-                <div>{item[1]}</div>
-              )}
+              <ItemLabel>가격:</ItemLabel>
+                {editModes[itemIndex] ? (
+                  <InputField
+                    type="text"
+                    // ref={(ref) => (inputRefs.current[itemIndex] = ref)} // 입력 포커스용 ref
+                    value={item.price}
+                    onChange={(e) => handlerEditItem(itemIndex, e, 'price')}
+                  />
+                ) : (
+                <div>{item.price}</div>
+                )}
             </ItemWrapper>
-            <EditButton onClick={() => handlerEditItem(idx)}>{editModes[idx] ? '완료' : '수정'}</EditButton>
-            <DeleteButton type='submit' onClick={() => handlerRemoveItem(idx)}>X</DeleteButton>
+            <EditButton onClick={() => handlerEditMode(itemIndex)}>
+              {getButtonText(itemIndex)}
+            </EditButton>
+            <DeleteButton onClick={() => handlerRemoveItem(itemIndex)}>X</DeleteButton>
           </ItemContainer>
         ))}
-        <AddButton onClick={handlerAddItem}  disabled={buttonDisabled}>+</AddButton>
+          <AddButton onClick={handlerAddItem}>+</AddButton>
       </ItemDiv>
-    </ComponentDiv>
+  </ComponentDiv>
   );
 };
 

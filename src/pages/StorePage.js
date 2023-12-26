@@ -161,8 +161,8 @@ function StorePage() {
     });
 };
 
-  console.log('넘어온 데이터: ', signupData[0])
-  console.log('api통신할 전체 데이터: ', storesData)
+  // console.log('넘어온 데이터: ', signupData[0])
+  // console.log('api통신할 전체 데이터: ', storesData)
 
   return (
     <ComponentDiv>
