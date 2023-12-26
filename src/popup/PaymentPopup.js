@@ -1,7 +1,10 @@
 import Modal from 'react-modal';
 // import { styled } from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 import PaymentList from "../components/payment/PaymentList";
 import PaymentWay from "../components/payment/PaymentWay";
+import { PayCompleteState } from '../recoil/atoms/ItemState';
 
 const modalStyle ={
     content: {
@@ -23,7 +26,8 @@ Modal.setAppElement('#root');
 
 /* eslint-disable*/
 function PaymentPopup({openPaymentPopup,closePaymentPopup,closeOrderPopup, tableId}) {
-console.log("PaymentPopup-tableId",tableId)
+console.log("PaymentPopup open")
+const closeAllPopup = useRecoilValue(PayCompleteState)
     // const [payModalOn, setPayModalOn] = useState(false); 
 
     // const openModal = () => {
@@ -35,6 +39,9 @@ console.log("PaymentPopup-tableId",tableId)
     // const closeModal = () => {
     //     setPayModalOn(false)
     // }
+    useEffect(() => {
+        console.log("paymentPopup",closeAllPopup)
+    },[closeAllPopup]);
     return (
         <>
         {/* <input type="button" value= "PayPopup" onClick={openModal}/> */}

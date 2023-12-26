@@ -3,10 +3,13 @@ import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { ItemState,TotalPrice } from '../recoil/atoms/ItemState';
+import { OrderCheckState, PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
 import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
 import PaymentPopup from './PaymentPopup';
+import { getAtom } from '../components/func/AtomData';
+import { OrderGetTableApi } from '../api/Orders/OrderGetTableApi';
+import { OrdersPostApi } from '../api/Orders/OrdersPostApi';
 
 const modalStyle ={
     content: {
@@ -33,48 +36,108 @@ const PayDiv = styled.div`
     display: flex;
     flexDirection: row;
 `
+const CloseBt = styled.button`
+    position: fixed;
+    right :3%;
+`
 // 모달을 위한 루트 엘리먼트 설정
 Modal.setAppElement('#root');
-
+/* eslint-disable */ 
 function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
+    // console.log("===============",tableId,"===============")
     // PaymentPopup - 결제팝업
     const [paymentPopupOn, setPaymentPopupOn] = useState(false);
-    
+    const closeAllPopup = useRecoilValue(PayCompleteState)
     const openPaymentPopup =() =>{
         setPaymentPopupOn(true)
     }
 
     const closePaymentPopup =() =>{       
-        /* eslint-disable no-console */ 
         console.log("3-closePaymentPopup함수")
         setPaymentPopupOn(false)
-        closeOrderPopup()        
+        console.log("=>=>=>closePaymentPopup closeAllPopup :", closeAllPopup)
+        if(closeAllPopup){
+            console.log("closePaymentPopup closeAllPopup :", closeAllPopup)
+            closeOrderPopup()
+        }
     }
     // setItems([
     //     { name: '커피', content1: {menu:'아메리카노',price: 3000, count : 3 }, content2: {menu:'카페라떼',price: 3500, count : 0 }},
     //     { name: '디저트', content1: {menu: '초코케이크',price: 7500, count : 4 },content2:{ menu:'생크림케이크',price : 8000, count:0 }},
     //     { name: '기타', content1: {menu: '시럽',price: 500, count : 4 }}
     // ])
-    const menu = useRecoilValue(ItemState)
-    const [totalPrice, setTotalPrice] = useRecoilState(TotalPrice)
+    // const tableName = `Table${tableId}State`
+    // console.log("tableName", tableName)
+    // const [menu,setMenu] = useRecoilState(`Table${tableId}State`)
+
+    // const [menu,setMenu] = getAtom(tableId)
+    
+    const totalPrice = useRecoilValue(TotalPrice)
     
     const totalAmountCalculate = () =>{
 
-        let newTotalPrice =0 
+        // let newTotalPrice =0 
 
-        menu.forEach((category) => {
-            category.items.forEach((item) => {
-              newTotalPrice += item.price * item.count;
-            });
-          });
+        // menu.forEach((category) => {
+        //     category.items.forEach((item) => {
+        //       newTotalPrice += item.price * item.count;
+        //     });
+        //   });
           
-        setTotalPrice(newTotalPrice)
-        // return newTotalPrice;
+        // setTotalPrice(newTotalPrice)
     };
 
+    const closeBtClick = () =>{
+        // closeOrderPopup()
+    }
     useEffect(()=>{
-        totalAmountCalculate()
-    },[menu])
+        console.log("totalPrice 변경됨")
+    },[totalPrice])
+    useEffect(()=>{
+        console.log("OrderPopup useEffect :",closeAllPopup)
+    },[closeAllPopup])
+
+    // const getDefaultData = async() =>{
+    //     try{
+    //         const defaultItems = await OrderGetTableApi();
+    //         console.log("defaultItems",defaultItems)
+    //     } catch(error){
+    //         console.log("getDefaultData Error :", error)
+    //     }
+    // }
+    // useEffect(()=>{
+    //     getDefaultData()
+    // },[])
+    const menu = useRecoilValue(TableState)
+    const orderCheckBt = useRecoilValue(OrderCheckState)
+
+    // paybt click
+    const postOrder = () =>{
+        // const orderItems = []
+        // menu.forEach(category => {
+        //     category.items.forEach(item => {
+        //         const {item_id, quantity} = item;
+        //         // // quantity 0이 아닌 경우에만 배열에 추가
+        //         if(item.quantity !== 0){
+        //             orderItems.push({item_id,quantity})
+        //         }                
+        //     })
+        // })
+        // const data = {
+        //     table_no : tableId,
+        //     carts: orderItems
+        // }
+        // console.log(data)
+        // const dataPost = OrdersPostApi(data);
+        console.log(orderCheckBt)
+        if(totalPrice === 0){
+            alert( "주문 내역이 없습니다.")
+        }else if(!orderCheckBt){
+            alert( "주문 확인을 완료해주세요.")
+        }else{
+            openPaymentPopup();
+        }
+    }
     return(
         // {/* <input type="button" value= "orderPopup" onClick={openOrderPopup}/> */}
         <>
@@ -83,17 +146,17 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
             {/* 왼쪽 탭 화면 */}
             <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
-                <OrderItem/>
+                <OrderItem tableId={tableId}/>
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}
             <div style={{ flex: 1.5, padding: '20px'}}>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
+                <CloseBt type='button' onClick={closeOrderPopup}>close</CloseBt>
                 <h2>주문 목록</h2>                
                 <OrderList/>
                 {/* <PayButton type='button' value="Close" onClick={()=>closeOrderPopup}/> */}
-                <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); openPaymentPopup(); }}>
-                <button type='button' onClick={closeOrderPopup}>테이블</button>
+                <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}>
                 <PayDiv>
                     <div style={{ flex: 3, display:'flex', 'alignItems': 'center','justify-content': 'center'}}>
                         {/* <p>총 결제금액 : {totalAmountCalculate()}원</p> */}

@@ -11,7 +11,7 @@ export async function ItemsApi(){
 
     try{
         const res = await axios.get(`${URL}/categories/items`,{headers})
-        return res.data;        
+        return res.data.categories;        
     } catch(error){
         console.log(error);
     }    
