@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { useRecoilValue } from "recoil";   // 읽기 전용
+import { useRecoilValue, useResetRecoilState, useRecoilState } from "recoil";   // 읽기 전용
 import { styled } from 'styled-components';
-import { ItemState, TotalPrice } from '../recoil/atoms/ItemState';
-import { OrdersPostApi } from '../api/Orders/OrdersPostApi';
+import { PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
+import { getAtom } from '../components/func/AtomData';
+import { PayPutApi } from '../api/pay/PayPutApi';
 
 const modalStyle ={
     content: {
@@ -64,28 +65,22 @@ const ListContent = styled.input`
     }
 `
 /* eslint-disable */
-function CashPopup({openCashPopup, closeCashPopup}) {
+function CashPopup({openCashPopup, closeCashPopup, tableId}) {
     const [cashModalOn, setCashModalOn] = useState(false);
     // 받은금액
     const [receiveAmount, setReceiveAmount] = useState(0);
     // 결제금액
     // const [paymentAmount, setPaymentAmount] = useState(15000);
     const totalPrice = useRecoilValue(TotalPrice)
-    const menu = useRecoilValue(ItemState)
+    // const menu = useRecoilValue(TableState)
+    // const [menu,setMenu] = getAtom(tableId)
     // 거스름돈
     const [change, setChange] = useState(0);
-
-    const openModal =() =>{
-        setCashModalOn(true);
-    }
-
-    const closeModal = () =>{
-        setCashModalOn(false);
-    }
 
     const handleReceiveAmountChange =(e) =>{
         setReceiveAmount(e.target.value)
     }
+    // const resetTable5 = useResetRecoilState(Table5State);
 
     useEffect(() => {
         // 팝업이 열릴 때마다 실행되는 코드
@@ -105,31 +100,38 @@ function CashPopup({openCashPopup, closeCashPopup}) {
         //console.log("useEffect - receiveAmount ")
         setChange(receiveAmount - totalPrice)
     },[receiveAmount]);
-
-    const payComplete =() =>{
+    const [closeAllPopup,setCloseAllPopup] = useRecoilState(PayCompleteState)
+    async function payComplete(){
         // 버튼클릭 시
-        const orderItems = []
-        menu.forEach(category => {
-            category.items.forEach(item => {
-                const {item_id, count} = item;
-                // // count가 0이 아닌 경우에만 배열에 추가
-                if(item.count !== 0){
-                    orderItems.push({item_id,count})
-                }                
-            })
-        })
-        const data = {
-            total_price: totalPrice,
-            items: orderItems
-        }
-        console.log("data:",data)
+        // const orderItems = []
+        // menu.forEach(category => {
+        //     category.items.forEach(item => {
+        //         const {item_id, count} = item;
+        //         // // count가 0이 아닌 경우에만 배열에 추가
+        //         if(item.count !== 0){
+        //             orderItems.push({item_id,count})
+        //         }                
+        //     })
+        // })
+        // const data = {
+        //     total_price: totalPrice,
+        //     items: orderItems
+        // }
+        // console.log("data:",data)
 
-        const dataPost = OrdersPostApi(data);
-        console.log(dataPost)
-        // // 1. 팝업 모두 닫힘
+        // const dataPost = OrdersPostApi(data);
+        // console.log(dataPost)
         
+        const data = {table_no:tableId}
+        const dataPut = await PayPutApi(data)
+        console.log(dataPut)
+        // // 1. 팝업 모두 닫힘
+        setCloseAllPopup(true)
+        console.log("=>cashPopup closeAllPopup",closeAllPopup)
+        closeCashPopup()
             
-        // 2. 테이블 초기화 
+        // 2. 테이블 초기화
+        
     }
     return (
         <>
@@ -137,6 +139,7 @@ function CashPopup({openCashPopup, closeCashPopup}) {
 
         <Modal isOpen={openCashPopup} onRequestClose={closeCashPopup} style={modalStyle} contentLabel="CashPopup">
             {/* <ModalContent/> */}
+            <button type='button' onClick={closeCashPopup} style={{width:'10%',height:'5%'}}>Back</button>
                 <div style={{height:'60%',width: '100%', 'justify-content': 'center', display: 'flex', flexDirection: 'column', 'align-items': 'center'}}>
                     <ListDiv>
                         <ListTitle>받은금액</ListTitle>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";   // 읽기 전용
-import { ItemState, TotalPrice } from "../../recoil/atoms/ItemState";
+import { TableState, TotalPrice } from "../../recoil/atoms/ItemState";
 
 const ListTable = styled.table`
     width : 80%;
@@ -31,7 +31,8 @@ const PayDiv = styled.div`
 
 `
 function PaymentList() {
-    const menu = useRecoilValue(ItemState)
+    const menu = useRecoilValue(TableState)
+    // const [menu,setMenu] = getAtom(tableId)
     const totalPrice = useRecoilValue(TotalPrice)
     // const totalAmountCalculate = () =>{
     //     let totalPrice = 0;
@@ -51,11 +52,11 @@ function PaymentList() {
                 <tbody>
                 {/* 각 품목을 나열하는 매핑 작업 */}
                 {menu.map((category) => (category.items.map((item) => (
-                    item.count !== 0 && (<ListTableTr key={item.item_id}>
+                    item.quantity !== 0 && (<ListTableTr key={item.item_id}>
                             <ListTableTd>{category.category_name}</ListTableTd>
                             <ListTableTd>{item.name}</ListTableTd>
                             <ListTableTd>{item.price}원</ListTableTd>
-                            <ListTableTd>{item.count}개</ListTableTd>
+                            <ListTableTd>{item.quantity}개</ListTableTd>
                         </ListTableTr>)
                     ))
                 ))}

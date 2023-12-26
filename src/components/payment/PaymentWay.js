@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { useRecoilState } from 'recoil';
 import CardPopup from '../../popup/CardPopup';
 import CashPopup from '../../popup/CashPopup';
+import { PayPutApi } from '../../api/pay/PayPutApi';
+import { PayCompleteState } from '../../recoil/atoms/ItemState';
 
 const WayDiv = styled.div`
     width:100%;
@@ -30,35 +33,54 @@ const Button = styled.button`
     width: 100%;
     height: 100%;
 `
+/* eslint-disable */
 function PaymentWay({closePaymentPopup,tableId}) {
 
     const [cardPopupOn, setCardPopupOn] = useState(false);
     const [cashPopupOn, setCashPopupOn] = useState(false);
+    const [closeAllPopup,setCloseAllPopup] = useRecoilState(PayCompleteState)
     
-    const closeCardPopup =() =>{
-        /* eslint-disable no-console */
-        console.log("2-closePaymentPopup")
-        setCardPopupOn(false)       
-        closePaymentPopup();
-    }
     const openCardPopup =() =>{
         setCardPopupOn(true);
         // 5초 후에 모달을 닫는 함수 호출
         setTimeout(() => {
-            /* eslint-disable no-console */
             console.log("1-closeCardPopup")
             closeCardPopup();
         }, 1000);
     }
-
+    const closeCardPopup =() =>{
+        console.log("2-closePaymentPopup")
+        setCardPopupOn(false)
+        setCloseAllPopup(true)
+        closePaymentPopup();        
+    }
     const openCashPopup =() =>{
         setCashPopupOn(true)
     }
     const closeCashPopup =() =>{
-        setCashPopupOn(false)
+        setCashPopupOn(false);
+        console.log("=>=>paymentway closeAllPopup :", closeAllPopup)
+
+        if(closeAllPopup){
+            closePaymentPopup()
+        }
+        // closePaymentPopup();        
     }
     
-    useEffect(() => clearTimeout, []);
+    useEffect(() => {
+        console.log("closeCashPopup closeAllPopup :", closeAllPopup)
+        if(closeAllPopup){
+            console.log("closeCashPopup closeAllPopup :", closeAllPopup)
+            closePaymentPopup()
+        }
+    },[closeAllPopup]);
+
+    // 결제
+    const payPut = () =>{
+        const data = {table_no:tableId}
+        const dataPut = PayPutApi(data)
+
+    }
     // useEffect(() =>{
 
     // },[cardPopupOn,cashPopupOn])
@@ -67,7 +89,7 @@ function PaymentWay({closePaymentPopup,tableId}) {
         <WayDiv>
             {/* 결제버튼-카드 */}
             <ButtonDiv>
-            <Link to={`/order/${tableId}/payment/card`} onClick={(e) => { e.preventDefault(); openCardPopup();}} style={{width:'100%', height:'100%',display: 'block'}}> 
+            <Link to={`/order/${tableId}/payment/card`} onClick={(e) => { e.preventDefault(); openCardPopup(); payPut()}} style={{width:'100%', height:'100%',display: 'block'}}> 
                 <Button type='button'>카드</Button>
                 {/* <CardPopup/> */}
             </Link>          
@@ -85,9 +107,8 @@ function PaymentWay({closePaymentPopup,tableId}) {
             </ButtonDiv>                  
         </WayDiv>
         {cardPopupOn && <CardPopup openCardPopup={openCardPopup} closeCardPopup={closeCardPopup}/>}        
-        {cashPopupOn && <CashPopup openCashPopup={openCashPopup} closeCashPopup={closeCashPopup}/>} 
+        {cashPopupOn && <CashPopup openCashPopup={openCashPopup} closeCashPopup={closeCashPopup} tableId={tableId}/>} 
         </>
     );
 };
-
 export default PaymentWay;
