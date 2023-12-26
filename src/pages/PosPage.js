@@ -1,20 +1,12 @@
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PosCategory from "../components/pos/PosCategory";
 import PosItem from "../components/pos/PosItem";
+import { CategoryGetApi } from "../api/pos/category/CategoryGetApi";
+import { ItemGetApi } from "../api/pos/item/ItemGetApi";
 
-// 이전 코드
-// const FlexContainer = styled.div`
-//     display: flex;
-//     justify-content: flex-start;
-//     align-items: center;
-//     padding-left: 150px;
-//     transition: padding-left 0.3s;
-//     @media (max-width: 768px) {
-//         padding-left: 0px;
-//     }
-// `;
+/* eslint-disable */
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
@@ -49,7 +41,7 @@ const PosItemDiv = styled.div`
 
 // 완료 버튼 영역
 const SubmitButtonDiv = styled.div`
-    height: 20%;
+    height: 10%;
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -72,7 +64,7 @@ const NoDiv = styled.div`
 // 완료 버튼
 const SubmitButton = styled.button`
   width: 150%;
-  height: 50%;
+  height: 100%;
   margin-right: 20%; 
   border: 1px solid #ccc;
   border-radius: 8%;
@@ -99,88 +91,74 @@ const SubmitButton = styled.button`
 
 function PosPage() {
 
-    // 카테고리 dummydata
-    const categoryData = [
-        { id: 1, name: '카테고리 1' },
-        { id: 2, name: '카테고리 2' },
-        { id: 3, name: '카테고리 3' }
-      ];
+  // API 호출해서 가져온 카테고리 데이터 상태 저장
+  const [categoryData, setCategoryData] = useState(null);
 
-    // 아이템 dummydata
-    const itemData = [
-    {
-        "categories": [
-            {
-                "category_id": 1,
-                "category_name": "카테고리 1",
-                "items": [
-                    {
-                        "item_id": 1,
-                        "name": "아이템 1",
-                        "price": 1111
-                    },
-                    {
-                        "item_id": 2,
-                        "name": "아이템 2",
-                        "price": 2222
-                    },
-                    {
-                        "item_id": 3,
-                        "name": "아이템 3",
-                        "price": 3333
-                    }
-                ]
-            },
-            {
-                "category_id": 2,
-                "category_name": "카테고리 2",
-                "items": [
-                    {
-                        "item_id": 4,
-                        "name": "아이템 4",
-                        "price": 4444
-                    },
-                    {
-                        "item_id": 5,
-                        "name": "아이템 5",
-                        "price": 5555
-                    },
-                    {
-                        "item_id": 3,
-                        "name": "아이템 6",
-                        "price": 6666
-                    }
-                ]
-            }
-        ]
-    }
-    ];
+  // API 호출해서 가져온 아이템 데이터 상태 저장
+  const [itemData, setItemData] = useState(null);
 
-    // PosCategory에서 CategoryButton 클릭 시 받아올 Category 데이터 상태 저장
-    const [selectedCategory, setSelectedCategory] = useState(null);
+  // 해당하는 카테고리에 대한 아이템만 나오게 조건 부여 상태 저장
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-    return (
-        <ComponentDiv>
-            <PosCategoryDiv>
-                <PosCategory categoryData={categoryData} setSelectedCategory={setSelectedCategory}/>
-            </PosCategoryDiv>
-            <VerticalLineDiv>
-                <VerticalLine/>
-            </VerticalLineDiv>
-            <PosItemSubmitButtonDiv>
-                <PosItemDiv>
-                    {/* Category의 id만 빼서 PosItem으로 전달 */}
-                    <PosItem  itemData={itemData}  selectedCategoryId={selectedCategory ? selectedCategory.id : null} />
-                </PosItemDiv>
-                <SubmitButtonDiv>
-                    <Link to="/">
-                        <SubmitButton>완료</SubmitButton>
-                    </Link>
-                </SubmitButtonDiv>
-            </PosItemSubmitButtonDiv>
-            <NoDiv/>
-        </ComponentDiv>
-    );
+
+  // API 호출해서 가져온 카테고리, 아이템 데이터
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const categoryResponse = await CategoryGetApi();   // [GET: 카테고리 정보]
+          if (categoryResponse && categoryResponse.categories) {
+            setCategoryData(categoryResponse.categories);
+          } else {
+            setCategoryData([]); // 데이터가 없을 경우 빈 배열 설정
+          };
+  
+          const itemResponse = await ItemGetApi();     // [GET: 아이템 정보]
+          if (itemResponse) {
+            setItemData(itemResponse);
+          } else {
+            setItemData([]); // 데이터가 없을 경우 빈 배열 설정
+          };
+          
+        } catch (err) {
+          console.error(err);
+        };
+      };
+      fetchData();
+    }, []);
+
+
+  // console.log('적용된 카테고리 데이터: ', categoryData)
+  // console.log('적용된 아이템 데이터: ', itemData)
+
+
+  return (
+    <ComponentDiv>
+      <PosCategoryDiv>
+        <PosCategory
+          categoryData={categoryData}
+          setSelectedCategory={setSelectedCategory}
+        />
+      </PosCategoryDiv>
+      <VerticalLineDiv>
+        <VerticalLine/>
+      </VerticalLineDiv>
+      <PosItemSubmitButtonDiv>
+        <PosItemDiv>
+          {/* Category의 id만 빼서 PosItem으로 전달 */}
+          <PosItem
+            itemData={itemData}
+            selectedCategoryId={selectedCategory ? selectedCategory.id : null}
+          />
+        </PosItemDiv>
+        <SubmitButtonDiv>
+          <Link to="/">
+            <SubmitButton>완료</SubmitButton>
+          </Link>
+        </SubmitButtonDiv>
+      </PosItemSubmitButtonDiv>
+      <NoDiv/>
+    </ComponentDiv>
+  );
 };
 
 export default PosPage;

@@ -310,6 +310,8 @@ function SignupPage() {
     if (signupData.username) {
       try {
         const checkResult = await SignupPostApi(signupData.username);
+
+        // api 명세에 적힌 양식으로 조건 설정
         if (checkResult.result === "failed") {
 
           // 이미 존재하는 아이디인 경우 경고창 알림

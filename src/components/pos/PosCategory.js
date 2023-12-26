@@ -1,6 +1,11 @@
-/* eslint-disable */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
+import { CategoryPostApi } from '../../api/pos/category/CategoryPostApi';
+import { CategoryGetApi } from '../../api/pos/category/CategoryGetApi';
+import { CategoryPutApi } from '../../api/pos/category/CategoryPutApi';
+import { CategoryDeleteApi } from '../../api/pos/category/CategoryDeleteApi';
+
+/* eslint-disable */
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
@@ -156,11 +161,15 @@ const AddButton = styled.button`
   }
 `;
 
+function PosCategory({ categoryData, setSelectedCategory }) {
 
-function PosCategory( {categoryData, setSelectedCategory} ) {
+  // 카테고리 데이터가 로딩 중인 동안 보여줄 내용 (PosPage가 무거워서 랜더링 좀 걸릴 수도 있음)
+  if (!categoryData) {
+    return <div><h1>Loading...</h1></div>;
+  };
 
   // 최대 카테고리 갯수
-  const maxCategories = 8;
+  const maxCategories = 10;
 
   // 카테고리 상태 저장
   const [categories, setCategories] = useState(categoryData);
@@ -168,25 +177,129 @@ function PosCategory( {categoryData, setSelectedCategory} ) {
   // 수정모드 상태 저장
   const [editModes, setEditModes] = useState(Array(categories.length).fill(false));
 
+  // 카테고리 입력칸 포커스 ref
+  const inputRefs = useRef([]);
+
+
   // 카테고리 버튼 클릭 이벤트 핸들러
   const handlerCategoryClick = (category) => {
+
     // 선택된 카테고리 정보를 상태로 저장
     setSelectedCategory(category);
 
-    console.log('PosCategory_카테고리 버튼 누름 : ', category)
+    // console.log('카테고리 버튼 누름 : ', category)
   };
 
 
   // 카테고리 추가 이벤트핸들러
+  // AddButton을 눌렀을 때 editModes를 추가하여 텍스트 입력칸을 생성하도록 변경
   const handlerAddCategory = () => {
-    if (categories.length < maxCategories) {
-      const newCategory = { id: categories.length + 1, name: '' };
-      const newCategories = [...categories, newCategory];
+  
+    // 최대 카테고리 갯수 제한
+    if (categories.length >= maxCategories) {
+      alert(`최대 ${maxCategories}개까지만 추가할 수 있습니다.`);
+      return;
+    };
+
+
+     // 등록 중인 카테고리(입력칸 활성화 상태)가 하나라도 있으면 카테고리 추가 금지
+    const isEdits = editModes.some((mode) => mode === true);
+
+    if (isEdits) {
+      alert('등록 중인 카테고리가 있습니다. 완료 후 카테고리를 추가해주세요.');
+      return;
+    };
+
+
+    // 빈 카테고리 추가
+    try {
+      const newCategories = [...categories, { id: null, name: '' }];
       setCategories(newCategories);
-    } else {
-      alert(`최대 ${maxCategories}개의 카테고리까지만 추가할 수 있습니다.`);
-    }
+  
+      const newEditModes = [...editModes, true];
+      setEditModes(newEditModes);
+  
+      setTimeout(() => {
+        inputRefs.current[newCategories.length - 1]?.focus();
+      }, 0);
+    } catch (err) {
+      console.error(err);
+    };
   };
+
+
+  // console.log('categories: ', categories)
+
+
+  // 수정, 완료 버튼 클릭 시 새로운 카테고리 등록
+  const handlerEditMode = async (idx) => {
+    if (editModes[idx]) {
+      try {
+        const newCategoryName = categories[idx].name.trim();
+  
+        // 새로운 카테고리의 이름이 비어있지 않으면 API 호출하여 카테고리 등록
+        if (newCategoryName !== '') {
+          if (categories[idx].id) {
+
+            // 기존 카테고리를 수정하는 로직
+            const categoryId = categories[idx].id;
+            const updatedCategory = { name: newCategoryName };
+            // console.log('카테고리수정 id: ', categoryId)
+            // console.log('카테고리수정 이름: ', updatedCategory)
+            await CategoryPutApi(categoryId, updatedCategory);    // [PUT: 카테고리 수정]
+
+  
+            // API 호출이 성공하면 해당 카테고리의 이름을 업데이트
+            const newCategories = [...categories];
+            newCategories[idx].name = newCategoryName;
+            setCategories(newCategories);
+          } else {
+
+            // 새로운 카테고리를 추가하는 로직
+            const newCategory = { name: newCategoryName };
+            // console.log('카테고리추가: ', newCategory)
+            // setCategories(newCategory.categories)
+            // console.log(categories)
+            await CategoryPostApi(newCategory);     // [POST: 카테고리 추가]
+            
+        
+            // API 호출이 성공하면 서버에서 최신 카테고리 목록을 다시 가져와서 상태를 업데이트
+            const latestCategories = await CategoryGetApi();       // [GET: 카테고리 실시간 랜더링]
+            setCategories(latestCategories.categories);
+          };
+  
+          // 해당 인덱스의 editModes를 false로 설정하여 텍스트 입력칸을 숨김
+          const newEditModes = [...editModes];
+          newEditModes[idx] = false;
+          setEditModes(newEditModes);
+  
+          // 입력칸에 포커스
+          inputRefs.current[idx]?.focus();
+        } else {
+          alert('카테고리 이름을 입력해주세요.');
+          inputRefs.current[idx]?.focus();
+        };
+      } catch (err) {
+        console.error(err);
+      };
+    } else {
+      const newEditModes = [...editModes];
+      newEditModes[idx] = true;
+      setEditModes(newEditModes);
+    };
+  };
+
+  // console.log(editModes)
+
+
+  // console.log('추가 버튼 눌렀을 때: ', editModes)
+  // console.log('수정 버튼 눌렀을 때: ', editModes) 
+  // console.log('등록 버튼 눌렀을 때: ', editModes)
+  // console.log('삭제 버튼 눌렀을 때: ', editModes)
+
+
+  // console.log(Array.isArray(categories))
+  // console.log(Array.isArray(categoryData))
 
 
   // [editModes: true => 수정상태 | editModes: false => 완료상태]
@@ -211,41 +324,50 @@ function PosCategory( {categoryData, setSelectedCategory} ) {
       const diff = categories.length - editModes.length;
       const newEditModes = [...editModes, ...new Array(diff).fill(false)];
       setEditModes(newEditModes);
-    }
+    };
   }, [categories, editModes]);
 
 
-  // 수정, 완료버튼 토글 이벤트핸들러
-  const handlerEditMode = (idx) => {
-    const newEditModes = [...editModes];
-    newEditModes[idx] = !newEditModes[idx];
-    setEditModes(newEditModes);
-  };
-
-
-  // 버튼에 수정, 완료 텍스트 적용
-  const getButtonText = (idx) => editModes[idx] ? '완료' : '수정';
-
-
-  // console.log('수정 버튼 눌렀을 때: ', editModes)
+  // 카테고리 옆의 버튼에 등록, 완료 텍스트 적용
+  const getButtonText = (idx) => editModes[idx] ? '등록' : '수정';
 
 
   // 카테고리 삭제 이벤트핸들러
-  const handlerRemoveCategory = (idx) => {
-    const newCategories = [...categories];
-    newCategories.splice(idx, 1);
-    setCategories(newCategories);
+  const handlerRemoveCategory = async (idx) => {
 
-     // 카테고리 삭제하면 editModes를 초기화하여 전에 있던 상태가 영향을 주지않게함
-    const newEditModes = [...editModes];
-    newEditModes.splice(idx, 1);
-    setEditModes(newEditModes);
-   
-    
-    // console.log('삭제 버튼 눌렀을 때: ', editModes)
+    // 삭제할 카테고리 id 참조
+    const deleteCategory = categories[idx].id;
+
+    // 삭제 확인 경고창 위한 로직
+    const confirmDelete = window.confirm('카테고리를 정말 삭제하겠습니까?');
+
+    // 삭제할 때
+    if (confirmDelete) {
+      try {
+        // 서버에서 카테고리 데이터 삭제
+        await CategoryDeleteApi(deleteCategory);    // [DELETE: 카테고리 삭제]
+
+        // 랜더링된 화면에서도 카테고리 삭제
+        const newCategories = [...categories];
+        newCategories.splice(idx, 1);
+        setCategories(newCategories);
+
+        // 카테고리 삭제하면 editModes를 초기화하여 전에 있던 상태가 영향을 주지않게함
+        const newEditModes = [...editModes];
+        newEditModes.splice(idx, 1);
+        setEditModes(newEditModes);
+        alert('카테고리가 삭제되었습니다.')
+      } catch (err) {
+          console.error(err);
+      };
+    } else {
+      alert('카테고리 삭제가 취소되었습니다.')
+    };
   };
 
-  console.log('PosCategory_카테고리 정보 : ', categories)
+  // console.log('PosCategory_카테고리 정보 : ', categories)
+
+  // console.log(editModes)
 
   return (
     <ComponentDiv>
@@ -253,16 +375,19 @@ function PosCategory( {categoryData, setSelectedCategory} ) {
         <h1>카테고리</h1>
       </TitleDiv>
       <CategoryDiv>
-        {categories.map((category, idx) => (
+        {categories && categories.map((category, idx) => (
           <CategoryContainer key={category.id}>
             {editModes[idx] ? (
               <InputField
                 type="text"
+                ref={(ref) => (inputRefs.current[idx] = ref)}   // 입력 포커스용 ref
                 value={category.name}
                 onChange={(e) => handlerEditCategory(idx, e)}
               />
             ) : (
-              <CategoryButton onClick={() => handlerCategoryClick(category)}>{category.name}</CategoryButton>
+              <CategoryButton onClick={() => handlerCategoryClick(category)}>
+                {category.name}
+              </CategoryButton>
             )}
             <EditButton onClick={() => handlerEditMode(idx)}>
               {getButtonText(idx)}
