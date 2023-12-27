@@ -3,7 +3,7 @@ name: Deploy to Amazon S3 bucket
 on:
   push:
     branches: [ "main" ]
-    # 브랜치 어떻게 할 지 생각
+    # 브랜치 어떻게 할 지 생각 
 
 env:
   AWS_REGION: ap-northeast-2
