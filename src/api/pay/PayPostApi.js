@@ -2,7 +2,7 @@ import axios from 'axios';
 import URL from '../BaseUrl';
 
 /* eslint-disable */
-export async function PayPutApi(data){
+export async function PayPostApi(data){
     const headers = {
         'content-type': 'application/json',
         Authorization : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMjUyMDM1NCwianRpIjoiY2M4ZDI5ODMtYTZkYS00NTMyLTlkYTQtYzZlMGM2YTQ3ZmE3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNzAyNTIwMzU0LCJleHAiOjE3MDUxMTIzNTR9.g4fz5XJyyXMzbFYApNZS1hSMhZuWE3upSagu2CKJVII',
@@ -11,11 +11,11 @@ export async function PayPutApi(data){
 
     try{
         
-        // await axios.put(`${URL}/orders/payment`,data,{headers: headers}).then(res=>{
-        //     console.log("PayPutApi-data:",res.data)
+        // await axios.post(`${URL}/orders/payment`,data,{headers: headers}).then(res=>{
+        //     console.log("PayPostApi-data:",res.data)
         //     return res.data;
         // })      
-        const res = await axios.put(`${URL}/orders/payment`,data,{headers: headers})
+        const res = await axios.post(`${URL}/sales/`,data,{headers: headers})
         return res.data;
     } catch(error){
         console.log("error: ", error.response.data);

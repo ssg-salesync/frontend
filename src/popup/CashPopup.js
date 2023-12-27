@@ -4,7 +4,7 @@ import { useRecoilValue, useResetRecoilState, useRecoilState } from "recoil";   
 import { styled } from 'styled-components';
 import { PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
 import { getAtom } from '../components/func/AtomData';
-import { PayPutApi } from '../api/pay/PayPutApi';
+import { PayPostApi } from '../api/pay/PayPostApi';
 
 const modalStyle ={
     content: {
@@ -122,9 +122,9 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
         // const dataPost = OrdersPostApi(data);
         // console.log(dataPost)
         
-        const data = {table_no:tableId}
-        const dataPut = await PayPutApi(data)
-        console.log(dataPut)
+        const data = {table_no:tableId,payment_type:"현금",total_price:totalPrice}
+        const dataPost = await PayPostApi(data)
+        console.log(dataPost)
         // // 1. 팝업 모두 닫힘
         setCloseAllPopup(true)
         console.log("=>cashPopup closeAllPopup",closeAllPopup)

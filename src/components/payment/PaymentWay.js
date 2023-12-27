@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import CardPopup from '../../popup/CardPopup';
 import CashPopup from '../../popup/CashPopup';
-import { PayPutApi } from '../../api/pay/PayPutApi';
-import { PayCompleteState } from '../../recoil/atoms/ItemState';
+import { PayPostApi } from '../../api/pay/PayPostApi';
+import { PayCompleteState, TotalPrice } from '../../recoil/atoms/ItemState';
 
 const WayDiv = styled.div`
     width:100%;
@@ -39,6 +39,7 @@ function PaymentWay({closePaymentPopup,tableId}) {
     const [cardPopupOn, setCardPopupOn] = useState(false);
     const [cashPopupOn, setCashPopupOn] = useState(false);
     const [closeAllPopup,setCloseAllPopup] = useRecoilState(PayCompleteState)
+    const totalPrice = useRecoilValue(TotalPrice)
     
     const openCardPopup =() =>{
         setCardPopupOn(true);
@@ -77,8 +78,9 @@ function PaymentWay({closePaymentPopup,tableId}) {
 
     // 결제
     const payPut = () =>{
-        const data = {table_no:tableId}
-        const dataPut = PayPutApi(data)
+        // const data = {table_no:tableId}
+        const data = {table_no:tableId,payment_type:"카드",total_price:totalPrice}
+        const dataPost = PayPostApi(data)
 
     }
     // useEffect(() =>{
