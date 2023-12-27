@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2
-  S3_BUCKET_NAME: salesync.site
+  S3_BUCKET_NAME: salesync-static-web-server
   # CLOUDFRONT_NAME: E28M3K5TF5L3PV
   # AWS CloudFront, Route53 생각
 
