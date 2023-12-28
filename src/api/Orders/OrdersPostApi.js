@@ -14,8 +14,9 @@ export async function OrdersPostApi(data){
         //     return res;
         // })
         const res = await axios.post(`${URL}/orders/`,data,{headers: headers});
+        console.log(res)
         return res.data;
     } catch(error){
         console.log("error: ", error.response.data);
-    }    
+    }
 }
