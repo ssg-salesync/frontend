@@ -121,14 +121,17 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
 
         // const dataPost = OrdersPostApi(data);
         // console.log(dataPost)
-        
-        const data = {table_no:tableId,payment_type:"현금",total_price:totalPrice}
-        const dataPost = await PayPostApi(data)
-        console.log(dataPost)
-        // // 1. 팝업 모두 닫힘
-        setCloseAllPopup(true)
-        console.log("=>cashPopup closeAllPopup",closeAllPopup)
-        closeCashPopup()
+        if (receiveAmount >= totalPrice){
+            const data = {table_no:tableId,payment_type:"현금",total_price:totalPrice}
+            const dataPost = await PayPostApi(data)
+            console.log(dataPost)
+            // // 1. 팝업 모두 닫힘
+            setCloseAllPopup(true)
+            console.log("=>cashPopup closeAllPopup",closeAllPopup)
+            closeCashPopup()
+        }else{
+            alert("받은 금액이 결제금액보다 적습니다.")
+        }
             
         // 2. 테이블 초기화
         
