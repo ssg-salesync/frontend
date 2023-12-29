@@ -8,10 +8,11 @@ const ListTable = styled.table`
     display: 'flex';
     text-align: center;
     margin-top: 10%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 10px;
 `
 const ListTableTr = styled.tr`
-    background: gray;
+    background: #FFF;
     border-radius:'10px';
 `
 const ListTableTd = styled.td`
@@ -21,7 +22,9 @@ const ListTableTd = styled.td`
 const PayDiv = styled.div`
     width: 60%;
     height: 90%;
-    background-color: gray;
+    border-radius: 0.625rem;
+    background: #1C395E;
+    color: #FFF;
 
     display: flex;
     align-items : center;

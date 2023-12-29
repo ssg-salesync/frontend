@@ -21,14 +21,15 @@ const ButtonDiv = styled.div`
     width: 80%;
     height: 10%;
     margin: 1rem;
-    background-color:gray;
-    
+    background-color:#D9D9D9;
+    border-radius: 0.625rem;
     display: flex;
     justify-content: center;
     box-sizing: border-box; /* padding, border가 너비에 포함되도록 함 */
 `
 const Button = styled.button`
     border: none;
+    border-radius: 0.625rem;
     padding: 0;
     width: 100%;
     height: 100%;

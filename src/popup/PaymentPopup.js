@@ -18,6 +18,7 @@ const modalStyle ={
         height: '80%', // 모달의 높이
         display: 'flex',
         flexDirection: 'row',
+        background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
       },
 };
 

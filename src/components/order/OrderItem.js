@@ -9,38 +9,47 @@ import { OrdersPutApi } from "../../api/Orders/OrdersPutApi";
 import { OrdersPostApi } from "../../api/Orders/OrdersPostApi";
 
 const TabDiv = styled.div`
-    height : 90%;
-    width : 90%;
-    background-color : green;
+    height : 100%;
+    width : 100%;
+    background: linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%), #FFF;
     // margin-left: 1%;
 `
 const TabMemu = styled.ul`
-    height : 5%;
+    // height : 5%;
     width : 100%;
+    
     display: flex;
     flex-direction:row;
     align-items: center;
-    list-style: none;
+    list-style-type: none;
     padding: 0;
+    margin: 0;
+    border-radius: 0.5rem;
 
     .focused{
         //선택된 tab에 적용되는 css
-        background-color : gray;
-        color: blue;
+        background-color : #D9D9D9;
+        color: black;
+        border-radius: 0.5rem;
     }
 `
 const SubMenu = styled.li`
     display: flex;
-    width: 20%;
+    width: 10%;
     height: 80%;
-    padding:10px;
-    font-size:15px;
+    padding: 0.5rem;
+    margin :0.5rem;
+    font-size:1rem;
     transition: 0.5s;
+    background-color : #FFF;
+    border-radius: 0.5rem;
+    justify-content: center;
 `
 const Item = styled.div`
     text-align: center;
     width: 100%;
-    height: 100%;
+    height: 90%;
+    border: 0.5rem;
     // background-color : gray;  
     display: flex;
     flex-direction:row;
@@ -49,12 +58,65 @@ const Menu = styled.div`
     width: 25%;
     height:25%;
     margin : 1rem;
-    background-color : gray;    
+    background-color : #D9D9D9;
+    border-radius: 0.5rem;
+`
+const MenuDtDiv = styled.div`
+    height:60%;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+`
+const MenuDtP =styled.p`
+    margin:0.5rem;
+`
+const BtDiv = styled.div`
+    height:40%;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+`
+const QuantityBt = styled.button`
+    width: 3rem;
+    height: 1.5rem;
+    background: #D9D9D9;
+    border:none;
+    font-family: 'Pretendard-Regular';
+`
+const MinusBt = styled.button`
+    // background: url("/img/MinusBt.png") no-repeat center center;
+    background: url("/img/MinusBt.png"), lightgray 50% / contain no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    border:none;
+    padding:0;
+`
+const PlusBt = styled.button`
+    // background: url("/img/PlusBt.png") no-repeat center center;
+    background: url("/img/PlusBt.png"), lightgray 50% / contain no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    border:none;
+    padding:0;
 `
 const OrderCheckBt = styled.button`
+    border: none;
+    border-radius: 0.5rem;
+    background: #1C395E;
+    color: #FFF;
+    width: 4rem;
+    height: 2rem;
     position: fixed;
-    right :43%;
-    bottom :5%;
+    right :40%;
+    bottom :8%;
+    font-family: Pretendard-Regular;
 `
 /* eslint-disable */
 function OrderItem({tableId}) {
@@ -251,9 +313,9 @@ function OrderItem({tableId}) {
                 {/* <li className="submenu">{menuArr[0].name}</li>
                     <li className="submenu">{menuArr[1].name}</li>
                     <li className="submenu">{menuArr[2].name}</li> */}
-                    <div>
-                    <OrderCheckBt type='button' onClick={orderSend}>확인</OrderCheckBt>
-                    </div>
+                <div>
+                <OrderCheckBt type='button' onClick={orderSend}>확인</OrderCheckBt>
+                </div>
                 {menu.map((cate) => (
                     <SubMenu key={cate.category_id} className={cate.category_id === currentTab ? "tab focused" : "tab"} onClick={() => selectMenuHandler(cate.category_id)}>{cate.category_name}</SubMenu>
                 ))}
@@ -263,22 +325,20 @@ function OrderItem({tableId}) {
                         Category {categoryId}
                     </SubMenu>
                 ))} */}
-
-
             </TabMemu>
             {menu.map((cate, cateIdx) => (cate.category_id === currentTab && (
                 <Item key={cate.category_id}>
                     {cate.items.map((item,itemIdx) => (
                         <Menu key={item.item_id}>
-                            <div>
-                                <p>{item.name}</p>
-                                <p>{item.price} </p>                                
-                            </div>
-                            <div>
-                                <button type="button" onClick={() =>quantityMinus(item.item_id,cate.category_id)}>-</button>
-                                <button type="button">{item.quantity}</button>  
-                                <button type="button" onClick={()=>quantityPlus(item.item_id,cate.category_id)}>+</button> 
-                            </div>
+                            <MenuDtDiv>
+                                <MenuDtP>{item.name}</MenuDtP>
+                                <MenuDtP>{item.price}</MenuDtP>                            
+                            </MenuDtDiv>
+                            <BtDiv>
+                                <MinusBt type="button" onClick={() =>quantityMinus(item.item_id,cate.category_id)}/>
+                                <QuantityBt type="button">{item.quantity}</QuantityBt>  
+                                <PlusBt type="button" onClick={()=>quantityPlus(item.item_id,cate.category_id)}/>
+                            </BtDiv>
                         </Menu>
                     ))}
                 </Item>
