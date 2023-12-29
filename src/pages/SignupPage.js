@@ -4,56 +4,67 @@ import { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { StoreState } from "../recoil/atoms/StoreState";
 import { SignupPostApi } from "../api/auth/SignupPostApi";
+import { ComponentDiv, TitleDiv,InsertDiv} from "../styles/CommonStyle";
 
 /* eslint-disable */
 
 // 컴포넌트 전체 영역
-const ComponentDiv = styled.div`
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+// const ComponentDiv = styled.div`
+// // height: 80vh;
+// width: 38.25rem;
+// height: 33.75rem;
 
-// 회원가입 제목 영역
-const TitleDiv = styled.div`
-  height: 30%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// display: flex;
+// flex-direction: column;
+// align-items: center;
 
-  // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 100%;
-  }
+// border-radius: 2.125rem;
+// border: 2px solid #FFF;
+// background: rgba(255, 255, 255);
+// box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
+// backdrop-filter: blur(10px);
+// `;
 
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 200%;
-  }
+// // 회원가입 제목 영역
+// const TitleDiv = styled.div`
+//   height: 30%;
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
 
-  @media screen and (min-width: 1025px) {
-    font-size: 300%;
-  }
-`;
+//   // 반응형에 맞게 폰트 크기 조정
+//   @media screen and (max-width: 480px) {
+//     font-size: 100%;
+//   }
+
+//   @media screen and (min-width: 481px) and (max-width: 1024px) {
+//     font-size: 200%;
+//   }
+
+//   @media screen and (min-width: 1025px) {
+//     font-size: 300%;
+//   }
+// `;
 
 // 아이디, 비밀번호 등 입력 영역
-const InsertDiv = styled.div`
-  height: 40%;
-  width: 100%;
-  margin: 30px auto;
-  width: 400px;
-  text-align: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+// const InsertDiv = styled.div`
+//   height: 40%;
+//   width: 100%;
+//   margin: 30px auto;
+//   width: 400px;
+//   text-align: center;
+//   align-items: center;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+// `;
 
 // 다음 버튼 영역
 const ButtonDiv = styled.div`
-  height: 30%;
+  height: 20%;
   width: 100%;
+  margin-bottom:10%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +73,10 @@ const ButtonDiv = styled.div`
 // 아이디, 비밀번호 등 입력칸
 const InputField = styled.input`
   border: none;
-  border-bottom: 2px solid #289AFF;
+  border-bottom: 2px solid #1C395E;
+  // margin:3%;
+  width:35%;
+  font-family: Pretendard-Regular;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 480px) {
@@ -80,27 +94,32 @@ const InputField = styled.input`
 
 // 다음 버튼
 const NextButton = styled.button`
-  width: 170%;
-  height: 25%;
-  margin-left: -35%;
-  border-radius: 15%;
-  border-color: #289AFF;
-  background-color: #289AFF;
-  color: white;
+  width: 7.125rem;
+  height: 2.375rem;
+  margin-left: -15%;
+  border-radius: 0.5625rem;
+  border:none;
+  background-color: #00ADEF;
   cursor: pointer;
 
+  color: #FFF;
+  font-family: 'Pretendard-Regular';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: normal;
+
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 50%;
-  }
+  // @media screen and (max-width: 480px) {
+  //   font-size: 50%;
+  // }
 
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 100%;
-  }
+  // @media screen and (min-width: 481px) and (max-width: 1024px) {
+  //   font-size: 100%;
+  // }
 
-  @media screen and (min-width: 1025px) {
-    font-size: 150%;
-  }
+  // @media screen and (min-width: 1025px) {
+  //   font-size: 150%;
+  // }
 `;
 
 function SignupPage() {
@@ -335,7 +354,7 @@ function SignupPage() {
 
   return (
     <ComponentDiv>
-      <TitleDiv>회원가입</TitleDiv>
+      <TitleDiv>회원가입을 위해 아이디와 <br/>비밀번호를 입력해주세요.</TitleDiv>
       <InsertDiv>
         <InputField
           type="text"
