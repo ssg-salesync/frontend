@@ -23,22 +23,51 @@ const modalStyle ={
         height: '80%', // 모달의 높이
         display: 'flex',
         flexDirection: 'row',
+        background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
       },
 };
 const PayDiv = styled.div`
-    width: 30%;
+    width: 70%;
     height: 20%;
     position: fixed;
     bottom: 0;
-    margin-bottom: 2rem;
-    background-color: gray;
+    margin: 3rem;
+    border-radius: 0.625rem;
+    background: #1C395E;
+    color: #FFF;
     
     display: flex;
-    flexDirection: row;
+    align-items: center;
+`
+const PayLDiv = styled.div`
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+`
+const PayRDiv = styled.div`
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 `
 const CloseBt = styled.button`
+    background: url("/img/Close.png"), #FFF 90%/ contain no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    border:none;
     position: fixed;
     right :3%;
+`
+const RightDiv = styled.div`
+    flex: 1.5; 
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.70);
+    backdrop-filter: blur(25px);
 `
 // 모달을 위한 루트 엘리먼트 설정
 Modal.setAppElement('#root');
@@ -150,24 +179,24 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}
-            <div style={{ flex: 1.5, padding: '20px'}}>
+            <RightDiv>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
-                <CloseBt type='button' onClick={closeOrderPopup}>close</CloseBt>
+                <CloseBt type='button' onClick={closeOrderPopup}/>
                 <h2>주문 목록</h2>                
-                <OrderList/>
+                <div><OrderList/></div>
                 {/* <PayButton type='button' value="Close" onClick={()=>closeOrderPopup}/> */}
                 <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}>
                 <PayDiv>
-                    <div style={{ flex: 3, display:'flex', 'alignItems': 'center','justify-content': 'center'}}>
+                    <PayLDiv>
                         {/* <p>총 결제금액 : {totalAmountCalculate()}원</p> */}
-                        <p>총 결제금액 : {totalPrice}원</p>
-                    </div>
-                    <div style={{ flex: 1.5, display:'flex', 'alignItems': 'center','justify-content': 'center'}}>
+                        <p>총 결제금액 <br/> {totalPrice}원</p>
+                    </PayLDiv>
+                    <PayRDiv>
                         결제하기
-                    </div>
+                    </PayRDiv>
                 </PayDiv>
                 </Link>
-            </div>
+            </RightDiv>
         </Modal>
         {paymentPopupOn && <PaymentPopup openPaymentPopup={openPaymentPopup} closePaymentPopup={closePaymentPopup} closeOrderPopup={closeOrderPopup} tableId={tableId}/>}
         </>

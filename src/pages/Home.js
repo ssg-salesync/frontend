@@ -9,38 +9,44 @@ import { deleteOrderState,deleteTotalPriceState } from "../components/func/AtomD
 import { UnpaidGetApi } from "../api/pay/UnpaidGetApi";
 
 const TableDiv = styled.div`
+    height:100%;
+    width:100%;
+
     display: grid;
-    grid-template-columns: repeat(4, 200px);
+    grid-template-columns: repeat(4, 15rem);
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    height: calc((100vh - 40px) / 2);
-    padding: 20px 0;
+    row-gap: 1rem;
+    // height: calc((100vh - 40px) / 2);
+    // padding: 20px 0;
 
     // 반응형 웹에 맞는 비율 당 보이는 테이블 갯수 설정
-    @media (max-width: 1200px) {
-        grid-template-columns: repeat(3, 200px);
-    }
+    // @media (max-width: 1200px) {
+    //     grid-template-columns: repeat(3, 200px);
+    // }
 
-    @media (max-width: 900px) {
-        grid-template-columns: repeat(2, 200px);
-    }
+    // @media (max-width: 900px) {
+    //     grid-template-columns: repeat(2, 200px);
+    // }
 
-    @media (max-width: 600px) {
-        grid-template-columns: 200px;
-    }
+    // @media (max-width: 600px) {
+    //     grid-template-columns: 200px;
+    // }
+    
 `;
 const TableContainer = styled.div`
-    width: 200px;
-    height: 200px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    width: 13rem;
+    height: 13rem;
+    border-radius: 0.625rem;
+    // border: 1px solid #ccc;
+    border:none;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     transition: transform 0.3s;
     cursor: pointer;
+    background: #FFF;
 
     &:hover {
         transform: scale(1.1) rotate(2deg);
@@ -165,7 +171,6 @@ function Home() {
         tableOrders()
     },[orderModalOn])
     return (
-        <>
         <TableDiv>        
         {loading && tables.map((table) => (
             <TableContainer key={table.tableId} onClick={(e) => { e.preventDefault(); openOrderPopup(table.tableId); }}>
@@ -188,12 +193,8 @@ function Home() {
                 </div>
             </TableContainer>
         ))}
+        {orderModalOn && <OrderPopup openOrderPopup={openOrderPopup} closeOrderPopup={closeOrderPopup} tableId={selectedTableId}/>}
         </TableDiv>
-
-        {orderModalOn && <OrderPopup openOrderPopup={openOrderPopup} closeOrderPopup={closeOrderPopup} tableId={selectedTableId}/>}        
-        {/* {orderModalOn && <OrderPopup openOrderPopup={openOrderPopup} closeOrderPopup={closeOrderPopup}/>}         */}
-        
-        </>
-    );
+);
 };
 export default Home
