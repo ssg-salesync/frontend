@@ -160,7 +160,7 @@ const DeleteButton = styled.div`
 `;
 
 
-function PosItem( {itemData, selectedCategoryId}) {
+function PosItem({ itemData, selectedCategoryId }) {
 
   // 아이템 데이터가 로딩 중인 동안 보여줄 내용 (PosPage가 무거워서 랜더링 좀 걸릴 수도 있음)
   if (!itemData) {
@@ -168,7 +168,7 @@ function PosItem( {itemData, selectedCategoryId}) {
   };
 
   // 최대 아이템 갯수
-  const maxitems = 5;
+  const maxitems = 10;
 
   // 아이템 상태 저장
   const [items, setItems] = useState(itemData);
@@ -194,6 +194,7 @@ function PosItem( {itemData, selectedCategoryId}) {
       return [];
     };
   };
+
 
   // 선택한 카테고리의 이름을 가져옴
   const getNameBySelectedCategory = () => {
@@ -271,10 +272,11 @@ function PosItem( {itemData, selectedCategoryId}) {
           (_, index) => index === newCategoryItems.length - 1
         );
 
-        console.log('New Edit Modes:', newEditModes); // 추가
+        // console.log(newEditModes); // 추가
 
         setEditModes(newEditModes);
 
+        // 비동기적으로 처리하기 위해 타임아웃(시간: 0) 설정
         setTimeout(() => {
           const lastIndex = newCategoryItems.length - 1;
           inputRefs.current[lastIndex]?.focus();
@@ -282,11 +284,9 @@ function PosItem( {itemData, selectedCategoryId}) {
 
         return updatedItems;
       });
-
-      
     } catch (err) {
-      console.error('새로운 카테고리 추가 오류:', err);
-    }
+      console.error(err);
+    };
   };
 
 // console.log('items: ', items)
@@ -460,6 +460,7 @@ useEffect(() => {
 }, [selectedCategoryId, items?.categories?.length]);
 
 
+console.log(selectedCategoryId)
 
 
 
