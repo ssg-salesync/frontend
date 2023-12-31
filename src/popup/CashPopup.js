@@ -18,6 +18,7 @@ const modalStyle ={
         height: '80%', // 모달의 높이
         display: 'flex',
         flexDirection: 'column',
+        background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
       },
 };
 const Button = styled.button`
@@ -35,7 +36,7 @@ const ButtonPay = styled.button`
 const ListDiv = styled.div`
     width: 60%;
     height: 15%;
-    background: gray;
+    background: #FFF;
     display: flex; 
     margin: 1%
 `
@@ -53,7 +54,7 @@ const ListGap = styled.p`
 const ListContent = styled.input`
     width: 40%;
     heigth: 100%;
-    background: gray;
+    background: #FFF;
 
     padding: 1%;
     text-align: right;
@@ -121,14 +122,17 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
 
         // const dataPost = OrdersPostApi(data);
         // console.log(dataPost)
-        
-        const data = {table_no:tableId,payment_type:"현금",total_price:totalPrice}
-        const dataPost = await PayPostApi(data)
-        console.log(dataPost)
-        // // 1. 팝업 모두 닫힘
-        setCloseAllPopup(true)
-        console.log("=>cashPopup closeAllPopup",closeAllPopup)
-        closeCashPopup()
+        if (receiveAmount >= totalPrice){
+            const data = {table_no:tableId,payment_type:"현금",total_price:totalPrice}
+            const dataPost = await PayPostApi(data)
+            console.log(dataPost)
+            // // 1. 팝업 모두 닫힘
+            setCloseAllPopup(true)
+            console.log("=>cashPopup closeAllPopup",closeAllPopup)
+            closeCashPopup()
+        }else{
+            alert("받은 금액이 결제금액보다 적습니다.")
+        }
             
         // 2. 테이블 초기화
         

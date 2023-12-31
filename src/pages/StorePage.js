@@ -3,53 +3,55 @@ import styled from 'styled-components';
 import { useState } from "react";
 import { useRecoilState } from 'recoil';
 import { StoreState } from "../recoil/atoms/StoreState";
-import { StorePostApi } from "../api/auth/signup/StorePostApi";
-import { StoreTokenPostApi } from "../api/auth/signup/StoreTokenPostApi";
+import { StorePostApi } from "../api/auth/StorePostApi";
+import { StoreTokenPostApi } from "../api/auth/StoreTokenPostApi";
+import { ComponentDiv, TitleDiv,InsertDiv } from "../styles/CommonStyle";
+
 
 /* eslint-disable */
 
 // 컴포넌트 전체 영역
-const ComponentDiv = styled.div`
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+// const ComponentDiv = styled.div`
+//   height: 80vh;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// `;
 
-// 매장정보 제목 영역
-const TitleDiv = styled.div`
-  height: 30%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// // 매장정보 제목 영역
+// const TitleDiv = styled.div`
+//   height: 30%;
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
 
-  // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 100%;
-  }
+//   // 반응형에 맞게 폰트 크기 조정
+//   @media screen and (max-width: 480px) {
+//     font-size: 100%;
+//   }
 
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 200%;
-  }
+//   @media screen and (min-width: 481px) and (max-width: 1024px) {
+//     font-size: 200%;
+//   }
 
-  @media screen and (min-width: 1025px) {
-    font-size: 300%;
-  }
-`;
+//   @media screen and (min-width: 1025px) {
+//     font-size: 300%;
+//   }
+// `;
 
 // 매장명, 주소 등 입력 영역
-const InsertDiv = styled.div`
-  height: 40%;
-  width: 100%;
-  margin: 30px auto;
-  width: 400px;
-  text-align: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+// const InsertDiv = styled.div`
+//   height: 40%;
+//   width: 100%;
+//   margin: 30px auto;
+//   width: 400px;
+//   text-align: center;
+//   align-items: center;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+// `;
 
 // 다음 버튼 영역
 const ButtonDiv = styled.div`
@@ -63,7 +65,10 @@ const ButtonDiv = styled.div`
 // 매장명, 주소 등 입력칸
 const InputField = styled.input`
   border: none;
-  border-bottom: 2px solid #289AFF;
+  border-bottom: 2px solid #1C395E;
+  margin:1%;
+  width:35%;
+  font-family: Pretendard-Regular;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 480px) {
@@ -81,27 +86,32 @@ const InputField = styled.input`
 
 // 다음 버튼
 const NextButton = styled.button`
-  width: 170%;
-  height: 25%;
-  margin-left: -35%;
-  border-radius: 15%;
-  border-color: #289AFF;
-  background-color: #289AFF;
-  color: white;
+  width: 7.125rem;
+  height: 2.375rem;
+  // margin-left: -15%;
+  border-radius: 0.5625rem;
+  border:none;
+  background-color: #00ADEF;
   cursor: pointer;
 
+  color: #FFF;
+  font-family: 'Pretendard-Regular';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: normal;
+
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 50%;
-  }
+  // @media screen and (max-width: 480px) {
+  //   font-size: 50%;
+  // }
 
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 100%;
-  }
+  // @media screen and (min-width: 481px) and (max-width: 1024px) {
+  //   font-size: 100%;
+  // }
 
-  @media screen and (min-width: 1025px) {
-    font-size: 150%;
-  }
+  // @media screen and (min-width: 1025px) {
+  //   font-size: 150%;
+  // }
 `;
 
 function StorePage() {
@@ -166,7 +176,7 @@ function StorePage() {
 
   return (
     <ComponentDiv>
-      <TitleDiv>매장 등록</TitleDiv>
+      <TitleDiv>매장을 등록해주세요.</TitleDiv>
       <InsertDiv>
         <InputField
           type="text"

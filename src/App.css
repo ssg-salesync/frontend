@@ -1,4 +1,8 @@
 main{
     height: 80vh;
     width: 100%;
+    background: linear-gradient(100deg, #E4F4FF, #E0F6FF, #D2E5FC), #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

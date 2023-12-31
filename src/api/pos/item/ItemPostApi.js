@@ -1,23 +1,11 @@
 import axios from 'axios';
 import URL from '../../BaseUrl';
+import { Token } from '../../Token';
 
 /* eslint-disable */
+export async function ItemPostApi(selectedCategoryId, newItem){
 
-// 로컬스토리지에 있는 토큰을 가져옴
-function getTokenFromLocalStorage(tokenName) {
-    return localStorage.getItem(tokenName);
-};
-
-export async function ItemPostApi(selectedCategoryId, newItem) {
-
-    const accessToken = getTokenFromLocalStorage('access_token');
-    const csrfToken = getTokenFromLocalStorage('csrf_token');
-
-    const headers = {
-        'content-type': 'application/json',
-        Authorization : `Bearer ${accessToken}`,
-        'X-CSRF-Token' : csrfToken
-    };
+    const headers = Token()
 
     try{
         await axios.post(`${URL}/categories/${selectedCategoryId}/items`, newItem, {headers}).then(res => {
