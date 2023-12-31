@@ -12,6 +12,7 @@ import { ItemGetApi } from "../api/pos/item/ItemGetApi";
 const ComponentDiv = styled.div`
     height: 80vh;
     display: flex;
+    overflow: auto;
 `;
 
 // PosCategory 컴포넌트 영역
@@ -126,6 +127,18 @@ function PosPage() {
       fetchData();
     }, []);
 
+
+//     useEffect(() => {
+//   // 카테고리 목록이 변경될 때마다 selectedCategory 확인
+//   if (selectedCategory && categoryData) {
+//     const isCategoryExist = categoryData.some(category => category.id === selectedCategory.id);
+
+//     // 선택된 카테고리가 더 이상 존재하지 않으면 null로 설정
+//     if (!isCategoryExist) {
+//       setSelectedCategory(null);
+//     }
+//   }
+// }, [categoryData, selectedCategory]);
 
   // console.log('적용된 카테고리 데이터: ', categoryData)
   // console.log('적용된 아이템 데이터: ', itemData)
