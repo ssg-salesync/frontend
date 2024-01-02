@@ -3,9 +3,10 @@ import URL from '../../BaseUrl';
 import { Token } from '../../Token';
 
 /* eslint-disable */
+
 export async function ItemPutApi(itemId, updatedItem){
 
-    const headers = Token()
+    const headers = Token();
 
     try{
         await axios.put(`${URL}/categories/items/${itemId}`, updatedItem, {headers}).then(res => {

@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from "react";
-import { InfoPutApi } from "../api/auth/info/InfoPutApi";
+import { useRecoilState } from "recoil";
+import { InfoPostApi } from "../api/auth/info/InfoPostApi";
 import { InfoGetApi } from "../api/auth/info/InfoGetApi";
+import { InfoState } from "../recoil/atoms/InfoState";
 
 /* eslint-disable */
 
@@ -104,42 +106,61 @@ const NextButton = styled.button`
 
 function InfoPage() {
 
-  // 새 비밀번호에 입력한 데이터 상태 저장
+  // 기존 비밀번호에 입력한 데이터 상태 저장
   const [infoData, setInfoData] = useState({
-    newPassword: ''
+    password: ''
   });
 
-  // 새 비밀번호 확인에 입력한 데이터 상태 저장
-  const [passwordData, setPasswordData] = useState({
-    confirmPassword: ''   // 비밀번호 확인
-  });
-
-  // 새 비밀번호 필드 데이터 변경 시 해당 상태 변경
+  // 기존 비밀번호 필드 데이터 변경 시 해당 상태 변경
   const handlerInputChange = (e) => {
     const { name, value } = e.target;
     setInfoData({ ...infoData, [name]: value });
   };
 
-  // 새 비밀번호 확인 필드 데이터 변경 시 해당 상태 변경
-  const handlerConfirmPassword = (e) => {
-    const { name, value } = e.target;
-    setPasswordData({ ...passwordData, [name]: value });
+  // 비밀번호 상태 전역 저장되게 recoil 세팅
+  const [infoState, setInfoState] = useRecoilState(InfoState)
+
+  // 네비게이트 훅
+  const navigate = useNavigate();
+
+  // POST로 기존 비밀번호 맞는지 확인 이벤트핸들러
+  const handlerPasswordCheck = async () => {
+    try {
+
+      if (infoData.password.trim() === '') {
+        alert('기존 비밀번호를 입력해주세요.')
+        return;
+      };
+
+      const password = { password: infoData.password }
+      const res = await InfoPostApi(password);
+      console.log(res);
+
+      // 기존 비밀번호와 일치하지 않으면 다음 페이지 못 넘어감
+      if (res.data.result === 'failed') {
+        alert('기존 비밀번호가 일치하지 않습니다.')
+
+        // 입력칸 초기화
+        setInfoData({...infoData, password: ''})
+
+        // 입력칸에 포커스
+        if (passwordRef.current) {
+          passwordRef.current.focus();
+        };
+      } else {
+
+        // 다음 페이지로 넘어갈 데이터 상태 저장
+        setInfoState({...infoState, ...infoData})
+
+        navigate('/mypage/info/newpassword');
+      }
+    } catch (err) {
+      console.log(err);
+    };
   };
 
-
-  // 필드별 입력칸 포커스 훅
+  // 기존 비밀번호 입력칸 포커스 훅
   const passwordRef = useRef(null);
-  
-  const newPasswordRef = useRef(null);
-  const confirmPasswordRef = useRef(null);
-
-
-  // 새 비밀번호 조건: 10~16자의 영문 대/소문자, 숫자, 특수문자를 최소 1개씩 입력
-  const isNewPasswordValid = (newPassword) => {
-    const newPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,16}$/;
-    return newPasswordRegex.test(newPassword);
-  };
-
 
   // GET으로 가져올 아이디 저장할 상태
   const [ownerName, setOwnerName] = useState('');
@@ -157,218 +178,25 @@ function InfoPage() {
     fetchData();
   }, []);
 
-      
-  // console.log('현재 입력하고 있는 패스워드: ', infoData.password)
-
-
-
-  // 여기부터 미구현 | 백엔드 API 추가 필요///////////////////////////////
-
-  // GET으로 가져올 비밀번호 저장할 상태
-  const [password, setPassword] = useState('');
-
-  // GET으로 비밀번호를 가져와서 상태 저장
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const passwordRes = await InfoGetApi();
-        setPassword(passwordRes.password) 
-        
-      } catch(err) {
-      console.log(err);
-    };
-  };
-    fetchData();
-  }, []);
-
-  // console.log('가져온 기존 비밀번호: ', password)
-
-///////////////////////////////////////////////////////////
-
-
-
-
-
-  // GET으로 가져올 storeID 저장할 상태
-  const [storeId, setStoreId] = useState('');
-
-  // GET으로 storeID를 가져와서 상태 저장
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const storeIdRes = await InfoGetApi();
-        setStoreId(storeIdRes.store_id)
-      } catch(err) {
-      console.log(err);
-    };
-  };
-    fetchData();
-  }, []);
-
-  // console.log('storeId: ', storeId)
-  // console.log('ownerName: ', ownerName)
-
-
-
-
-  // 미완성/////////////////////////////////////////////
-
-  // 기존 비밀번호 필드 조건 부여 이벤트 핸들러
-  const handlerPasswordBlur = () => {
-
-    // 경고창 무한반복 안되게 초기화
-    if (infoData.newPassword.trim() === '') {
-      return;
-    };
-  // 기존 비밀번호와 GET으로 가져온 비밀번호 데이터 비교
-  if (infoData.newPassword !== password) {
-    alert('기존 비밀번호가 일치하지 않습니다.');
-
-    // 입력칸 초기화
-    setInfoData({ ...infoData, password: '' });
-
-    // 입력칸에 포커스
-    if (passwordRef.current) {
-      passwordRef.current.focus();
-    };
-  };
-  };
-//////////////////////////////////////////////////
-
-
-
-  // 새 비밀번호 필드 조건 부여 이벤트 핸들러
-  const handlerNewPasswordBlur = () => {
-
-    // 경고창 무한반복 안되게 초기화
-    if (infoData.newPassword.trim() === '') {
-      return;
-    };
-
-    // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림
-    const isValid = isNewPasswordValid(infoData.newPassword);
-    if (!isValid) {
-      alert('비밀번호: 10~16자의 영문 대/소문자, 숫자, 특수문자를 최소 1개씩 사용해 주세요.');
-
-      // 입력칸 초기화
-      setInfoData({ ...infoData, newPassword: ''});
-
-      // 입력칸에 포커스
-      if (newPasswordRef.current) {
-        newPasswordRef.current.focus();
-      };
-    };
-  };
-
- 
-  // 새 비밀번호 확인 필드 조건 부여 이벤트 핸들러
-  const handlerConfirmPasswordBlur = () => {
-
-    // 경고창 무한반복 안되게 초기화
-    if (passwordData.confirmPassword.trim() === '') {
-      return;
-    };
-
-    // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림 | 조건: 비밀번호랑 일치하는지
-    if (passwordData.confirmPassword !== infoData.newPassword) {
-      alert('새 비밀번호가 일치하지 않습니다.');
-
-      // 입력칸의 상태 초기화
-      setPasswordData({ ...passwordData, confirmPassword: ''});
-
-      // 비동기적으로 처리하기 위해 타임아웃(시간: 0) 설정
-      setTimeout(() => {
-        if (confirmPasswordRef.current) {
-          confirmPasswordRef.current.focus()
-
-          //입력칸 초기화
-          confirmPasswordRef.current.value = '';
-        };
-      }, 0);
-    };
-  };
-
-  // console.log('새 비밀번호: ', infoData.newPassword)
-  // console.log('새 비밀번호 확인: ', passwordData.confirmPassword)
-
-  // 네비게이트 훅
-  const navigate = useNavigate();
-
-  // console.log('storeId: ', storeId)
-
-
-  // 완료 버튼 클릭 이벤트핸들러 => PUT으로 비밀번호 수정 완료 후 메인페이지로 라우팅
-  const handlerSubmitClick = async () => {
-
-    // 새 비밀번호 필드가 입력되지 않으면 다음 페이지 안 넘어가게 조건 부여
-    if (!infoData.newPassword) {
-      alert('새 비밀번호를 입력해주세요.'); 
-      return;
-    }
-
-    // 새 비밀번호 확인 필드가 입력되지 않으면 다음 페이지 안 넘어가게 조건 부여
-    if (!passwordData.confirmPassword) {
-      alert('새 비밀번호 확인을 입력해주세요.'); 
-      return;
-    }
-  
-    try {
-      // const storeIdToUse = storeId;
-      // console.log('storeIdToUse: ',storeIdToUse)
-      console.log('PUT 요청 시 storeId: ', storeId)
-      const newPassword = { password: infoData.newPassword}
-      const response = await InfoPutApi(storeId, newPassword); // storeId와 새 비밀번호 전달
-      console.log('새 비밀번호가 성공적으로 업데이트되었습니다.', response);
-      
-      // 성공적으로 업데이트되었을 때, 다음 페이지로 이동하거나 다른 작업을 수행할 수 있습니다.
-      navigate("/");
-    } catch (error) {
-      console.error('새 비밀번호 업데이트에 실패했습니다.', error);
-      // 실패했을 때 사용자에게 적절한 오류 처리를 해줄 수 있습니다.
-    }
-  };
-
-// console.log('변경할 새 패스워드: ', infoData.newPassword)
-
   return (
     <ComponentDiv>
-      <TitleDiv>정보수정</TitleDiv>
+      <TitleDiv>{ownerName} 님</TitleDiv>
       <InsertDiv>
-        <h1>{ownerName} 님</h1>
+        <h1>비밀번호 확인</h1>
         <br/>
         <InputField
           type="password"
           name="password"
           value={infoData.password}
           onChange={handlerInputChange}
-          onBlur={handlerPasswordBlur}
           placeholder="기존 비밀번호"
           ref={passwordRef}
         />
         <br/>
-        <InputField
-          type="password"
-          name="newPassword"
-          value={infoData.newPassword}
-          onChange={handlerInputChange}
-          onBlur={handlerNewPasswordBlur}
-          placeholder="새 비밀번호"
-          ref={newPasswordRef}
-        />
-        <br/>
-        <InputField
-          type="password"
-          name="confirmPassword"
-          onChange={handlerConfirmPassword}
-          onBlur={handlerConfirmPasswordBlur}
-          placeholder="새 비밀번호 확인"
-          ref={confirmPasswordRef}
-        />
-        <br/>
-        </InsertDiv>
+      </InsertDiv>
       <ButtonDiv>
         <div>
-          <NextButton type="button" onClick={handlerSubmitClick}>완료</NextButton>
+          <NextButton onClick={handlerPasswordCheck}>다음</NextButton>
         </div>
       </ButtonDiv>
     </ComponentDiv>
