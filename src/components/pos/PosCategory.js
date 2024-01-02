@@ -17,7 +17,8 @@ const ComponentDiv = styled.div`
 
 // 맨 위 카테고리 글자 영역
 const TitleDiv = styled.div`
-  height: 20%;
+  height: 15%;
+  width: 80%;
   display: flex;
   align-items: center;
 
@@ -46,7 +47,7 @@ const CategoryDiv = styled.div`
 
 // 카테고리 하나당 영역
 const CategoryContainer = styled.div`
-  width: 70%;
+  width: 80%;
   height: 10%;
   display: flex;
   align-items: center;
@@ -55,9 +56,13 @@ const CategoryContainer = styled.div`
 // 카테고리명 입력칸
 const InputField = styled.input`
   width: 100%;
-  height: 40%;
+  height: 50%;
   margin-bottom: 5%;
   text-align: center;
+  border-radius: 0.5rem;
+  background: #FFF;
+  border: none;
+  font-family: 'Pretendard-Regular';
 `;
 
 // 카테고리명 버튼
@@ -67,8 +72,10 @@ const CategoryButton = styled.button`
   margin-bottom: 5%;
   text-align: center;
   border: none;
-  background-color: #f0f0f0;
+  background-color: #B4E1FF;
+  border-radius: 0.5rem;
   cursor: pointer;
+  font-family: 'Pretendard-Regular';
 
   &:hover {
     background-color: #e0e0e0;
@@ -81,40 +88,44 @@ const CategoryButton = styled.button`
 
 // 카테고리 삭제 버튼
 const RemoveButton = styled.button`
-  width: 10%;
-  height: 48%;
-  border-radius: 50%;
+  width: 15%;
+  height: 60%;
+  border-radius: 0.3rem;
   margin-bottom: 5%;
-  border: red;
   cursor: pointer;
-  background-color: red;
-  color: white;
+  background: url("/img/DeleteBt.png") center/ contain no-repeat;
+  background-repeat: no-repeat; // 이미지 반복 방지
+  background-color: rgba(0, 173, 239, 0.50);
   display: flex;
   justify-content: center;
   align-items: center;
-
+  border:none;
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 60%;
-  }
+  // @media screen and (max-width: 480px) {
+  //   font-size: 60%;
+  // }
 
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 80%;
-  }
+  // @media screen and (min-width: 481px) and (max-width: 1024px) {
+  //   font-size: 80%;
+  // }
 
-  @media screen and (min-width: 1025px) {
-    font-size: 100%;
-  }
+  // @media screen and (min-width: 1025px) {
+  //   font-size: 100%;
+  // }
 `;
 
 // 카테고리 수정 버튼
 const EditButton = styled.button`
-  width: 20%;
-  height: 50%;
+  // width: 20%;
+  // height: 60%;
+  width: 15%;
+  height: 60%;
   margin-bottom: 5%;
-  margin-right: 10%;
-  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  border: none;
+  background-color: rgba(28, 57, 94, 0.50);
   cursor: pointer;
+  font-family: 'Pretendard-Regular';
 
   &:hover {
     background-color: #e0e0e0;
@@ -136,8 +147,8 @@ const EditButton = styled.button`
 
 // 카테고리 추가 버튼
 const AddButton = styled.button`
-  width: 70%;
-  height: 10%;
+  width: 80%;
+  height: 8%;
   border-radius: 3%;
   border: 1px solid #ccc;
   flex: 0 0 auto;
@@ -394,14 +405,10 @@ function PosCategory({ categoryData, setSelectedCategory }) {
                 onChange={(e) => handlerEditCategory(idx, e)}
               />
             ) : (
-              <CategoryButton onClick={() => handlerCategoryClick(category)}>
-                {category.name}
-              </CategoryButton>
+              <CategoryButton onClick={() => handlerCategoryClick(category)}>{category.name}</CategoryButton>
             )}
-            <EditButton onClick={() => handlerEditMode(idx)}>
-              {getButtonText(idx)}
-            </EditButton>
-            <RemoveButton onClick={() => handlerRemoveCategory(idx)}>X</RemoveButton>
+            <EditButton onClick={() => handlerEditMode(idx)}>{getButtonText(idx)}</EditButton>
+            <RemoveButton onClick={() => handlerRemoveCategory(idx)}/>
           </CategoryContainer>
         ))}
         <AddButton onClick={handlerAddCategory}>+</AddButton>

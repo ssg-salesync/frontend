@@ -52,10 +52,12 @@ const Item = styled.div`
     border: 0.5rem;
     // background-color : gray;  
     display: flex;
-    flex-direction:row;
+    // flex-direction:row;
+    flex-wrap: wrap;  /* 아이템들을 여러 줄로 나누기 위해 flex-wrap 추가 */
 `
 const Menu = styled.div`
-    width: 25%;
+    // width: 25%;
+    width: calc(30% - 1rem);
     height:25%;
     margin : 1rem;
     background-color : #D9D9D9;

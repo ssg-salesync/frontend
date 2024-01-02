@@ -9,78 +9,50 @@ import { ItemPutApi } from '../../api/pos/item/ItemPutApi';
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
-  height: 80vh;
+  height: 60vh;
+  width: 97%;
   display: flex;
   flex-direction: column;
+  padding: 3%;
 `;
-
 // 선택한 카테고리 글자 영역
 const TitleDiv = styled.div`
-  height: 20%;
+  height: 10%;
   display: flex;
   align-items: center;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 70%;
-  }
+  // @media screen and (max-width: 480px) {
+  //   font-size: 70%;
+  // }
 
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 85%;
-  }
+  // @media screen and (min-width: 481px) and (max-width: 1024px) {
+  //   font-size: 85%;
+  // }
 
-  @media screen and (min-width: 1025px) {
-    font-size: 100%;
-  }
+  // @media screen and (min-width: 1025px) {
+  //   font-size: 100%;
+  // }
 `;
-
 // 아이템 전체 영역
 const ItemDiv = styled.div`
-  height: 60%;
+  height: 90%;
+  width: 100%;
+  margin-top: 5%;
   display: flex;
-  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 4%;
-  align-content: center
+  gap: 2%;
+  // align-content: center
 `;
-
-// 아이템 추가 버튼
-const AddButton = styled.button`
-  width: 30%;
-  height: 40%;
-  border-radius: 3%;
-  border: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #e0e0e0;
-  }
-
-  // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 100%;
-  }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 150%;
-  }
-
-  @media screen and (min-width: 1025px) {
-    font-size: 200%;
-  }
-`;
-
 // 아이템 하나당 영역
 const ItemContainer = styled.div`
   position: relative;
-  width: 30%;
+  // width: 30%;
+  width : calc(30% - 1rem);
   height: 40%;
   border-radius: 5%;
-  border: 1px solid #ccc;
+  background: #FFF;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,20 +71,18 @@ const ItemContainer = styled.div`
     font-size: 130%;
   }
 `;
-
 // 품목명: 입력칸 | 가격: 입력칸
 const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-right: 5%;
-  margin-left: 5%;
+  // margin-right: 5%;
+  // margin-left: 5%;
+  margin: 2%;
 `;
-
 // 품목명, 가격 라벨  
 const ItemLabel = styled.label`
 `;
-
 // 아이템 정보 입력칸
 const InputField = styled.input`
   width: 50%;
@@ -120,14 +90,16 @@ const InputField = styled.input`
   resize: none;
   text-align: center;
 `;
-
 // 아이템 수정 버튼
 const EditButton = styled.button`
-  width: 50%;
+  width: 40%;
   height: 20%;
-  border: 1px solid #ccc;
-  color: black;
+  // border: 1px solid #ccc;
+  border: none;
+  border-radius: 0.5rem;
+  font-family: 'Pretendard-Regular';
   cursor: pointer;
+
   &:hover {
     background-color: #e0e0e0;
   }
@@ -145,20 +117,53 @@ const EditButton = styled.button`
     font-size: 70%;
   }
 `;
-
 // 아이템 삭제 버튼
-const DeleteButton = styled.div`
+const DeleteButton = styled.button`
+  width: 13%;
+  height: 13%;
   position: absolute;
   top: -1%;
   right: -1%;
-  background-color: red;
+  background: url("/img/DeleteBt.png") center/ contain no-repeat;
+  background-repeat: no-repeat; // 이미지 반복 방지
+  background-color: rgba(0, 173, 239, 0.50);
   border: red;
-  border-radius: 50%;
+  border-radius: 0.5rem;
   cursor: pointer;
   font-size: 100%;
   color: white;
 `;
+// 아이템 추가 버튼
+const AddButton = styled.button`
+  width: 28%;
+  height: 40%;
+  border-radius: 3%;
+  // border: 1px solid #ccc;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #FFF;
 
+  &:hover {
+    background-color: #B4E1FF;
+  }
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 480px) {
+    font-size: 100%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    font-size: 150%;
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 200%;
+  }
+`;
 
 function PosItem({ itemData, selectedCategoryId }) {
 
@@ -549,7 +554,7 @@ return (
             <EditButton onClick={() => handlerEditMode(itemIndex)}>
               {getButtonText(itemIndex)}
             </EditButton>
-            <DeleteButton onClick={() => handlerRemoveItem(itemIndex)}>X</DeleteButton>
+            <DeleteButton onClick={() => handlerRemoveItem(itemIndex)}></DeleteButton>
           </ItemContainer>
         ))}
           <AddButton onClick={handlerAddItem}>+</AddButton>
