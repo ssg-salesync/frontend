@@ -4,14 +4,14 @@ import { Token } from '../../Token';
 
 /* eslint-disable */
 
-export async function InfoGetApi(){
+export async function InfoPostApi(password){
 
     const headers = Token();
 
     try{
-        const res = await axios.get(`${URL}/stores/`, {headers});
-        // console.log(res)
-        return res.data.store;
+        const res = await axios.post(`${URL}/stores/pwcheck`, password, {headers});
+        console.log(res)
+        return res;
     } catch (err) {
         throw err;
     };

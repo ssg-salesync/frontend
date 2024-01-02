@@ -3,9 +3,10 @@ import URL from '../../BaseUrl';
 import { Token } from '../../Token';
 
 /* eslint-disable */
+
 export async function CategoryPostApi(newCategory){
     
-    const headers = Token()
+    const headers = Token();
 
     try{
         await axios.post(`${URL}/categories/`, newCategory, {headers}).then(res => {

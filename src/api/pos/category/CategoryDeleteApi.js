@@ -3,9 +3,10 @@ import URL from '../../BaseUrl';
 import { Token } from '../../Token';
 
 /* eslint-disable */
+
 export async function CategoryDeleteApi(categoryId){
 
-    const headers = Token()
+    const headers = Token();
 
     try{
         await axios.delete(`${URL}/categories/${categoryId}`, {headers}).then(res => {

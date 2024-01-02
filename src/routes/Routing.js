@@ -12,6 +12,7 @@ import PaymentPage from "../popup/PaymentPopup";
 import CardPage from "../popup/CardPopup";
 import CashPage from "../popup/CashPopup";
 import CostPage from "../pages/CostPage";
+import InfoNpwPage from "../pages/InfoNpwPage";
 
 
 function Routing() {
@@ -24,6 +25,7 @@ function Routing() {
             <Route path="/signup/stores/pos" element={<PosPage/>}/>
             <Route path="/mypage" element={<MyPage/>}/>
             <Route path="/mypage/info" element={<InfoPage/>}/>
+            <Route path="/mypage/info/newpassword" element={<InfoNpwPage/>}/>
             <Route path="/mypage/cost" element={<CostPage/>}/>
             <Route path="/mypage/dashboard" element={<DashboardPage/>}/>
             <Route path="/order/:tableId" element={<OrderPopup/>}/>
