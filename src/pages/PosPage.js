@@ -11,6 +11,10 @@ import { ItemGetApi } from "../api/pos/item/ItemGetApi";
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
     height: 80vh;
+    
+    // PosPage의 default 너비 130으로 고정해야 사이즈 잘 나옴 
+    width: 130vh;
+
     display: flex;
     overflow: auto;
 `;
