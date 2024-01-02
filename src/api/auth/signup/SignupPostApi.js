@@ -1,5 +1,5 @@
 import axios from 'axios';
-import URL from '../BaseUrl';
+import URL from '../../BaseUrl';
 
 /* eslint-disable */
 

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { useSetRecoilState } from "recoil";
-import { LoginPostApi } from "../api/auth/LoginPostApi";
+import {LoginPostApi} from "../api/auth/login/LoginPostApi"
 import {ComponentDiv,TitleDiv,InsertDiv} from "../styles/CommonStyle"
 import { UserCheckState } from "../recoil/atoms/UserState";
 

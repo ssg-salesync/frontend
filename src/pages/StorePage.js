@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { useState } from "react";
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { StoreState } from "../recoil/atoms/StoreState";
-import { StorePostApi } from "../api/auth/StorePostApi";
-import { StoreTokenPostApi } from "../api/auth/StoreTokenPostApi";
+import { StorePostApi } from "../api/auth/signup/StorePostApi";
+import { StoreTokenPostApi } from "../api/auth/signup/StoreTokenPostApi";
 import { ComponentDiv, TitleDiv,InsertDiv } from "../styles/CommonStyle";
 import { UserCheckState } from "../recoil/atoms/UserState";
+
 
 /* eslint-disable */
 

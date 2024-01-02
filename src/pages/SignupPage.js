@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { StoreState } from "../recoil/atoms/StoreState";
-import { SignupPostApi } from "../api/auth/SignupPostApi";
+import { SignupPostApi } from "../api/auth/signup/SignupPostApi";
 import { ComponentDiv, TitleDiv,InsertDiv} from "../styles/CommonStyle";
+
 
 /* eslint-disable */
 
@@ -80,6 +81,7 @@ function SignupPage() {
     phone: ''
   });
 
+  // 비밀번호 확인용 데이터 상태 저장
   const [passwordData, setPasswordData] = useState({
     confirmPassword: ''   // 비밀번호 확인
   });

@@ -169,7 +169,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
   };
 
   // 최대 카테고리 갯수
-  const maxCategories = 10;
+  const maxCategories = 20;
 
   // 카테고리 상태 저장
   const [categories, setCategories] = useState(categoryData);
@@ -186,7 +186,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
 
     // 선택된 카테고리 정보를 상태로 저장
     setSelectedCategory(category);
-
+  
     // console.log('카테고리 버튼 누름 : ', category)
   };
 
@@ -215,10 +215,11 @@ function PosCategory({ categoryData, setSelectedCategory }) {
     try {
       const newCategories = [...categories, { id: null, name: '' }];
       setCategories(newCategories);
-  
+
       const newEditModes = [...editModes, true];
       setEditModes(newEditModes);
-  
+
+      // 비동기적으로 처리하기 위해 타임아웃(시간: 0) 설정
       setTimeout(() => {
         inputRefs.current[newCategories.length - 1]?.focus();
       }, 0);
@@ -227,7 +228,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
     };
   };
 
-
+  // console.log(editModes)
   // console.log('categories: ', categories)
 
 
@@ -236,7 +237,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
     if (editModes[idx]) {
       try {
         const newCategoryName = categories[idx].name.trim();
-  
+
         // 새로운 카테고리의 이름이 비어있지 않으면 API 호출하여 카테고리 등록
         if (newCategoryName !== '') {
           if (categories[idx].id) {
@@ -248,7 +249,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
             // console.log('카테고리수정 이름: ', updatedCategory)
             await CategoryPutApi(categoryId, updatedCategory);    // [PUT: 카테고리 수정]
 
-  
+
             // API 호출이 성공하면 해당 카테고리의 이름을 업데이트
             const newCategories = [...categories];
             newCategories[idx].name = newCategoryName;
@@ -261,18 +262,22 @@ function PosCategory({ categoryData, setSelectedCategory }) {
             // setCategories(newCategory.categories)
             // console.log(categories)
             await CategoryPostApi(newCategory);     // [POST: 카테고리 추가]
-            
-        
+
+
             // API 호출이 성공하면 서버에서 최신 카테고리 목록을 다시 가져와서 상태를 업데이트
             const latestCategories = await CategoryGetApi();       // [GET: 카테고리 실시간 랜더링]
             setCategories(latestCategories.categories);
-          };
-  
+
+            // 추가한 최신 카테고리는 바로 선택상태로 해서 PosItem에서 선택된 카테고리 이름 나오게
+            setSelectedCategory(latestCategories.categories[latestCategories.categories.length-1])
+            // console.log('latestCategories: ', latestCategories.categories[latestCategories.categories.length-1])
+            };
+
           // 해당 인덱스의 editModes를 false로 설정하여 텍스트 입력칸을 숨김
           const newEditModes = [...editModes];
           newEditModes[idx] = false;
           setEditModes(newEditModes);
-  
+
           // 입력칸에 포커스
           inputRefs.current[idx]?.focus();
         } else {
@@ -288,6 +293,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
       setEditModes(newEditModes);
     };
   };
+
 
   // console.log(editModes)
 
@@ -357,6 +363,9 @@ function PosCategory({ categoryData, setSelectedCategory }) {
         newEditModes.splice(idx, 1);
         setEditModes(newEditModes);
         alert('카테고리가 삭제되었습니다.')
+
+        // 카테고리를 삭제하면 선택된 카테고리도 null로 하여 PosItem 초기화 리렌더링
+        setSelectedCategory(null)
       } catch (err) {
           console.error(err);
       };
