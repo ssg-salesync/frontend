@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import styled from 'styled-components';
 import { useState } from "react";
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -115,6 +115,46 @@ const NextButton = styled.button`
   // }
 `;
 
+// 드롭다운 컨테이너
+const DropdownContainer = styled.div`
+  margin-top: 5%;
+  width: 35%;
+`;
+
+// 드롭다운 스타일
+const Dropdown = styled.select`
+  border: none;
+  border-bottom: 2px solid #1C395E;
+  width: 100%;
+  height: 100%;
+  font-family: Pretendard-Regular;
+  font-size: 85%;
+
+  // 선택한 옵션 스타일
+  option:checked {
+    background-color: #00ADEF;
+    color: white;
+  }
+
+  // 드롭다운 화살표 아이콘 스타일
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%231C395E" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+
+  // 반응형 폰트 크기 조정
+  @media screen and (max-width: 480px) {
+    font-size: 70%;
+  }
+`;
+
+// 드롭다운 옵션 스타일
+const DropdownOption = styled.option`
+  font-family: Pretendard-Regular;
+`;
+
+
 function StorePage() {
 
   // 회원가입 페이지에서 등록한 recoil 전역상태 데이터
@@ -129,6 +169,26 @@ function StorePage() {
     storeType: ''
   });
 
+  // 드롭다운 용 선택한 storeType
+  const [selectedStoreType, setSelectedStoreType] = useState('');
+
+  // 드롭다운에 나올 목록들
+  const storeTypes = [
+    '휴게음식점',
+    '일반음식점',
+    '단란주점업',
+    '유흥주점업',
+    '위탁급식업',
+    '제과점업'
+  ];
+
+  // 드롭다운에 선택한 storeType과 위의 storeType 상태 취합
+  const handlerStoreTypeSelect = (e) => {
+    const selectedType = e.target.value;
+    setStoreData({ ...storeData, storeType: selectedType });
+    setSelectedStoreType(selectedType);
+  };
+
   // 각 필드 데이터 변경 시 해당 상태 변경
   const handlerInputChange = (e) => {
     const { name, value } = e.target;
@@ -138,7 +198,13 @@ function StorePage() {
   // 모든 데이터 합치기
   const storesData = { ...signupData[0], ...storeData };
 
+  // 헤더용 recoil 세팅 (로그인, 로그아웃)
   const setUserCheck = useSetRecoilState(UserCheckState)
+
+  // 네비게이트 훅
+  const navigate = useNavigate();
+
+  // console.log(storesData.storeType)
   
   // 다음 버튼 클릭 이벤트 핸들러
   const handlerNextClick = () => {
@@ -152,6 +218,25 @@ function StorePage() {
       store_type: storesData.storeType
     };
 
+    // 다음 페이지 넘어가지 않는 조건 부여
+    if (
+      !data.store_name
+    ) { alert('매장명을 입력해주세요.'); 
+    return; // 다음 페이지로 넘어가지 않음
+    };
+
+    if (
+      !data.address
+    ) { alert('주소를 입력해주세요.'); 
+    return; // 다음 페이지로 넘어가지 않음
+    };
+
+    if (
+      !data.store_type
+    ) { alert('업종을 선택해주세요.'); 
+    return; // 다음 페이지로 넘어가지 않음
+    };
+
     // API 호출
     StorePostApi(data)
     .then(res => {
@@ -163,7 +248,9 @@ function StorePage() {
         password: storesData.password
       };
 
-      // StoreTokenPostApi 호출을 반환하여 다음 .then 블록에서 처리
+      // 다음 페이지로 넘어감
+      navigate('/signup/stores/pos');
+
       return StoreTokenPostApi(tokenData);
     })
     .then(tokenRes => {
@@ -198,19 +285,23 @@ function StorePage() {
           placeholder="주소"
         />
         <br/>
-        <InputField
-          type="text"
-          name="storeType"
-          value={storeData.storeType}
-          onChange={handlerInputChange}
-          placeholder="업종"
-        />
-        <br/>
+        <DropdownContainer>
+          <Dropdown
+            id="storeTypeSelect"
+            value={selectedStoreType}
+            onChange={handlerStoreTypeSelect}
+          >
+            <DropdownOption value='' disabled selected hidden>업종을 선택하세요</DropdownOption>
+            {storeTypes.map((type, idx) => (
+              <DropdownOption key={idx} value={type}>
+                {type}
+              </DropdownOption>
+            ))}
+          </Dropdown>
+        </DropdownContainer>
       </InsertDiv>
       <ButtonDiv>
-        <Link to="/signup/stores/pos">
           <NextButton type="submit" onClick={handlerNextClick}>다음</NextButton>
-        </Link>
       </ButtonDiv>
     </ComponentDiv>
   );
