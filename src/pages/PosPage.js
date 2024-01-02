@@ -13,51 +13,54 @@ const ComponentDiv = styled.div`
     height: 80vh;
     
     // PosPage의 default 너비 130으로 고정해야 사이즈 잘 나옴 
-    width: 130vh;
+    width: 140vh;
 
     display: flex;
     overflow: auto;
-`;
 
+`;
 // PosCategory 컴포넌트 영역
 const PosCategoryDiv = styled.div`
     height: 100%;
     width: 30%;
+    border-right: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.70);
+    backdrop-filter: blur(25px);
 `;
 
 // 세로선 영역
-const VerticalLineDiv = styled.div`
-    height: 100%;
-    width: 8%;
-    margin-left: 3%;
-`;
+// const VerticalLineDiv = styled.div`
+//     height: 100%;
+//     width: 8%;
+//     margin-left: 3%;
+// `;
 
 // PosItem, 완료 버튼 전체 영역
 const PosItemSubmitButtonDiv = styled.div`
-    heigth: 100%;
-    width: 56%
+    height: 100%;
+    width: 70%;
 `;
 
 // PosItem 컴포넌트 영역
 const PosItemDiv = styled.div`
-    height: 80%;
+    height: 90%;
     width: 100%;
 `;
-
 // 완료 버튼 영역
 const SubmitButtonDiv = styled.div`
     height: 10%;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    // justify-content: flex-end;
+    justify-content: right;
 `;
 
 // 세로선
-const VerticalLine = styled.div`
-    border-left: 1px solid #ccc;
-    height: 100%;
-    display: flex;
-`;
+// const VerticalLine = styled.div`
+//     border-left: 1px solid #ccc;
+//     height: 100%;
+//     display: flex;
+// `;
 
 // 여백의 미
 const NoDiv = styled.div`
@@ -65,15 +68,17 @@ const NoDiv = styled.div`
     width: 6%;
     color: white;
 `;
-
 // 완료 버튼
 const SubmitButton = styled.button`
   width: 150%;
-  height: 100%;
+  height: 70%;
   margin-right: 20%; 
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 8%;
   cursor: pointer;
+  border-radius: 0.5rem;
+  background: #1C395E;
+  color: #FFF;
 
   &:hover {
     background-color: #e0e0e0;
@@ -156,9 +161,9 @@ function PosPage() {
           setSelectedCategory={setSelectedCategory}
         />
       </PosCategoryDiv>
-      <VerticalLineDiv>
+      {/* <VerticalLineDiv>
         <VerticalLine/>
-      </VerticalLineDiv>
+      </VerticalLineDiv> */}
       <PosItemSubmitButtonDiv>
         <PosItemDiv>
           {/* Category의 id만 빼서 PosItem으로 전달 */}
