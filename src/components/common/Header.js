@@ -1,6 +1,8 @@
+import { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-// import { TableState} from "../../../public/Logo.png"
+import { UserCheckState } from "../../recoil/atoms/UserState";
 
 const HeaderDiv = styled.header`
     height: 10vh;
@@ -31,25 +33,40 @@ const Bt = styled.button`
     margin :1rem;
     font-family: 'Pretendard-Regular';
 `
+/* eslint-disable */ 
 function Header() {
+    const [userCheck,setUserCheck]=useRecoilState(UserCheckState)
     const logout=()=>{
         localStorage.removeItem('access_token');
         localStorage.removeItem('csrf_token');
+        tokenCheckfunc()
     }
+    const tokenCheckfunc=()=>{
+        const tokenCheck = localStorage.getItem('access_token')
+        console.log("tokenCheck",tokenCheck)
+        if(tokenCheck !== null){
+            setUserCheck(true)
+        }else{
+            setUserCheck(false)
+        }
+    }
+    useEffect(()=>{
+        tokenCheckfunc()
+    },[userCheck])
+    
     return (
         <HeaderDiv>
             <LogoDiv>
-                {/* Salesync */}
                 <Logo src='/img/salesync_logo.png' alt="logo"/>
             </LogoDiv>
-            <StoreNameDiv>
+            {userCheck&&<StoreNameDiv>
                 <Link to='/login'>
                     <Bt type="button" onClick={logout}>로그아웃</Bt>
                 </Link>
                 <Link to='/mypage'>
                     <Bt type="button">마이페이지</Bt>
                 </Link>
-            </StoreNameDiv>
+            </StoreNameDiv>}
         </HeaderDiv>    
     );
 };
