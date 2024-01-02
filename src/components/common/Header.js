@@ -40,7 +40,7 @@ function Header() {
         <HeaderDiv>
             <LogoDiv>
                 {/* Salesync */}
-                <Logo src='/img/Logo.png' alt="logo"/>
+                <Logo src='/img/salesync_logo.png' alt="logo"/>
             </LogoDiv>
             <StoreNameDiv>
                 <Link to='/login'>
