@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
 import { useState } from "react";
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { StoreState } from "../recoil/atoms/StoreState";
 import { StorePostApi } from "../api/auth/StorePostApi";
 import { StoreTokenPostApi } from "../api/auth/StoreTokenPostApi";
 import { ComponentDiv, TitleDiv,InsertDiv } from "../styles/CommonStyle";
+import { UserCheckState } from "../recoil/atoms/UserState";
 
 /* eslint-disable */
 
@@ -136,6 +137,8 @@ function StorePage() {
   // 모든 데이터 합치기
   const storesData = { ...signupData[0], ...storeData };
 
+  const setUserCheck = useSetRecoilState(UserCheckState)
+  
   // 다음 버튼 클릭 이벤트 핸들러
   const handlerNextClick = () => {
     const data = {
@@ -164,6 +167,7 @@ function StorePage() {
     })
     .then(tokenRes => {
       console.log('토큰 발급 성공: ', tokenRes);
+      setUserCheck(true)
     })
     .catch(err => {
       console.error('API 호출 또는 토큰 발급 실패: ', err);

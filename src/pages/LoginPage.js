@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
+import { useSetRecoilState } from "recoil";
 import { LoginPostApi } from "../api/auth/LoginPostApi";
 import {ComponentDiv,TitleDiv,InsertDiv} from "../styles/CommonStyle"
+import { UserCheckState } from "../recoil/atoms/UserState";
 
 /* eslint-disable */
 
@@ -172,6 +174,8 @@ function LoginPage() {
 
   const usernameRef = useRef(null);
 
+  const setUserCheck = useSetRecoilState(UserCheckState)
+
   // 로그인 버튼 클릭 이벤트핸들러
   const handlerLoginClick = () => {
 
@@ -195,7 +199,7 @@ function LoginPage() {
     LoginPostApi(data)
       .then(res => {
         console.log('로그인 성공 | 토큰 정보: ', res);
-
+        setUserCheck(true)
         // 홈으로 넘어감
         navigate("/");
       })
