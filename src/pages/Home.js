@@ -7,6 +7,7 @@ import OrderPopup from "../popup/OrderPopup";
 import { PayCompleteState, Table1State,Table2State,Table3State,Table4State,Table5State,Table6State,Table7State,Table8State,TableState } from "../recoil/atoms/ItemState";
 import { deleteOrderState,deleteTotalPriceState } from "../components/func/AtomData";
 import { UnpaidGetApi } from "../api/pay/UnpaidGetApi";
+import { TotalDiv } from "../styles/CommonStyle";
 
 const TableDiv = styled.div`
     height:100%;
@@ -16,7 +17,7 @@ const TableDiv = styled.div`
     grid-template-columns: repeat(4, 15rem);
     justify-content: center;
     align-items: center;
-    row-gap: 1rem;
+    // row-gap: 0.5rem;
     // height: calc((100vh - 40px) / 2);
     // padding: 20px 0;
 
@@ -171,6 +172,7 @@ function Home() {
         tableOrders()
     },[orderModalOn])
     return (
+        <TotalDiv>
         <TableDiv>        
         {loading && tables.map((table) => (
             <TableContainer key={table.tableId} onClick={(e) => { e.preventDefault(); openOrderPopup(table.tableId); }}>
@@ -195,6 +197,7 @@ function Home() {
         ))}
         {orderModalOn && <OrderPopup openOrderPopup={openOrderPopup} closeOrderPopup={closeOrderPopup} tableId={selectedTableId}/>}
         </TableDiv>
+        </TotalDiv>
 );
 };
 export default Home
