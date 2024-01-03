@@ -21,49 +21,49 @@ const modalStyle ={
         background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
       },
 };
-const Button = styled.button`
-    border: none;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-`
 const ButtonPay = styled.button`
     border: none;
     padding: 0;
     width: 15%;
-    height: 15%;
+    height: 30%;
+    font-family: 'Pretendard-Regular';
+    font-size: 1rem;
+    border-radius: 0.6rem;
+    background: #D9D9D9;
 `
 const ListDiv = styled.div`
     width: 60%;
     height: 15%;
     background: #FFF;
     display: flex; 
-    margin: 1%
+    margin: 1%;
+    border-radius: 0.6rem;    
 `
 const ListTitle = styled.p`
     width: 35%;
     heigth: 100%;
     padding: 1%;
-    text-align: right;
+    display:flex;
+    align-items:center;
+    justify-content: right;
 `
 const ListGap = styled.p`
     width: 20%;
     height:100%;
-    padding: 1%;
+    display:flex;
+    align-items:center;
+    justify-content: left;
+    margin: 0;
 `
 const ListContent = styled.input`
     width: 40%;
     heigth: 100%;
     background: #FFF;
 
-    padding: 1%;
     text-align: right;
     border: none;
-    overflow: hidden;
-
-    :focus{
-        background-color : white;
-    }
+    font-family: 'Pretendard-Regular';
+    outline: none;
 `
 /* eslint-disable */
 function CashPopup({openCashPopup, closeCashPopup, tableId}) {
@@ -144,7 +144,7 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
         <Modal isOpen={openCashPopup} onRequestClose={closeCashPopup} style={modalStyle} contentLabel="CashPopup">
             {/* <ModalContent/> */}
             <button type='button' onClick={closeCashPopup} style={{width:'10%',height:'5%'}}>Back</button>
-                <div style={{height:'60%',width: '100%', 'justify-content': 'center', display: 'flex', flexDirection: 'column', 'align-items': 'center'}}>
+                <div style={{height:'65%', width: '100%', 'justify-content': 'center', display: 'flex', flexDirection: 'column', 'align-items': 'center'}}>
                     <ListDiv>
                         <ListTitle>받은금액</ListTitle>
                         <ListContent type="number" value={receiveAmount} onInput={handleReceiveAmountChange} />
@@ -161,8 +161,8 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
                         <ListGap>원</ListGap>
                     </ListDiv>
                 </div>
-                <div style={{height:'40%',width: '100%', 'justify-content': 'center', display: 'flex','align-items' : 'center'}}>
-                        <ButtonPay type='button' onClick={payComplete}>결제</ButtonPay>
+                <div style={{height:'20%',width: '100%', 'justify-content': 'center', display: 'flex','align-items' : 'center'}}>
+                    <ButtonPay type='button' onClick={payComplete}>결제</ButtonPay>
                 </div>
         </Modal>
         </>

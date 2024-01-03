@@ -5,32 +5,33 @@ import { TableState, TotalPrice } from "../../recoil/atoms/ItemState";
 const ListTable = styled.table`
     width : 80%;
     height : 5%;
-    display: 'flex';
     text-align: center;
-    margin-top: 10%;
     border-collapse: separate;
     border-spacing: 0 10px;
+    font-size: 1.2rem;
 `
 const ListTableTr = styled.tr`
-    background: #FFF;
-    border-radius:'10px';
+    background: #D9D9D9;
+    margin-bottom: 1rem;
 `
 const ListTableTd = styled.td`
     line-height: 100%;
     padding: 1rem;
 `
 const PayDiv = styled.div`
-    width: 60%;
-    height: 90%;
-    border-radius: 0.625rem;
+    width: 55%;
+    height: 70%;
+    border-radius: 0.6rem;
     background: #1C395E;
     color: #FFF;
 
     display: flex;
     align-items : center;
     justify-content: center;
-    text-align: center;
+    text-align: right;
     flex-direction: column;
+
+    font-size: 1.5rem;
 
 `
 function PaymentList() {
@@ -50,7 +51,7 @@ function PaymentList() {
     // };
     return (
         <>
-        <div style={{height:'60%','justify-content': 'center', display: 'flex', marginTop: '10%'}}>
+        <div style={{height:'60%','justify-content': 'center', display: 'flex', marginTop: '10%', overflow: 'auto'}}>
             <ListTable>
                 <tbody>
                 {/* 각 품목을 나열하는 매핑 작업 */}
@@ -74,8 +75,9 @@ function PaymentList() {
                 <div style={{ flex: 1.5}}>
                     결제하기
                 </div> */}
-                    <div>총 결제금액</div>
-                    <div>{totalPrice}원</div>
+                {/* <div>총 결제금액</div>
+                <div>{totalPrice}원</div> */}
+                <div>총 결제금액 : {totalPrice}원</div>
             </PayDiv>
         </div>
         </>

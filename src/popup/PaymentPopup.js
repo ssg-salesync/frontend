@@ -50,7 +50,7 @@ const closeAllPopup = useRecoilValue(PayCompleteState)
         <Modal isOpen={openPaymentPopup} onRequestClose={closePaymentPopup} style={modalStyle} contentLabel="PaymentPopup">
             {/* <ModalContent/> */}
             {/* 왼쪽 탭 화면 */}
-            <button type='button' onClick={closePaymentPopup} style={{width:'10%',height:'5%'}}>Back</button>
+            <button type='button' onClick={closePaymentPopup} style={{width:'5%',height:'5%'}}>Back</button>
             <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
                 <PaymentList closeModal={closePaymentPopup}/>
