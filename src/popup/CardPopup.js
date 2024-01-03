@@ -31,7 +31,7 @@ const CardDiv = styled.div`
     height: '100%';
 `
 const PayIngDiv = styled.div`
-    background: #FFF;
+    background: #D9D9D9;
     width: 60%;
     height: 50%;
     display: flex;
@@ -39,6 +39,7 @@ const PayIngDiv = styled.div`
     justify-content: center;
     text-align: center;
     flex-direction: column;
+    border-radius: 0.6rem;
 `
 
 function CardPopup({openCardPopup, closeCardPopup}) {

@@ -21,88 +21,24 @@ const ComponentDiv = styled.div`
   height: 80vh;
   width: 100%;
   display: flex;
-  overflow: auto;
+  // overflow: hidden;
 `;
 
 // PosCategory 컴포넌트 영역
 const PosCategoryDiv = styled.div`
   height: 100%;
-  width: 30%;
+  // width: 30%;
+  flex: 1.5;
   border-right: 1px solid #ccc;
   background: rgba(255, 255, 255, 0.70);
   backdrop-filter: blur(25px);
 `;
-
-// 세로선 영역
-// const VerticalLineDiv = styled.div`
-//     height: 100%;
-//     width: 8%;
-//     margin-left: 3%;
-// `;
-
-// PosItem, 완료 버튼 전체 영역
-const PosItemSubmitButtonDiv = styled.div`
-  height: 100%;
-  width: 70%;
-`;
-
 // PosItem 컴포넌트 영역
 const PosItemDiv = styled.div`
-  height: 90%;
-  width: 100%;
-`;
-// 완료 버튼 영역
-const SubmitButtonDiv = styled.div`
-  height: 10%;
-  width: 100%;
-  display: flex;
-  // justify-content: flex-end;
-  justify-content: right;
-`;
-
-// 세로선
-// const VerticalLine = styled.div`
-//     border-left: 1px solid #ccc;
-//     height: 100%;
-//     display: flex;
-// `;
-
-// 여백의 미
-const NoDiv = styled.div`
   height: 100%;
-  width: 6%;
-  color: white;
+  // width: 70%;
+  flex: 4;
 `;
-// 완료 버튼
-const SubmitButton = styled.button`
-  width: 150%;
-  height: 70%;
-  margin-right: 20%; 
-  border: none;
-  border-radius: 8%;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  background: #1C395E;
-  color: #FFF;
-
-  &:hover {
-    background-color: #e0e0e0;
-  }
-
-  // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 60%;
-  }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 80%;
-  }
-
-  @media screen and (min-width: 1025px) {
-    font-size: 120%;
-  }
-`;
-
 
 function PosPage() {
 
@@ -161,29 +97,11 @@ function PosPage() {
   return (
     <ComponentDiv>
       <PosCategoryDiv>
-        <PosCategory
-          categoryData={categoryData}
-          setSelectedCategory={setSelectedCategory}
-        />
+        <PosCategory categoryData={categoryData} setSelectedCategory={setSelectedCategory}/>
       </PosCategoryDiv>
-      {/* <VerticalLineDiv>
-        <VerticalLine/>
-      </VerticalLineDiv> */}
-      <PosItemSubmitButtonDiv>
-        <PosItemDiv>
-          {/* Category의 id만 빼서 PosItem으로 전달 */}
-          <PosItem
-            itemData={itemData}
-            selectedCategoryId={selectedCategory ? selectedCategory.id : null}
-          />
-        </PosItemDiv>
-        <SubmitButtonDiv>
-          <Link to="/">
-            <SubmitButton>완료</SubmitButton>
-          </Link>
-        </SubmitButtonDiv>
-      </PosItemSubmitButtonDiv>
-      <NoDiv/>
+      <PosItemDiv>
+        <PosItem itemData={itemData} selectedCategoryId={selectedCategory ? selectedCategory.id : null}/>
+      </PosItemDiv>
     </ComponentDiv>
   );
 };

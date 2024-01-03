@@ -31,11 +31,10 @@ const PayDiv = styled.div`
     height: 18%;
     position: fixed;
     bottom: 0;
-    margin: 3rem;
     border-radius: 0.625rem;
     background: #1C395E;
     color: #FFF;
-    
+    margin: 9%;
     display: flex;
     align-items: center;
 `

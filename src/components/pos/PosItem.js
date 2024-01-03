@@ -1,23 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { ItemGetApi } from '../../api/pos/item/ItemGetApi';
 import { ItemDeleteApi } from '../../api/pos/item/ItemDeleteApi';
 import { ItemPostApi } from '../../api/pos/item/ItemPostApi';
 import { ItemPutApi } from '../../api/pos/item/ItemPutApi';
 
+
 /* eslint-disable */
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
-  height: 60vh;
-  width: 97%;
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  padding: 3%;
+  // padding: 3%;
 `;
 // 선택한 카테고리 글자 영역
 const TitleDiv = styled.div`
-  height: 10%;
+  height: 15%;
+  width: 80%;
+  margin-left: 4%;
+  
   display: flex;
   align-items: center;
 
@@ -36,14 +40,56 @@ const TitleDiv = styled.div`
 `;
 // 아이템 전체 영역
 const ItemDiv = styled.div`
-  height: 90%;
-  width: 100%;
-  margin-top: 5%;
+  height: 80%;
+  // width: 100%;
+  // margin-top: 2%;
+  margin-left: 4%;
+  // padding: 2%;
   display: flex;
   flex-wrap: wrap;
-  gap: 2%;
-  // align-content: center
+  gap: 5%;
+  overflow: auto;
 `;
+// 완료 버튼 영역
+const SubmitButtonDiv = styled.div`
+  height: 10%;
+  
+  display: flex;
+  align-items: center;
+  margin-left: 85%;
+`;
+
+// 완료 버튼
+const SubmitButton = styled.button`
+  width: 6rem;
+  height: 2.375rem;
+  // margin-top: 50%;
+  margin-right: 20%; 
+  border: none;
+  border-radius: 8%;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  background: #1C395E;
+  color: #FFF;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 480px) {
+    font-size: 60%;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    font-size: 80%;
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 120%;
+  }
+`;
+
 // 아이템 하나당 영역
 const ItemContainer = styled.div`
   position: relative;
@@ -97,8 +143,9 @@ const EditButton = styled.button`
   // border: 1px solid #ccc;
   border: none;
   border-radius: 0.5rem;
-  font-family: 'Pretendard-Regular';
+  font-family: Pretendard-Regular;
   cursor: pointer;
+  margin-top: 3%;
 
   &:hover {
     background-color: #e0e0e0;
@@ -526,7 +573,7 @@ return (
         {getItemsBySelectedCategory().map((item, itemIndex) => (
           <ItemContainer key={itemIndex}>
             <ItemWrapper>
-              <ItemLabel>품목명:</ItemLabel>
+              <ItemLabel>품목명: &nbsp;</ItemLabel>
                 {editModes[itemIndex] ? (
                   <InputField
                     type="text"
@@ -539,7 +586,7 @@ return (
                 )}
             </ItemWrapper>
             <ItemWrapper>
-              <ItemLabel>가격:</ItemLabel>
+              <ItemLabel>가격: &nbsp;</ItemLabel>
                 {editModes[itemIndex] ? (
                   <InputField
                     type="text"
@@ -559,6 +606,11 @@ return (
         ))}
           <AddButton onClick={handlerAddItem}>+</AddButton>
       </ItemDiv>
+      <SubmitButtonDiv>
+          <Link to="/">
+            <SubmitButton>완료</SubmitButton>
+          </Link>
+        </SubmitButtonDiv>
   </ComponentDiv>
   );
 };

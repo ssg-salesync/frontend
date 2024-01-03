@@ -19,6 +19,7 @@ const ComponentDiv = styled.div`
 const TitleDiv = styled.div`
   height: 15%;
   width: 80%;
+
   display: flex;
   align-items: center;
 
@@ -259,6 +260,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
             // console.log('카테고리수정 id: ', categoryId)
             // console.log('카테고리수정 이름: ', updatedCategory)
             await CategoryPutApi(categoryId, updatedCategory);    // [PUT: 카테고리 수정]
+            
 
 
             // API 호출이 성공하면 해당 카테고리의 이름을 업데이트

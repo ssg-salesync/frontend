@@ -46,14 +46,14 @@ const SubMenu = styled.li`
     justify-content: center;
 `
 const Item = styled.div`
-    text-align: center;
     width: 100%;
     height: 80%;
     border: 0.5rem;
     // background-color : gray;  
     display: flex;
     flex-wrap: wrap;  /* 아이템들을 여러 줄로 나누기 위해 flex-wrap 추가 */
-    justify-content: center;
+    // justify-content: center;
+    text-align: center;
     overflow:auto;
 `
 const Menu = styled.div`
@@ -120,6 +120,11 @@ const OrderCheckBt = styled.button`
     right :40%;
     bottom :5%;
     font-family: Pretendard-Regular;
+
+    &:hover {
+        background-color: #e0e0e0;
+    }
+
 `
 /* eslint-disable */
 function OrderItem({tableId}) {
