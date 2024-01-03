@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { useSetRecoilState } from "recoil";
 import {LoginPostApi} from "../api/auth/login/LoginPostApi"
-import {ComponentDiv,TitleDiv,InsertDiv} from "../styles/CommonStyle"
+import {TotalDiv,ComponentDiv,TitleDiv,InsertDiv} from "../styles/CommonStyle"
 import { UserCheckState } from "../recoil/atoms/UserState";
 
 /* eslint-disable */
@@ -222,6 +222,7 @@ function LoginPage() {
   console.log('api통신할 전체 데이터: ', loginData)
 
   return (
+    <TotalDiv>
     <ComponentDiv>
       <TitleDiv>로그인을 위해 아이디와<br/>비밀번호를 입력해주세요.</TitleDiv>
       <InsertDiv>
@@ -252,6 +253,7 @@ function LoginPage() {
         </Link>
       </ButtonDiv>
     </ComponentDiv>
+    </TotalDiv>
   );
 };
 
