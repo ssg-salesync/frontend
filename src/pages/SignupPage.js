@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { StoreState } from "../recoil/atoms/StoreState";
 import { SignupPostApi } from "../api/auth/signup/SignupPostApi";
-import { ComponentDiv, TitleDiv,InsertDiv} from "../styles/CommonStyle";
+import { TotalDiv, ComponentDiv, TitleDiv,InsertDiv} from "../styles/CommonStyle";
 
 
 /* eslint-disable */
@@ -303,6 +303,7 @@ function SignupPage() {
   console.log('비밀번호 확인 데이터: ', passwordData)
 
   return (
+    <TotalDiv>
     <ComponentDiv>
       <TitleDiv>회원가입을 위해 아이디와 <br/>비밀번호를 입력해주세요.</TitleDiv>
       <InsertDiv>
@@ -361,6 +362,7 @@ function SignupPage() {
         </div>
       </ButtonDiv>
     </ComponentDiv>
+    </TotalDiv>
   );
 };
 

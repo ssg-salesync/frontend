@@ -5,7 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { StoreState } from "../recoil/atoms/StoreState";
 import { StorePostApi } from "../api/auth/signup/StorePostApi";
 import { StoreTokenPostApi } from "../api/auth/signup/StoreTokenPostApi";
-import { ComponentDiv, TitleDiv,InsertDiv } from "../styles/CommonStyle";
+import { TotalDiv, ComponentDiv, TitleDiv,InsertDiv } from "../styles/CommonStyle";
 import { UserCheckState } from "../recoil/atoms/UserState";
 
 
@@ -266,6 +266,7 @@ function StorePage() {
   // console.log('api통신할 전체 데이터: ', storesData)
 
   return (
+    <TotalDiv>
     <ComponentDiv>
       <TitleDiv>매장을 등록해주세요.</TitleDiv>
       <InsertDiv>
@@ -304,6 +305,7 @@ function StorePage() {
           <NextButton type="submit" onClick={handlerNextClick}>다음</NextButton>
       </ButtonDiv>
     </ComponentDiv>
+    </TotalDiv>
   );
 };
 

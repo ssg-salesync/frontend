@@ -1,20 +1,29 @@
 import styled from 'styled-components';
 
 // 로그인/회원가입/매장등록 박스
+export const TotalDiv = styled.div`
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+// 로그인/회원가입/매장등록 박스
 export const ComponentDiv = styled.div`
-// height: 80vh;
-width: 38.25rem;
-height: 33.75rem;
+  // height: 80vh;
+  width: 38.25rem;
+  height: 33.75rem;
 
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-border-radius: 2.125rem;
-border: 2px solid #FFF;
-background: rgba(255, 255, 255);
-box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
-backdrop-filter: blur(10px);
+  border-radius: 2.125rem;
+  border: 2px solid #FFF;
+  background: rgba(255, 255, 255);
+  box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
 `;
 
 // 로그인/회원가입/매장등록 제목 영역

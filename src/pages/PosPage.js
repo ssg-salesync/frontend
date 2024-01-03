@@ -8,24 +8,29 @@ import { ItemGetApi } from "../api/pos/item/ItemGetApi";
 
 /* eslint-disable */
 
+// const TotalDiv = styled.div`
+//   height: 80vh;
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `;
+
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
-    height: 80vh;
-    
-    // PosPage의 default 너비 130으로 고정해야 사이즈 잘 나옴 
-    width: 140vh;
-
-    display: flex;
-    overflow: auto;
-
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  overflow: auto;
 `;
+
 // PosCategory 컴포넌트 영역
 const PosCategoryDiv = styled.div`
-    height: 100%;
-    width: 30%;
-    border-right: 1px solid #ccc;
-    background: rgba(255, 255, 255, 0.70);
-    backdrop-filter: blur(25px);
+  height: 100%;
+  width: 30%;
+  border-right: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.70);
+  backdrop-filter: blur(25px);
 `;
 
 // 세로선 영역
@@ -37,22 +42,22 @@ const PosCategoryDiv = styled.div`
 
 // PosItem, 완료 버튼 전체 영역
 const PosItemSubmitButtonDiv = styled.div`
-    height: 100%;
-    width: 70%;
+  height: 100%;
+  width: 70%;
 `;
 
 // PosItem 컴포넌트 영역
 const PosItemDiv = styled.div`
-    height: 90%;
-    width: 100%;
+  height: 90%;
+  width: 100%;
 `;
 // 완료 버튼 영역
 const SubmitButtonDiv = styled.div`
-    height: 10%;
-    width: 100%;
-    display: flex;
-    // justify-content: flex-end;
-    justify-content: right;
+  height: 10%;
+  width: 100%;
+  display: flex;
+  // justify-content: flex-end;
+  justify-content: right;
 `;
 
 // 세로선
@@ -64,9 +69,9 @@ const SubmitButtonDiv = styled.div`
 
 // 여백의 미
 const NoDiv = styled.div`
-    height: 100%;
-    width: 6%;
-    color: white;
+  height: 100%;
+  width: 6%;
+  color: white;
 `;
 // 완료 버튼
 const SubmitButton = styled.button`
