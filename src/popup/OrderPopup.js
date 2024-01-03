@@ -28,7 +28,7 @@ const modalStyle ={
 };
 const PayDiv = styled.div`
     width: 70%;
-    height: 20%;
+    height: 18%;
     position: fixed;
     bottom: 0;
     margin: 3rem;
@@ -183,7 +183,7 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
                 <CloseBt type='button' onClick={closeOrderPopup}/>
                 <h2>주문 목록</h2>                
-                <div><OrderList/></div>
+                <div style={{height:'65%',overflow: 'auto'}}><OrderList/></div>
                 {/* <PayButton type='button' value="Close" onClick={()=>closeOrderPopup}/> */}
                 <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}>
                 <PayDiv>

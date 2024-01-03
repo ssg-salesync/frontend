@@ -6,7 +6,6 @@ const ListTable = styled.table`
     width : 80%;
     height : 5%;
     text-align: center;
-    margin-top: 10%;
     border-collapse: separate;
     border-spacing: 0 10px;
     font-size: 1.2rem;
@@ -20,8 +19,8 @@ const ListTableTd = styled.td`
     padding: 1rem;
 `
 const PayDiv = styled.div`
-    width: 60%;
-    height: 90%;
+    width: 55%;
+    height: 70%;
     border-radius: 0.6rem;
     background: #1C395E;
     color: #FFF;
@@ -52,7 +51,7 @@ function PaymentList() {
     // };
     return (
         <>
-        <div style={{height:'55%','justify-content': 'center', display: 'flex', marginTop: '10%'}}>
+        <div style={{height:'60%','justify-content': 'center', display: 'flex', marginTop: '10%', overflow: 'auto'}}>
             <ListTable>
                 <tbody>
                 {/* 각 품목을 나열하는 매핑 작업 */}

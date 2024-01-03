@@ -15,7 +15,7 @@ const TabDiv = styled.div`
     // margin-left: 1%;
 `
 const TabMemu = styled.ul`
-    // height : 5%;
+    height : 10%;
     width : 100%;
     
     display: flex;
@@ -35,8 +35,8 @@ const TabMemu = styled.ul`
 `
 const SubMenu = styled.li`
     display: flex;
-    width: 10%;
-    height: 80%;
+    width: max-content;
+    height: max-content;
     padding: 0.5rem;
     margin :0.5rem;
     font-size:1rem;
@@ -48,17 +48,18 @@ const SubMenu = styled.li`
 const Item = styled.div`
     text-align: center;
     width: 100%;
-    height: 90%;
+    height: 80%;
     border: 0.5rem;
     // background-color : gray;  
     display: flex;
-    // flex-direction:row;
     flex-wrap: wrap;  /* 아이템들을 여러 줄로 나누기 위해 flex-wrap 추가 */
+    justify-content: center;
+    overflow:auto;
 `
 const Menu = styled.div`
     // width: 25%;
-    width: calc(30% - 1rem);
-    height:25%;
+    width: calc(30% - 0.8rem);
+    height:30%;
     margin : 1rem;
     background-color : #D9D9D9;
     border-radius: 0.5rem;
@@ -117,7 +118,7 @@ const OrderCheckBt = styled.button`
     height: 2rem;
     position: fixed;
     right :40%;
-    bottom :8%;
+    bottom :5%;
     font-family: Pretendard-Regular;
 `
 /* eslint-disable */
@@ -329,21 +330,21 @@ function OrderItem({tableId}) {
                 ))} */}
             </TabMemu>
             {menu.map((cate, cateIdx) => (cate.category_id === currentTab && (
-                <Item key={cate.category_id}>
-                    {cate.items.map((item,itemIdx) => (
-                        <Menu key={item.item_id}>
-                            <MenuDtDiv>
-                                <MenuDtP>{item.name}</MenuDtP>
-                                <MenuDtP>{item.price}</MenuDtP>                            
-                            </MenuDtDiv>
-                            <BtDiv>
-                                <MinusBt type="button" onClick={() =>quantityMinus(item.item_id,cate.category_id)}/>
-                                <QuantityBt type="button">{item.quantity}</QuantityBt>  
-                                <PlusBt type="button" onClick={()=>quantityPlus(item.item_id,cate.category_id)}/>
-                            </BtDiv>
-                        </Menu>
-                    ))}
-                </Item>
+            <Item key={cate.category_id}>
+                {cate.items.map((item,itemIdx) => (
+                    <Menu key={item.item_id}>
+                        <MenuDtDiv>
+                            <MenuDtP>{item.name}</MenuDtP>
+                            <MenuDtP>{item.price}</MenuDtP>                            
+                        </MenuDtDiv>
+                        <BtDiv>
+                            <MinusBt type="button" onClick={() =>quantityMinus(item.item_id,cate.category_id)}/>
+                            <QuantityBt type="button">{item.quantity}</QuantityBt>  
+                            <PlusBt type="button" onClick={()=>quantityPlus(item.item_id,cate.category_id)}/>
+                        </BtDiv>
+                    </Menu>
+                ))}
+            </Item>
                 )
             ))}
 

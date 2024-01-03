@@ -10,9 +10,9 @@ import { UnpaidGetApi } from "../api/pay/UnpaidGetApi";
 import { TotalDiv } from "../styles/CommonStyle";
 
 const TableDiv = styled.div`
-    height:100%;
+    height:75%;
     width:100%;
-
+    overflow:auto;
     display: grid;
     grid-template-columns: repeat(4, 15rem);
     justify-content: center;
@@ -42,12 +42,13 @@ const TableContainer = styled.div`
     // border: 1px solid #ccc;
     border:none;
     display: flex;
-    align-items: center;
     justify-content: center;
     text-align: center;
     transition: transform 0.3s;
     cursor: pointer;
     background: #FFF;
+    // overflow: auto;
+    padding-top: 8%;
 
     &:hover {
         transform: scale(1.1) rotate(2deg);
@@ -177,7 +178,8 @@ function Home() {
         {loading && tables.map((table) => (
             <TableContainer key={table.tableId} onClick={(e) => { e.preventDefault(); openOrderPopup(table.tableId); }}>
                 <div>
-                    <span>테이블: {table.tableId}</span>
+                    <span style={{fontWeight:'bold'}}>테이블: {table.tableId}</span>
+                    <div style={{overflow:'auto',height:'80%',width:'100%'}}>
                     {
                         ordersData.map((order)=>
                             {
@@ -191,7 +193,7 @@ function Home() {
                             }
                         )
                     }
-                    
+                    </div>
                 </div>
             </TableContainer>
         ))}
