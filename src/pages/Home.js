@@ -12,12 +12,12 @@ import { TotalDiv } from "../styles/CommonStyle";
 const TableDiv = styled.div`
     height:75%;
     width:100%;
-    overflow:auto;
+    // overflow:auto;
     display: grid;
     grid-template-columns: repeat(4, 15rem);
     justify-content: center;
     align-items: center;
-    // row-gap: 0.5rem;
+    row-gap: 2rem;
     // height: calc((100vh - 40px) / 2);
     // padding: 20px 0;
 
@@ -177,7 +177,7 @@ function Home() {
         <TableDiv>        
         {loading && tables.map((table) => (
             <TableContainer key={table.tableId} onClick={(e) => { e.preventDefault(); openOrderPopup(table.tableId); }}>
-                <div>
+                <div style={{height:'100%',width:'100%'}}>
                     <span style={{fontWeight:'bold'}}>테이블: {table.tableId}</span>
                     <div style={{overflow:'auto',height:'80%',width:'100%'}}>
                     {

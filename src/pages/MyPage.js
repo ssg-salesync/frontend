@@ -1,107 +1,100 @@
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
+import { ComponentDiv, TitleDiv, TotalDiv } from "../styles/CommonStyle";
 
 /* eslint-disable */
 
 // 컴포넌트 전체 영역
-const ComponentDiv = styled.div`
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
+// const ComponentDiv = styled.div`
+//     height: 80vh;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// `;
 
 // 맨 위 마이페이지 글자 영역
-const TitleDiv = styled.div`
-  height: 20%;
-  display: flex;
-  align-items: center;
+// const TitleDiv = styled.div`
+//   height: 20%;
+//   display: flex;
+//   align-items: center;
 
-  // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 70%;
-  }
+//   // 반응형에 맞게 폰트 크기 조정
+//   @media screen and (max-width: 480px) {
+//     font-size: 70%;
+//   }
 
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 85%;
-  }
+//   @media screen and (min-width: 481px) and (max-width: 1024px) {
+//     font-size: 85%;
+//   }
 
-  @media screen and (min-width: 1025px) {
-    font-size: 100%;
-  }
-`;
+//   @media screen and (min-width: 1025px) {
+//     font-size: 100%;
+//   }
+// `;
 
 // 버튼들 전체 영역(위에 글자 제외)
 const MyPageContainer = styled.div`
-  height: 80%;
+  height: 50%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  // 버튼들 사이 간격
-  & > *:not(:last-child) {
-    margin-bottom: 5%;
-  }
 `;
-
+const MyPageButtonDiv = styled.div`
+  width: 100%;
+  height: 13%;
+  display: flex;
+  margin: 0.5rem;
+  justify-content: center;
+`
 // 마이페이지 버튼들
 const MyPageButton = styled.button`
   width: 100%;
   height: 100%;
-  border-radius: 3%;
-  border: 1px solid #ccc;
-  flex: 0 0 auto;
+  font-family: 'Pretendard-Regular';
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  border:none;
+  background-color: #00ADEF;
   cursor: pointer;
+  color: #FFF;
 
   &:hover {
     background-color: #e0e0e0;
-  }
-
-  // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 100%;
-  }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 150%;
-  }
-
-  @media screen and (min-width: 1025px) {
-    font-size: 200%;
   }
 `;
 
 function MyPage() {
   return (
+    <TotalDiv>
     <ComponentDiv>
-      <TitleDiv>
-        <h1>마이페이지</h1>
-      </TitleDiv>
+      <TitleDiv>마이페이지</TitleDiv>
+
       <MyPageContainer>
-        <Link to="/mypage/info">
+        <MyPageButtonDiv><Link to="/mypage/info">
           <MyPageButton type="submit">
             회원 정보 수정
           </MyPageButton>
-        </Link>
-        <Link to="/signup/stores/pos">
+        </Link></MyPageButtonDiv>
+        <MyPageButtonDiv><Link to="/signup/stores/pos">
           <MyPageButton type="submit">
             매장 정보 수정
           </MyPageButton>
-        </Link>
-        <Link to="/mypage/cost">
+        </Link></MyPageButtonDiv>
+        <MyPageButtonDiv><Link to="/mypage/cost">
           <MyPageButton type="submit">
             물품 비용 계산
           </MyPageButton>
-        </Link>
-        <Link to="/mypage/dashboard">
+        </Link></MyPageButtonDiv>
+        <MyPageButtonDiv><Link to="/mypage/dashboard">
           <MyPageButton>
             대&nbsp;&nbsp;&nbsp;시&nbsp;&nbsp;&nbsp;보&nbsp;&nbsp;&nbsp;드
           </MyPageButton>
-        </Link>
-        </MyPageContainer>
-    </ComponentDiv>     
+        </Link></MyPageButtonDiv>
+      </MyPageContainer>
+    </ComponentDiv>
+    </TotalDiv>    
   );
 };
 
