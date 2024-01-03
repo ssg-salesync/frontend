@@ -21,7 +21,6 @@ const ButtonDiv = styled.div`
     width: 80%;
     height: 10%;
     margin: 1rem;
-    background-color:#D9D9D9;
     border-radius: 0.625rem;
     display: flex;
     justify-content: center;
@@ -33,6 +32,9 @@ const Button = styled.button`
     padding: 0;
     width: 100%;
     height: 100%;
+    background-color:#D9D9D9;
+    font-family: Pretendard-Regular;
+    font-size: 1rem;
 `
 /* eslint-disable */
 function PaymentWay({closePaymentPopup,tableId}) {
