@@ -14,26 +14,25 @@ import CashPage from "../popup/CashPopup";
 import CostPage from "../pages/CostPage";
 import InfoNpwPage from "../pages/InfoNpwPage";
 
-
 function Routing() {
-    return(
-        <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="/signup/stores" element={<StorePage/>}/>
-            <Route path="/signup/stores/pos" element={<PosPage/>}/>
-            <Route path="/mypage" element={<MyPage/>}/>
-            <Route path="/mypage/info" element={<InfoPage/>}/>
-            <Route path="/mypage/info/newpassword" element={<InfoNpwPage/>}/>
-            <Route path="/mypage/cost" element={<CostPage/>}/>
-            <Route path="/mypage/dashboard" element={<DashboardPage/>}/>
-            <Route path="/order/:tableId" element={<OrderPopup/>}/>
-            <Route path="/order/:tableId/payment" element={<PaymentPage/>}/>
-            <Route path="/order/:tableId/payment/card" element={<CardPage/>}/>
-            <Route path="/order/:tableId/payment/cash" element={<CashPage/>}/>
-        </Routes>
-    );
+  return(
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/signup" element={<SignupPage/>}/>
+      <Route path="/signup/stores" element={<StorePage/>}/>
+      <Route path="/signup/stores/pos" element={<PosPage/>}/>
+      <Route path="/mypage" element={<MyPage/>}/>
+      <Route path="/mypage/info" element={<InfoPage/>}/>
+      <Route path="/mypage/info/newpassword" element={<InfoNpwPage/>}/>
+      <Route path="/mypage/cost" element={<CostPage/>}/>
+      <Route path="/mypage/dashboard" element={<DashboardPage/>}/>
+      <Route path="/order/:tableId" element={<OrderPopup/>}/>
+      <Route path="/order/:tableId/payment" element={<PaymentPage/>}/>
+      <Route path="/order/:tableId/payment/card" element={<CardPage/>}/>
+      <Route path="/order/:tableId/payment/cash" element={<CashPage/>}/>
+    </Routes>
+  );
 };
 
 export default Routing
