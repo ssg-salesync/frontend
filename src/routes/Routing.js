@@ -13,6 +13,7 @@ import CardPage from "../popup/CardPopup";
 import CashPage from "../popup/CashPopup";
 import CostPage from "../pages/CostPage";
 import InfoNpwPage from "../pages/InfoNpwPage";
+import KioskPage from "../pages/KioskPage";
 
 function Routing() {
   return(
@@ -31,6 +32,8 @@ function Routing() {
       <Route path="/order/:tableId/payment" element={<PaymentPage/>}/>
       <Route path="/order/:tableId/payment/card" element={<CardPage/>}/>
       <Route path="/order/:tableId/payment/cash" element={<CashPage/>}/>
+
+      <Route path="/kiosk" element={<KioskPage/>}/>
     </Routes>
   );
 };
