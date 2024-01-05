@@ -13,6 +13,19 @@ const TabDiv = styled.div`
     width : 100%;
     background: linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%), #FFF;
     // margin-left: 1%;
+    
+    //슬라이드 애니메이션 효과
+    // animation: slideUp 0.5s forwards;
+    // @keyframes slideUp {
+    //     from {
+    //     transform: translateY(100%);
+    //     opacity: 0;
+    //     }
+    //     to {
+    //     transform: translateY(0);
+    //     opacity: 1;
+    //     }
+    // }
 `
 const TabMemu = styled.ul`
     height : 10%;

@@ -24,6 +24,19 @@ export const ComponentDiv = styled.div`
   background: rgba(255, 255, 255);
   box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(10px);
+
+  // 슬라이드 애니매이션 효과
+  transform: translateX(100%);
+  animation: slideIn 0.5s forwards;
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
 `;
 
 // 로그인/회원가입/매장등록 제목 영역
