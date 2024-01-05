@@ -39,6 +39,36 @@ export const ComponentDiv = styled.div`
   }
 `;
 
+// 로그인 박스
+export const ComponentDivUp = styled.div`
+  // height: 80vh;
+  width: 38.25rem;
+  height: 33.75rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 2.125rem;
+  border: 2px solid #FFF;
+  background: rgba(255, 255, 255);
+  box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+
+  // 슬라이드 애니매이션 효과
+  transform: translateY(100%);
+  animation: slideUp 0.5s forwards;
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+`;
+
 // 로그인/회원가입/매장등록 제목 영역
 export const TitleDiv = styled.div`
   height: 25%;
