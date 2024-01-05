@@ -34,7 +34,7 @@ import { ComponentDiv,ComponentDivUp, TitleDiv, TotalDiv } from "../styles/Commo
 
 // 버튼들 전체 영역(위에 글자 제외)
 const MyPageContainer = styled.div`
-  height: 50%;
+  height: 60%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -42,23 +42,25 @@ const MyPageContainer = styled.div`
   justify-content: center;
 `;
 const MyPageButtonDiv = styled.div`
-  width: 100%;
-  height: 13%;
+  width: 60%;
+  height: 50%;
   display: flex;
-  margin: 0.5rem;
-  justify-content: center;
+  // justify-content: center;
+  justify-content: space-between;
 `
 // 마이페이지 버튼들
 const MyPageButton = styled.button`
-  width: 100%;
-  height: 100%;
+  width: 130%;
+  height: 60%;
+
   font-family: 'Pretendard-Regular';
-  font-size: 0.8rem;
+  font-size: 110%;
   border-radius: 0.5rem;
   border:none;
   background-color: #00ADEF;
   cursor: pointer;
   color: #FFF;
+  margin: 5%;
 
   &:hover {
     background-color: #e0e0e0;
@@ -72,26 +74,40 @@ function MyPage() {
       <TitleDiv>마이페이지</TitleDiv>
 
       <MyPageContainer>
-        <MyPageButtonDiv><Link to="/mypage/info">
+        {/* <MyPageButtonDiv><Link to="/mypage/info">
           <MyPageButton type="submit">
             회원 정보 수정
           </MyPageButton>
-        </Link></MyPageButtonDiv>
-        <MyPageButtonDiv><Link to="/signup/stores/pos">
-          <MyPageButton type="submit">
-            매장 정보 수정
-          </MyPageButton>
-        </Link></MyPageButtonDiv>
-        <MyPageButtonDiv><Link to="/mypage/cost">
+        </Link></MyPageButtonDiv> */}
+        <MyPageButtonDiv>
+          <Link to="/mypage/info">
+            <MyPageButton type="submit">
+              회원 정보 수정
+            </MyPageButton>
+          </Link>
+          <Link to="/signup/stores/pos">
+            <MyPageButton type="submit">
+              매장 정보 수정
+            </MyPageButton>
+          </Link>
+        </MyPageButtonDiv>
+        {/* <MyPageButtonDiv><Link to="/mypage/cost">
           <MyPageButton type="submit">
             물품 비용 계산
           </MyPageButton>
-        </Link></MyPageButtonDiv>
-        <MyPageButtonDiv><Link to="/mypage/dashboard">
-          <MyPageButton>
-            대&nbsp;&nbsp;&nbsp;시&nbsp;&nbsp;&nbsp;보&nbsp;&nbsp;&nbsp;드
-          </MyPageButton>
-        </Link></MyPageButtonDiv>
+        </Link></MyPageButtonDiv> */}
+        <MyPageButtonDiv>
+          <Link to="/mypage/cost">
+            <MyPageButton type="submit">
+              물품 비용 계산
+            </MyPageButton>
+          </Link>
+          <Link to="/mypage/dashboard">
+            <MyPageButton>
+              대&nbsp;&nbsp;&nbsp;시&nbsp;&nbsp;&nbsp;보&nbsp;&nbsp;&nbsp;드
+            </MyPageButton>
+          </Link>
+        </MyPageButtonDiv>
       </MyPageContainer>
     </ComponentDivUp>
     </TotalDiv>    

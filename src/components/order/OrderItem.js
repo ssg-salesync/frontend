@@ -7,6 +7,7 @@ import { ItemsApi } from "../../api/Items/ItemsApi";
 import { OrderGetTableApi } from "../../api/Orders/OrderGetTableApi";
 import { OrdersPutApi } from "../../api/Orders/OrdersPutApi";
 import { OrdersPostApi } from "../../api/Orders/OrdersPostApi";
+import { OrderCancelApi } from "../../api/Orders/OrderCancelApi";
 
 const TabDiv = styled.div`
     height : 100%;
@@ -122,22 +123,41 @@ const PlusBt = styled.button`
     border:none;
     padding:0;
 `
+const OrderCheckDiv = styled.div`
+    width:100%;
+    height:10%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+`
 const OrderCheckBt = styled.button`
     border: none;
     border-radius: 0.5rem;
     background: #1C395E;
     color: #FFF;
-    width: 4rem;
-    height: 2rem;
-    position: fixed;
-    right :40%;
-    bottom :5%;
+    width: 15%;
+    height: 60%;
     font-family: Pretendard-Regular;
+    font-size: 110%;
+    margin: 1%;
+    &:hover {
+        background-color: #e0e0e0;
+    }
+`
+const OrderCancelBt = styled.button`
+    border: none;
+    border-radius: 0.5rem;
+    background: #1C395E;
+    color: #FFF;
+    width: 15%;
+    height: 60%;
+    font-family: Pretendard-Regular;
+    font-size: 110%;
+    margin: 1%;
 
     &:hover {
         background-color: #e0e0e0;
     }
-
 `
 /* eslint-disable */
 function OrderItem({tableId}) {
@@ -325,7 +345,12 @@ function OrderItem({tableId}) {
             // .catch((err)=>console.log(err))
         }
         setOrderCheckBt(true)
-   }
+    }
+    const orderCancel=()=>{
+        const cancelOrder = OrderCancelApi(tableId);
+        console.log("cancelOrder",cancelOrder)
+        
+    }
     return(
         <TabDiv>
             <TabMemu>
@@ -334,9 +359,6 @@ function OrderItem({tableId}) {
                 {/* <li className="submenu">{menuArr[0].name}</li>
                     <li className="submenu">{menuArr[1].name}</li>
                     <li className="submenu">{menuArr[2].name}</li> */}
-                <div>
-                <OrderCheckBt type='button' onClick={orderSend}>확인</OrderCheckBt>
-                </div>
                 {menu.map((cate) => (
                     <SubMenu key={cate.category_id} className={cate.category_id === currentTab ? "tab focused" : "tab"} onClick={() => selectMenuHandler(cate.category_id)}>{cate.category_name}</SubMenu>
                 ))}
@@ -365,7 +387,10 @@ function OrderItem({tableId}) {
             </Item>
                 )
             ))}
-
+            <OrderCheckDiv>
+                <OrderCheckBt type='button' onClick={orderSend}>주문 완료</OrderCheckBt>
+                <OrderCancelBt type='button' onClick={orderCancel}>주문 취소</OrderCancelBt>
+            </OrderCheckDiv>
         </TabDiv>
     )
 }

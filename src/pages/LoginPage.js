@@ -219,7 +219,7 @@ function LoginPage() {
     });
   };
 
-  console.log('api통신할 전체 데이터: ', loginData)
+  // console.log('api통신할 전체 데이터: ', loginData)
 
   return (
     <TotalDiv>
