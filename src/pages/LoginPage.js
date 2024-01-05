@@ -201,7 +201,7 @@ function LoginPage() {
         console.log('로그인 성공 | 토큰 정보: ', res);
         setUserCheck(true)
         // 홈으로 넘어감
-        navigate("/");
+        navigate("/home");
       })
       .catch(err => {
         console.error('로그인 실패 ㅣ 에러메세지: ', err.response.status);
