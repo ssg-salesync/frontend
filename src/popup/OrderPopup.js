@@ -11,21 +11,45 @@ import { getAtom } from '../components/func/AtomData';
 import { OrderGetTableApi } from '../api/Orders/OrderGetTableApi';
 import { OrdersPostApi } from '../api/Orders/OrdersPostApi';
 
-const modalStyle ={
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        width: '80%', // 모달의 너비
-        height: '80%', // 모달의 높이
-        display: 'flex',
-        flexDirection: 'row',
-        background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
-      },
+// 애니메이션 키프레임
+const slideUpAnimation = `
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+`;
+
+const modalStyle = {
+  content: {
+    top: '8%',
+    bottom: 'auto',
+    left: '9%',
+    right: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%', 
+    height: '80%', 
+    display: 'flex',
+    flexDirection: 'row',
+    background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
+    animation: 'slideUp 0.5s forwards', // 애니메이션 효과 적용
+  },
 };
+
+// style요소에 css 애니메이션 요소를 추가
+const style = document.createElement('style');
+style.appendChild(document.createTextNode(slideUpAnimation));
+document.head.appendChild(style);
+
+  
+
+  
 const PayDiv = styled.div`
     width: 70%;
     height: 18%;
