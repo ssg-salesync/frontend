@@ -10,14 +10,14 @@ import { UnpaidGetApi } from "../api/pay/UnpaidGetApi";
 import { TotalDiv } from "../styles/CommonStyle";
 
 const TableDiv = styled.div`
-    height:75%;
+    height:95%;
     width:100%;
-    // overflow:auto;
     display: grid;
-    grid-template-columns: repeat(4, 15rem);
+    grid-template-columns: repeat(4, 20%);
+    grid-template-rows: repeat(2, 50%);
     justify-content: center;
     align-items: center;
-    row-gap: 2rem;
+    // row-gap: 1%;
     // height: calc((100vh - 40px) / 2);
     // padding: 20px 0;
 
@@ -36,9 +36,11 @@ const TableDiv = styled.div`
     
 `;
 const TableContainer = styled.div`
-    width: 13rem;
-    height: 13rem;
-    border-radius: 0.625rem;
+    // width: 13rem;
+    // height: 13rem;
+    width: 90%;
+    height: 70%;
+    border-radius: 10%;
     // border: 1px solid #ccc;
     border:none;
     display: flex;
@@ -47,13 +49,16 @@ const TableContainer = styled.div`
     transition: transform 0.3s;
     cursor: pointer;
     background: #FFF;
-    // overflow: auto;
     padding-top: 8%;
 
     &:hover {
         transform: scale(1.1) rotate(2deg);
     }
 `;
+const TableSpan = styled.span`
+    font-weight: bold;
+    font-size: 130%;
+`
 /* eslint-disable*/
 function Home() {
     const [orderModalOn, setOrderModalOn] = useState(false);
@@ -178,7 +183,7 @@ function Home() {
         {loading && tables.map((table) => (
             <TableContainer key={table.tableId} onClick={(e) => { e.preventDefault(); openOrderPopup(table.tableId); }}>
                 <div style={{height:'100%',width:'100%'}}>
-                    <span style={{fontWeight:'bold'}}>테이블: {table.tableId}</span>
+                    <TableSpan>테이블 {table.tableId}</TableSpan>
                     <div style={{overflow:'auto',height:'80%',width:'100%'}}>
                     {
                         ordersData.map((order)=>
@@ -186,7 +191,7 @@ function Home() {
                                 if(table.tableId === order.table_no){
                                     return order.carts.map((cart)=>(
                                     <div key={cart.item_id}>
-                                        <p>{cart.item_name}{cart.quantity}</p>
+                                        <p>{cart.item_name} &nbsp;&nbsp;&nbsp;{cart.quantity}</p>
                                     </div>)
                                     )
                                 }

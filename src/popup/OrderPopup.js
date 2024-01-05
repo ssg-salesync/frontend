@@ -56,7 +56,7 @@ const PayDiv = styled.div`
     position: fixed;
     bottom: 0;
     border-radius: 0.625rem;
-    background: #1C395E;
+    // background: #1C395E;
     color: #FFF;
     margin: 9%;
     display: flex;
@@ -64,17 +64,30 @@ const PayDiv = styled.div`
 `
 const PayLDiv = styled.div`
     flex: 3;
+    height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: right;
-`
+    background: #1C395E;
+    border-radius: 0.625rem;
+    margin:2%;
+`    
 const PayRDiv = styled.div`
     flex: 2;
+    height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    background: #1C395E;
+    border-radius: 0.625rem;
+    color: #FFF;
+    border: none;
+    margin:2%;
+    &:hover {
+        background-color: #e0e0e0;
+    }
 `
 const CloseBt = styled.button`
     background: url("/img/Close.png"), #FFF 90%/ contain no-repeat;
@@ -208,17 +221,19 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
                 <h2>주문 목록</h2>                
                 <div style={{height:'65%',overflow: 'auto'}}><OrderList/></div>
                 {/* <PayButton type='button' value="Close" onClick={()=>closeOrderPopup}/> */}
-                <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}>
+                {/* <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}> */}
                 <PayDiv>
                     <PayLDiv>
                         {/* <p>총 결제금액 : {totalAmountCalculate()}원</p> */}
                         <p>총 결제금액 <br/> {totalPrice}원</p>
                     </PayLDiv>
-                    <PayRDiv>
+                    {/* <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}> */}
+                    <PayRDiv onClick={(e) => { e.preventDefault(); postOrder()}}>
                         결제하기
                     </PayRDiv>
+                    {/* </Link> */}
                 </PayDiv>
-                </Link>
+                {/* </Link> */}
             </RightDiv>
         </Modal>
         {paymentPopupOn && <PaymentPopup openPaymentPopup={openPaymentPopup} closePaymentPopup={closePaymentPopup} closeOrderPopup={closeOrderPopup} tableId={tableId}/>}

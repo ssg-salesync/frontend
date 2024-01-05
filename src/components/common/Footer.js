@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 const FooterDiv = styled.footer`
+    // height: 5%;
     height: 10vh;
     width: 100%;
     background: #1C395E;
@@ -18,7 +19,7 @@ function Footer() {
         <FooterDiv>
             {/* <p>salesync</p>
             <p>salesync Intro</p> */}
-            <div>&copy;Copyright 2023 salesync & Privacy</div>
+        <div style={{fontSize: '80%'}}>&copy;Copyright 2023 salesync & Privacy</div>
         </FooterDiv>
     );
 };
