@@ -256,11 +256,10 @@ function InfoNpwPage() {
       const res = await InfoPutApi(storeId, newPassword); // storeId와 새 비밀번호 전달
       console.log('새 비밀번호가 성공적으로 업데이트되었습니다.', res);
       
-      // 성공적으로 업데이트되었을 때, 다음 페이지로 이동하거나 다른 작업을 수행할 수 있습니다.
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       console.error('새 비밀번호 업데이트에 실패했습니다.', err);
-      // 실패했을 때 사용자에게 적절한 오류 처리를 해줄 수 있습니다.
+
     }
   };
 

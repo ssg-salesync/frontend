@@ -118,8 +118,8 @@ function Header() {
         // isKiosk 값이 변경될 때마다 실행되는 useEffect를 이용하여 라우팅을 수행합니다.
         if (isKiosk) {
             navigate('/kiosk');
-        } else {
-            navigate('/');
+        } else if(!isKiosk&&userCheck) {
+            navigate('/home');
         }
     }, [isKiosk]);
 
@@ -140,7 +140,7 @@ function Header() {
                 {/* Toggle Switch가 ON인 상태일 경우에 Desc 컴포넌트 내부의 텍스트를 'Toggle Switch ON'으로, 그렇지 않은 경우 'Toggle Switch OFF'. 조건부 렌더링을 활용. */}
                 <Desc><div>KIOSK</div></Desc>
                 {!isKiosk && 
-                    <BtContainer><Link to='/login'>
+                    <BtContainer><Link to='/'>
                     <Bt type="button" onClick={logout}>로그아웃</Bt>
                     </Link>
                 <Link to='/mypage'>

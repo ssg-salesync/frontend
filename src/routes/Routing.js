@@ -18,8 +18,8 @@ import KioskPage from "../pages/KioskPage";
 function Routing() {
   return(
     <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/" element={<LoginPage/>}/>
+      <Route path="/home" element={<Home/>}/>
       <Route path="/signup" element={<SignupPage/>}/>
       <Route path="/signup/stores" element={<StorePage/>}/>
       <Route path="/signup/stores/pos" element={<PosPage/>}/>

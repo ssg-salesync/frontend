@@ -607,7 +607,7 @@ return (
           <AddButton onClick={handlerAddItem}>+</AddButton>
       </ItemDiv>
       <SubmitButtonDiv>
-          <Link to="/">
+          <Link to="/home">
             <SubmitButton>완료</SubmitButton>
           </Link>
         </SubmitButtonDiv>
