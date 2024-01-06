@@ -1,7 +1,8 @@
 import Modal from 'react-modal';
-// import { styled } from 'styled-components';
+import { styled } from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
+import { IoArrowBackSharp } from "react-icons/io5";
 import PaymentList from "../components/payment/PaymentList";
 import PaymentWay from "../components/payment/PaymentWay";
 import { PayCompleteState } from '../recoil/atoms/ItemState';
@@ -36,7 +37,10 @@ const modalStyle ={
         animation: 'slideIn 0.5s forwards', // 애니메이션 효과 적용
       },
 };
-
+const BackBt = styled(IoArrowBackSharp)`
+  width:5%;
+  height:5%;
+`
 // style요소에 css 애니메이션 요소를 추가
 const style = document.createElement('style');
 style.appendChild(document.createTextNode(slideInAnimation));
@@ -70,7 +74,7 @@ const closeAllPopup = useRecoilValue(PayCompleteState)
         <Modal isOpen={openPaymentPopup} onRequestClose={closePaymentPopup} style={modalStyle} contentLabel="PaymentPopup">
             {/* <ModalContent/> */}
             {/* 왼쪽 탭 화면 */}
-            <button type='button' onClick={closePaymentPopup} style={{width:'5%',height:'5%'}}>Back</button>
+            <BackBt type='button' onClick={closePaymentPopup}/>
             <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
                 <PaymentList closeModal={closePaymentPopup}/>

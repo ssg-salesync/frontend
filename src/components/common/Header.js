@@ -6,9 +6,9 @@ import { UserCheckState } from "../../recoil/atoms/UserState";
 import { KioskState } from "../../recoil/atoms/KioskState";
 
 const HeaderDiv = styled.header`
-    height: 10vh;
+    height: 20%;
     width: 100%;
-    background: #1C395E;
+    // background: #1C395E;
 `
 const LogoDiv = styled.div`
     height: 100%;

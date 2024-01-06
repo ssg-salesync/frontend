@@ -18,7 +18,7 @@ import { ItemGetApi } from "../api/pos/item/ItemGetApi";
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
-  height: 80vh;
+  height: 100%;
   width: 100%;
   display: flex;
   // overflow: hidden;

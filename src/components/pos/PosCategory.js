@@ -9,10 +9,12 @@ import { CategoryDeleteApi } from '../../api/pos/category/CategoryDeleteApi';
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
-  height: 80vh;
+  height: 88vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-right: 10%;
+  padding-left: 10%;
 `;
 
 // 맨 위 카테고리 글자 영역
@@ -44,6 +46,7 @@ const CategoryDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow:auto;
 `;
 
 // 카테고리 하나당 영역
@@ -64,6 +67,7 @@ const InputField = styled.input`
   background: #FFF;
   border: none;
   font-family: 'Pretendard-Regular';
+  font-size: 100%;
 `;
 
 // 카테고리명 버튼
@@ -77,6 +81,7 @@ const CategoryButton = styled.button`
   border-radius: 0.5rem;
   cursor: pointer;
   font-family: 'Pretendard-Regular';
+  font-size: 100%;
 
   &:hover {
     background-color: #e0e0e0;
