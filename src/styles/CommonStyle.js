@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // 로그인/회원가입/매장등록 박스
 export const TotalDiv = styled.div`
-  height: 80vh;
+  height: 90vh;
   width: 100%;
   display: flex;
   align-items: center;

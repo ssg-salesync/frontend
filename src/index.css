@@ -1,11 +1,17 @@
 body{
     margin: 0;
+    padding: 0;
     font-family: 'Pretendard-Regular';
+    box-sizing: border-box;
+    background: linear-gradient(110deg, #E4F4FF, #E0F6FF, #D2E5FC), #FFF;
+
 }
-body > #root > div {
-    /* viewport 높이의 100% */
+/* body > #root > div {
+    viewport 높이의 100%
     height: 100vh;
-  }
+    background: linear-gradient(10deg, #E4F4FF, #E0F6FF, #D2E5FC), #FFF;
+
+  } */
 
   @font-face {
     font-family: 'Pretendard-Regular';

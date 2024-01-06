@@ -15,11 +15,9 @@ function App() {
       <RecoilRoot>
       <Header/>
       <main>
-        <div>
           <Routing/>
-        </div>
       </main>
-      <Footer/>
+      {/* <Footer/> */}
       </RecoilRoot>
     </>
   );

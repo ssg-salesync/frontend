@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { IoCloseSharp } from "react-icons/io5";
 import { OrderCheckState, PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
 import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
@@ -89,19 +90,19 @@ const PayRDiv = styled.div`
         background-color: #e0e0e0;
     }
 `
-const CloseBt = styled.button`
-    background: url("/img/Close.png"), #FFF 90%/ contain no-repeat;
+const CloseBt = styled(IoCloseSharp)`
+    // background: url("/img/Close.png"), #FFF 90%/ contain no-repeat;
     background-size: cover;
     cursor: pointer;
-    width: 1.5rem;
-    height: 1.5rem;
-    border:none;
+    width: 7%;
+    height: 7%;
+    border: none;
     position: fixed;
     right :3%;
 `
 const RightDiv = styled.div`
     flex: 1.5; 
-    padding: 20px;
+    padding: 1.5%;
     background: rgba(255, 255, 255, 0.70);
     backdrop-filter: blur(25px);
 `
@@ -215,6 +216,7 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}
+            <CloseBt type='button' onClick={closeOrderPopup}/>
             <RightDiv>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
                 <CloseBt type='button' onClick={closeOrderPopup}/>

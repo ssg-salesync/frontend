@@ -48,7 +48,7 @@ const NextButton = styled.button`
   // margin-left: -15%;
   border-radius: 0.5625rem;
   border:none;
-  background-color: #00ADEF;
+  background-color: #1D56A8;
   cursor: pointer;
 
   color: #FFF;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
+import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
 import { getAtom } from "../func/AtomData";
 import { OrderCheckState, TableState, TotalPrice} from "../../recoil/atoms/ItemState";
 import { ItemsApi } from "../../api/Items/ItemsApi";
@@ -13,7 +14,7 @@ const TabDiv = styled.div`
     height : 100%;
     width : 100%;
     background: linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%), #FFF;
-    // margin-left: 1%;
+    // margin-right: 1%;
     
     //슬라이드 애니메이션 효과
     // animation: slideUp 0.5s forwards;
@@ -39,6 +40,9 @@ const TabMemu = styled.ul`
     padding: 0;
     margin: 0;
     border-radius: 0.5rem;
+    // overflow: auto;
+    overflow-x: auto;
+    white-space: nowrap;
 
     .focused{
         //선택된 tab에 적용되는 css
@@ -49,7 +53,8 @@ const TabMemu = styled.ul`
 `
 const SubMenu = styled.li`
     display: flex;
-    width: max-content;
+    width: 10%;
+    white-space: nowrap;
     height: max-content;
     padding: 0.5rem;
     margin :0.5rem;
@@ -75,7 +80,7 @@ const Menu = styled.div`
     width: calc(30% - 0.8rem);
     height:30%;
     margin : 1rem;
-    background-color : #D9D9D9;
+    background-color : #FFF;
     border-radius: 0.5rem;
 `
 const MenuDtDiv = styled.div`
@@ -99,13 +104,13 @@ const BtDiv = styled.div`
 const QuantityBt = styled.button`
     width: 3rem;
     height: 1.5rem;
-    background: #D9D9D9;
+    background: #FFF;
     border:none;
     font-family: 'Pretendard-Regular';
 `
-const MinusBt = styled.button`
+const MinusBt = styled(FaRegMinusSquare)`
     // background: url("/img/MinusBt.png") no-repeat center center;
-    background: url("/img/MinusBt.png"), lightgray 50% / contain no-repeat;
+    // background: url("/img/MinusBt.png"), lightgray 50% / contain no-repeat;
     background-size: cover;
     cursor: pointer;
     width: 1.5rem;
@@ -113,9 +118,10 @@ const MinusBt = styled.button`
     border:none;
     padding:0;
 `
-const PlusBt = styled.button`
+// const PlusBt = styled.button`
+const PlusBt = styled(FaRegPlusSquare)`
     // background: url("/img/PlusBt.png") no-repeat center center;
-    background: url("/img/PlusBt.png"), lightgray 50% / contain no-repeat;
+    // background: url("/img/PlusBt.png"), lightgray 50% / contain no-repeat;
     background-size: cover;
     cursor: pointer;
     width: 1.5rem;
@@ -388,8 +394,8 @@ function OrderItem({tableId}) {
                 )
             ))}
             <OrderCheckDiv>
-                <OrderCheckBt type='button' onClick={orderSend}>주문 완료</OrderCheckBt>
                 <OrderCancelBt type='button' onClick={orderCancel}>주문 취소</OrderCancelBt>
+                <OrderCheckBt type='button' onClick={orderSend}>주문 완료</OrderCheckBt>
             </OrderCheckDiv>
         </TabDiv>
     )
