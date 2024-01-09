@@ -9,7 +9,7 @@ export const TotalDiv = styled.div`
   justify-content: center;
 `;
 
-// 로그인/회원가입/매장등록 박스
+// 회원가입/매장등록 박스
 export const ComponentDiv = styled.div`
   // height: 80vh;
   width: 38.25rem;
@@ -39,7 +39,7 @@ export const ComponentDiv = styled.div`
   }
 `;
 
-// 로그인 박스
+// 로그인/마이페이지 박스
 export const ComponentDivUp = styled.div`
   // height: 80vh;
   width: 38.25rem;

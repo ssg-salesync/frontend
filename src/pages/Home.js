@@ -52,7 +52,7 @@ const TableContainer = styled.div`
     padding-top: 8%;
 
     &:hover {
-        transform: scale(1.1) rotate(2deg);
+        transform: scale(1.1);
     }
 `;
 const TableSpan = styled.span`
