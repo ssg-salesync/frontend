@@ -102,7 +102,7 @@ const LoginButton = styled.button`
   margin-left: -15%;
   border-radius: 0.5625rem;
   border:none;
-  background-color: #00ADEF;
+  background-color: #1D56A8;
   cursor: pointer;
 
   color: #FFF;
@@ -132,7 +132,7 @@ const SignupButton = styled.button`
   margin-left: 15%;
   border-radius: 0.5625rem;
   border:none;
-  background-color: #00ADEF;
+  background-color: #1D56A8;
   cursor: pointer;
 
   color: #FFF;
@@ -219,7 +219,7 @@ function LoginPage() {
     });
   };
 
-  console.log('api통신할 전체 데이터: ', loginData)
+  // console.log('api통신할 전체 데이터: ', loginData)
 
   return (
     <TotalDiv>

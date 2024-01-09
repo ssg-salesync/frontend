@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
+import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
 import { getAtom } from "../func/AtomData";
 import { OrderCheckState, TableState, TotalPrice} from "../../recoil/atoms/ItemState";
 import { ItemsApi } from "../../api/Items/ItemsApi";
 import { OrderGetTableApi } from "../../api/Orders/OrderGetTableApi";
 import { OrdersPutApi } from "../../api/Orders/OrdersPutApi";
 import { OrdersPostApi } from "../../api/Orders/OrdersPostApi";
+import { OrderCancelApi } from "../../api/Orders/OrderCancelApi";
 
 const TabDiv = styled.div`
     height : 100%;
     width : 100%;
     background: linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%), #FFF;
-    // margin-left: 1%;
+    // margin-right: 1%;
     
     //슬라이드 애니메이션 효과
     // animation: slideUp 0.5s forwards;
@@ -38,6 +40,9 @@ const TabMemu = styled.ul`
     padding: 0;
     margin: 0;
     border-radius: 0.5rem;
+    // overflow: auto;
+    overflow-x: auto;
+    white-space: nowrap;
 
     .focused{
         //선택된 tab에 적용되는 css
@@ -48,7 +53,8 @@ const TabMemu = styled.ul`
 `
 const SubMenu = styled.li`
     display: flex;
-    width: max-content;
+    width: 10%;
+    white-space: nowrap;
     height: max-content;
     padding: 0.5rem;
     margin :0.5rem;
@@ -74,7 +80,7 @@ const Menu = styled.div`
     width: calc(30% - 0.8rem);
     height:30%;
     margin : 1rem;
-    background-color : #D9D9D9;
+    background-color : #FFF;
     border-radius: 0.5rem;
 `
 const MenuDtDiv = styled.div`
@@ -98,13 +104,13 @@ const BtDiv = styled.div`
 const QuantityBt = styled.button`
     width: 3rem;
     height: 1.5rem;
-    background: #D9D9D9;
+    background: #FFF;
     border:none;
     font-family: 'Pretendard-Regular';
 `
-const MinusBt = styled.button`
+const MinusBt = styled(FaRegMinusSquare)`
     // background: url("/img/MinusBt.png") no-repeat center center;
-    background: url("/img/MinusBt.png"), lightgray 50% / contain no-repeat;
+    // background: url("/img/MinusBt.png"), lightgray 50% / contain no-repeat;
     background-size: cover;
     cursor: pointer;
     width: 1.5rem;
@@ -112,32 +118,52 @@ const MinusBt = styled.button`
     border:none;
     padding:0;
 `
-const PlusBt = styled.button`
+// const PlusBt = styled.button`
+const PlusBt = styled(FaRegPlusSquare)`
     // background: url("/img/PlusBt.png") no-repeat center center;
-    background: url("/img/PlusBt.png"), lightgray 50% / contain no-repeat;
+    // background: url("/img/PlusBt.png"), lightgray 50% / contain no-repeat;
     background-size: cover;
     cursor: pointer;
     width: 1.5rem;
     height: 1.5rem;
     border:none;
     padding:0;
+`
+const OrderCheckDiv = styled.div`
+    width:100%;
+    height:10%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
 `
 const OrderCheckBt = styled.button`
     border: none;
     border-radius: 0.5rem;
     background: #1C395E;
     color: #FFF;
-    width: 4rem;
-    height: 2rem;
-    position: fixed;
-    right :40%;
-    bottom :5%;
+    width: 15%;
+    height: 60%;
     font-family: Pretendard-Regular;
+    font-size: 110%;
+    margin: 1%;
+    &:hover {
+        background-color: #e0e0e0;
+    }
+`
+const OrderCancelBt = styled.button`
+    border: none;
+    border-radius: 0.5rem;
+    background: #1C395E;
+    color: #FFF;
+    width: 15%;
+    height: 60%;
+    font-family: Pretendard-Regular;
+    font-size: 110%;
+    margin: 1%;
 
     &:hover {
         background-color: #e0e0e0;
     }
-
 `
 /* eslint-disable */
 function OrderItem({tableId}) {
@@ -325,7 +351,12 @@ function OrderItem({tableId}) {
             // .catch((err)=>console.log(err))
         }
         setOrderCheckBt(true)
-   }
+    }
+    const orderCancel=()=>{
+        const cancelOrder = OrderCancelApi(tableId);
+        console.log("cancelOrder",cancelOrder)
+        
+    }
     return(
         <TabDiv>
             <TabMemu>
@@ -334,9 +365,6 @@ function OrderItem({tableId}) {
                 {/* <li className="submenu">{menuArr[0].name}</li>
                     <li className="submenu">{menuArr[1].name}</li>
                     <li className="submenu">{menuArr[2].name}</li> */}
-                <div>
-                <OrderCheckBt type='button' onClick={orderSend}>확인</OrderCheckBt>
-                </div>
                 {menu.map((cate) => (
                     <SubMenu key={cate.category_id} className={cate.category_id === currentTab ? "tab focused" : "tab"} onClick={() => selectMenuHandler(cate.category_id)}>{cate.category_name}</SubMenu>
                 ))}
@@ -365,7 +393,10 @@ function OrderItem({tableId}) {
             </Item>
                 )
             ))}
-
+            <OrderCheckDiv>
+                <OrderCancelBt type='button' onClick={orderCancel}>주문 취소</OrderCancelBt>
+                <OrderCheckBt type='button' onClick={orderSend}>주문 완료</OrderCheckBt>
+            </OrderCheckDiv>
         </TabDiv>
     )
 }

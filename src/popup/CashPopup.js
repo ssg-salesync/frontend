@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useRecoilValue, useResetRecoilState, useRecoilState } from "recoil";   // 읽기 전용
 import { styled } from 'styled-components';
+import { IoArrowBackSharp } from "react-icons/io5";
 import { PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
 import { getAtom } from '../components/func/AtomData';
 import { PayPostApi } from '../api/pay/PayPostApi';
@@ -36,6 +37,10 @@ const modalStyle ={
       },
 };
 
+const BackBt = styled(IoArrowBackSharp)`
+  width:5%;
+  height:5%;
+`
 // style요소에 css 애니메이션 요소를 추가
 const style = document.createElement('style');
 style.appendChild(document.createTextNode(slideInAnimation));
@@ -163,7 +168,7 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
 
         <Modal isOpen={openCashPopup} onRequestClose={closeCashPopup} style={modalStyle} contentLabel="CashPopup">
             {/* <ModalContent/> */}
-            <button type='button' onClick={closeCashPopup} style={{width:'10%',height:'5%'}}>Back</button>
+            <BackBt type='button' onClick={closeCashPopup}/>
                 <div style={{height:'65%', width: '100%', 'justify-content': 'center', display: 'flex', flexDirection: 'column', 'align-items': 'center'}}>
                     <ListDiv>
                         <ListTitle>받은금액</ListTitle>

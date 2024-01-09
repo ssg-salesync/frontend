@@ -6,12 +6,12 @@ import { UserCheckState } from "../../recoil/atoms/UserState";
 import { KioskState } from "../../recoil/atoms/KioskState";
 
 const HeaderDiv = styled.header`
-    height: 10vh;
+    height: 20%;
     width: 100%;
-    background: #1C395E;
+    // background: #1C395E;
 `
 const LogoDiv = styled.div`
-    height: 10vh;
+    height: 100%;
     width: 20%;
     float: left;
 `
@@ -21,24 +21,31 @@ const Logo = styled.img`
   object-fit: scale-down; /* 이미지가 컨테이너에 맞게 조절될 때 가로/세로 비율 유지 및 오버플로우 숨김 */
 `;
 const BtDiv = styled.div`
-    height: 10vh;
+    height: 100%;
     width: 30%;
     float: right;
     display: flex;
     // justify-content: center; /* 가로 정렬 */
     justify-content: ${props => props.isKiosk ? 'right' : 'center'}; /* 조건에 따라 동적으로 변경 */
     align-items : center;
+    margin-right: 2%;
 `
 const BtContainer = styled.div`
-  display: flex;
-  gap: 3%; /* 버튼 사이의 간격 조절 */
+    height: 80%;
+    width: 40%;
+    display: flex;
+    align-items : center;
+    margin-right: 2%;
+    gap: 10%; /* 버튼 사이의 간격 조절 */
 `;
 const Bt = styled.button`
-    height: 50%;
-    width: 80%;
+    height: 70%;
+    width: 110%;
     white-space: nowrap; /* 줄 바꿈 방지 */
-    margin : 0.8rem;
     font-family: 'Pretendard-Regular';
+    font-size: 110%;
+    border-radius: 0.4rem;
+    border: none;
 `
 const ToggleContainer = styled.div`
   position: relative;
@@ -79,7 +86,7 @@ const ToggleContainer = styled.div`
 const Desc = styled.div`
   //설명 부분의 CSS를 구현
   text-align: center;
-  margin: 20px;
+  margin: 3%;
   color: #fff;
 `;
 /* eslint-disable */ 
@@ -92,6 +99,19 @@ function Header() {
         localStorage.removeItem('access_token');
         localStorage.removeItem('csrf_token');
         tokenCheckfunc()
+    }
+    const logoClick=()=>{
+        tokenCheckfunc
+        console.log("userCheck",userCheck)
+        if(isKiosk){
+            navigate('/kiosk')
+        }else if(!userCheck){
+            console.log("/")
+            navigate('/');
+        }else if(userCheck){
+            console.log("/home")
+            navigate('/home');
+        }
     }
     const tokenCheckfunc=()=>{
         const tokenCheck = localStorage.getItem('access_token')
@@ -114,7 +134,6 @@ function Header() {
     }
 
     useEffect(() => {
-
         // isKiosk 값이 변경될 때마다 실행되는 useEffect를 이용하여 라우팅을 수행합니다.
         if (isKiosk) {
             navigate('/kiosk');
@@ -125,7 +144,7 @@ function Header() {
 
     return (
         <HeaderDiv>
-            <LogoDiv>
+            <LogoDiv onClick={logoClick}>
                 <Logo src='/img/salesync_logo.png' alt="logo"/>
             </LogoDiv>
             {userCheck&&<BtDiv isKiosk={isKiosk}>
@@ -147,7 +166,7 @@ function Header() {
                     <Bt type="button">마이페이지</Bt>
                 </Link></BtContainer>}
             </BtDiv>}
-        </HeaderDiv>    
+        </HeaderDiv>
     );
 };
 export default Header;

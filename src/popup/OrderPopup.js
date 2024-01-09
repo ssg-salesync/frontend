@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { IoCloseSharp } from "react-icons/io5";
 import { OrderCheckState, PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
 import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
@@ -56,7 +57,7 @@ const PayDiv = styled.div`
     position: fixed;
     bottom: 0;
     border-radius: 0.625rem;
-    background: #1C395E;
+    // background: #1C395E;
     color: #FFF;
     margin: 9%;
     display: flex;
@@ -64,31 +65,44 @@ const PayDiv = styled.div`
 `
 const PayLDiv = styled.div`
     flex: 3;
+    height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: right;
-`
+    background: #1C395E;
+    border-radius: 0.625rem;
+    margin:2%;
+`    
 const PayRDiv = styled.div`
     flex: 2;
+    height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    background: #1C395E;
+    border-radius: 0.625rem;
+    color: #FFF;
+    border: none;
+    margin:2%;
+    &:hover {
+        background-color: #e0e0e0;
+    }
 `
-const CloseBt = styled.button`
-    background: url("/img/Close.png"), #FFF 90%/ contain no-repeat;
+const CloseBt = styled(IoCloseSharp)`
+    // background: url("/img/Close.png"), #FFF 90%/ contain no-repeat;
     background-size: cover;
     cursor: pointer;
-    width: 1.5rem;
-    height: 1.5rem;
-    border:none;
+    width: 7%;
+    height: 7%;
+    border: none;
     position: fixed;
     right :3%;
 `
 const RightDiv = styled.div`
     flex: 1.5; 
-    padding: 20px;
+    padding: 1.5%;
     background: rgba(255, 255, 255, 0.70);
     backdrop-filter: blur(25px);
 `
@@ -202,23 +216,26 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}
+            <CloseBt type='button' onClick={closeOrderPopup}/>
             <RightDiv>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
                 <CloseBt type='button' onClick={closeOrderPopup}/>
                 <h2>주문 목록</h2>                
                 <div style={{height:'65%',overflow: 'auto'}}><OrderList/></div>
                 {/* <PayButton type='button' value="Close" onClick={()=>closeOrderPopup}/> */}
-                <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}>
+                {/* <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}> */}
                 <PayDiv>
                     <PayLDiv>
                         {/* <p>총 결제금액 : {totalAmountCalculate()}원</p> */}
                         <p>총 결제금액 <br/> {totalPrice}원</p>
                     </PayLDiv>
-                    <PayRDiv>
+                    {/* <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}> */}
+                    <PayRDiv onClick={(e) => { e.preventDefault(); postOrder()}}>
                         결제하기
                     </PayRDiv>
+                    {/* </Link> */}
                 </PayDiv>
-                </Link>
+                {/* </Link> */}
             </RightDiv>
         </Modal>
         {paymentPopupOn && <PaymentPopup openPaymentPopup={openPaymentPopup} closePaymentPopup={closePaymentPopup} closeOrderPopup={closeOrderPopup} tableId={tableId}/>}

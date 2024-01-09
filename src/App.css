@@ -1,5 +1,5 @@
 main{
-    height: 80vh;
+    height: 90%;
     width: 100%;
-    background: linear-gradient(105deg, #E4F4FF, #E0F6FF, #D2E5FC), #FFF;
+    /* background: linear-gradient(10deg, #E4F4FF, #E0F6FF, #D2E5FC), #FFF; */
 }
