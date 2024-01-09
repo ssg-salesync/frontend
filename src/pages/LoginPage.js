@@ -194,7 +194,7 @@ function LoginPage() {
 
   return (
     <TotalDiv>
-    <ComponentDivUp>
+    <ComponentDiv>
       <TitleDiv>로그인을 위해 아이디와<br/>비밀번호를 입력해주세요.</TitleDiv>
       <InsertDiv>
         <InputField
@@ -222,7 +222,7 @@ function LoginPage() {
           <Button type="submit" onClick={handlerSignUpClick}>회원가입</Button>
         {/* </Link> */}
       </ButtonDiv>
-    </ComponentDivUp>
+    </ComponentDiv>
     </TotalDiv>
   );
 };

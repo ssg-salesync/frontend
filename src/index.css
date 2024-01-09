@@ -2,6 +2,7 @@ body{
     margin: 0;
     /* padding: 0; */
     height: 100vh;
+    width: 100vw;
     font-family: 'Pretendard-Regular';
     box-sizing: border-box;
     background: linear-gradient(110deg, #E4F4FF, #E0F6FF, #D2E5FC), #FFF;

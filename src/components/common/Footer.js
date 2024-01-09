@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 const FooterDiv = styled.footer`
     // height: 5%;
-    height: 10%;
+    height: 10vh;
     width: 100%;
     // background: #1C395E;
     // color: white;

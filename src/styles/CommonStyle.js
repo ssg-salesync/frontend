@@ -11,9 +11,8 @@ export const TotalDiv = styled.div`
 
 // 회원가입/매장등록 박스
 export const ComponentDiv = styled.div`
-  // height: 80vh;
-  width: 38.25rem;
-  height: 33.75rem;
+  width: 35%;
+  height: 80%;
 
   display: flex;
   flex-direction: column;
@@ -26,15 +25,15 @@ export const ComponentDiv = styled.div`
   backdrop-filter: blur(10px);
 
   // 슬라이드 애니매이션 효과
-  transform: translateX(100%);
-  animation: slideIn 0.5s forwards;
+  transform: translateY(100%);
+  animation: slideUp 0.5s forwards;
 
-  @keyframes slideIn {
+  @keyframes slideUp {
     from {
-      transform: translateX(100%);
+      transform: translateY(100%);
     }
     to {
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
 `;

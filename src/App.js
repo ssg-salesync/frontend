@@ -13,7 +13,9 @@ function App() {
       {/ <GlobalStyle/>  /}
       {/ Recoil 사용하기 위한 설정 */}
       <RecoilRoot>
-      <Header/>
+      {/* <header> */}
+        <Header/>
+      {/* </header> */}
       <main>
           <Routing/>
       </main>
