@@ -63,16 +63,6 @@ import { UserCheckState } from "../recoil/atoms/UserState";
 //   justify-content: center;
 // `;
 
-// 버튼 영역
-const ButtonDiv = styled.div`
-  height: 20%;
-  width: 100%;
-  margin-bottom:10%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 // // 아이디, 비밀번호 입력칸
 const InputField = styled.input`
   border: none;
@@ -94,42 +84,20 @@ const InputField = styled.input`
     font-size: 100%;
   }
 `;
-
-// 로그인 버튼
-const LoginButton = styled.button`
-  width: 7.125rem;
-  height: 2.375rem;
-  margin-left: -15%;
-  border-radius: 0.5625rem;
-  border:none;
-  background-color: #1D56A8;
-  cursor: pointer;
-
-  color: #FFF;
-  font-family: 'Pretendard-Regular';
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: normal;
-
-// 반응형에 맞게 폰트 크기 조정
-// @media screen and (max-width: 480px) {
-//   font-size: 50%;
-// }
-
-// @media screen and (min-width: 481px) and (max-width: 1024px) {
-//   font-size: 100%;
-// }
-
-// @media screen and (min-width: 1025px) {
-//   font-size: 150%;
-// }
+// 버튼 영역
+const ButtonDiv = styled.div`
+  height: 20%;
+  width: 100%;
+  margin-bottom:10%;
+  gap: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
-
-// 회원가입 버튼
-const SignupButton = styled.button`
-  width: 7.125rem;
-  height: 2.375rem;
-  margin-left: 15%;
+// 로그인/회원가입 버튼
+const Button = styled.button`
+  width: 20%;
+  height: 40%;
   border-radius: 0.5625rem;
   border:none;
   background-color: #1D56A8;
@@ -137,22 +105,22 @@ const SignupButton = styled.button`
 
   color: #FFF;
   font-family: 'Pretendard-Regular';
-  font-size: 1rem;
+  font-size: 130%;
   font-weight: 400;
   line-height: normal;
 
-// 반응형에 맞게 폰트 크기 조정
-// @media screen and (max-width: 480px) {
-//   font-size: 50%;
-// }
+반응형에 맞게 폰트 크기 조정
+@media screen and (max-width: 965px) {
+  font-size: 80%;
+}
 
-// @media screen and (min-width: 481px) and (max-width: 1024px) {
-//   font-size: 100%;
-// }
+@media screen and (min-width: 965px) and (max-width: 1240px) {
+  font-size: 100%;
+}
 
-// @media screen and (min-width: 1025px) {
-//   font-size: 150%;
-// }
+@media screen and (min-width: 1240px) {
+  font-size: 130%;
+}
 `;
 
 function LoginPage() {
@@ -175,7 +143,10 @@ function LoginPage() {
   const usernameRef = useRef(null);
 
   const setUserCheck = useSetRecoilState(UserCheckState)
-
+  // 회원가입 버튼 클릭
+  const handlerSignUpClick = () =>{
+    navigate("/signup")
+  }
   // 로그인 버튼 클릭 이벤트핸들러
   const handlerLoginClick = () => {
 
@@ -234,7 +205,6 @@ function LoginPage() {
           placeholder="ID"
           ref={usernameRef}
           />
-        
         <InputField
           type="password"
           name="password"
@@ -245,12 +215,12 @@ function LoginPage() {
         <br/>
       </InsertDiv>
       <ButtonDiv>
-        <div>
-          <LoginButton type="submit" onClick={handlerLoginClick}>로그인</LoginButton>
-        </div>
-        <Link to="/signup">
-          <SignupButton type="submit">회원가입</SignupButton>
-        </Link>
+        {/* <div> */}
+          <Button type="submit" onClick={handlerLoginClick}>로그인</Button>
+        {/* </div> */}
+        {/* <Link to="/signup"> */}
+          <Button type="submit" onClick={handlerSignUpClick}>회원가입</Button>
+        {/* </Link> */}
       </ButtonDiv>
     </ComponentDivUp>
     </TotalDiv>

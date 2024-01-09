@@ -212,7 +212,7 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
             {/* 왼쪽 탭 화면 */}
             <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
-                <OrderItem tableId={tableId}/>
+                <OrderItem tableId={tableId} closeOrderPopup={closeOrderPopup}/>
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}

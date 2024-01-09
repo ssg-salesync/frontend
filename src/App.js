@@ -17,7 +17,7 @@ function App() {
       <main>
           <Routing/>
       </main>
-      {/* <Footer/> */}
+      <Footer/>
       </RecoilRoot>
     </>
   );
