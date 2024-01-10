@@ -2,16 +2,16 @@ import { styled } from "styled-components";
 
 const FooterDiv = styled.footer`
     // height: 5%;
-    height: 0%;
+    height: 10vh;
     width: 100%;
     // background: #1C395E;
-    color: white;
+    // color: white;
     // line-height: 1%;
     // text-align: center;
-    display:flex;
+    // display:flex;
     // flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    // justify-content: center;
 `
 
 function Footer() {

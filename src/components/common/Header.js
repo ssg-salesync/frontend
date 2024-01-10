@@ -6,7 +6,7 @@ import { UserCheckState } from "../../recoil/atoms/UserState";
 import { KioskState } from "../../recoil/atoms/KioskState";
 
 const HeaderDiv = styled.header`
-    height: 20%;
+    height: 10vh;
     width: 100%;
     // background: #1C395E;
 `
@@ -25,22 +25,30 @@ const BtDiv = styled.div`
     width: 30%;
     float: right;
     display: flex;
-    // justify-content: center; /* 가로 정렬 */
-    justify-content: ${props => props.isKiosk ? 'right' : 'center'}; /* 조건에 따라 동적으로 변경 */
+    justify-content: center; /* 가로 정렬 */
+    // justify-content: ${props => props.isKiosk ? 'right' : 'center'}; /* 조건에 따라 동적으로 변경 */
     align-items : center;
-    margin-right: 2%;
+    // margin-right: 2%;
 `
 const BtContainer = styled.div`
     height: 80%;
-    width: 40%;
+    width: 50%;
+    // display: flex;
+    // align-items : center;
+    // margin-right: 2%;
+    // gap: 10%; /* 버튼 사이의 간격 조절 */
+`;
+const BtInnerContainer = styled.div`
+    height: 100%;
+    width: 50%;
     display: flex;
     align-items : center;
-    margin-right: 2%;
-    gap: 10%; /* 버튼 사이의 간격 조절 */
+    justify-content: center;
+    gap: 3%; /* 버튼 사이의 간격 조절 */
 `;
 const Bt = styled.button`
-    height: 70%;
-    width: 110%;
+    height: 150%;
+    width: 100%;
     white-space: nowrap; /* 줄 바꿈 방지 */
     font-family: 'Pretendard-Regular';
     font-size: 110%;
@@ -147,7 +155,17 @@ function Header() {
             <LogoDiv onClick={logoClick}>
                 <Logo src='/img/salesync_logo.png' alt="logo"/>
             </LogoDiv>
-            {userCheck&&<BtDiv isKiosk={isKiosk}>
+            {userCheck&&
+            <BtDiv isKiosk={isKiosk}>
+                {!isKiosk ? 
+                <BtInnerContainer>
+                    <Link to='/'>
+                        <Bt type="button" onClick={logout}>로그아웃</Bt></Link>
+                    <Link to='/mypage'>
+                        <Bt type="button">마이페이지</Bt>
+                    </Link>
+                </BtInnerContainer> 
+                : <BtContainer></BtContainer>}
                 <ToggleContainer // 클릭하면 토글이 켜진 상태(isKiosk)를 boolean 타입으로 변경하는 메소드가 실행
                     onClick={kioskHandler}>
                     {/* 아래에 div 엘리먼트 2개가 있다. 각각의 클래스를 'toggle-container', 'toggle-circle' 로 지정 */}
@@ -158,13 +176,6 @@ function Header() {
                 {/* Desc 컴포넌트를 활용*/}
                 {/* Toggle Switch가 ON인 상태일 경우에 Desc 컴포넌트 내부의 텍스트를 'Toggle Switch ON'으로, 그렇지 않은 경우 'Toggle Switch OFF'. 조건부 렌더링을 활용. */}
                 <Desc><div>KIOSK</div></Desc>
-                {!isKiosk && 
-                    <BtContainer><Link to='/'>
-                    <Bt type="button" onClick={logout}>로그아웃</Bt>
-                    </Link>
-                <Link to='/mypage'>
-                    <Bt type="button">마이페이지</Bt>
-                </Link></BtContainer>}
             </BtDiv>}
         </HeaderDiv>
     );

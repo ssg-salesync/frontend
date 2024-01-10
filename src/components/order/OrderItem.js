@@ -166,7 +166,7 @@ const OrderCancelBt = styled.button`
     }
 `
 /* eslint-disable */
-function OrderItem({tableId}) {
+function OrderItem({tableId,closeOrderPopup}) {
     // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
     const [currentTab, setCurrentTab] = useState("");
 
@@ -351,12 +351,14 @@ function OrderItem({tableId}) {
             // .catch((err)=>console.log(err))
         }
         setOrderCheckBt(true)
+        closeOrderPopup();
     }
     const orderCancel=()=>{
         const cancelOrder = OrderCancelApi(tableId);
         console.log("cancelOrder",cancelOrder)
-        
+        closeOrderPopup();        
     }
+    
     return(
         <TabDiv>
             <TabMemu>

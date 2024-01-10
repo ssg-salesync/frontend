@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import {useState,useEffect} from "react";
 import { useRecoilState} from 'recoil';
 import styled, {keyframes,css} from 'styled-components';
 import { deleteOrderState,deleteTotalPriceState } from "../components/func/AtomData";
@@ -31,6 +31,7 @@ const OrderBt = styled.button`
     font-size: 1rem;
     border-radius: 0.6rem;
     background: #D9D9D9;
+
     // 애니메이션 적용
     opacity: 0;
     ${({ visible }) =>
@@ -39,6 +40,12 @@ const OrderBt = styled.button`
             animation: ${fadeIn} 1s ease-in-out forwards;
         `}
 `;
+
+
+    &:hover {
+        background-color: #e0e0e0;
+    }
+`
 
 function Kiosk(){
     const [orderModalOn, setOrderModalOn] = useState(false);

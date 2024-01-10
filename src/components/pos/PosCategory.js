@@ -46,7 +46,6 @@ const CategoryDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow:auto;
 `;
 
 // 카테고리 하나당 영역
@@ -82,7 +81,6 @@ const CategoryButton = styled.button`
   cursor: pointer;
   font-family: 'Pretendard-Regular';
   font-size: 100%;
-
   &:hover {
     background-color: #e0e0e0;
   }
@@ -206,7 +204,15 @@ function PosCategory({ categoryData, setSelectedCategory }) {
   
     // console.log('카테고리 버튼 누름 : ', category)
   };
-
+  
+  // alert 3초후 자동으로 닫힘
+  const showAlert= (msg)=>{
+    alert(msg);
+    setTimeout(function() {
+      // alert 창이 닫히도록 함
+      window.close();
+    }, 3000); // 3초 후에 실행
+  }
 
   // 카테고리 추가 이벤트핸들러
   // AddButton을 눌렀을 때 editModes를 추가하여 텍스트 입력칸을 생성하도록 변경
@@ -214,7 +220,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
   
     // 최대 카테고리 갯수 제한
     if (categories.length >= maxCategories) {
-      alert(`최대 ${maxCategories}개까지만 추가할 수 있습니다.`);
+      showAlert('최대 ${maxCategories}개까지만 추가할 수 있습니다.');
       return;
     };
 
@@ -223,7 +229,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
     const isEdits = editModes.some((mode) => mode === true);
 
     if (isEdits) {
-      alert('등록 중인 카테고리가 있습니다. 완료 후 카테고리를 추가해주세요.');
+      showAlert("등록 중인 카테고리가 있습니다. 완료 후 카테고리를 추가해주세요.");
       return;
     };
 
@@ -299,7 +305,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
           // 입력칸에 포커스
           inputRefs.current[idx]?.focus();
         } else {
-          alert('카테고리 이름을 입력해주세요.');
+          showAlert('카테고리 이름을 입력해주세요.');
           inputRefs.current[idx]?.focus();
         };
       } catch (err) {
@@ -380,7 +386,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
         const newEditModes = [...editModes];
         newEditModes.splice(idx, 1);
         setEditModes(newEditModes);
-        alert('카테고리가 삭제되었습니다.')
+        showAlert('카테고리가 삭제되었습니다.')
 
         // 카테고리를 삭제하면 선택된 카테고리도 null로 하여 PosItem 초기화 리렌더링
         setSelectedCategory(null)
@@ -388,7 +394,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
           console.error(err);
       };
     } else {
-      alert('카테고리 삭제가 취소되었습니다.')
+      showAlert('카테고리 삭제가 취소되었습니다.')
     };
   };
 
