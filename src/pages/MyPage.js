@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
-import { ComponentDiv,ComponentDivUp, TitleDiv, TotalDiv } from "../styles/CommonStyle";
+import { ComponentDiv, TitleDiv, TotalDiv } from "../styles/CommonStyle";
 
 /* eslint-disable */
 
@@ -70,7 +70,7 @@ const MyPageButton = styled.button`
 function MyPage() {
   return (
     <TotalDiv>
-    <ComponentDivUp>
+    <ComponentDiv>
       <TitleDiv>마이페이지</TitleDiv>
 
       <MyPageContainer>
@@ -109,7 +109,7 @@ function MyPage() {
           </Link>
         </MyPageButtonDiv>
       </MyPageContainer>
-    </ComponentDivUp>
+    </ComponentDiv>
     </TotalDiv>    
   );
 };

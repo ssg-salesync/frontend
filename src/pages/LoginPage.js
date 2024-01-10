@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { useSetRecoilState } from "recoil";
 import {LoginPostApi} from "../api/auth/login/LoginPostApi"
-import {TotalDiv,ComponentDiv,ComponentDivUp,TitleDiv,InsertDiv} from "../styles/CommonStyle"
+import {TotalDiv,ComponentDiv,TitleDiv,InsertDiv} from "../styles/CommonStyle"
 import { UserCheckState } from "../recoil/atoms/UserState";
 
 /* eslint-disable */
@@ -68,20 +68,20 @@ const InputField = styled.input`
   border: none;
   border-bottom: 2px solid #1C395E;
   margin:3%;
-  width:35%;
+  width: 45%;
   font-family: Pretendard-Regular;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 70%;
+  @media screen and (max-width: 750px) {
+    font-size: 40%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 85%;
+  
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 90%;
   }
-
+  
   @media screen and (min-width: 1025px) {
-    font-size: 100%;
+    font-size: 120%;
   }
 `;
 // 버튼 영역
@@ -96,8 +96,9 @@ const ButtonDiv = styled.div`
 `;
 // 로그인/회원가입 버튼
 const Button = styled.button`
-  width: 20%;
-  height: 40%;
+  // width: 20%;
+  // height: 40%;
+  padding: 10px 30px;
   border-radius: 0.5625rem;
   border:none;
   background-color: #1D56A8;
@@ -108,23 +109,24 @@ const Button = styled.button`
   // font-size: 130%;
   font-weight: 400;
   line-height: normal;
+  white-space: nowrap; // 버튼 내 줄바꿈 금지
 
   &:hover {
     background-color: #e0e0e0;
   }
 
 // 반응형에 맞게 폰트 크기 조정
-@media screen and (max-width: 1240px) {
-  font-size: 120%;
+@media screen and (max-width: 750px) {
+  font-size: 40%;
+  padding: 5px 15px;
 }
-
-// @media screen and (min-width: 965px) and (max-width: 1240px) {
-//   font-size: 100%;
-// }
-
-// @media screen and (min-width: 1240px) {
-//   font-size: 130%;
-// }
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+  font-size: 90%;
+  padding: 8px 20px;
+}
+@media screen and (min-width: 1025px) {
+  font-size: 130%;
+}
 `;
 
 function LoginPage() {

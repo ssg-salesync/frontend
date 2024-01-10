@@ -1,11 +1,14 @@
 body{
     margin: 0;
     /* padding: 0; */
-    height: 100vh;
-    width: 100vw;
+    /* height: 100vh; */
+    min-height: 100vh; /* 최소 높이를 뷰포트의 100%로 설정 */
+    width: 100%;
+    
     font-family: 'Pretendard-Regular';
     box-sizing: border-box;
     background: linear-gradient(110deg, #E4F4FF, #E0F6FF, #D2E5FC), #FFF;
+
 }
 /* body > #root > div { */
     /* viewport 높이의 100% */

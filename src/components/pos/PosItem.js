@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { FaRegTrashAlt } from "react-icons/fa";
 import { ItemGetApi } from '../../api/pos/item/ItemGetApi';
 import { ItemDeleteApi } from '../../api/pos/item/ItemDeleteApi';
 import { ItemPostApi } from '../../api/pos/item/ItemPostApi';
@@ -11,90 +11,93 @@ import { ItemPutApi } from '../../api/pos/item/ItemPutApi';
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
-  height: 80vh;
+  height: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
-  // padding: 3%;
+  margin-left: 4%;
 `;
 // 선택한 카테고리 글자 영역
 const TitleDiv = styled.div`
-  height: 15%;
-  width: 80%;
-  margin-left: 4%;
+  height: 10%;
+  width: 100%;
   
   display: flex;
   align-items: center;
+  border: 5%;
+  font-weight: 900;
 
   // 반응형에 맞게 폰트 크기 조정
-  // @media screen and (max-width: 480px) {
-  //   font-size: 70%;
-  // }
-
-  // @media screen and (min-width: 481px) and (max-width: 1024px) {
-  //   font-size: 85%;
-  // }
-
-  // @media screen and (min-width: 1025px) {
-  //   font-size: 100%;
-  // }
+  @media screen and (max-width: 750px) {
+    font-size: 100%;
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 140%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 180%;
+  }
 `;
 // 아이템 전체 영역
 const ItemDiv = styled.div`
   height: 80%;
-  // width: 100%;
+  width: 100%;
   // margin-top: 2%;
-  margin-left: 4%;
+  // margin-left: 4%;
   // padding: 2%;
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
   overflow: auto;
+  margin-left: 2%;
 `;
 // 완료 버튼 영역
 const SubmitButtonDiv = styled.div`
   height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  // margin-left: 85%;
+`;
+// 완료 버튼
+const SubmitButton = styled.button`
+  width: 8%;
+  height: 70%;
+
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background: #1C395E;
+  color: #FFF;
+  float: right;
+  font-family: 'Pretendard-Regular';
   
   display: flex;
   align-items: center;
-  margin-left: 85%;
-`;
-
-// 완료 버튼
-const SubmitButton = styled.button`
-  width: 6rem;
-  height: 2.375rem;
-  // margin-top: 50%;
-  margin-right: 20%; 
-  border: none;
-  border-radius: 8%;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  background: #1C395E;
-  color: #FFF;
+  justify-content: center;
+  white-space: nowrap; // 버튼 내 줄바꿈 금지
 
   &:hover {
     background-color: #e0e0e0;
   }
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 60%;
+  @media screen and (max-width: 750px) {
+    font-size: 40%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
     font-size: 80%;
-  }
-
+  }  
   @media screen and (min-width: 1025px) {
-    font-size: 120%;
+    font-size: 110%;
   }
 `;
-
 // 아이템 하나당 영역
 const ItemContainer = styled.div`
   position: relative;
   // width: 30%;
-  width : calc(30% - 1rem);
+  width : calc(30% - 0.5rem);
   height: 40%;
   border-radius: 5%;
   background: #FFF;
@@ -105,16 +108,14 @@ const ItemContainer = styled.div`
   justify-content: center;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 70%;
+  @media screen and (max-width: 750px) {
+    font-size: 40%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 100%;
-  }
-
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 80%;
+  }  
   @media screen and (min-width: 1025px) {
-    font-size: 130%;
+    font-size: 120%;
   }
 `;
 // 품목명: 입력칸 | 가격: 입력칸
@@ -124,7 +125,7 @@ const ItemWrapper = styled.div`
   justify-content: space-between;
   // margin-right: 5%;
   // margin-left: 5%;
-  margin: 2%;
+  margin: 3%;
 `;
 // 품목명, 가격 라벨  
 const ItemLabel = styled.label`
@@ -139,27 +140,25 @@ const InputField = styled.input`
 // 아이템 수정 버튼
 const EditButton = styled.button`
   width: 40%;
-  height: 20%;
+  height: 18%;
   // border: 1px solid #ccc;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   font-family: Pretendard-Regular;
   cursor: pointer;
-  margin-top: 3%;
+  margin-top: 5%;
 
   &:hover {
     background-color: #e0e0e0;
   }
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 750px) {
     font-size: 30%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
     font-size: 50%;
   }
-
   @media screen and (min-width: 1025px) {
     font-size: 70%;
   }
@@ -169,18 +168,53 @@ const DeleteButton = styled.button`
   width: 13%;
   height: 13%;
   position: absolute;
-  top: -1%;
-  right: -1%;
-  background: url("/img/DeleteBt.png") center/ contain no-repeat;
-  background-repeat: no-repeat; // 이미지 반복 방지
-  background-color: rgba(0, 173, 239, 0.50);
-  border: red;
-  border-radius: 0.5rem;
+  top: 0%;
+  right: 0%;
+  margin: 1%;
+
+  background-color: rgba(0, 173, 239);
+  border: none;
+  border-radius: 0.3rem;
   cursor: pointer;
-  font-size: 100%;
   color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
     background-color: #e0e0e0;
+  }
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 750px) {
+    width: 20%;
+    height: 1em;
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    width: 18%;
+    height: 13%;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 13%;
+    height: 13%;
+  }
+`;
+const DeleteIcon = styled(FaRegTrashAlt)`
+  width: 1.5em;
+  height: 1.5em;
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 750px) {
+    width: 1em;
+    height: 1em;
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    width: 1em;
+    height: 1em;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 1.5em;
+    height: 1.5em;
   }
 `;
 // 아이템 추가 버튼
@@ -205,11 +239,9 @@ const AddButton = styled.button`
   @media screen and (max-width: 480px) {
     font-size: 100%;
   }
-
   @media screen and (min-width: 481px) and (max-width: 1024px) {
     font-size: 150%;
   }
-
   @media screen and (min-width: 1025px) {
     font-size: 200%;
   }
@@ -566,11 +598,15 @@ const handlerRemoveItem = async (idx) => {
 // console.log('Positem_카테고리 정보 : ', items)
 
 // console.log(editModes)
-
+// 회원가입 버튼 클릭
+const handlerSubmitClick = () =>{
+  navigate("/home")
+}
 return (
   <ComponentDiv>
       <TitleDiv>
-        <h1>{getNameBySelectedCategory()}</h1>
+        {/* <h1>{getNameBySelectedCategory()}</h1> */}
+        {getNameBySelectedCategory()}
       </TitleDiv>
       <ItemDiv>
         {getItemsBySelectedCategory().map((item, itemIndex) => (
@@ -604,16 +640,17 @@ return (
             <EditButton onClick={() => handlerEditMode(itemIndex)}>
               {getButtonText(itemIndex)}
             </EditButton>
-            <DeleteButton onClick={() => handlerRemoveItem(itemIndex)}></DeleteButton>
+            <DeleteButton onClick={() => handlerRemoveItem(itemIndex)}><DeleteIcon/></DeleteButton>
           </ItemContainer>
         ))}
           <AddButton onClick={handlerAddItem}>+</AddButton>
       </ItemDiv>
       <SubmitButtonDiv>
-          <Link to="/home">
+            <SubmitButton onClick={handlerSubmitClick}>완료</SubmitButton>
+          {/* <Link to="/home">
             <SubmitButton>완료</SubmitButton>
-          </Link>
-        </SubmitButtonDiv>
+          </Link> */}
+      </SubmitButtonDiv>
   </ComponentDiv>
   );
 };

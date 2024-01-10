@@ -6,46 +6,46 @@ import { StoreState } from "../recoil/atoms/StoreState";
 import { SignupPostApi } from "../api/auth/signup/SignupPostApi";
 import { TotalDiv, ComponentDiv, TitleDiv,InsertDiv} from "../styles/CommonStyle";
 
-
 /* eslint-disable */
-
-// 다음 버튼 영역
-const ButtonDiv = styled.div`
-  height: 20%;
-  width: 100%;
-  margin-bottom:10%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 // 아이디, 비밀번호 등 입력칸
 const InputField = styled.input`
   border: none;
   border-bottom: 2px solid #1C395E;
-  // margin:3%;
-  width:35%;
+  margin:1.5%;
+  width: 45%;
   font-family: Pretendard-Regular;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 70%;
+  @media screen and (max-width: 750px) {
+    font-size: 40%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 85%;
+  
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 90%;
   }
-
+  
   @media screen and (min-width: 1025px) {
-    font-size: 100%;
+    font-size: 110%;
   }
 `;
-
+// 다음 버튼 영역
+const ButtonDiv = styled.div`
+  height: 30%;
+  width: 100%;
+  // margin-bottom:10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (min-width: 1025px) {
+    // margin-top: 20px;
+    height: 30%;
+  }
+`;
 // 다음 버튼
 const NextButton = styled.button`
-  width: 7.125rem;
-  height: 2.375rem;
-  // margin-left: -15%;
+  // width: 7.125rem;
+  // height: 2.375rem;
+  padding: 10px 30px;
   border-radius: 0.5625rem;
   border:none;
   background-color: #1D56A8;
@@ -54,23 +54,24 @@ const NextButton = styled.button`
   color: #FFF;
   font-family: 'Pretendard-Regular';
   font-size: 1rem;
-  font-weight: 400;
-  line-height: normal;
+  white-space: nowrap; // 버튼 내 줄바꿈 금지
+
   &:hover {
     background-color: #e0e0e0;
   }
+
   // 반응형에 맞게 폰트 크기 조정
-  // @media screen and (max-width: 480px) {
-  //   font-size: 50%;
-  // }
-
-  // @media screen and (min-width: 481px) and (max-width: 1024px) {
-  //   font-size: 100%;
-  // }
-
-  // @media screen and (min-width: 1025px) {
-  //   font-size: 150%;
-  // }
+  @media screen and (max-width: 750px) {
+    font-size: 40%;
+    padding: 5px 15px;
+  }  
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 90%;
+    padding: 8px 20px;
+  }  
+  @media screen and (min-width: 1025px) {
+    font-size: 120%;
+  }
 `;
 
 function SignupPage() {
@@ -318,7 +319,7 @@ function SignupPage() {
           placeholder="아이디"
           ref={usernameRef}
         />
-        <br />
+        {/* <br /> */}
         <InputField
           type="password"
           name="password"
@@ -328,7 +329,7 @@ function SignupPage() {
           placeholder="비밀번호"
           ref={passwordRef}
         />
-        <br />
+        {/* <br /> */}
         <InputField
           type="password"
           name="confirmPassword"
@@ -337,7 +338,7 @@ function SignupPage() {
           placeholder="비밀번호 확인"
           ref={confirmPasswordRef}
         />
-        <br />
+        {/* <br /> */}
         <InputField
           type="text"
           name="ownerName"
@@ -347,7 +348,7 @@ function SignupPage() {
           placeholder="이름"
           ref={ownerNameRef}
         />
-        <br />
+        {/* <br /> */}
         <InputField
           type="text"
           name="phone"
