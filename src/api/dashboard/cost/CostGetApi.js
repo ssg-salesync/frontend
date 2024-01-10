@@ -1,6 +1,6 @@
 import axios from 'axios';
-import URL from '../BaseUrl';
-import { Token } from '../Token';
+import URL from '../../BaseUrl';
+import { Token } from '../../Token';
 
 /* eslint-disable */
 
