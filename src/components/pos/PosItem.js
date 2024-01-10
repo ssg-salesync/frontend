@@ -179,6 +179,9 @@ const DeleteButton = styled.button`
   cursor: pointer;
   font-size: 100%;
   color: white;
+  &:hover {
+    background-color: #e0e0e0;
+  }
 `;
 // 아이템 추가 버튼
 const AddButton = styled.button`

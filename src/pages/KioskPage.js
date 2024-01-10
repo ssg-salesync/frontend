@@ -20,6 +20,9 @@ const OrderBt = styled.button`
     font-size: 1rem;
     border-radius: 0.6rem;
     background: #D9D9D9;
+    &:hover {
+        background-color: #e0e0e0;
+    }
 `
 function Kiosk(){
     const [orderModalOn, setOrderModalOn] = useState(false);

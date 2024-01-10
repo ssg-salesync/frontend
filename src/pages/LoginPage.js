@@ -105,22 +105,26 @@ const Button = styled.button`
 
   color: #FFF;
   font-family: 'Pretendard-Regular';
-  font-size: 130%;
+  // font-size: 130%;
   font-weight: 400;
   line-height: normal;
 
-반응형에 맞게 폰트 크기 조정
-@media screen and (max-width: 965px) {
-  font-size: 80%;
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+// 반응형에 맞게 폰트 크기 조정
+@media screen and (max-width: 1240px) {
+  font-size: 120%;
 }
 
-@media screen and (min-width: 965px) and (max-width: 1240px) {
-  font-size: 100%;
-}
+// @media screen and (min-width: 965px) and (max-width: 1240px) {
+//   font-size: 100%;
+// }
 
-@media screen and (min-width: 1240px) {
-  font-size: 130%;
-}
+// @media screen and (min-width: 1240px) {
+//   font-size: 130%;
+// }
 `;
 
 function LoginPage() {
