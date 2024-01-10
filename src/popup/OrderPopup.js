@@ -24,24 +24,19 @@ const slideUpAnimation = `
       opacity: 1;
     }
   }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
 `;
 
-const modalStyle = {
-  content: {
-    top: '8%',
-    bottom: 'auto',
-    left: '9%',
-    right: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80%', 
-    height: '80%', 
-    display: 'flex',
-    flexDirection: 'row',
-    background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
-    animation: 'slideUp 0.5s forwards', // 애니메이션 효과 적용
-  },
-};
 
 // style요소에 css 애니메이션 요소를 추가
 const style = document.createElement('style');
@@ -110,6 +105,24 @@ const RightDiv = styled.div`
 Modal.setAppElement('#root');
 /* eslint-disable */ 
 function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
+    // 닫기 버튼을 누르기 전 기본 modalStyle을 유지
+    const [modalStyle, setModalStyle] = useState({
+        content: {
+        top: '8%',
+        bottom: 'auto',
+        left: '9%',
+        right: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        width: '80%', 
+        height: '80%', 
+        display: 'flex',
+        flexDirection: 'row',
+        background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
+        animation: 'slideUp 0.5s forwards', // 기존 애니메이션 유지
+        },
+    });
+
     // console.log("===============",tableId,"===============")
     // PaymentPopup - 결제팝업
     const [paymentPopupOn, setPaymentPopupOn] = useState(false);
@@ -153,9 +166,20 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
         // setTotalPrice(newTotalPrice)
     };
 
-    const closeBtClick = () =>{
-        // closeOrderPopup()
-    }
+     // 모달이 닫힐 때 애니메이션을 적용하는 스타일로 변경
+     const closeBtClick = () => {
+        setModalStyle({
+            ...modalStyle,
+            content: {
+                ...modalStyle.content,
+                animation: 'slideDown 0.5s forwards', // 아래로 내려가는 애니메이션
+            },
+        });
+        setTimeout(() => {
+            closeOrderPopup();
+        }, 300);
+    };
+
     useEffect(()=>{
         console.log("totalPrice 변경됨")
     },[totalPrice])
@@ -216,10 +240,10 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}
-            <CloseBt type='button' onClick={closeOrderPopup}/>
+            <CloseBt type='button' onClick={closeBtClick}/>
             <RightDiv>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
-                <CloseBt type='button' onClick={closeOrderPopup}/>
+                <CloseBt type='button' onClick={closeBtClick}/>
                 <h2>주문 목록</h2>                
                 <div style={{height:'65%',overflow: 'auto'}}><OrderList/></div>
                 {/* <PayButton type='button' value="Close" onClick={()=>closeOrderPopup}/> */}
