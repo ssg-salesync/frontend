@@ -100,7 +100,9 @@ const NextButton = styled.button`
   font-size: 1rem;
   font-weight: 400;
   line-height: normal;
-
+  &:hover {
+    background-color: #e0e0e0;
+  }
   // 반응형에 맞게 폰트 크기 조정
   // @media screen and (max-width: 480px) {
   //   font-size: 50%;

@@ -73,6 +73,9 @@ border:none;
 background-color: #00ADEF;
 cursor: pointer;
 margin: 0 auto;
+&:hover {
+  background-color: #e0e0e0;
+}
 `;
 
 function InfoNpwPage() {
