@@ -21,23 +21,22 @@ const ComponentDiv = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  // overflow: hidden;
 `;
-
 // PosCategory 컴포넌트 영역
 const PosCategoryDiv = styled.div`
   height: 100%;
-  // width: 30%;
-  flex: 1.5;
+  width: 30%;
+  // flex: 1.5;
   border-right: 1px solid #ccc;
-  background: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.50);
   backdrop-filter: blur(25px);
+  overflow-y: auto;
 `;
 // PosItem 컴포넌트 영역
 const PosItemDiv = styled.div`
   height: 100%;
-  // width: 70%;
-  flex: 4;
+  width: 70%;
+  // flex: 4;
 `;
 
 function PosPage() {

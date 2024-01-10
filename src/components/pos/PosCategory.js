@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
+import { FaRegTrashAlt } from "react-icons/fa";
 import { CategoryPostApi } from '../../api/pos/category/CategoryPostApi';
 import { CategoryGetApi } from '../../api/pos/category/CategoryGetApi';
 import { CategoryPutApi } from '../../api/pos/category/CategoryPutApi';
@@ -9,14 +10,13 @@ import { CategoryDeleteApi } from '../../api/pos/category/CategoryDeleteApi';
 
 // 컴포넌트 전체 영역
 const ComponentDiv = styled.div`
-  height: 88vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-right: 10%;
   padding-left: 10%;
 `;
-
 // 맨 위 카테고리 글자 영역
 const TitleDiv = styled.div`
   height: 15%;
@@ -26,19 +26,16 @@ const TitleDiv = styled.div`
   align-items: center;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 750px) {
     font-size: 70%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 85%;
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 90%;
   }
-
   @media screen and (min-width: 1025px) {
-    font-size: 100%;
+    font-size: 120%;
   }
 `;
-
 // 카테고리 전체 영역(위에 글자 제외)
 const CategoryDiv = styled.div`
   height: 80%;
@@ -47,40 +44,60 @@ const CategoryDiv = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
 // 카테고리 하나당 영역
 const CategoryContainer = styled.div`
   width: 80%;
   height: 10%;
+  
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap:1%;
 `;
-
 // 카테고리명 입력칸
 const InputField = styled.input`
   width: 100%;
   height: 50%;
-  margin-bottom: 5%;
+  // margin-bottom: 5%;
   text-align: center;
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
   background: #FFF;
   border: none;
   font-family: 'Pretendard-Regular';
   font-size: 100%;
-`;
+  white-space: nowrap;
 
-// 카테고리명 버튼
+  &:focus {
+    outline: none;
+  }
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 750px) {
+    font-size: 10px;
+    // padding: 2px 4px;
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 50%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 90%;
+    // padding: 5px 5px;
+  }
+`;
+// 카테고리명 read
 const CategoryButton = styled.button`
   width: 100%;
-  height: 60%;
-  margin-bottom: 5%;
+  height: 70%;
+  // margin-bottom: 5%;
   text-align: center;
   border: none;
   background-color: #B4E1FF;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   cursor: pointer;
   font-family: 'Pretendard-Regular';
   font-size: 100%;
+  white-space: nowrap;
+
   &:hover {
     background-color: #e0e0e0;
   }
@@ -88,74 +105,94 @@ const CategoryButton = styled.button`
   &:focus {
     outline: none;
   }
-`;
 
-// 카테고리 삭제 버튼
-const RemoveButton = styled.button`
-  width: 15%;
-  height: 60%;
-  border-radius: 0.3rem;
-  margin-bottom: 5%;
-  cursor: pointer;
-  background: url("/img/DeleteBt.png") center/ contain no-repeat;
-  background-repeat: no-repeat; // 이미지 반복 방지
-  background-color: rgba(0, 173, 239, 0.50);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border:none;
   // 반응형에 맞게 폰트 크기 조정
-  // @media screen and (max-width: 480px) {
-  //   font-size: 60%;
-  // }
-
-  // @media screen and (min-width: 481px) and (max-width: 1024px) {
-  //   font-size: 80%;
-  // }
-
-  // @media screen and (min-width: 1025px) {
-  //   font-size: 100%;
-  // }
+  @media screen and (max-width: 750px) {
+    font-size: 10px;
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 50%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 100%;
+  }
 `;
-
-// 카테고리 수정 버튼
+// 카테고리 등록 <-> 수정 버튼
 const EditButton = styled.button`
-  // width: 20%;
-  // height: 60%;
-  width: 15%;
-  height: 60%;
-  margin-bottom: 5%;
+  width: 20%;
+  height: 70%;
+  
   border-radius: 0.3rem;
   border: none;
   background-color: rgba(28, 57, 94, 0.50);
   cursor: pointer;
   font-family: 'Pretendard-Regular';
-
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: #e0e0e0;
   }
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 30%;
+  @media screen and (max-width: 750px) {
+    font-size: 20%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
     font-size: 50%;
   }
-
   @media screen and (min-width: 1025px) {
-    font-size: 70%;
+    font-size: 90%;
   }
 `;
+// 카테고리 삭제 버튼
+const RemoveButton = styled.button`
+  width: 20%;
+  height: 70%;
+  border-radius: 0.3rem;
+  cursor: pointer;
 
+  background-color: rgba(0, 173, 239, 0.50);
+  border:none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const RemoveIcon = styled(FaRegTrashAlt)`
+  width: 1.5em;
+  height: 1.5em;
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 750px) {
+    width: 1em;
+    height: 1em;
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    width: 1em;
+    height: 1em;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 1.5em;
+    height: 1.5em;
+  }
+`;
+const AddButtonDiv = styled.div`
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 // 카테고리 추가 버튼
 const AddButton = styled.button`
   width: 80%;
   height: 8%;
-  border-radius: 3%;
+  border-radius: 0.3rem;
   border: 1px solid #ccc;
-  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 
   &:hover {
@@ -166,11 +203,9 @@ const AddButton = styled.button`
   @media screen and (max-width: 480px) {
     font-size: 100%;
   }
-
   @media screen and (min-width: 481px) and (max-width: 1024px) {
     font-size: 150%;
   }
-
   @media screen and (min-width: 1025px) {
     font-size: 200%;
   }
@@ -421,7 +456,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
               <CategoryButton onClick={() => handlerCategoryClick(category)}>{category.name}</CategoryButton>
             )}
             <EditButton onClick={() => handlerEditMode(idx)}>{getButtonText(idx)}</EditButton>
-            <RemoveButton onClick={() => handlerRemoveCategory(idx)}/>
+            <RemoveButton onClick={() => handlerRemoveCategory(idx)}><RemoveIcon/></RemoveButton>
           </CategoryContainer>
         ))}
         <AddButton onClick={handlerAddCategory}>+</AddButton>

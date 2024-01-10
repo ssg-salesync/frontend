@@ -5,10 +5,9 @@ import { styled } from "styled-components";
 import { UserCheckState } from "../../recoil/atoms/UserState";
 import { KioskState } from "../../recoil/atoms/KioskState";
 
-const HeaderDiv = styled.header`
+const HeaderDiv = styled.div`
     height: 10vh;
     width: 100%;
-    // background: #1C395E;
 `
 const LogoDiv = styled.div`
     height: 100%;
@@ -22,7 +21,7 @@ const Logo = styled.img`
 `;
 const BtDiv = styled.div`
     height: 100%;
-    width: 30%;
+    width: 45%;
     float: right;
     display: flex;
     justify-content: center; /* 가로 정렬 */
@@ -30,9 +29,10 @@ const BtDiv = styled.div`
     align-items : center;
     // margin-right: 2%;
 `
+// kiosk
 const BtContainer = styled.div`
-    height: 80%;
-    width: 50%;
+    height: 100%;
+    width: 40%;
     // display: flex;
     // align-items : center;
     // margin-right: 2%;
@@ -40,20 +40,43 @@ const BtContainer = styled.div`
 `;
 const BtInnerContainer = styled.div`
     height: 100%;
-    width: 50%;
+    width: 43%;
     display: flex;
     align-items : center;
     justify-content: center;
-    gap: 3%; /* 버튼 사이의 간격 조절 */
+    gap: 4%;
+`;
+const BtInner = styled.div`
+    height: 55%;
+    width: 35%;
+    display: flex;
+    align-items : center;
+    justify-content: center;
 `;
 const Bt = styled.button`
-    height: 150%;
+    height: 100%;
     width: 100%;
+
     white-space: nowrap; /* 줄 바꿈 방지 */
+
     font-family: 'Pretendard-Regular';
     font-size: 110%;
-    border-radius: 0.4rem;
+    border-radius: 0.5rem;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 750px) {
+      font-size: 55%;
+    }
+    @media screen and (min-width: 750px) and (max-width: 1024px) {
+      font-size: 70%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 105%;
+    }
 `
 const ToggleContainer = styled.div`
   position: relative;
@@ -94,8 +117,19 @@ const ToggleContainer = styled.div`
 const Desc = styled.div`
   //설명 부분의 CSS를 구현
   text-align: center;
-  margin: 3%;
+  margin: 2%;
   color: #fff;
+  font-size: 110%;
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 750px) {
+    font-size: 70%;
+  }
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 90%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 110%;
+  }
 `;
 /* eslint-disable */ 
 function Header() {
@@ -107,6 +141,9 @@ function Header() {
         localStorage.removeItem('access_token');
         localStorage.removeItem('csrf_token');
         tokenCheckfunc()
+    }
+    const myPage=()=>{
+        navigate('/mypage');
     }
     const logoClick=()=>{
         tokenCheckfunc
@@ -159,11 +196,13 @@ function Header() {
             <BtDiv isKiosk={isKiosk}>
                 {!isKiosk ? 
                 <BtInnerContainer>
-                    <Link to='/'>
+                    <BtInner><Bt type="button" onClick={logout}>로그아웃</Bt></BtInner>
+                    <BtInner><Bt type="button" onClick={myPage}>마이페이지</Bt></BtInner>
+                    {/* <Link to='/'>
                         <Bt type="button" onClick={logout}>로그아웃</Bt></Link>
                     <Link to='/mypage'>
                         <Bt type="button">마이페이지</Bt>
-                    </Link>
+                    </Link> */}
                 </BtInnerContainer> 
                 : <BtContainer></BtContainer>}
                 <ToggleContainer // 클릭하면 토글이 켜진 상태(isKiosk)를 boolean 타입으로 변경하는 메소드가 실행
