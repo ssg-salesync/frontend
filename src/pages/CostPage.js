@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
-import { ItemGetApi } from "../api/pos/item/ItemGetApi";
+import { PriceGetApi } from "../api/cost/PriceGetApi";
+import { CostGetApi } from "../api/cost/CostGetApi";
 
 /* eslint-disable */
 
@@ -111,92 +112,76 @@ const InputField = styled.input`
   text-align: center;
   display: block;
   margin: 0 auto;
-  
 `;
 
 function CostPage() {
+  
   const [categories, setCategories] = useState([]);
 
-  const [costs, SetCosts] = useState({});
-
-
+  const [costData, setCostData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await ItemGetApi();
-        setCategories(data.categories);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+        const data = await CostGetApi();
+        setCostData(data.items);
+      } catch (err) {
+        console.error(err);
       }
     }
     fetchData();
   }, []);
 
+  console.log('costData: ', costData)
+
+
+
+
+  console.log('categories: ', categories)
+
   // 2개씩 카테고리를 나열하는 함수
   const renderCategories = () => {
-    if (categories.length === 0) {
-      return <div><h1>Loading...</h1></div>; // 데이터가 없는 경우 로딩을 표시하거나 처리할 수 있음
+    if (costData.length === 0) {
+      return <div><h1>Loading...</h1></div>; // 랜더링 시 로딩을 표시
     }
-
-    const categoryRows = [];
-    const length = categories.length;
-
-    for (let i = 0; i < length; i += 2) {
-      const firstCategory = categories[i];
-      const secondCategory = categories[i + 1];
-
-      categoryRows.push(
-        <div key={i / 2} style={{ display: 'flex', marginBottom: '5%' }}>
-          {firstCategory && (
-            <div>
-              <h2>{firstCategory.category_name}</h2>
-              <Table>
-                <thead>
-                  <tr>
-                    <Th>&nbsp;&nbsp;아이템 이름&nbsp;&nbsp;</Th>
-                    <Th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가&nbsp;격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Th>
-                    <Th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;원&nbsp;가&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {firstCategory.items.map((item) => (
-                    <tr key={item.item_id}>
-                      <Td>{item.name}</Td>
-                      <Td>{item.price}</Td>
-                      <Td>{<InputField type="price"/>}</Td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          )}
-          {secondCategory && (
-            <div>
-              <h2>{secondCategory.category_name}</h2>
-              <Table>
-                <thead>
-                  <tr>
-                    <Th>&nbsp;&nbsp;아이템 이름&nbsp;&nbsp;</Th>
-                    <Th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가&nbsp;격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Th>
-                    <Th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;원&nbsp;가&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {secondCategory.items.map((item) => (
-                    <tr key={item.item_id}>
-                      <Td>{item.name}</Td>
-                      <Td>{item.price}</Td>
-                      <Td><InputField type="price"/></Td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          )}
+  
+    const sortedData = {}; // category_id 별로 데이터 정리
+    costData.forEach((item) => {
+      const { category_id } = item;
+      if (!sortedData[category_id]) {
+        sortedData[category_id] = [];
+      }
+      sortedData[category_id].push(item);
+    });
+  
+    const categoryRows = Object.keys(sortedData).map((categoryId) => {
+      const categoryItems = sortedData[categoryId];
+  
+      return (
+        <div key={categoryId} style={{ marginBottom: '5%' }}>
+          <h2>{category.category_name}</h2>
+          <Table>
+            <thead>
+              <tr>
+                <Th>&nbsp;&nbsp;아이템 이름&nbsp;&nbsp;</Th>
+                <Th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가&nbsp;격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Th>
+                <Th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;원&nbsp;가&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Th>
+              </tr>
+            </thead>
+            <tbody>
+              {categoryItems.map((category, idx) => (
+                <tr key={idx}>
+                  <Td>{category.name}</Td>
+                  <Td>{category.price}</Td>
+                  <Td>{category.cost}</Td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </div>
       );
-    }
+    });
+  
     return categoryRows;
   };
 

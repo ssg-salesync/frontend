@@ -39,8 +39,6 @@ const OrderBt = styled.button`
         css`
             animation: ${fadeIn} 1s ease-in-out forwards;
         `}
-`;
-
 
     &:hover {
         background-color: #e0e0e0;
