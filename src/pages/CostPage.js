@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useRef, useState, useEffect } from 'react';
-import { CostGetApi } from "../api/dashboard/cost/CostGetApi";
-import { CostPostApi } from "../api/dashboard/cost/CostPostApi";
+import { useState, useEffect } from 'react';
+import { CostsGetApi } from "../api/dashboard/costs/CostsGetApi";
+import { CostsPostApi } from "../api/dashboard/costs/CostsPostApi";
 
 /* eslint-disable */
 
@@ -174,7 +174,7 @@ function CostPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await CostGetApi();
+        const data = await CostsGetApi();
         setCostData(data.items);
       } catch (err) {
         console.error(err);
@@ -195,7 +195,7 @@ function CostPage() {
 
       console.log('POST 데이터 확인: ', itemsToSend)
 
-      await CostPostApi({ items: itemsToSend });
+      await CostsPostApi({ items: itemsToSend });
     } catch (err) {
       console.error(err);
     };
