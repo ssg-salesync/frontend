@@ -1,6 +1,6 @@
 function MyChart() {
   return (
-    <h1>미완성123</h1>
+    <h1>미완성123123</h1>
   );
 };
 
