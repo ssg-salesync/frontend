@@ -187,7 +187,7 @@ function DashboardPage() {
             datasets: [
               {
                 label: '판매량',
-                data: data?.items.map(item => item.price) || [],
+                data: data?.items.map(item => item.sales_volume) || [],
                 backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
                 hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
               },
@@ -203,7 +203,7 @@ function DashboardPage() {
             datasets: [
               {
                 label: '판매량',
-                data: data?.items.map(item => item.price) || [],
+                data: data?.items.map(item => item.sales_volume) || [],
                 backgroundColor: ['black'],
                 hoverBackgroundColor: ['white']
               },
