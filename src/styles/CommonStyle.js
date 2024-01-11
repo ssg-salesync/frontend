@@ -36,6 +36,17 @@ export const ComponentDiv = styled.div`
       transform: translateY(0);
     }
   }
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 35%;
+  }
 `;
 
 // 로그인/회원가입/매장등록 제목 영역
@@ -52,10 +63,10 @@ export const TitleDiv = styled.div`
   text-align: center;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 768px) {
     font-size: 100%;
   }
-  @media screen and (min-width: 750px) and (max-width: 1024px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 130%;
   }
   @media screen and (min-width: 1025px) {

@@ -55,9 +55,39 @@ const TableContainer = styled.div`
         transform: scale(1.1);
     }
 `;
-const TableSpan = styled.span`
+const TableTittle = styled.span`
     font-weight: bold;
-    font-size: 130%;
+    font-size: 120%;
+    white-space: nowrap;
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 90%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 110%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 140%;
+    }
+`
+const TableOrder = styled.div`
+    overflow: auto;
+    height: 80%;
+    width: 100%
+    font-size: 24px;
+    white-space: nowrap;
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 11px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 15px;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 20px;
+    }
 `
 /* eslint-disable*/
 function Home() {
@@ -183,8 +213,8 @@ function Home() {
         {loading && tables.map((table) => (
             <TableContainer key={table.tableId} onClick={(e) => { e.preventDefault(); openOrderPopup(table.tableId); }}>
                 <div style={{height:'100%',width:'100%'}}>
-                    <TableSpan>테이블 {table.tableId}</TableSpan>
-                    <div style={{overflow:'auto',height:'80%',width:'100%'}}>
+                    <TableTittle>테이블 {table.tableId}</TableTittle>
+                    <TableOrder>
                     {
                         ordersData.map((order)=>
                             {
@@ -198,7 +228,7 @@ function Home() {
                             }
                         )
                     }
-                    </div>
+                    </TableOrder>
                 </div>
             </TableContainer>
         ))}

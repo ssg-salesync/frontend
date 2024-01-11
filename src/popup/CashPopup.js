@@ -49,12 +49,24 @@ document.head.appendChild(style);
 const ButtonPay = styled.button`
     border: none;
     padding: 0;
-    width: 15%;
-    height: 30%;
+    // width: 15%;
+    // height: 30%;
+    padding: 15px 60px;
     font-family: 'Pretendard-Regular';
-    font-size: 1rem;
+    font-size: 130%;
     border-radius: 0.6rem;
     background: #D9D9D9;
+    
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+        font-size: 100%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        font-size: 115%;
+    }
+    @media screen and (min-width: 1025px) {
+        font-size: 130%;
+    }
 `
 const ListDiv = styled.div`
     width: 60%;
@@ -62,7 +74,19 @@ const ListDiv = styled.div`
     background: #FFF;
     display: flex; 
     margin: 1%;
-    border-radius: 0.6rem;    
+    border-radius: 0.6rem;
+    font-size: 130%;
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+        font-size: 90%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        font-size: 115%;
+    }
+    @media screen and (min-width: 1025px) {
+        font-size: 130%;
+    }
 `
 const ListTitle = styled.p`
     width: 35%;
@@ -89,6 +113,18 @@ const ListContent = styled.input`
     border: none;
     font-family: 'Pretendard-Regular';
     outline: none;
+    font-size: 130%;
+    
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+        font-size: 90%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        font-size: 115%;
+    }
+    @media screen and (min-width: 1025px) {
+        font-size: 130%;
+    }
 `
 /* eslint-disable */
 function CashPopup({openCashPopup, closeCashPopup, tableId}) {

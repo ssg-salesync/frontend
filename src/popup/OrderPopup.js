@@ -37,30 +37,27 @@ const slideUpAnimation = `
   }
 `;
 
-
 // style요소에 css 애니메이션 요소를 추가
 const style = document.createElement('style');
 style.appendChild(document.createTextNode(slideUpAnimation));
 document.head.appendChild(style);
 
-  
-
-  
 const PayDiv = styled.div`
-    width: 70%;
+    // width: 90%;
     height: 18%;
-    position: fixed;
-    bottom: 0;
+    // position: fixed;
+    // bottom: 0;
     border-radius: 0.625rem;
     // background: #1C395E;
     color: #FFF;
-    margin: 9%;
+    // margin: 9%;
     display: flex;
     align-items: center;
 `
 const PayLDiv = styled.div`
-    flex: 3;
+    // flex: 60%;
     height: 70%;
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,10 +65,25 @@ const PayLDiv = styled.div`
     background: #1C395E;
     border-radius: 0.625rem;
     margin:2%;
+    white-space: nowrap;
+    font-size: 120%;
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 90%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 115%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 120%;
+    }
+
 `    
 const PayRDiv = styled.div`
-    flex: 2;
+    // flex: 40%;
     height: 70%;
+    width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,9 +92,23 @@ const PayRDiv = styled.div`
     border-radius: 0.625rem;
     color: #FFF;
     border: none;
-    margin:2%;
+    // margin:2%;
+    white-space: nowrap;
+    font-size: 120%;
+
     &:hover {
         background-color: #e0e0e0;
+    }
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 90%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 115%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 120%;
     }
 `
 const CloseBt = styled(IoCloseSharp)`
@@ -97,9 +123,23 @@ const CloseBt = styled(IoCloseSharp)`
 `
 const RightDiv = styled.div`
     flex: 1.5; 
-    padding: 1.5%;
+    padding: 1% 2.5%;
     background: rgba(255, 255, 255, 0.70);
     backdrop-filter: blur(25px);
+`
+const RightDivTitle = styled.h2`
+    font-size: 100%;
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 100%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 125%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 160%;
+    }
 `
 // 모달을 위한 루트 엘리먼트 설정
 Modal.setAppElement('#root');
@@ -244,7 +284,7 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
             <RightDiv>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}
                 <CloseBt type='button' onClick={closeBtClick}/>
-                <h2>주문 목록</h2>                
+                <RightDivTitle>주문 목록</RightDivTitle>                
                 <div style={{height:'65%',overflow: 'auto'}}><OrderList/></div>
                 {/* <PayButton type='button' value="Close" onClick={()=>closeOrderPopup}/> */}
                 {/* <Link to={`/order/${tableId}/payment`} onClick={(e) => { e.preventDefault(); postOrder()}}> */}

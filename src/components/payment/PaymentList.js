@@ -2,10 +2,16 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";   // 읽기 전용
 import { TableState, TotalPrice } from "../../recoil/atoms/ItemState";
 
+const ListTableDiv = styled.div`
+    height: 60%;
+    justify-content: center;
+    display: flex; 
+    margin-top: 10%;
+    overflow: hidden;
+`
 const ListTable = styled.table`
     width : 80%;
     height : 5%;
-    text-align: center;
     border-collapse: separate;
     border-spacing: 0 10px;
     font-size: 1.2rem;
@@ -16,9 +22,29 @@ const ListTableTr = styled.tr`
 `
 const ListTableTd = styled.td`
     line-height: 100%;
-    padding: 1rem;
+    padding: 0.8rem;
+    white-space: nowrap;
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 70%;
+      padding: 0.4rem;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 100%;
+      padding: 0.6rem;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 120%;
+    }
 `
 const PayDiv = styled.div`
+    height: 25%;
+    justify-content: center;
+    display: flex;
+    align-items : center;
+`
+const PayContentDiv = styled.div`
     width: 55%;
     height: 70%;
     border-radius: 0.6rem;
@@ -31,8 +57,19 @@ const PayDiv = styled.div`
     text-align: right;
     flex-direction: column;
 
-    font-size: 1.5rem;
+    font-size: 150%;
+    white-space: nowrap;
 
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 95%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 120%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 150%;
+    }
 `
 function PaymentList() {
     const menu = useRecoilValue(TableState)
@@ -51,7 +88,7 @@ function PaymentList() {
     // };
     return (
         <>
-        <div style={{height:'60%','justify-content': 'center', display: 'flex', marginTop: '10%', overflow: 'auto'}}>
+        <ListTableDiv>
             <ListTable>
                 <tbody>
                 {/* 각 품목을 나열하는 매핑 작업 */}
@@ -66,9 +103,9 @@ function PaymentList() {
                 ))}
                 </tbody>
             </ListTable>
-        </div>
-        <div style={{height:'25%', 'justify-content': 'center', display: 'flex','align-items' : 'center'}}>
-            <PayDiv>
+        </ListTableDiv>
+        <PayDiv>
+            <PayContentDiv>
                 {/* <div style={{ flex: 3, borderRight: '1px solid #ccc'}}>
                     총 결제금액
                 </div>
@@ -77,9 +114,10 @@ function PaymentList() {
                 </div> */}
                 {/* <div>총 결제금액</div>
                 <div>{totalPrice}원</div> */}
-                <div>총 결제금액 : {totalPrice}원</div>
-            </PayDiv>
-        </div>
+                {/* <div>총 결제금액 : {totalPrice}원</div> */}
+                총 결제금액 : {totalPrice}원
+            </PayContentDiv>
+        </PayDiv>
         </>
     );
 };
