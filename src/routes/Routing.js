@@ -14,11 +14,13 @@ import CashPage from "../popup/CashPopup";
 import CostPage from "../pages/CostPage";
 import InfoNpwPage from "../pages/InfoNpwPage";
 import KioskPage from "../pages/KioskPage";
+import SplashPage from "../pages/SplashPage";
 
 function Routing() {
   return(
     <Routes>
-      <Route path="/" element={<LoginPage/>}/>
+      <Route path="/" element={<SplashPage/>}/>
+      <Route path="/login" element={<LoginPage/>}/>
       <Route path="/home" element={<Home/>}/>
       <Route path="/signup" element={<SignupPage/>}/>
       <Route path="/signup/stores" element={<StorePage/>}/>

@@ -203,7 +203,7 @@ function DashboardPage() {
             datasets: [
               {
                 label: '판매량',
-                data: data?.items.map(item => item.sales_volume) || [],
+                data: data?.items.map(item => item.profit) || [],
                 backgroundColor: ['black'],
                 hoverBackgroundColor: ['white']
               },
