@@ -1,3 +1,3 @@
-const URL = "https://api.salesync.site";
+const URL = "//api.salesync.site";
 
 export default URL;
