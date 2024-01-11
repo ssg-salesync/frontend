@@ -4,7 +4,7 @@ import { Token } from '../../Token';
 
 /* eslint-disable */
 
-export async function CostPostApi(items){
+export async function CostsPostApi(items){
 
     const headers = Token();
 
