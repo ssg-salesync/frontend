@@ -25,7 +25,6 @@ const BtDiv = styled.div`
     float: right;
     display: flex;
     justify-content: center; /* 가로 정렬 */
-    // justify-content: ${props => props.isKiosk ? 'right' : 'center'}; /* 조건에 따라 동적으로 변경 */
     align-items : center;
     // margin-right: 2%;
 `
@@ -54,7 +53,7 @@ const BtInner = styled.div`
     justify-content: center;
 `;
 const Bt = styled.button`
-    height: 100%;
+    height: 80%;
     width: 100%;
 
     white-space: nowrap; /* 줄 바꿈 방지 */
@@ -165,6 +164,7 @@ function Header() {
             setUserCheck(true)
         }else{
             setUserCheck(false)
+            navigate("/")
         }
     }
     useEffect(()=>{

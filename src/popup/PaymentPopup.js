@@ -67,6 +67,7 @@ const closeAllPopup = useRecoilValue(PayCompleteState)
     useEffect(() => {
         console.log("paymentPopup",closeAllPopup)
     },[closeAllPopup]);
+
     return (
         <>
         {/* <input type="button" value= "PayPopup" onClick={openModal}/> */}
@@ -75,13 +76,13 @@ const closeAllPopup = useRecoilValue(PayCompleteState)
             {/* <ModalContent/> */}
             {/* 왼쪽 탭 화면 */}
             <BackBt type='button' onClick={closePaymentPopup}/>
-            <div style={{ flex: 3, borderRight: '1px solid #ccc' }}>             
+            <div style={{ width: '70%', borderRight: '1px solid #ccc' }}>             
                 {/* 왼쪽 탭 화면 컨텐츠 */}
                 <PaymentList closeModal={closePaymentPopup}/>
             </div>
 
             {/* 오른쪽 컴포넌트 화면 */}
-            <div style={{ flex: 1.5, padding: '20px'}}>
+            <div style={{ width: '30%', padding: '20px'}}>
                 {/* 오른쪽 컴포넌트 화면 컨텐츠 */}              
                 <PaymentWay closePaymentPopup={closePaymentPopup} closeOrderPopup={closeOrderPopup} tableId={tableId}/>
             </div>

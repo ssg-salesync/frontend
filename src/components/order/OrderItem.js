@@ -30,22 +30,24 @@ const TabDiv = styled.div`
     // }
 `
 const TabMemu = styled.ul`
-    height : 10%;
+    height : 9%;
     width : 100%;
-    
+    border-radius: 0.5rem;
+
     display: flex;
     flex-direction:row;
     align-items: center;
     list-style-type: none;
+
     padding: 0;
     margin: 0;
-    border-radius: 0.5rem;
-    // overflow: auto;
     overflow-x: auto;
+    overflow-y: hidden;
+
     white-space: nowrap;
 
+    //선택된 tab에 적용되는 css
     .focused{
-        //선택된 tab에 적용되는 css
         background-color : #D9D9D9;
         color: black;
         border-radius: 0.5rem;
@@ -54,15 +56,27 @@ const TabMemu = styled.ul`
 const SubMenu = styled.li`
     display: flex;
     width: 10%;
-    white-space: nowrap;
     height: max-content;
-    padding: 0.5rem;
+    white-space: nowrap;
+
+    padding: 0.3rem;
     margin :0.5rem;
-    font-size:1rem;
+    font-size: 120%;
     transition: 0.5s;
     background-color : #FFF;
     border-radius: 0.5rem;
     justify-content: center;
+
+    // 반응형
+    @media screen and (max-width: 768px) {
+      font-size: 70%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 100%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 120%;
+    }
 `
 const Item = styled.div`
     width: 100%;
@@ -77,26 +91,42 @@ const Item = styled.div`
 `
 const Menu = styled.div`
     // width: 25%;
-    width: calc(30% - 0.8rem);
-    height:30%;
-    margin : 1rem;
+    width: calc(30% - 0.7rem);
+    height: 35%;
+    margin : 0.7rem;
     background-color : #FFF;
     border-radius: 0.5rem;
+    font-size: 120%;
+
+    // 반응형
+    @media screen and (max-width: 768px) {
+      font-size: 80%;
+      margin : 0.5rem;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 100%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 120%;
+    }
 `
 const MenuDtDiv = styled.div`
-    height:60%;
+    height: 60%;
     width:100%;
+    margin-top: 5%;
     display:flex;
     align-items:center;
     justify-content: center;
     flex-direction: column;
 `
 const MenuDtP =styled.p`
-    margin:0.5rem;
+    margin: 0.4rem;
+    white-space: nowrap;
 `
 const BtDiv = styled.div`
-    height:40%;
+    height: 20%;
     width:100%;
+
     display:flex;
     align-items:center;
     justify-content: center;
@@ -104,9 +134,20 @@ const BtDiv = styled.div`
 const QuantityBt = styled.button`
     width: 3rem;
     height: 1.5rem;
+
     background: #FFF;
     border:none;
-    font-family: 'Pretendard-Regular';
+    font-family: Pretendard-Regular;
+    font-size: 100%;
+    padding:0;
+
+    // 반응형
+    @media screen and (max-width: 768px) {
+        width: 1rem;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 1.5rem;
+    }
 `
 const MinusBt = styled(FaRegMinusSquare)`
     // background: url("/img/MinusBt.png") no-repeat center center;
@@ -116,7 +157,16 @@ const MinusBt = styled(FaRegMinusSquare)`
     width: 1.5rem;
     height: 1.5rem;
     border:none;
-    padding:0;
+
+    // 반응형
+    @media screen and (max-width: 768px) {
+        width: 1rem;
+        height: 1rem;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 1.3rem;
+        height: 1.3rem;
+    }
 `
 // const PlusBt = styled.button`
 const PlusBt = styled(FaRegPlusSquare)`
@@ -127,44 +177,84 @@ const PlusBt = styled(FaRegPlusSquare)`
     width: 1.5rem;
     height: 1.5rem;
     border:none;
-    padding:0;
+
+    // 반응형
+    @media screen and (max-width: 768px) {
+        width: 1rem;
+        height: 1rem;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 1.3rem;
+        height: 1.3rem;
+    }
 `
-const OrderCheckDiv = styled.div`
-    width:100%;
-    height:10%;
+const OrderBtDiv = styled.div`
+    width: 97%;
+    height: 10%;
     display: flex;
     justify-content: right;
     align-items: center;
 `
-const OrderCheckBt = styled.button`
+const OrderBt = styled.button`
     border: none;
     border-radius: 0.5rem;
     background: #1C395E;
     color: #FFF;
-    width: 15%;
-    height: 60%;
+    // width: 15%;
+    // height: 60%;
+    padding: 6px 14px;
     font-family: Pretendard-Regular;
-    font-size: 110%;
+    font-size: 145%;
     margin: 1%;
-    &:hover {
-        background-color: #e0e0e0;
-    }
-`
-const OrderCancelBt = styled.button`
-    border: none;
-    border-radius: 0.5rem;
-    background: #1C395E;
-    color: #FFF;
-    width: 15%;
-    height: 60%;
-    font-family: Pretendard-Regular;
-    font-size: 110%;
-    margin: 1%;
+    white-space: nowrap;
 
     &:hover {
         background-color: #e0e0e0;
     }
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 750px) {
+    font-size: 40%;
+    }
+    @media screen and (min-width: 750px) and (max-width: 1024px) {
+    font-size: 100%;
+    }
+    @media screen and (min-width: 1025px) {
+    font-size: 145%;
+    }
 `
+// const OrderCheckBt = styled.button`
+//     border: none;
+//     border-radius: 0.5rem;
+//     background: #1C395E;
+//     color: #FFF;
+//     width: 15%;
+//     height: 60%;
+//     font-family: Pretendard-Regular;
+//     font-size: 110%;
+//     margin: 1%;
+//     white-space: nowrap;
+
+//     &:hover {
+//         background-color: #e0e0e0;
+//     }
+// `
+// const OrderCancelBt = styled.button`
+//     border: none;
+//     border-radius: 0.5rem;
+//     background: #1C395E;
+//     color: #FFF;
+//     width: 15%;
+//     height: 60%;
+//     font-family: Pretendard-Regular;
+//     font-size: 110%;
+//     margin: 1%;
+//     white-space: nowrap;
+
+//     &:hover {
+//         background-color: #e0e0e0;
+//     }
+// `
 /* eslint-disable */
 function OrderItem({tableId,closeOrderPopup}) {
     // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
@@ -395,10 +485,10 @@ function OrderItem({tableId,closeOrderPopup}) {
             </Item>
                 )
             ))}
-            <OrderCheckDiv>
-                <OrderCancelBt type='button' onClick={orderCancel}>주문 취소</OrderCancelBt>
-                <OrderCheckBt type='button' onClick={orderSend}>주문 완료</OrderCheckBt>
-            </OrderCheckDiv>
+            <OrderBtDiv>
+                <OrderBt type='button' onClick={orderCancel}>주문 취소</OrderBt>
+                <OrderBt type='button' onClick={orderSend}>주문 완료</OrderBt>
+            </OrderBtDiv>
         </TabDiv>
     )
 }
