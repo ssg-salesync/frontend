@@ -8,7 +8,7 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: salesync.site
-  # CLOUDFRONT_NAME: E3P5E4B2X3UGOU
+  CLOUDFRONT_NAME: E3P5E4B2X3UGOU
   # AWS CloudFront, Route53 생각
 
 permissions:
@@ -64,11 +64,11 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 
-      # - name: CloudFront delete cache
-      #   uses: chetan/invalidate-cloudfront-action@v2
-      #   env:
-      #     DISTRIBUTION: ${{ env.CLOUDFRONT_NAME }}
-      #     PATHS: "/*"
-      #     AWS_REGION: ${{ env.AWS_REGION }}
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: CloudFront delete cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ env.CLOUDFRONT_NAME }}
+          PATHS: "/*"
+          AWS_REGION: ${{ env.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
