@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useRecoilState,useResetRecoilState } from 'recoil';
 import { ItemsApi } from '../api/Items/ItemsApi';
 import OrderPopup from "../popup/OrderPopup";
-import { PayCompleteState, Table1State,Table2State,Table3State,Table4State,Table5State,Table6State,Table7State,Table8State,TableState } from "../recoil/atoms/ItemState";
+import { PayCompleteState} from "../recoil/atoms/ItemState";
 import { deleteOrderState,deleteTotalPriceState } from "../components/func/AtomData";
 import { UnpaidGetApi } from "../api/pay/UnpaidGetApi";
 import { TotalDiv } from "../styles/CommonStyle";
