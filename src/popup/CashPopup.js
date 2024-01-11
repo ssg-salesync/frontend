@@ -90,6 +90,33 @@ const ListContent = styled.input`
     font-family: 'Pretendard-Regular';
     outline: none;
 `
+
+const PaymentProcessingMessage = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   font-size: 3rem;
+`;
+
+const Spinner = styled.div`
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-left: 8px solid #000;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 /* eslint-disable */
 function CashPopup({openCashPopup, closeCashPopup, tableId}) {
     const [cashModalOn, setCashModalOn] = useState(false);
@@ -107,6 +134,9 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
         setReceiveAmount(e.target.value)
     }
     // const resetTable5 = useResetRecoilState(Table5State);
+    
+    // 결제 진행 상태를 관리할 상태 추가
+    const [processingPayment, setProcessingPayment] = useState(false);
 
     useEffect(() => {
         // 팝업이 열릴 때마다 실행되는 코드
@@ -126,6 +156,7 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
         //console.log("useEffect - receiveAmount ")
         setChange(receiveAmount - totalPrice)
     },[receiveAmount]);
+    
     const [closeAllPopup,setCloseAllPopup] = useRecoilState(PayCompleteState)
     async function payComplete(){
         // 버튼클릭 시
@@ -151,10 +182,15 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
             const data = {table_no:tableId,payment_type:"현금",total_price:totalPrice}
             const dataPost = await PayPostApi(data)
             console.log(dataPost)
-            // // 1. 팝업 모두 닫힘
-            setCloseAllPopup(true)
-            console.log("=>cashPopup closeAllPopup",closeAllPopup)
-            closeCashPopup()
+            // 결제 진행 메시지 활성화
+            setProcessingPayment(true);
+            // 몇 초 동안 결제 진행 메시지 활성후 팝업 닫음
+            setTimeout(() => {
+                setProcessingPayment(false);
+                setCloseAllPopup(true);
+                console.log("=>cashPopup closeAllPopup",closeAllPopup)
+                closeCashPopup();
+              }, 1500);
         }else{
             alert("받은 금액이 결제금액보다 적습니다.")
         }
@@ -189,6 +225,12 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
                 <div style={{height:'20%',width: '100%', 'justify-content': 'center', display: 'flex','align-items' : 'center'}}>
                     <ButtonPay type='button' onClick={payComplete}>결제</ButtonPay>
                 </div>
+                {processingPayment && ( // 결제 진행 중 상태가 true일 때 로딩바를 표시합니다.
+                <PaymentProcessingMessage>
+                    <Spinner />
+                    {/* <p>결제 중</p> */}
+                </PaymentProcessingMessage>
+                )}
         </Modal>
         </>
     );

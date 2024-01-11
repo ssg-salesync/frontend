@@ -17,6 +17,21 @@ const modalStyle ={
       },
 };
 
+const Spinner = styled.div`
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-left: 8px solid #000;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 const Button = styled.button`
     border: none;
     padding: 0;
@@ -60,6 +75,7 @@ function CardPopup({openCardPopup, closeCardPopup}) {
             <PayIngDiv>
                 <div> 카드를 넣어주세요 </div>
                 <div> ~결제중~ </div>
+                <Spinner />
             </PayIngDiv>
             </CardDiv>
         </Modal>
