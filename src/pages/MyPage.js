@@ -34,8 +34,8 @@ import { ComponentDiv, TitleDiv, TotalDiv } from "../styles/CommonStyle";
 
 // 버튼들 전체 영역(위에 글자 제외)
 const MyPageContainer = styled.div`
-  height: 60%;
-  width: 100%;
+  // height: 60%;
+  // width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

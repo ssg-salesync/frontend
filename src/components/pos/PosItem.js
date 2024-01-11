@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FaRegTrashAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { ItemGetApi } from '../../api/pos/item/ItemGetApi';
 import { ItemDeleteApi } from '../../api/pos/item/ItemDeleteApi';
 import { ItemPostApi } from '../../api/pos/item/ItemPostApi';
@@ -599,9 +600,12 @@ const handlerRemoveItem = async (idx) => {
 
 // console.log(editModes)
 // 회원가입 버튼 클릭
+const navigate = useNavigate();
+
 const handlerSubmitClick = () =>{
   navigate("/home")
 }
+
 return (
   <ComponentDiv>
       <TitleDiv>

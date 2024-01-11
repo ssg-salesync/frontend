@@ -72,11 +72,11 @@ const InputField = styled.input`
   font-family: Pretendard-Regular;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 768px) {
     font-size: 40%;
   }
   
-  @media screen and (min-width: 750px) and (max-width: 1024px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 90%;
   }
   
@@ -115,18 +115,18 @@ const Button = styled.button`
     background-color: #e0e0e0;
   }
 
-// 반응형에 맞게 폰트 크기 조정
-@media screen and (max-width: 750px) {
-  font-size: 40%;
-  padding: 5px 15px;
-}
-@media screen and (min-width: 750px) and (max-width: 1024px) {
-  font-size: 90%;
-  padding: 8px 20px;
-}
-@media screen and (min-width: 1025px) {
-  font-size: 130%;
-}
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    font-size: 40%;
+    padding: 5px 15px;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 90%;
+    padding: 8px 20px;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 130%;
+  }
 `;
 
 function LoginPage() {
