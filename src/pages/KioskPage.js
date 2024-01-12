@@ -70,7 +70,7 @@ function Kiosk(){
     useEffect(() => {
         const timeout = setTimeout(() => {
             setIsButtonVisible(true);
-        }, 500);
+        }, 100);
         return () => clearTimeout(timeout);
     }, []);
 

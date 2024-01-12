@@ -11,7 +11,7 @@ function WelcomePage() {
     const timer = setTimeout(() => {
       setShowSplash(false);
       navigate('/login')
-    }, 4000);
+    }, 2300);
 
     return () => clearTimeout(timer);
   }, []);

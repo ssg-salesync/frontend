@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { UserCheckState } from "../../recoil/atoms/UserState";
@@ -136,7 +136,7 @@ const Desc = styled.div`
 `;
 /* eslint-disable */ 
 function Header() {
-
+    const location = useLocation();
     const navigate = useNavigate();
 
     const [userCheck,setUserCheck]=useRecoilState(UserCheckState)
@@ -191,6 +191,15 @@ function Header() {
         }
     }, [isKiosk]);
 
+     // 404 에러 페이지에서는 헤더를 숨김
+     console.log('pathname',location)
+     
+     if (!['/', '/login', '/home', '/signup', '/signup/stores', '/signup/stores/pos', '/mypage', '/mypage/info', 
+     '/mypage/info/newpassword', '/mypage/cost', '/mypage/dashboard', '/order/:tableId', '/order/:tableId/payment', 
+     '/order/:tableId/payment/card', '/order/:tableId/payment/cash', '/kiosk'].includes(location.pathname)) {
+        return null;
+      }
+     
     return (
         <HeaderDiv>
             {userCheck&&<>
