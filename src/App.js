@@ -14,12 +14,12 @@ function App() {
       {/ Recoil 사용하기 위한 설정 */}
       <RecoilRoot>
       {/* <header> */}
-        <Header/>
+        {/* <Header/> */}
       {/* </header> */}
       <main>
           <Routing/>
       </main>
-      <Footer/>
+      {/* <Footer/> */}
       </RecoilRoot>
     </>
   );
