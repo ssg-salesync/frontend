@@ -7,7 +7,7 @@ const ListTableDiv = styled.div`
     justify-content: center;
     display: flex; 
     margin-top: 10%;
-    overflow: hidden;
+    overflow: auto;
 `
 const ListTable = styled.table`
     width : 80%;
