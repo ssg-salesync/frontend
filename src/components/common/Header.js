@@ -85,6 +85,10 @@ const Bt = styled.button`
     background-color: #2D69C4;
     color: #FFF;
 
+    &:hover {
+        filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
+    }
+
     // 반응형
     @media screen and (max-width: 768px) {
       font-size: 55%;

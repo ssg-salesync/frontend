@@ -37,6 +37,10 @@ const Button = styled.button`
     font-size: 150%;
     white-space: nowrap;
 
+    &:hover {
+        filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
+    }
+    
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 768px) {
       font-size: 90%;
