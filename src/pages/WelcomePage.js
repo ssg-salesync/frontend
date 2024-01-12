@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-function SplashPage() {
+function WelcomePage() {
   const [showSplash, setShowSplash] = useState(true);
 
   const navigate = useNavigate();
@@ -94,4 +94,4 @@ function SplashPage() {
 };
 
 
-export default SplashPage;
+export default WelcomePage;

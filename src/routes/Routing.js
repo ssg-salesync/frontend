@@ -14,13 +14,13 @@ import CashPage from "../popup/CashPopup";
 import CostPage from "../pages/CostPage";
 import InfoNpwPage from "../pages/InfoNpwPage";
 import KioskPage from "../pages/KioskPage";
-import NotFound from "../pages/NotFound";
-import SplashPage from "../pages/SplashPage";
+import NotFoundPage from "../pages/NotFoundPage";
+import WelcomePage from "../pages/WelcomePage";
 
 function Routing() {
   return(
     <Routes>
-      <Route path="/" element={<SplashPage/>}/>
+      <Route path="/" element={<WelcomePage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/home" element={<Home/>}/>
       <Route path="/signup" element={<SignupPage/>}/>
@@ -38,7 +38,7 @@ function Routing() {
 
       <Route path="/kiosk" element={<KioskPage/>}/>
        {/* NotFound 페이지를 가장 맨 아래에 위치 */}
-      <Route path="/*" element={<NotFound />} />
+      <Route path="/*" element={<NotFoundPage />} />
     </Routes>
   );
 };

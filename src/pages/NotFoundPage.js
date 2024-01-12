@@ -1,6 +1,3 @@
-// NotFound.js
-
-import React from 'react';
 import styled from 'styled-components';
 
 // 스타일을 정의
@@ -31,13 +28,18 @@ const Paragraph = styled.p`
   font-size: 1.2em; /* 글자 크기를 변경합니다. */
 `;
 
-// 컴포넌트 정의
-const NotFound = () => (
-  <NotFoundContainer>
-    <Heading2>Uh-oh! Page not found.</Heading2>
-    <Heading1>404</Heading1>
-    <Paragraph>We could not find the page you are looking for.</Paragraph>
-  </NotFoundContainer>
-);
+/* eslint-disable */
 
-export default NotFound;
+// 컴포넌트 정의
+function NotFoundPage() {
+
+  return (
+    <NotFoundContainer>
+      <Heading2>Uh-oh! Page not found.</Heading2>
+      <Heading1>404</Heading1>
+      <Paragraph>We could not find the page you are looking for.</Paragraph>
+    </NotFoundContainer>
+  );
+};
+
+export default NotFoundPage;
