@@ -192,13 +192,13 @@ function Header() {
     }, [isKiosk]);
 
      // 404 에러 페이지에서는 헤더를 숨김
-     console.log('pathname',location)
+    //  console.log('pathname',location)
      
-     if (!['/', '/login', '/home', '/signup', '/signup/stores', '/signup/stores/pos', '/mypage', '/mypage/info', 
-     '/mypage/info/newpassword', '/mypage/cost', '/mypage/dashboard', '/order/:tableId', '/order/:tableId/payment', 
-     '/order/:tableId/payment/card', '/order/:tableId/payment/cash', '/kiosk'].includes(location.pathname)) {
-        return null;
-      }
+    //  if (!['/', '/login', '/home', '/signup', '/signup/stores', '/signup/stores/pos', '/mypage', '/mypage/info', 
+    //  '/mypage/info/newpassword', '/mypage/cost', '/mypage/dashboard', '/order/:tableId', '/order/:tableId/payment', 
+    //  '/order/:tableId/payment/card', '/order/:tableId/payment/cash', '/kiosk'].includes(location.pathname)) {
+    //     return null;
+    //   }
      
     return (
         <HeaderDiv>
