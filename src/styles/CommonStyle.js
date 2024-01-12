@@ -58,7 +58,7 @@ export const TitleDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 180%;
+  font-size: 230%;
   font-weight: 600;
   text-align: center;
   white-space: nowrap;
@@ -88,3 +88,52 @@ export const InsertDiv = styled.div`
   gap:3%;
 `;
 
+// 정보 수정 user 영역
+export const UserDiv = styled.div`
+  height: 10%;
+  width: 100%;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  // margin-top:5%;
+  font-size: 150%;
+  font-weight: 600;
+  text-align: center;
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    font-size: 100%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 130%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 150%;
+  }
+`;
+
+// 정보 수정 title 영역
+export const EditTitleDiv = styled.div`
+  height: 25%;
+  width: 100%;
+  margin-top:7%;
+  // margin-bottom:3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 230%;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    font-size: 160%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 200%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 230%;
+  }
+`;

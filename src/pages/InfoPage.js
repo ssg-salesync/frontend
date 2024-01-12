@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { InfoPostApi } from "../api/auth/info/InfoPostApi";
 import { InfoGetApi } from "../api/auth/info/InfoGetApi";
 import { InfoState } from "../recoil/atoms/InfoState";
-import { ComponentDiv, TotalDiv } from "../styles/CommonStyle";
+import { ComponentDiv, TotalDiv, UserDiv, EditTitleDiv } from "../styles/CommonStyle";
 
 /* eslint-disable */
 
@@ -15,32 +15,6 @@ import { ComponentDiv, TotalDiv } from "../styles/CommonStyle";
 //   display: flex;
 //   flex-direction: column;
 //   align-items: center;
-// `;
-
-// 회원가입 제목 영역
-const TitleDiv = styled.div`
-  height: 15%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top:5%;
-  font-size: 1.5rem;
-  font-weight: 600;
-  text-align: center;
-
-//   // 반응형에 맞게 폰트 크기 조정
-//   @media screen and (max-width: 480px) {
-//     font-size: 100%;
-//   }
-
-//   @media screen and (min-width: 481px) and (max-width: 1024px) {
-//     font-size: 200%;
-//   }
-
-//   @media screen and (min-width: 1025px) {
-//     font-size: 300%;
-//   }
 // `;
 
 const InsertDiv = styled.div`
@@ -56,8 +30,9 @@ const InsertDiv = styled.div`
 const InputField = styled.input`
   border: none;
   border-bottom: 2px solid #1C395E;
-  margin:3%;
-  width:35%;
+  height: 15%;
+  width:45%;
+  font-size: 100%;
   font-family: Pretendard-Regular;
 
   // 반응형에 맞게 폰트 크기 조정
@@ -83,24 +58,33 @@ const ButtonDiv = styled.div`
 `;
 // 다음 버튼
 const NextButton = styled.button`
-  width: 7.125rem;
-  height: 2.375rem;
-  
-  // width: 140%;
-  // height: 20%;
+  padding: 10px 30px;
+
+  border-radius: 0.5625rem;
+  border:none;
+  background-color: #1D56A8;
+  cursor: pointer;
 
   color: #FFF;
   font-family: 'Pretendard-Regular';
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  border:none;
-  background-color: #00ADEF;
-  cursor: pointer;
-  margin: 0 auto;
+  font-size: 130%;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap; // 버튼 내 줄바꿈 금지
 
   &:hover {
     background-color: #e0e0e0;
+  }
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    font-size: 80%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 110%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 130%;
   }
 `;
 
@@ -180,9 +164,9 @@ function InfoPage() {
 
   return (
     <TotalDiv>
-    <ComponentDiv>
-      <TitleDiv>{ownerName} 님</TitleDiv>
-      <TitleDiv>비밀번호 확인</TitleDiv>
+    <ComponentDiv>      
+      <EditTitleDiv>비밀번호 확인</EditTitleDiv>
+      <UserDiv>{ownerName} 님</UserDiv>
       <InsertDiv>        
         <InputField
           type="password"

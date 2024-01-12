@@ -86,6 +86,7 @@ const InputField = styled.input`
   width: 45%;
   height: 15%;
   font-family: Pretendard-Regular;
+  font-size: 120%;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
