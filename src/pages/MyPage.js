@@ -62,13 +62,24 @@ const MyPageButton = styled.button`
   white-space: nowrap;
   border-radius: 0.5rem;
   border:none;
-  background-color: #00ADEF;
+  background-color: #1D56A8;
   cursor: pointer;
   color: #FFF;
   // margin: 5%;
 
   &:hover {
     background-color: #e0e0e0;
+  }
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    font-size: 80%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 95%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 110%;
   }
 `;
 
