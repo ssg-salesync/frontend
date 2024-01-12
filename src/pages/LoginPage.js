@@ -63,23 +63,37 @@ import { UserCheckState } from "../recoil/atoms/UserState";
 //   justify-content: center;
 // `;
 
+// 페이지 제목 영역
+const LogoDiv = styled.div`
+  height: 25%;
+  width: 100%;
+  margin-top: 7%;
+  // border: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const Logo = styled.img`
+  object-fit: contain; // 이미지가 상자 안에 맞게 조절되도록 설정
+  max-width: 70%;     // 최대 너비를 100%로 지정
+  max-height: 80%;    // 최대 높이를 100%로 지정
+`
 // // 아이디, 비밀번호 입력칸
 const InputField = styled.input`
   border: none;
   border-bottom: 2px solid #1C395E;
   margin:3%;
   width: 45%;
+  height: 15%;
   font-family: Pretendard-Regular;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
     font-size: 40%;
-  }
-  
+  }  
   @media screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 90%;
-  }
-  
+  }  
   @media screen and (min-width: 1025px) {
     font-size: 120%;
   }
@@ -202,7 +216,7 @@ function LoginPage() {
     <TotalDiv>
     <ComponentDiv>
       {/* <TitleDiv>로그인을 위해 아이디와<br/>비밀번호를 입력해주세요.</TitleDiv> */}
-      <TitleDiv>로그인</TitleDiv>
+      <LogoDiv><Logo src='/img/salesync_logo.png' alt="logo"/></LogoDiv>
       <InsertDiv>
         <InputField
           type="text"
