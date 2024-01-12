@@ -24,18 +24,18 @@ const ComponentDiv = styled.div`
 `;
 // PosCategory 컴포넌트 영역
 const PosCategoryDiv = styled.div`
-  height: 100%;
-  width: 30%;
+  height: 112%;
+  width: 25%;
   // flex: 1.5;
-  border-right: 1px solid #ccc;
-  background: rgba(255, 255, 255, 0.50);
-  backdrop-filter: blur(25px);
+  // border-right: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.55);
+  // backdrop-filter: blur(1000px);
   overflow-y: auto;
 `;
 // PosItem 컴포넌트 영역
 const PosItemDiv = styled.div`
-  height: 100%;
-  width: 70%;
+  height: 112%;
+  width: 75%;
   // flex: 4;
 `;
 

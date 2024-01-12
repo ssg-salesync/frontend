@@ -32,7 +32,7 @@ const Button = styled.button`
     padding: 0;
     width: 100%;
     height: 100%;
-    background-color:#D9D9D9;
+    background-color:#FFF;
     font-family: Pretendard-Regular;
     font-size: 150%;
     white-space: nowrap;
@@ -62,7 +62,7 @@ function PaymentWay({closePaymentPopup,tableId}) {
         setTimeout(() => {
             console.log("1-closeCardPopup")
             closeCardPopup();
-        }, 1000);
+        }, 3000);
     }
     const closeCardPopup =() =>{
         console.log("2-closePaymentPopup")

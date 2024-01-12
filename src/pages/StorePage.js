@@ -123,7 +123,7 @@ const NextButton = styled.button`
 
 // 드롭다운 컨테이너
 const DropdownContainer = styled.div`
-  margin-top: 3%;
+  margin-top: 2%;
   width: 45%;
 
   // 반응형에 맞게 폰트 크기 조정
@@ -134,7 +134,7 @@ const DropdownContainer = styled.div`
     font-size: 80%;
   }
   @media screen and (min-width: 1025px) {
-    font-size: 110%;
+    font-size: 120%;
   }
 `;
 
@@ -285,7 +285,7 @@ function StorePage() {
   return (
     <TotalDiv>
     <ComponentDiv>
-      <TitleDiv>매장을 등록해주세요.</TitleDiv>
+      <TitleDiv>매장정보를 입력해주세요.</TitleDiv>
       <InsertDiv>
         <InputField
           type="text"
@@ -309,7 +309,7 @@ function StorePage() {
             value={selectedStoreType}
             onChange={handlerStoreTypeSelect}
           >
-            <DropdownOption value='' disabled selected hidden>업종을 선택하세요</DropdownOption>
+            <DropdownOption value='' disabled selected hidden>업종</DropdownOption>
             {storeTypes.map((type, idx) => (
               <DropdownOption key={idx} value={type}>
                 {type}

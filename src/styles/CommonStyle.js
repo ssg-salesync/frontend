@@ -53,14 +53,15 @@ export const ComponentDiv = styled.div`
 export const TitleDiv = styled.div`
   height: 25%;
   width: 100%;
-  margin-top:3%;
-  margin-bottom:3%;
+  margin-top:7%;
+  // margin-bottom:3%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 180%;
   font-weight: 600;
   text-align: center;
+  white-space: nowrap;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
@@ -70,7 +71,7 @@ export const TitleDiv = styled.div`
     font-size: 130%;
   }
   @media screen and (min-width: 1025px) {
-    font-size: 180%;
+    font-size: 230%;
   }
 `;
 

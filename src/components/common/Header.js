@@ -65,6 +65,8 @@ const Bt = styled.button`
     display: flex;
     justify-content: center;
     align-items : center;
+    background-color: #2D69C4;
+    color: #FFF;
 
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 750px) {
@@ -89,11 +91,11 @@ const ToggleContainer = styled.div`
     width: 50px;
     height: 24px;
     border-radius: 30px;
-    background-color: rgb(233,233,234);}
+    background-color: #868686;}
 
     //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
   > .toggle--checked {
-    background-color: rgb(0,200,102);
+    background-color: #2D69C4;
     transition : 0.5s
   }
 
@@ -117,8 +119,10 @@ const Desc = styled.div`
   //설명 부분의 CSS를 구현
   text-align: center;
   margin: 2%;
-  color: #fff;
+  color: black;
   font-size: 110%;
+  font-weight: 1000;
+
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 750px) {
     font-size: 70%;
@@ -189,10 +193,11 @@ function Header() {
 
     return (
         <HeaderDiv>
+            {userCheck&&<>
             <LogoDiv onClick={logoClick}>
                 <Logo src='/img/salesync_logo.png' alt="logo"/>
             </LogoDiv>
-            {userCheck&&
+            {/* {userCheck&& */}
             <BtDiv isKiosk={isKiosk}>
                 {!isKiosk ? 
                 <BtInnerContainer>
@@ -215,7 +220,7 @@ function Header() {
                 {/* Desc 컴포넌트를 활용*/}
                 {/* Toggle Switch가 ON인 상태일 경우에 Desc 컴포넌트 내부의 텍스트를 'Toggle Switch ON'으로, 그렇지 않은 경우 'Toggle Switch OFF'. 조건부 렌더링을 활용. */}
                 <Desc><div>KIOSK</div></Desc>
-            </BtDiv>}
+            </BtDiv></>}
         </HeaderDiv>
     );
 };

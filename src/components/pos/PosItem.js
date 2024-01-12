@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { FaRegTrashAlt } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { ItemGetApi } from '../../api/pos/item/ItemGetApi';
 import { ItemDeleteApi } from '../../api/pos/item/ItemDeleteApi';
@@ -22,7 +22,7 @@ const ComponentDiv = styled.div`
 const TitleDiv = styled.div`
   height: 10%;
   width: 100%;
-  
+  margin-left: 2%;
   display: flex;
   align-items: center;
   border: 5%;
@@ -54,10 +54,10 @@ const ItemDiv = styled.div`
 `;
 // 완료 버튼 영역
 const SubmitButtonDiv = styled.div`
-  height: 10%;
+  height: 8%;
   width: 100%;
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: right;
   // margin-left: 85%;
 `;
@@ -173,18 +173,20 @@ const DeleteButton = styled.button`
   right: 0%;
   margin: 1%;
 
-  background-color: rgba(0, 173, 239);
+  // background-color: rgba(0, 173, 239);
+  background-color: #FFF;
   border: none;
   border-radius: 0.3rem;
   cursor: pointer;
-  color: white;
+  // color: white;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    background-color: #e0e0e0;
+    background-color: #fff;
+    color: #2D69C4;
   }
 
   // 반응형에 맞게 폰트 크기 조정
@@ -201,7 +203,7 @@ const DeleteButton = styled.button`
     height: 13%;
   }
 `;
-const DeleteIcon = styled(FaRegTrashAlt)`
+const DeleteIcon = styled(IoClose)`
   width: 1.5em;
   height: 1.5em;
   // 반응형에 맞게 폰트 크기 조정

@@ -17,13 +17,15 @@ const ListTable = styled.table`
     font-size: 1.2rem;
 `
 const ListTableTr = styled.tr`
-    background: #D9D9D9;
+    background: #FFF;
     margin-bottom: 1rem;
+    border-radius: 0.5rem;
 `
 const ListTableTd = styled.td`
     line-height: 100%;
     padding: 0.8rem;
     white-space: nowrap;
+    // border-radius: 0.5rem;
 
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 768px) {

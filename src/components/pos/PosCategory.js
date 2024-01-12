@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { FaRegTrashAlt } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 import { CategoryPostApi } from '../../api/pos/category/CategoryPostApi';
 import { CategoryGetApi } from '../../api/pos/category/CategoryGetApi';
 import { CategoryPutApi } from '../../api/pos/category/CategoryPutApi';
@@ -14,12 +14,13 @@ const ComponentDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-right: 10%;
-  padding-left: 10%;
+  padding-right: 7%;
+  padding-left: 7%;
 `;
 // 맨 위 카테고리 글자 영역
 const TitleDiv = styled.div`
-  height: 15%;
+  height: 10%;
+  margin-top: 3%;
   width: 80%;
 
   display: flex;
@@ -33,7 +34,7 @@ const TitleDiv = styled.div`
     font-size: 90%;
   }
   @media screen and (min-width: 1025px) {
-    font-size: 120%;
+    font-size: 100%;
   }
 `;
 // 카테고리 전체 영역(위에 글자 제외)
@@ -160,21 +161,22 @@ const RemoveButton = styled.button`
   align-items: center;
   justify-content: center;
 `;
-const RemoveIcon = styled(FaRegTrashAlt)`
-  width: 1.5em;
-  height: 1.5em;
+const RemoveIcon = styled(IoClose)`
+  width: 3em;
+  height: 3em;
+
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 768px) {
     width: 1em;
     height: 1em;
   }
-  @media screen and (min-width: 750px) and (max-width: 1024px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     width: 1em;
     height: 1em;
   }
   @media screen and (min-width: 1025px) {
-    width: 1.5em;
-    height: 1.5em;
+    width: 2em;
+    height: 2em;
   }
 `;
 const AddButtonDiv = styled.div`
@@ -190,11 +192,13 @@ const AddButton = styled.button`
   height: 8%;
   border-radius: 0.3rem;
   border: 1px solid #ccc;
+
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2%;
   cursor: pointer;
-
+  
   &:hover {
     background-color: #e0e0e0;
   }
