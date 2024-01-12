@@ -148,18 +148,18 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
     // 닫기 버튼을 누르기 전 기본 modalStyle을 유지
     const [modalStyle, setModalStyle] = useState({
         content: {
-        top: '8%',
-        bottom: 'auto',
-        left: '9%',
-        right: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        width: '80%', 
-        height: '80%', 
-        display: 'flex',
-        flexDirection: 'row',
-        background: 'linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%)',
-        animation: 'slideUp 0.5s forwards', // 기존 애니메이션 유지
+          top: '8%',
+          bottom: 'auto',
+          left: '9%',
+          right: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%', 
+          height: '80%', 
+          display: 'flex',
+          flexDirection: 'row',
+          background: 'linear-gradient(130deg, #E4F4FF, #E0F6FF, #84BDFF)',
+          animation: 'slideUp 0.5s forwards', // 기존 애니메이션 유지
         },
     });
 
