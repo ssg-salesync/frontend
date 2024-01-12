@@ -145,16 +145,22 @@ function CostPage() {
 
   // 수정된 값을 저장
   const handlerEdit = (itemId, updatedCost) => {
+
     const updatedData = costData.map(item => {
       if (item.item_id === itemId) {
+
+        // cost가 price보다 높으면 경고창 띄우고 수정하지 않음
+        if (updatedCost > item.price) {
+          alert('원가가 원래 가격보다 높습니다.');
+          return item;    // 적용하지 않고 이전 값 반환
+        }    
         return { ...item, cost: updatedCost };
       }
       return item;
     });
     setCostData(updatedData);
-    setEditingItem(null);    // 입력 필드를 버튼으로 되돌림
+    setEditingItem(null); // 입력 필드를 버튼으로 되돌림
   };
-
 
   // 입력 칸의 데이터 변화
   const handlerInputChange = (itemId) => {
@@ -253,6 +259,7 @@ function CostPage() {
                           {/* 아이템의 cost 상태에 따라 버튼 또는 입력 필드 표시 */}
                           {editingItem === category.item_id ? (
                             <InputField
+                              type="number"
                               defaultValue={category.cost !== null ? `${category.cost}` : ''}
                               onKeyDown={(e) => handlerKeyDown(e, category.item_id)}
                             />
@@ -290,6 +297,7 @@ function CostPage() {
                           {/* 아이템의 cost 상태에 따라 버튼 또는 입력 필드 표시 */}
                           {editingItem === category.item_id ? (
                             <InputField
+                              type="number"
                               defaultValue={category.cost !== null ? `${category.cost}` : ''}
                               onKeyDown={(e) => handlerKeyDown(e, category.item_id)}
                             />
