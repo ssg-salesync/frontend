@@ -140,6 +140,7 @@ const QuantityBt = styled.button`
     font-family: Pretendard-Regular;
     font-size: 100%;
     padding:0;
+    color: #000000;
 
     // 반응형
     @media screen and (max-width: 768px) {

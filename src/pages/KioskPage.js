@@ -32,6 +32,8 @@ const OrderBt = styled.button`
     font-weight: 800;
     border-radius: 0.6rem;
     background: #FFF;
+    white-space: nowrap;
+    color: #000000;
 
     // 애니메이션 적용
     opacity: 0;
@@ -43,6 +45,17 @@ const OrderBt = styled.button`
 
     &:hover {
         background-color: #e0e0e0;
+    }
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+        width:25%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width:23%;
+    }
+    @media screen and (min-width: 1025px) {
+        width:20%;
     }
 `
 
