@@ -12,8 +12,9 @@ const CalendarContainer = styled.div`
 `;
 
 const DropdownButton = styled.button`
-  width: 200px;
-  height: 48px;
+  margin-top: 20%;
+  width: 100%;
+  height: 50%;
   border: 0.8px solid var(--festie-gray-600, #949494);
   border-radius: 10px;
   padding: 0px 12px;

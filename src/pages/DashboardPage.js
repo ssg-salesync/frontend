@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { Doughnut } from 'react-chartjs-2';
 import moment from 'moment';
 import { SalesGetApi } from "../api/dashboard/sales/SalesGetApi";
+import MyCalendar from "../components/dashboard/MyCalendar";
 
 // chart.js arc 에러 해결
 import 'chart.js/auto';
-import MyCalendar from "../components/dashboard/MyCalendar";
 
 /* eslint-disable */
 
@@ -24,29 +24,29 @@ const ComponentDiv = styled.div`
 // 맨 위 글자 영역
 const TitleDiv = styled.div`
   width: 100%;
-  height: 15%;
+  height: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 480px) {
-    font-size: 70%;
+    font-size: 80%;
   }
 
   @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 85%;
+    font-size: 100%;
   }
 
   @media screen and (min-width: 1025px) {
-    font-size: 100%;
+    font-size: 120%;
   }
 `;
 
 // 드롭다운 영역
 const DropdownDiv = styled.div`
   width: 100%;  
-  height: 10%;
+  height: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +67,7 @@ const DropdownDiv = styled.div`
 
 // 드롭다운 컨테이너
 const DropdownContainer = styled.div`
-  // margin-top: 5%;
+  margin-top: 2%;
   width: 35%;
 `;
 
@@ -76,7 +76,7 @@ const Dropdown = styled.select`
   border: none;
   border-bottom: 2px solid #1C395E;
   width: 100%;
-  height: 100%;
+  height: 50%;
   font-family: Pretendard-Regular;
   font-size: 85%;
 
@@ -106,18 +106,84 @@ const DropdownOption = styled.option`
 
 // 대시보드 영역
 const DashboardDiv = styled.div`
-  height: 65%;
+  height: 75%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+`;
+
+// 도넛, 텍스트 전체 영역
+const DoughnutDiv = styled.div`
+  height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 5%;
+`;
+
+// 도넛 영역
+const DoughnutContainer = styled.div`
+  height: 80%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  // background-color: white;
+  justify-content: center;
+  border-radius: 0.5625rem;
+`;
+
+// 도넛 텍스트 영역
+const DoughnutTextContainer = styled.div`
+  height: 80%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  justify-content: center;
+  border-radius: 0.5625rem;
+`;
+
+// 그래프, 텍스트 전체 영역
+const GraphDiv = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
-// 최하단 영역
-const BottomDiv = styled.div`
-  height: 10%;
+// 그래프 영역
+const GraphContainer = styled.div`
+  height: 80%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  // background-color: white;
+  justify-content: center;
+  border-radius: 0.5625rem;
+`;
+
+// 그래프 텍스트 영역
+const GraphTextContainer = styled.div`
+  height: 80%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  // background-color: white;
+  justify-content: center;
+  border-radius: 0.5625rem;
+`;
+
+// 버튼 영역
+const BottonDiv = styled.div`
+  height: 5%;
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
 `;
 
@@ -152,19 +218,27 @@ const SubmitButton = styled.button`
 
 function DashboardPage() {
 
-  const [date, setDate] = useState("날짜를 선택해주세요.");
+  // default 오늘 날짜
+  const today = moment().format("YYYY-MM-DD");
 
+  // calendar용 날짜 상태 저장
+  const [date, setDate] = useState(today);
+
+  // 변경된 날짜 이벤트 핸들러
   const handlerDateChange = (date) => {
     setDate(moment(date).format("YYYY-MM-DD"));
-    // setSelectedDate(date);
   };
 
+  // 판매 데이터 상태 저장
   const [saleData, setSaleData] = useState([]);
+  
+  // 대시보드 타입 상태 저장
+  const [selectedDashboardType, setSelectedDashboardType] = useState('매출');
 
-  const [selectedDashboardType, setSelectedDashboardType] = useState('');
-
+  // 차트 데이터 상태 저장
   const [chartData, setChartData] = useState({});
 
+  // 드롭다운 대시보드 타입 목록
   const dashboardType = [
     '매출',
     '순이익'
@@ -176,10 +250,11 @@ function DashboardPage() {
     setSelectedDashboardType(selectedType);
   };
 
+  // Chart.js에 GET으로 가져온 데이터 보여주기
   useEffect(() => {
     async function fetchData() {
       try {
-        if (selectedDashboardType === '매출') { // 추가: '매출'일 때만 데이터 가져오도록
+        if (selectedDashboardType === '매출') {
           const data = await SalesGetApi(date);
           setSaleData(data?.items || []);
           const chartData = {
@@ -195,7 +270,7 @@ function DashboardPage() {
           };
           setChartData(chartData);
         } 
-        else if (selectedDashboardType === '순이익') { // 추가: '매출'일 때만 데이터 가져오도록
+        else if (selectedDashboardType === '순이익') {
           const data = await SalesGetApi(date);
           setSaleData(data?.items || []);
           const chartData = {
@@ -210,16 +285,14 @@ function DashboardPage() {
             ],
           };
           setChartData(chartData);
-        } 
-
-
+        };
       } catch (error) {
         console.log(error);
-      }
-    }
-  
+      };
+    };
     fetchData();
-  }, [date, selectedDashboardType]); // selectedDashboardType 추가
+  }, [date, selectedDashboardType]);
+
   return (
     <ComponentDiv>
       <TitleDiv>
@@ -228,10 +301,9 @@ function DashboardPage() {
       <DropdownDiv>
         <MyCalendar date={date} onDateChange={handlerDateChange} />
         <DropdownContainer>
-          <Dropdown onChange={handlerDashboardTypeSelect}>
-            <option value="" disabled selected hidden>원하는 대시보드를 선택해주세요.</option>
-            {dashboardType.map((type, index) => (
-              <DropdownOption key={index} value={type}>
+          <Dropdown onChange={handlerDashboardTypeSelect} value={selectedDashboardType}>
+            {dashboardType.map((type, idx) => (
+              <DropdownOption key={idx} value={type}>
                 {type}
               </DropdownOption>
             ))}
@@ -239,24 +311,44 @@ function DashboardPage() {
         </DropdownContainer>
       </DropdownDiv>
       <DashboardDiv>
-        {/* 원형차트 추가 */}
-        {chartData.labels && chartData.datasets && (
-          <Doughnut
-            data={chartData}
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-            }}
-          />
-        )}
+        <DoughnutDiv>
+          <DoughnutContainer>
+            {chartData.labels && chartData.datasets && (
+              <Doughnut
+                data={chartData}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                }}
+              />
+            )}
+          </DoughnutContainer>
+          <DoughnutTextContainer>
+            <h1>
+              여기는 도넛 텍스트
+            </h1>
+          </DoughnutTextContainer>
+        </DoughnutDiv>
+        <GraphDiv>
+          <GraphContainer>
+            <h1>
+              여기는 꺾은선 그래프
+            </h1>
+          </GraphContainer>
+          <GraphTextContainer>
+            <h1>
+              여기는 꺾은선 텍스트
+            </h1>
+          </GraphTextContainer>
+        </GraphDiv>
       </DashboardDiv>
-      <BottomDiv>
+      <BottonDiv>
         <Link to="/home">
           <SubmitButton>홈으로</SubmitButton>
         </Link>
-      </BottomDiv>
+      </BottonDiv>
     </ComponentDiv>
   );
 };
 
-export default DashboardPage
+export default DashboardPage;
