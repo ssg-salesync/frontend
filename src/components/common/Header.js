@@ -31,11 +31,18 @@ const BtDiv = styled.div`
 // kiosk
 const BtContainer = styled.div`
     height: 100%;
-    width: 40%;
+    width: 43%;
     // display: flex;
     // align-items : center;
     // margin-right: 2%;
     // gap: 10%; /* 버튼 사이의 간격 조절 */
+    // 반응형
+    @media screen and (max-width: 768px) {
+        width: 55%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 49%;
+    }
 `;
 const BtInnerContainer = styled.div`
     height: 100%;
@@ -44,6 +51,16 @@ const BtInnerContainer = styled.div`
     align-items : center;
     justify-content: center;
     gap: 4%;
+
+    // 반응형
+    @media screen and (max-width: 768px) {
+        gap: 10%;
+        width: 55%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 49%;
+        gap: 7%;
+    }
 `;
 const BtInner = styled.div`
     height: 55%;
@@ -60,7 +77,7 @@ const Bt = styled.button`
 
     font-family: 'Pretendard-Regular';
     font-size: 110%;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
     border: none;
     display: flex;
     justify-content: center;
@@ -68,12 +85,16 @@ const Bt = styled.button`
     background-color: #2D69C4;
     color: #FFF;
 
-    // 반응형에 맞게 폰트 크기 조정
-    @media screen and (max-width: 750px) {
+    // 반응형
+    @media screen and (max-width: 768px) {
       font-size: 55%;
+      height: 55%;
+      width: 150%;
     }
-    @media screen and (min-width: 750px) and (max-width: 1024px) {
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
       font-size: 70%;
+      height: 63%;
+      width: 130%;
     }
     @media screen and (min-width: 1025px) {
       font-size: 105%;
@@ -86,10 +107,19 @@ const ToggleContainer = styled.div`
   cursor: pointer;
 
   > .toggle-container {
-    // width: 50px;
-    // height: 24px;
-    width: 50px;
-    height: 24px;
+    width: 58px;
+    height: 30px;
+    
+    // 반응형
+    @media screen and (max-width: 768px) {
+        width: 38px;
+        height: 20px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 48px;
+        height: 25px;
+    }
+
     border-radius: 30px;
     background-color: #868686;}
 
@@ -103,15 +133,37 @@ const ToggleContainer = styled.div`
     position: absolute;
     top: 1px;
     left: 1px;
-    width: 22px;
-    height: 22px;
+    width: 28px;
+    height: 28px;
+    // width: 22px;
+    // height: 22px;
+
+    // 반응형
+    @media screen and (max-width: 768px) {
+        width: 18px;
+        height: 18px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 23px;
+        height: 23px;
+    }
+    
     border-radius: 50%;
     background-color: rgb(255,254,255);
     transition : 0.5s
-    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
 
+    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
   } >.toggle--checked {
-    left: 27px;
+    left: 29px;
+
+    // 반응형
+    @media screen and (max-width: 768px) {
+        left: 19px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        left: 24px;
+    }
+    
     transition : 0.5s
   }
 `;
@@ -124,10 +176,10 @@ const Desc = styled.div`
   font-weight: 1000;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 768px) {
     font-size: 70%;
   }
-  @media screen and (min-width: 750px) and (max-width: 1024px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 90%;
   }
   @media screen and (min-width: 1025px) {
