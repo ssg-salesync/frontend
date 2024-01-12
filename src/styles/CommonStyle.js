@@ -65,13 +65,13 @@ export const TitleDiv = styled.div`
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
-    font-size: 100%;
+    font-size: 140%;
   }
   @media screen and (min-width: 768px) and (max-width: 1024px) {
-    font-size: 130%;
+    font-size: 180%;
   }
   @media screen and (min-width: 1025px) {
-    font-size: 230%;
+    font-size: 225%;
   }
 `;
 
