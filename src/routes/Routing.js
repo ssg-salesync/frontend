@@ -14,6 +14,7 @@ import CashPage from "../popup/CashPopup";
 import CostPage from "../pages/CostPage";
 import InfoNpwPage from "../pages/InfoNpwPage";
 import KioskPage from "../pages/KioskPage";
+import NotFound from "../pages/NotFound";
 import SplashPage from "../pages/SplashPage";
 
 function Routing() {
@@ -36,6 +37,8 @@ function Routing() {
       <Route path="/order/:tableId/payment/cash" element={<CashPage/>}/>
 
       <Route path="/kiosk" element={<KioskPage/>}/>
+       {/* NotFound 페이지를 가장 맨 아래에 위치 */}
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   );
 };
