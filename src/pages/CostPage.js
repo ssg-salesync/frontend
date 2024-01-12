@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useRef, useState, useEffect } from 'react';
-import { CostGetApi } from "../api/dashboard/cost/CostGetApi";
-import { CostPostApi } from "../api/dashboard/cost/CostPostApi";
+import { useState, useEffect } from 'react';
+import { CostsGetApi } from "../api/dashboard/costs/CostsGetApi";
+import { CostsPostApi } from "../api/dashboard/costs/CostsPostApi";
 
 /* eslint-disable */
 
@@ -106,7 +106,7 @@ const Td = styled.td`
   text-align: center;
 `;
 
-const Button = styled.button`
+const CostButton = styled.button`
   width: 100%;
   height: 100%;
   border-radius: 0.5625rem;
@@ -136,44 +136,45 @@ const InputField = styled.input`
 
 function CostPage() {
   
-
-
+  // GET으로 받아온 데이터와 새로 입력한 데이터의 상태 관리
   const [costData, setCostData] = useState([]);
 
+  // 아이템의 입력 상태 관리
+  const [editingItem, setEditingItem] = useState(null);
 
-   // 아이템의 입력 상태 관리를 위한 state 추가
-   const [editingItem, setEditingItem] = useState(null);
 
-   // 수정된 값을 저장하는 함수
-   const handlerEdit = (itemId, updatedCost) => {
-     const updatedData = costData.map(item => {
-       if (item.item_id === itemId) {
-         return { ...item, cost: updatedCost };
-       }
-       return item;
-     });
-     setCostData(updatedData);
-     setEditingItem(null); // 입력 필드를 버튼으로 되돌림
-   };
+  // 수정된 값을 저장
+  const handlerEdit = (itemId, updatedCost) => {
+    const updatedData = costData.map(item => {
+      if (item.item_id === itemId) {
+        return { ...item, cost: updatedCost };
+      }
+      return item;
+    });
+    setCostData(updatedData);
+    setEditingItem(null);    // 입력 필드를 버튼으로 되돌림
+  };
 
-  
 
+  // 입력 칸의 데이터 변화
   const handlerInputChange = (itemId) => {
     setEditingItem(itemId);
   };
 
-  // Enter 키를 눌렀을 때 값을 저장하는 함수
-  const handlerKeyDown = (event, itemId) => {
-    if (event.key === 'Enter') {
-      handlerEdit(itemId, event.target.value);
+
+  // Enter 키를 눌렀을 때 값을 저장
+  const handlerKeyDown = (e, itemId) => {
+    if (e.key === 'Enter') {
+      handlerEdit(itemId, e.target.value);
     }
   };
 
 
+  // GET 메서드로 기존 costData 가져옴
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await CostGetApi();
+        const data = await CostsGetApi();
         setCostData(data.items);
       } catch (err) {
         console.error(err);
@@ -184,15 +185,17 @@ function CostPage() {
 
   console.log('costData: ', costData)
 
-  const handlerComplete = async () => {
+
+  // 완료버튼 클릭시 POST로 데이터 보냄
+  const handlerSubmit = async () => {
     try {
       const itemsToSend = costData
         .filter(item => item.cost !== null)
-        .map(item => ({ item_id: item.item_id, cost: parseInt(item.cost) }));
+        .map(item => ({ item_id: item.item_id, cost: parseInt(item.cost) }));   // Request Body에 맞게 파싱
 
       console.log('POST 데이터 확인: ', itemsToSend)
 
-      await CostPostApi({ items: itemsToSend });
+      await CostsPostApi({ items: itemsToSend });
     } catch (err) {
       console.error(err);
     };
@@ -202,22 +205,26 @@ function CostPage() {
   // 2개씩 카테고리를 나열하는 함수
   const renderCategories = () => {
     if (costData.length === 0) {
-      return <div><h1>Loading...</h1></div>; // 랜더링 시 로딩을 표시
-    }
-  
-    const sortedData = {}; // category_id 별로 데이터 정리
+      return <div><h1>Loading...</h1></div>;    // 랜더링 시 로딩을 표시
+    };
+    
+    // category_id 별로 데이터 정리
+    const sortedData = {};   
+
+    // id와 name으로 아이템 정렬
     costData.forEach((item) => {
       const { category_id, category_name } = item;
+
       if (!sortedData[category_id]) {
         sortedData[category_id] = { category_name, items: [] };
-      }
+      };
+
       sortedData[category_id].items.push(item);
     });
   
     const categoryIds = Object.keys(sortedData);
     const categoryRows = [];
     
-  
     // category_id에 따라 홀수는 왼쪽으로, 짝수는 오른쪽으로
     for (let i = 0; i < categoryIds.length; i += 2) {
       const categoryId1 = categoryIds[i];
@@ -250,9 +257,9 @@ function CostPage() {
                               onKeyDown={(e) => handlerKeyDown(e, category.item_id)}
                             />
                           ) : (
-                            <Button onClick={() => handlerInputChange(category.item_id)}>
+                            <CostButton onClick={() => handlerInputChange(category.item_id)}>
                               {category.cost !== null ? `${category.cost}` : '입력'}
-                            </Button>
+                            </CostButton>
                           )}
                         </Td>
                       </tr>
@@ -287,9 +294,9 @@ function CostPage() {
                               onKeyDown={(e) => handlerKeyDown(e, category.item_id)}
                             />
                           ) : (
-                            <Button onClick={() => handlerInputChange(category.item_id)}>
+                            <CostButton onClick={() => handlerInputChange(category.item_id)}>
                               {category.cost !== null ? `${category.cost}` : '입력'}
-                            </Button>
+                            </CostButton>
                           )}
                         </Td>
                       </tr>
@@ -301,10 +308,9 @@ function CostPage() {
           </div>
         </div>
       );
-  
+      // 새로 추가된 카테고리(데이터상) 마다 새로운 열 추가
       categoryRows.push(categoryRow);
-    }
-  
+    };
     return categoryRows;
   };
 
@@ -317,10 +323,10 @@ function CostPage() {
         {renderCategories()}
       </CostDiv>
       <Link to="/home">
-        <SubmitButton type="button" onClick={handlerComplete}>완료</SubmitButton>
+        <SubmitButton type="button" onClick={handlerSubmit}>완료</SubmitButton>
       </Link>
     </ComponentDiv>
   );
-}
+};
 
 export default CostPage;

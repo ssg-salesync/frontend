@@ -34,7 +34,19 @@ const Button = styled.button`
     height: 100%;
     background-color:#D9D9D9;
     font-family: Pretendard-Regular;
-    font-size: 1rem;
+    font-size: 150%;
+    white-space: nowrap;
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 90%;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 120%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 150%;
+    }
 `
 /* eslint-disable */
 function PaymentWay({closePaymentPopup,tableId}) {

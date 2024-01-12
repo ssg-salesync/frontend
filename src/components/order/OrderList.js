@@ -10,13 +10,28 @@ const ListTable = styled.table`
     border-spacing: 0 10px; /* 수평 간격은 0, 수직 간격은 10px로 설정 */
 `
 const ListTbody = styled.tbody`
-
+    font-size: 100%;
+    white-space: nowrap;
 `
 const ListTr = styled.tr`
     height: 2.5rem;
+    white-space: nowrap;
+
     &:not(:last-child) {
         margin: 1rem; /* 마지막 행을 제외한 모든 행에 간격을 주는 부분 */
         background: #E4F4FF;
+    }
+
+    // 반응형에 맞게 폰트 크기 조정
+    @media screen and (max-width: 768px) {
+      font-size: 80%;
+      height: 1.8rem;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      font-size: 100%;
+    }
+    @media screen and (min-width: 1025px) {
+      font-size: 120%;
     }
 `
 const ListTd = styled.td`
@@ -42,7 +57,7 @@ function OrderList(){
                     <ListTr key={item.item_id} style={{background: '#FFF'}}>
                         <ListTd>{category.category_name}</ListTd>
                         <ListTd>{item.name}</ListTd>
-                        <ListTd>{item.price}원</ListTd>
+                        {/* <ListTd>{item.price}원</ListTd> */}
                         <ListTd>{item.quantity}개</ListTd>
                     </ListTr>
                     )
