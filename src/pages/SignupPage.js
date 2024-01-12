@@ -308,7 +308,8 @@ function SignupPage() {
   return (
     <TotalDiv>
     <ComponentDiv>
-      <TitleDiv>회원가입을 위해 아이디와 <br/>비밀번호를 입력해주세요.</TitleDiv>
+      <TitleDiv>회원가입을 위해 <br/>개인정보를 입력해주세요.</TitleDiv>
+      {/* <TitleDiv>회원가입을 위해 아이디와 <br/>비밀번호를 입력해주세요.</TitleDiv> */}
       <InsertDiv>
         <InputField
           type="text"

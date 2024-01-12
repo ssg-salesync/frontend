@@ -202,7 +202,7 @@ const OrderBt = styled.button`
     color: #FFF;
     // width: 15%;
     // height: 60%;
-    padding: 6px 14px;
+    padding: 10px 18px;
     font-family: Pretendard-Regular;
     font-size: 145%;
     margin: 1%;
@@ -214,13 +214,13 @@ const OrderBt = styled.button`
 
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 750px) {
-    font-size: 40%;
+    font-size: 70%;
     }
     @media screen and (min-width: 750px) and (max-width: 1024px) {
     font-size: 100%;
     }
     @media screen and (min-width: 1025px) {
-    font-size: 145%;
+    font-size: 120%;
     }
 `
 // const OrderCheckBt = styled.button`

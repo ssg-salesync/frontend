@@ -201,14 +201,15 @@ function LoginPage() {
   return (
     <TotalDiv>
     <ComponentDiv>
-      <TitleDiv>로그인을 위해 아이디와<br/>비밀번호를 입력해주세요.</TitleDiv>
+      {/* <TitleDiv>로그인을 위해 아이디와<br/>비밀번호를 입력해주세요.</TitleDiv> */}
+      <TitleDiv>로그인</TitleDiv>
       <InsertDiv>
         <InputField
           type="text"
           name="username"
           value={loginData.username}
           onChange={handlerInputChange}
-          placeholder="ID"
+          placeholder="아이디"
           ref={usernameRef}
           />
         <InputField
@@ -216,7 +217,7 @@ function LoginPage() {
           name="password"
           value={loginData.password}
           onChange={handlerInputChange}
-          placeholder="PW"
+          placeholder="비밀번호"
           />
         <br/>
       </InsertDiv>

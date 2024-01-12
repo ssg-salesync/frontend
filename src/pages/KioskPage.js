@@ -28,16 +28,17 @@ const OrderBt = styled.button`
     width:20%;
     border: none;
     font-family: 'Pretendard-Regular';
-    font-size: 1rem;
+    font-size: 180%;
+    font-weight: 800;
     border-radius: 0.6rem;
-    background: #D9D9D9;
+    background: #FFF;
 
     // 애니메이션 적용
     opacity: 0;
     ${({ visible }) =>
         visible &&
         css`
-            animation: ${fadeIn} 1s ease-in-out forwards;
+            animation: ${fadeIn} 0.5s ease-in-out forwards;
         `}
 
     &:hover {
