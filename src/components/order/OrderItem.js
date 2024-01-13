@@ -9,6 +9,7 @@ import { OrderGetTableApi } from "../../api/Orders/OrderGetTableApi";
 import { OrdersPutApi } from "../../api/Orders/OrdersPutApi";
 import { OrdersPostApi } from "../../api/Orders/OrdersPostApi";
 import { OrderCancelApi } from "../../api/Orders/OrderCancelApi";
+import { KioskState } from "../../recoil/atoms/KioskState";
 
 const TabDiv = styled.div`
     height : 100%;
@@ -267,6 +268,7 @@ function OrderItem({tableId,closeOrderPopup}) {
     const [newOrder,setNewOrder] = useState(false)
     // 주문수정ing 상태 체크(결제x = false, 결제o = true)
     const [orderCheckBt,setOrderCheckBt] = useRecoilState(OrderCheckState)
+    const kioskState = useRecoilValue(KioskState)
     // 메뉴 가져오기 
     const getDefaultData = async() =>{
         console.log("getDefaultData-start")
@@ -442,12 +444,16 @@ function OrderItem({tableId,closeOrderPopup}) {
             // .catch((err)=>console.log(err))
         }
         setOrderCheckBt(true)
-        closeOrderPopup();
+        if(kioskState !== true){
+            closeOrderPopup();
+        }      
     }
     const orderCancel=()=>{
         const cancelOrder = OrderCancelApi(tableId);
         console.log("cancelOrder",cancelOrder)
-        closeOrderPopup();        
+        if(kioskState !== true){
+            closeOrderPopup();
+        }        
     }
     
     return(
