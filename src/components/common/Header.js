@@ -192,7 +192,7 @@ const Desc = styled.div`
 `;
 /* eslint-disable */ 
 function Header() {
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
 
     const [userCheck,setUserCheck]=useRecoilState(UserCheckState)
@@ -213,20 +213,20 @@ function Header() {
             console.log("/")
             navigate('/');
         }else if(userCheck){
-            console.log("/home")
             navigate('/home');
         }
     }
     const tokenCheckfunc=()=>{
         const tokenCheck = localStorage.getItem('access_token')
         console.log("tokenCheck",tokenCheck)
+
         if(tokenCheck !== null){
             setUserCheck(true)
         }else{
             setUserCheck(false)
-            navigate("/")
         }
     }
+
     useEffect(()=>{
         tokenCheckfunc()
     },[userCheck])
