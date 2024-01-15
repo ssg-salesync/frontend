@@ -8,6 +8,7 @@ const PrivateRoute = ({element})=>{
     
     console.log("PrivateRoute")
     console.log("userCheck",userCheck)
+    console.log("element",element)
     return userCheck ? element : <Navigate replace to="/"/>;
 }
 export default PrivateRoute;

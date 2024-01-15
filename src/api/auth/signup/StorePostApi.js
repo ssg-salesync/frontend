@@ -6,8 +6,7 @@ import URL from '../../BaseUrl';
 export async function StorePostApi(data) {
     try{
         await axios.post(`${URL}/stores/`, data).then(res => {
-            console.log('res입니다',res);
-            console.log('res.data입니다', res.data)
+            console.log('StorePostApi', res.data)
             return res.data;
         })
     } catch(err) {
