@@ -2,8 +2,9 @@ import './App.css'
 // import GlobalStyle from './styles/GlobalStyle';
 // import { Reset } from "styled-reset"
 import { RecoilRoot } from 'recoil';
-import Header from "./components/common/Header";
-import Footer from "./components/common/Footer";
+// import ErrorBoundary from './components/common/ErrorBoundary';
+// import Header from "./components/common/Header";
+// import Footer from "./components/common/Footer";
 import Routing from './routes/Routing';
 
 function App() {
@@ -13,9 +14,7 @@ function App() {
       {/ <GlobalStyle/>  /}
       {/ Recoil 사용하기 위한 설정 */}
       <RecoilRoot>
-      {/* <header> */}
-        {/* <Header/> */}
-      {/* </header> */}
+      {/* <Header/> */}
       <main>
           <Routing/>
       </main>

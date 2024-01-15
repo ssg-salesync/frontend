@@ -19,6 +19,7 @@ import WelcomePage from "../pages/WelcomePage";
 import Layout from "../components/common/Layout";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import InternalErrorPage from "../pages/InternalErrorPage";
 
 /* eslint-disable*/
 function Routing() {
@@ -43,34 +44,10 @@ function Routing() {
       <Route path="/kiosk" element={<PrivateRoute element={<KioskPage />} />} />
     </Route>
     <Route path="/" element={<WelcomePage/>} />
+    <Route path="/internalerror" element={<InternalErrorPage />} />
     {/* NotFound 페이지를 가장 맨 아래에 위치 */}
     <Route path="/*" element={<NotFoundPage />} />
   </Routes>
-       
-    // <Routes>
-    //   <Route element={<Layout />}>
-    //   <Route path="/" element={<WelcomePage/>}/>
-    //   <Route path="/login" element={<LoginPage/>}/>
-    //   <Route path="/signup" element={<SignupPage/>}/>
-    //   <Route path="/home" element={<Home/>}/>
-    //   <Route path="/signup/stores" element={<StorePage/>}/>
-    //   <Route path="/signup/stores/pos" element={<PosPage/>}/>
-    //   <Route path="/mypage" element={<MyPage/>}/>
-    //   <Route path="/mypage/info" element={<InfoPage/>}/>
-    //   <Route path="/mypage/info/newpassword" element={<InfoNpwPage/>}/>
-    //   <Route path="/mypage/cost" element={<CostPage/>}/>
-    //   <Route path="/mypage/dashboard" element={<DashboardPage/>}/>
-    //   <Route path="/order/:tableId" element={<OrderPopup/>}/>
-    //   <Route path="/order/:tableId/payment" element={<PaymentPage/>}/>
-    //   <Route path="/order/:tableId/payment/card" element={<CardPage/>}/>
-    //   <Route path="/order/:tableId/payment/cash" element={<CashPage/>}/>
-
-    //   <Route path="/kiosk" element={<KioskPage/>}/>
-    //   </Route>
-    //    {/* NotFound 페이지를 가장 맨 아래에 위치 */}
-    //    <Route path="/*" element={<NotFoundPage />} />
-       
-    // </Routes>
   );
 };
 
