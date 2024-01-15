@@ -257,22 +257,33 @@ function StorePage() {
     // API 호출
     StorePostApi(data)
     .then(res => {
-      console.log('API 호출 성공:', res);
+      console.log('StorePostApi complete');
 
       // 첫 번째 API 호출이 성공한 후에 두 번째 API 호출
       const tokenData = {
         username: storesData.username,
         password: storesData.password
       };
-
       // 다음 페이지로 넘어감
-      navigate('/signup/stores/pos');
-
+      // navigate('/signup/stores/pos');
+      console.log('StoreTokenPostApi complete');
       return StoreTokenPostApi(tokenData);
     })
-    .then(tokenRes => {
+    .then(async tokenRes => {
       console.log('토큰 발급 성공: ', tokenRes);
       setUserCheck(true)
+      console.log("토큰발급후 넘어가기 직전 userCheck")
+      
+      await tokenRes;
+
+      // 5초 후에 모달을 닫는 함수 호출
+      setTimeout(() => {
+        navigate('/signup/stores/pos');
+        console.log("/signup/stores/pos 로 setTimeOut")
+      },0);
+
+      // console.log("토큰발급후 넘어감")
+      // navigate('/signup/stores/pos');
     })
     .catch(err => {
       console.error('API 호출 또는 토큰 발급 실패: ', err);
@@ -309,7 +320,7 @@ function StorePage() {
             value={selectedStoreType}
             onChange={handlerStoreTypeSelect}
           >
-            <DropdownOption value='' disabled selected hidden>업종</DropdownOption>
+            <DropdownOption value='' disabled hidden>업종</DropdownOption>
             {storeTypes.map((type, idx) => (
               <DropdownOption key={idx} value={type}>
                 {type}
@@ -319,7 +330,7 @@ function StorePage() {
         </DropdownContainer>
       </InsertDiv>
       <ButtonDiv>
-          <NextButton type="submit" onClick={handlerNextClick}>다음</NextButton>
+          <NextButton type="button" onClick={handlerNextClick}>다음</NextButton>
       </ButtonDiv>
     </ComponentDiv>
     </TotalDiv>

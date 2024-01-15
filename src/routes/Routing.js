@@ -1,4 +1,5 @@
 import { Navigate, Route, Router, Routes} from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import Home from "../pages/Home";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
@@ -19,18 +20,20 @@ import WelcomePage from "../pages/WelcomePage";
 import Layout from "../components/common/Layout";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import { UserCheckState } from "../recoil/atoms/UserState";
 
 /* eslint-disable*/
 function Routing() {
+  // const userCheck = useRecoilValue(UserCheckState)
 
   return(
     <Routes>
     <Route element={<Layout />}>      
-      <Route path="/login" element={<PublicRoute element={<LoginPage />} />} />
-      <Route path="/signup" element={<PublicRoute element={<SignupPage />} />} />
+      {/* <Route path="/login" element={<PublicRoute element={<LoginPage />} />} /> */}
+      {/* <Route path="/signup" element={<PublicRoute element={<SignupPage />} />} /> */}
+      {/* <Route path="/signup/stores" element={<PublicRoute element={<StorePage />} />} /> */}
+      <Route path="/signup/stores/pos" element={<PrivateRoute element={<PosPage />}/>} />
       <Route path="/home" element={<PrivateRoute element={<Home />} />} />
-      <Route path="/signup/stores" element={<PrivateRoute element={<StorePage />} />} />
-      <Route path="/signup/stores/pos" element={<PrivateRoute element={<PosPage />} />} />
       <Route path="/mypage" element={<PrivateRoute element={<MyPage />} />} />
       <Route path="/mypage/info" element={<PrivateRoute element={<InfoPage />} />} />
       <Route path="/mypage/info/newpassword" element={<PrivateRoute element={<InfoNpwPage />} />} />
@@ -43,6 +46,9 @@ function Routing() {
       <Route path="/kiosk" element={<PrivateRoute element={<KioskPage />} />} />
     </Route>
     <Route path="/" element={<WelcomePage/>} />
+    <Route path="/login" element={<PublicRoute element={<LoginPage />} />} />
+    <Route path="/signup" element={<PublicRoute element={<SignupPage />} />} />
+    <Route path="/signup/stores" element={<PublicRoute element={<StorePage />} />} />
     {/* NotFound 페이지를 가장 맨 아래에 위치 */}
     <Route path="/*" element={<NotFoundPage />} />
   </Routes>

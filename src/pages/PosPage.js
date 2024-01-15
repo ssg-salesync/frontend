@@ -53,28 +53,34 @@ function PosPage() {
 
   // API 호출해서 가져온 카테고리, 아이템 데이터
   useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const categoryResponse = await CategoryGetApi();   // [GET: 카테고리 정보]
-          if (categoryResponse && categoryResponse.categories) {
-            setCategoryData(categoryResponse.categories);
-          } else {
-            setCategoryData([]); // 데이터가 없을 경우 빈 배열 설정
-          };
-  
-          const itemResponse = await ItemGetApi();     // [GET: 아이템 정보]
-          if (itemResponse) {
-            setItemData(itemResponse);
-          } else {
-            setItemData([]); // 데이터가 없을 경우 빈 배열 설정
-          };
+    const fetchData = async () => {
+      try {
+        const categoryResponse = await CategoryGetApi();   // [GET: 카테고리 정보]
+        
+      
+
+        if (categoryResponse && categoryResponse.categories) {
+          setCategoryData(categoryResponse.categories);
           
-        } catch (err) {
-          console.error(err);
+        } else {
+          setCategoryData([]); // 데이터가 없을 경우 빈 배열 설정
         };
+
+        const itemResponse = await ItemGetApi();     // [GET: 아이템 정보]
+        if (itemResponse) {
+          setItemData(itemResponse);
+        } else {
+          setItemData([]); // 데이터가 없을 경우 빈 배열 설정
+        };
+
+        // setSelectedCategory(categoryResponse.categories[0].id)
+        //   console.log('categoryResponse: ',categoryResponse)
+      } catch (err) {
+        console.error(err);
       };
-      fetchData();
-    }, []);
+    };
+    fetchData();
+  }, []);
 
 
 //     useEffect(() => {
