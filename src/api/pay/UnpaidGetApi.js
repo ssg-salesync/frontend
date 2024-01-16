@@ -10,7 +10,6 @@ export async function UnpaidGetApi(){
     //     'X-CSRF-Token' : 'ImE0NWZkNWI4ZDQ3ZGVkN2VkNzQ2MTUwYmEzM2FmNDA1ZGEyZTE4Yzci.ZXpmIg.PjAV8rh96_mPNuQ3EDE-ZUItAsw'
     // }
     const headers = Token()
-    console.log("headers", headers)
 
     try{
         const res = await axios.get(`${URL}/orders/unpaids`,{headers})
