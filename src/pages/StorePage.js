@@ -337,4 +337,4 @@ function StorePage() {
   );
 };
 
-export default StorePages
+export default StorePage
