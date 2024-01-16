@@ -282,6 +282,7 @@ function StorePage() {
         console.log("/signup/stores/pos 로 setTimeOut")
       },0);
 
+
       // console.log("토큰발급후 넘어감")
       // navigate('/signup/stores/pos');
     })
