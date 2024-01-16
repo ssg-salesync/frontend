@@ -32,11 +32,11 @@ export function getAtom(tableId){
 
 export function deleteOrderState(){
     /* eslint-disable */
-    console.log("deleteOrder")
+    // console.log("deleteOrder")
     return useResetRecoilState(TableState)
 }
 export function deleteTotalPriceState(){
     /* eslint-disable */
-    console.log("deleteTotalPrice")
+    // console.log("deleteTotalPrice")
     return useResetRecoilState(TotalPrice)
 }

@@ -104,7 +104,7 @@ function Home() {
         document.body.style.overflow = "hidden";
     }
     const closeOrderPopup = () => {
-        console.log("home.js closeAllPopup : ",closeAllPopup)
+        // console.log("home.js closeAllPopup : ",closeAllPopup)
         setSelectedTableId(null)
         deleteOrder()
         deleteTotalPrice()

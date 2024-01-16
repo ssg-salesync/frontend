@@ -192,6 +192,7 @@ const Desc = styled.div`
 `;
 /* eslint-disable */ 
 function Header() {
+    console.log("Header.js open")
     // const location = useLocation();
     const navigate = useNavigate();
 
@@ -205,16 +206,19 @@ function Header() {
         navigate('/mypage');
     }
     const logoClick=()=>{
-        tokenCheckfunc
+        tokenCheckfunc()
         console.log("userCheck",userCheck)
         if(isKiosk){
             navigate('/kiosk')
-        }else if(!userCheck){
-            console.log("/")
-            navigate('/');
-        }else if(userCheck){
-            navigate('/home');
         }
+        else{
+            navigate('/home')
+        }
+        // else if(!userCheck){
+        //     navigate('/');
+        // }else if(userCheck){
+        //     navigate('/home');
+        // }
     }
     const tokenCheckfunc=()=>{
         const tokenCheck = localStorage.getItem('access_token')
@@ -227,9 +231,9 @@ function Header() {
         }
     }
 
-    useEffect(()=>{
-        tokenCheckfunc()
-    },[userCheck])
+    // useEffect(()=>{
+    //     tokenCheckfunc()
+    // },[userCheck])
     
     //kiosk
     const [isKiosk , setIsKiosk] = useRecoilState(KioskState)
@@ -239,12 +243,19 @@ function Header() {
     }
 
     useEffect(() => {
+        console.log("Header.js - useEffect[isKiosk]")
         // isKiosk 값이 변경될 때마다 실행되는 useEffect를 이용하여 라우팅을 수행합니다.
         if (isKiosk) {
             navigate('/kiosk');
-        } else if(!isKiosk&&userCheck) {
-            navigate('/home');
         }
+        else{
+            console.log("Header.js - useEffect[isKiosk] - !isKiosk")
+            navigate('/home')
+        }
+        // else if(!isKiosk && userCheck) {
+        //     console.log("Header.js - useEffect[isKiosk] - !isKiosk")
+        //     navigate('/home');
+        // }
     }, [isKiosk]);
 
      // 404 에러 페이지에서는 헤더를 숨김
@@ -258,7 +269,7 @@ function Header() {
      
     return (
         <HeaderDiv>
-            {userCheck&&<>
+            {/* {userCheck&&<> */}
             <LogoDiv onClick={logoClick}>
                 <Logo src='/img/salesync_logo.png' alt="logo"/>
             </LogoDiv>
@@ -285,7 +296,8 @@ function Header() {
                 {/* Desc 컴포넌트를 활용*/}
                 {/* Toggle Switch가 ON인 상태일 경우에 Desc 컴포넌트 내부의 텍스트를 'Toggle Switch ON'으로, 그렇지 않은 경우 'Toggle Switch OFF'. 조건부 렌더링을 활용. */}
                 <Desc><div>KIOSK</div></Desc>
-            </BtDiv></>}
+            </BtDiv>
+            {/* </>} */}
         </HeaderDiv>
     );
 };

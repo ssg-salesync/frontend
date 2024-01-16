@@ -302,8 +302,8 @@ function SignupPage() {
     navigate("/signup/stores");
   };
 
-  console.log('넘길 데이터: ', signupData)
-  console.log('비밀번호 확인 데이터: ', passwordData)
+  // console.log('넘길 데이터: ', signupData)
+  // console.log('비밀번호 확인 데이터: ', passwordData)
 
   return (
     <TotalDiv>
