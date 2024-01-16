@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { IoClose } from "react-icons/io5";
+import { useSetRecoilState } from 'recoil';
 import { CategoryPostApi } from '../../api/pos/category/CategoryPostApi';
 import { CategoryGetApi } from '../../api/pos/category/CategoryGetApi';
 import { CategoryPutApi } from '../../api/pos/category/CategoryPutApi';
 import { CategoryDeleteApi } from '../../api/pos/category/CategoryDeleteApi';
+import { CategoryState } from '../../recoil/atoms/CategoryState';
 
 /* eslint-disable */
 
@@ -293,7 +295,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
   // console.log(editModes)
   // console.log('categories: ', categories)
 
-
+  const setCategoryState = useSetRecoilState(CategoryState)
   // 수정, 완료 버튼 클릭 시 새로운 카테고리 등록
   const handlerEditMode = async (idx) => {
     if (editModes[idx]) {
@@ -396,6 +398,15 @@ function PosCategory({ categoryData, setSelectedCategory }) {
     };
   }, [categories, editModes]);
 
+  useEffect(()=>{
+    if(categories.length == 0){
+      setCategoryState(true)
+      console.log("setCategoryState(true)",categories.length)
+    }else{
+      setCategoryState(false)
+      console.log("setCategoryState(false)",categories.length)
+    }
+  },[categories])
 
   // 카테고리 옆의 버튼에 등록, 완료 텍스트 적용
   const getButtonText = (idx) => editModes[idx] ? '등록' : '수정';

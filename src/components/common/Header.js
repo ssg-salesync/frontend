@@ -4,6 +4,8 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { UserCheckState } from "../../recoil/atoms/UserState";
 import { KioskState } from "../../recoil/atoms/KioskState";
+import { CategoryGetApi } from "../../api/pos/category/CategoryGetApi";
+import { CategoryState } from "../../recoil/atoms/CategoryState";
 
 const HeaderDiv = styled.div`
     height: 10vh;
@@ -200,14 +202,15 @@ function Header() {
     const logout=()=>{
         localStorage.removeItem('access_token');
         localStorage.removeItem('csrf_token');
-        tokenCheckfunc()
+        setUserCheck(false)
+        navigate('/')
     }
     const myPage=()=>{
         navigate('/mypage');
     }
     const logoClick=()=>{
         tokenCheckfunc()
-        console.log("userCheck",userCheck)
+
         if(isKiosk){
             navigate('/kiosk')
         }
@@ -222,7 +225,7 @@ function Header() {
     }
     const tokenCheckfunc=()=>{
         const tokenCheck = localStorage.getItem('access_token')
-        console.log("tokenCheck",tokenCheck)
+        console.log("tokenCheckfunc",tokenCheck)
 
         if(tokenCheck !== null){
             setUserCheck(true)
@@ -234,27 +237,104 @@ function Header() {
     // useEffect(()=>{
     //     tokenCheckfunc()
     // },[userCheck])
-    
-    //kiosk
+
+    // category가 빈 값인 경우 true
+    const [categoryCheck,setCategoryCheck] = useState([])
+
+    // API 호출해서 가져온 카테고리, 아이템 데이터
+    // useEffect(() => {
+    //     console.log("Header.js - useEffect[checkCategory]")
+    //     const checkCategory = async () => {
+    //     try {
+    //         const categoryIsNull = await CategoryGetApi(); 
+    //         console.log("categoryIsNull",categoryIsNull.categories.length == 0)
+    //         if (categoryIsNull.categories.length == 0){
+    //             setCategoryCheck(true)
+    //         }
+    //         else{
+    //             setCategoryCheck(false)
+    //         }
+    //         console.log("Header.js - useEffect[checkCategory]-categoryCheck",categoryCheck)
+    //     } catch (err) {
+    //         console.error(err);
+    //     };
+    //     };
+    //     checkCategory();
+    // }, []);
+
+    //kiosk 상태
     const [isKiosk , setIsKiosk] = useRecoilState(KioskState)
+    // 카테고리 데이터 상태 체크 [0인경우 true]
+    const [categoryState, setCategoryState] = useRecoilState(CategoryState)
+    useEffect(()=>{
+        const checkCategory = async () => {
+            try{
+                const category = await CategoryGetApi();
+                if(category.categories.length !== 0){
+                    setCategoryState(false)
+                }else{
+                    setCategoryState(true)
+                }            
+            } catch(err){
+                console.log(err)
+            }
+        }
+        checkCategory()
+    },[])
 
     const kioskHandler =() => {
-        setIsKiosk(!isKiosk)
+        if(categoryState){
+            alert('메뉴를 등록해주세요')
+        }else{
+            setIsKiosk(!isKiosk)
+        }
+        // setIsKiosk(!isKiosk)
     }
 
     useEffect(() => {
-        console.log("Header.js - useEffect[isKiosk]")
+        // console.log("Header.js - useEffect[isKiosk]")
+        // const checkCategory = async () => {
+        //     try{
+        //         const category = await CategoryGetApi();
+        //         console.log("category.categories.length",category.categories.length)
+        //         setCategoryCheck(category)
+        //         console.log(categoryCheck)
+        //         if(category.categories.length !== 0){
+        //             if(isKiosk){
+        //                 navigate('/kiosk');
+        //             }else if(!isKiosk && category.categories.length !== 0){
+        //                 console.log("Header.js - useEffect[isKiosk] - !isKiosk");
+        //                 navigate('/home');
+        //             }  
+        //         }else{
+        //             // setIsKiosk(!isKiosk)
+        //             alert('메뉴를 등록해주세요')
+        //             // navigate('/signup/stores/pos');
+        //             // setIsKiosk(!isKiosk)
+        //         }            
+        //     } catch(err){
+        //         console.log(err)
+        //     }            
+        // }
+        // checkCategory()
+        // const categoryCheck = await checkCategory()
+
+        // console.log("Header.js - useEffect[isKiosk]-categoryCheck",categoryCheck)
+
         // isKiosk 값이 변경될 때마다 실행되는 useEffect를 이용하여 라우팅을 수행합니다.
         if (isKiosk) {
             navigate('/kiosk');
         }
-        else{
+        else if(!isKiosk && !categoryState){
             console.log("Header.js - useEffect[isKiosk] - !isKiosk")
             navigate('/home')
         }
-        // else if(!isKiosk && userCheck) {
-        //     console.log("Header.js - useEffect[isKiosk] - !isKiosk")
-        //     navigate('/home');
+
+        // else if(!isKiosk) {
+        //     if(categoryCheck.length == 0){
+        //         console.log("Header.js - useEffect[isKiosk] - !isKiosk")
+        //         navigate('/home');
+        //     }
         // }
     }, [isKiosk]);
 

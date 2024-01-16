@@ -279,8 +279,8 @@ function StorePage() {
       // 5초 후에 모달을 닫는 함수 호출
       setTimeout(() => {
         navigate('/signup/stores/pos');
-        console.log("/signup/stores/pos 로 setTimeOut")
-      },0);
+        console.log("=========================================")
+      },500);
 
       // console.log("토큰발급후 넘어감")
       // navigate('/signup/stores/pos');
@@ -337,4 +337,4 @@ function StorePage() {
   );
 };
 
-export default StorePage
+export default StorePages

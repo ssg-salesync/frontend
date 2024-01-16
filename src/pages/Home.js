@@ -9,6 +9,15 @@ import { deleteOrderState,deleteTotalPriceState } from "../components/func/AtomD
 import { UnpaidGetApi } from "../api/pay/UnpaidGetApi";
 import { TotalDiv } from "../styles/CommonStyle";
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 const TableDiv = styled.div`
     height:95%;
     width:100%;
@@ -17,6 +26,7 @@ const TableDiv = styled.div`
     grid-template-rows: repeat(2, 50%);
     justify-content: center;
     align-items: center;
+    animation: ${fadeIn} 1s ease-in-out;
     // row-gap: 1%;
     // height: calc((100vh - 40px) / 2);
     // padding: 20px 0;
@@ -35,6 +45,7 @@ const TableDiv = styled.div`
     // }
     
 `;
+
 const TableContainer = styled.div`
     // width: 13rem;
     // height: 13rem;
