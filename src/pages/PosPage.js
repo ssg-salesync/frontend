@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import PosCategory from "../components/pos/PosCategory";
 import PosItem from "../components/pos/PosItem";
@@ -40,6 +40,8 @@ const PosItemDiv = styled.div`
 `;
 
 function PosPage() {
+
+  const navigate = useNavigate();
 
   // API 호출해서 가져온 카테고리 데이터 상태 저장
   const [categoryData, setCategoryData] = useState(null);

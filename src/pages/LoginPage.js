@@ -189,28 +189,27 @@ function LoginPage() {
     };
 
   // API 통신
-    LoginPostApi(data)
-      .then(res => {
-        console.log('로그인 성공 | 토큰 정보: ', res);
-        setUserCheck(true)
-        // 홈으로 넘어감
-        navigate("/home");
-      })
-      .catch(err => {
-        console.error('로그인 실패 ㅣ 에러메세지: ', err.response.status);
-        if (err.response.status === 400) {
-          alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+  LoginPostApi(data)
+  .then(res => {
+    console.log('로그인 성공 | 토큰 정보: ', res);
+    setUserCheck(true);
+    // 홈으로 넘어감
+    navigate("/home");
+  })
+  .catch(err => {
+    console.error('로그인 실패 | 에러메세지: ', err.response.status);
 
-          setLoginData({ ...loginData, username: '', password: ''});
+    if (err.response.status === 400) {
+      alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
 
-          if (usernameRef.current) {
-            usernameRef.current.focus();
-          };
+      setLoginData({ ...loginData, username: '', password: '' });
 
-          return;
-        };
-    });
-  };
+      if (usernameRef.current) {
+        usernameRef.current.focus();
+      };
+    } 
+  });
+};
 
   // console.log('api통신할 전체 데이터: ', loginData)
 
