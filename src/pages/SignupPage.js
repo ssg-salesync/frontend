@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { StoreState } from "../recoil/atoms/StoreState";
 import { SignupPostApi } from "../api/auth/signup/SignupPostApi";
-import { TotalDiv, ComponentDiv, TitleDiv,InsertDiv} from "../styles/CommonStyle";
+import { TotalDiv, ComponentDiv, TitleDiv,InsertDiv,MsgDiv} from "../styles/CommonStyle";
 
 /* eslint-disable */
 // 아이디, 비밀번호 등 입력칸
@@ -75,6 +75,8 @@ const NextButton = styled.button`
 `;
 
 function SignupPage() {
+  // 경고메세지
+  const [msg, setMsg] =useState("")
 
   // 각 필드에 입력한 데이터 상태 저장
   const [signupData, setSignupData] = useState({
@@ -147,7 +149,8 @@ function SignupPage() {
     // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림
     const isValid = isUsernameValid(signupData.username);
     if (!isValid) {
-      alert('아이디: 8~16자의 영문 대/소문자, 숫자를 사용해 주세요.');
+      // alert('아이디: 8~16자의 영문 대/소문자, 숫자를 사용해 주세요.');
+      setMsg('아이디: 8~16자의 영문 대/소문자, 숫자를 사용해 주세요.');
 
       // 입력칸 초기화
       setSignupData({ ...signupData, username: ''});
@@ -170,7 +173,8 @@ function SignupPage() {
     // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림
     const isValid = isPasswordValid(signupData.password);
     if (!isValid) {
-      alert('비밀번호: 10~16자의 영문 대/소문자, 숫자, 특수문자를 최소 1개씩 사용해 주세요.');
+      // alert('비밀번호: 10~16자의 영문 대/소문자, 숫자, 특수문자를 최소 1개씩 사용해 주세요.');
+      setMsg('비밀번호: 10~16자의 영문 대/소문자, 숫자, 특수문자를 최소 1개씩 사용해 주세요.');
 
       // 입력칸 초기화
       setSignupData({ ...signupData, password: ''});
@@ -193,7 +197,8 @@ function SignupPage() {
     // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림
     const isValid = isOwnerNameValid(signupData.ownerName);
     if (!isValid) {
-      alert('이름: 2~20자의 한글, 영문 대/소문자를 사용해 주세요.');
+      setMsg('이름: 2~20자의 한글, 영문 대/소문자를 사용해 주세요.');
+      // alert('이름: 2~20자의 한글, 영문 대/소문자를 사용해 주세요.');
 
       // 입력칸 초기화
       setSignupData({ ...signupData, ownerName: ''});
@@ -216,7 +221,8 @@ function SignupPage() {
     // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림
     const isValid = isPhoneValid(signupData.phone);
     if (!isValid) {
-      alert('전화번호: ㅡ 없이 11자의 숫자를 사용해 주세요.');
+      // alert('전화번호: ㅡ 없이 11자의 숫자를 사용해 주세요.');
+      setMsg('전화번호: ㅡ 없이 11자의 숫자를 사용해 주세요.');
 
       // 입력칸 초기화
       setSignupData({ ...signupData, phone: ''});
@@ -238,7 +244,8 @@ function SignupPage() {
 
     // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림 | 조건: 비밀번호랑 일치하는지
     if (passwordData.confirmPassword !== signupData.password) {
-      alert('비밀번호가 일치하지 않습니다.');
+      // alert('비밀번호가 일치하지 않습니다.');
+      setMsg('비밀번호가 일치하지 않습니다.');
 
       // 입력칸의 상태 초기화
       setPasswordData({ ...passwordData, confirmPassword: ''});
@@ -274,7 +281,8 @@ function SignupPage() {
       !signupData.phone
     ) {
 
-      alert('모든 항목을 입력해주세요.'); 
+      // alert('모든 항목을 입력해주세요.'); 
+      setMsg('모든 항목을 입력해주세요.'); 
       return; // 다음 페이지로 넘어가지 않음
     };
 
@@ -287,7 +295,8 @@ function SignupPage() {
         if (checkResult.result === "failed") {
 
           // 이미 존재하는 아이디인 경우 경고창 알림
-          alert(checkResult.message);
+          // alert(checkResult.message);
+          setMsg(checkResult.message);
           return; // 다음 페이지로 넘어가지 않음
         };
       } catch(err) {
@@ -359,6 +368,8 @@ function SignupPage() {
           placeholder="전화번호"
           ref={phoneRef}
         />
+        <br/>
+        <MsgDiv>{msg}</MsgDiv>
         </InsertDiv>
       <ButtonDiv>
         <div>

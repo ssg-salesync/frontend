@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { useSetRecoilState } from "recoil";
 import {LoginPostApi} from "../api/auth/login/LoginPostApi"
-import {TotalDiv,ComponentDiv,TitleDiv,InsertDiv} from "../styles/CommonStyle"
+import {TotalDiv,ComponentDiv,TitleDiv,InsertDiv, MsgDiv} from "../styles/CommonStyle"
 import { UserCheckState } from "../recoil/atoms/UserState";
 
 /* eslint-disable */
@@ -103,17 +103,28 @@ const InputField = styled.input`
 const ButtonDiv = styled.div`
   height: 20%;
   width: 100%;
-  margin-bottom:10%;
+  margin-bottom:7%;
   gap: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  // 반응형
+  @media screen and (max-width: 768px) {
+    margin-bottom: 7%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    margin-bottom: 7%;
+  }
+  @media screen and (min-width: 1025px) {
+    margin-top:3%;
+  }
 `;
 // 로그인/회원가입 버튼
 const Button = styled.button`
   // width: 20%;
   // height: 40%;
-  padding: 10px 30px;
+  padding: 9px 27px;
   border-radius: 0.5625rem;
   border:none;
   background-color: #1D56A8;
@@ -131,7 +142,7 @@ const Button = styled.button`
     filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
   }
 
-  // 반응형에 맞게 폰트 크기 조정
+  // 반응형
   @media screen and (max-width: 768px) {
     font-size: 40%;
     padding: 5px 15px;
@@ -141,12 +152,13 @@ const Button = styled.button`
     padding: 8px 20px;
   }
   @media screen and (min-width: 1025px) {
-    font-size: 130%;
+    font-size: 120%;
   }
 `;
-
 function LoginPage() {
-
+  // 경고메세지
+  const [msg, setMsg] =useState("")
+ 
   // 로그인에 사용한 아이디, 비밀번호 상태 저장
   const [ loginData, setLoginData ] = useState({
     username: '',
@@ -178,7 +190,8 @@ function LoginPage() {
       !loginData.password
     ) {
 
-      alert('모든 항목을 입력해주세요.');
+      setMsg('모든 항목을 입력해주세요.');
+
       return; // 다음 페이지로 넘어가지 않음
     };
 
@@ -199,7 +212,8 @@ function LoginPage() {
       .catch(err => {
         console.error('로그인 실패 ㅣ 에러메세지: ', err.response.status);
         if (err.response.status === 400) {
-          alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+          // alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+          setMsg('로그인에 실패했습니다.\n 아이디와 비밀번호를 확인해주세요.');
 
           setLoginData({ ...loginData, username: '', password: ''});
 
@@ -236,13 +250,14 @@ function LoginPage() {
           placeholder="비밀번호"
           />
         <br/>
+        <MsgDiv>{msg}</MsgDiv>
       </InsertDiv>
       <ButtonDiv>
         {/* <div> */}
-          <Button type="submit" onClick={handlerLoginClick}>로그인</Button>
+          <Button type="button" onClick={handlerLoginClick}>로그인</Button>
         {/* </div> */}
         {/* <Link to="/signup"> */}
-          <Button type="submit" onClick={handlerSignUpClick}>회원가입</Button>
+          <Button type="button" onClick={handlerSignUpClick}>회원가입</Button>
         {/* </Link> */}
       </ButtonDiv>
     </ComponentDiv>
