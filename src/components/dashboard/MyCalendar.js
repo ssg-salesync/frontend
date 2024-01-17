@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from "styled-components";
 import Calendar from 'react-calendar';
-// import 'react-calendar/dist/Calendar.css';
 import './MyCalendar.css';
 import moment from 'moment';
 
@@ -16,11 +15,10 @@ const DropdownButton = styled.button`
   width: 100%;
   height: 50%;
   border: 0.8px solid var(--festie-gray-600, #949494);
-  border-radius: 10px;
+  border-radius: 0.6rem;
   padding: 0px 12px;
   color: var(--festie-gray-800, #3a3a3a);
   font-family: SUIT Variable;
-  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 140%;
@@ -31,26 +29,32 @@ const DropdownButton = styled.button`
   background-position: right 12px center;
   background-size: 12px;
   cursor: pointer;
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    font-size: 80%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 100%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 120%;
+  }
 `;
 
 const CalendarWrapper = styled.div`
   z-index: 11;
   position: absolute;
   top: 100%;
-  left: 0;
+  left: -90%;
   display: ${(props) => (props.isOpen ? "block" : "none")};
 `;
 
 
-
-function MyCalendar({ date, onDateChange}) {
+function MyCalendar({ date, onDateChange }) {
 
   // 드롭다운과 캘린더 매핑하기 위한 상태 저장
   const [value, onChange] = useState();
-
-  // 선택한 날짜 상태 저장
-  // const [startDate, setStartDate] = useState("날짜를 선택해주세요");
-  // const [endDate, setEndDate] = useState();
 
   // 드롭다운 클릭 시 상태 저장
   const [isOpen, setIsOpen] = useState(false);
@@ -66,8 +70,6 @@ function MyCalendar({ date, onDateChange}) {
   const handlerDateChange = (selectedDate) => {
     onChange(selectedDate);
     setIsOpen(false);
-    // setDate(moment(selectedDate).format("YYYY-MM-DD"));  // 날짜가 선택될 때에 NowDate 값을 넣어주도록 수정
-
     onDateChange(selectedDate)
   };
 
