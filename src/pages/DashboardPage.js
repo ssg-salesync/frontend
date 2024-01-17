@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { Doughnut } from 'react-chartjs-2';
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 import moment from 'moment';
-import { SalesGetApi } from "../api/dashboard/sales/SalesGetApi";
-import MyCalendar from "../components/dashboard/MyCalendar";
-
-// chart.js arc 에러 해결
-import 'chart.js/auto';
+import { PieGetApi } from '../api/dashboard/sales/PieGetApi';
+import MyCalendar from '../components/dashboard/MyCalendar';
+import { LineGetApi } from '../api/dashboard/sales/LineGetApi';
 
 /* eslint-disable */
 
@@ -18,202 +15,124 @@ const ComponentDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: auto;
 `;
 
 // 맨 위 글자 영역
 const TitleDiv = styled.div`
-  width: 100%;
-  height: 5%;
+  height: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
+    font-size: 60%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 80%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 100%;
-  }
-
   @media screen and (min-width: 1025px) {
-    font-size: 120%;
+    font-size: 100%;
   }
 `;
 
-// 드롭다운 영역
-const DropdownDiv = styled.div`
+// 달력, 타입 영역
+const CalendarTypeDiv = styled.div`
   width: 100%;  
   height: 5%;
   display: flex;
+  align-items: flex-start;
+  justify-content: start;
+`;
+
+// 달력 컨테이너
+const CalendarContainer = styled.div`
+  width: 20%;
+  height : 70%;
+  margin-right: 10%;
+  margin-left: 5%;
+  text-align: center;
+  display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: -0.7%;
+`;
+
+// 대시보드 타입 영역
+const TypeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 30%;
+
+`;
+
+// 대시보드 타입 버튼
+const TypeButton = styled.button`
+  border: none;
+  border-bottom: 2px solid #1C395E;
+  width: 50%;
+  height: 100%;
+  font-family: Pretendard-Regular;
+  font-size: 85%;
+  background-color: ${({ active }) => (active ? "#00ADEF" : "transparent")};
+  color: ${({ active }) => (active ? "white" : "#1C395E")};
+  cursor: pointer;
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 70%;
+  @media screen and (max-width: 768px) {
+    font-size: 60%;
   }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 85%;
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 80%;
   }
-
   @media screen and (min-width: 1025px) {
     font-size: 100%;
   }
-`;
-
-// 드롭다운 컨테이너
-const DropdownContainer = styled.div`
-  margin-top: 2%;
-  width: 35%;
-`;
-
-// 드롭다운 스타일
-const Dropdown = styled.select`
-  border: none;
-  border-bottom: 2px solid #1C395E;
-  width: 100%;
-  height: 50%;
-  font-family: Pretendard-Regular;
-  font-size: 85%;
-
-  // 선택한 옵션 스타일
-  option:checked {
-    background-color: #00ADEF;
-    color: white;
-  }
-
-  // 드롭다운 화살표 아이콘 스타일
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%231C395E" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 30px;
-
-  // 반응형 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 70%;
-  }
-`;
-
-// 드롭다운 옵션 스타일
-const DropdownOption = styled.option`
-  font-family: Pretendard-Regular;
 `;
 
 // 대시보드 영역
 const DashboardDiv = styled.div`
-  height: 75%;
+  height: 80%;
   width: 100%;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
 `;
 
-// 도넛, 텍스트 전체 영역
-const DoughnutDiv = styled.div`
+// 파이 컨테이너
+const PieContainer = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 5%;
-`;
-
-// 도넛 영역
-const DoughnutContainer = styled.div`
-  height: 80%;
-  width: 40%;
-  display: flex;
-  align-items: center;
-  // background-color: white;
   justify-content: center;
-  border-radius: 0.5625rem;
-`;
-
-// 도넛 텍스트 영역
-const DoughnutTextContainer = styled.div`
-  height: 80%;
-  width: 40%;
-  display: flex;
   align-items: center;
-  background-color: white;
-  justify-content: center;
-  border-radius: 0.5625rem;
+
+  // 마우스 포인터 버그 해결을 위해 포인터 이벤트 비활성화
+  pointer-events: none;
 `;
 
-// 그래프, 텍스트 전체 영역
-const GraphDiv = styled.div`
+
+// 라인 컨테이너
+const LineContainer = styled.div`
+  margin-top: -5%;
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-// 그래프 영역
-const GraphContainer = styled.div`
-  height: 80%;
-  width: 40%;
-  display: flex;
-  align-items: center;
-  // background-color: white;
   justify-content: center;
-  border-radius: 0.5625rem;
-`;
-
-// 그래프 텍스트 영역
-const GraphTextContainer = styled.div`
-  height: 80%;
-  width: 40%;
-  display: flex;
   align-items: center;
-  // background-color: white;
-  justify-content: center;
-  border-radius: 0.5625rem;
+
+  // 마우스 포인터 버그 해결을 위해 포인터 이벤트 비활성화
+  pointer-events: none;
 `;
 
-// 버튼 영역
-const BottonDiv = styled.div`
+// 컨설팅 컨테이너
+const ConsultContainer = styled.div`
   height: 5%;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-`;
-
-// 완료 버튼
-const SubmitButton = styled.button`
-  width: 100%;
-  height: 75%;
-  border: none;
-  border-radius: 8%;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  background: #1C395E;
-  color: #FFF;
-
-  &:hover {
-    background-color: #e0e0e0;
-  }
-
-  // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 480px) {
-    font-size: 60%;
-  }
-
-  @media screen and (min-width: 481px) and (max-width: 1024px) {
-    font-size: 80%;
-  }
-
-  @media screen and (min-width: 1025px) {
-    font-size: 120%;
-  }
+  justify-content: center;
 `;
 
 function DashboardPage() {
@@ -229,124 +148,225 @@ function DashboardPage() {
     setDate(moment(date).format("YYYY-MM-DD"));
   };
 
-  // 판매 데이터 상태 저장
-  const [saleData, setSaleData] = useState([]);
-  
   // 대시보드 타입 상태 저장
   const [selectedDashboardType, setSelectedDashboardType] = useState('매출');
 
-  // 차트 데이터 상태 저장
-  const [chartData, setChartData] = useState({});
 
-  // 드롭다운 대시보드 타입 목록
-  const dashboardType = [
-    '매출',
-    '순이익'
-  ];
+  // 파이 데이터 상태 저장
+  const [pieData, setPieData] = useState([]);
 
-  // 드롭다운에 선택한 dashboardType과 위의 dashboardType 상태 취합
-  const handlerDashboardTypeSelect = (e) => {
-    const selectedType = e.target.value;
-    setSelectedDashboardType(selectedType);
+  
+  // 차트(파이) 데이터 상태 저장
+  const [chartData, setChartData] = useState([]);
+
+
+  // 라인 데이터 상태저장
+  const [lineData, setLineData] = useState([]);
+
+  
+  // 그래프(라인) 데이터 상태 저장
+  const [graphData, setGraphData] = useState([]);
+  
+
+  // 버튼 클릭 시 실행할 함수
+  const handlerButtonClick = (e) => {
+    setSelectedDashboardType(e);
   };
 
   // Chart.js에 GET으로 가져온 데이터 보여주기
   useEffect(() => {
     async function fetchData() {
       try {
-        if (selectedDashboardType === '매출') {
-          const data = await SalesGetApi(date);
-          setSaleData(data?.items || []);
-          const chartData = {
-            labels: data?.items.map(item => item.name) || [],
-            datasets: [
-              {
-                label: '판매량',
-                data: data?.items.map(item => item.sales_volume) || [],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
-                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
-              },
-            ],
+        const pieData = await PieGetApi(date);
+        setPieData(pieData?.items || []);
+  
+        // 기본적인 데이터 매핑
+        const chartData = pieData?.items.map((item) => ({
+          name: `${item.name}`,
+          value: selectedDashboardType === '매출' ? item.sales_volume : item.profit,
+        })) || [];
+  
+        // 백분율이 5% 미만인 데이터를 '기타'로 합치기
+        const totalPercent = chartData.reduce((total, entry) => total + entry.value, 0);
+        const filteredData = chartData.filter(entry => (entry.value / totalPercent) * 100 >= 5);
+        
+        if (chartData.length > filteredData.length) {
+          const otherData = {
+            name: '기타',
+            value: totalPercent - filteredData.reduce((total, entry) => total + entry.value, 0),
           };
-          setChartData(chartData);
-        } 
-        else if (selectedDashboardType === '순이익') {
-          const data = await SalesGetApi(date);
-          setSaleData(data?.items || []);
-          const chartData = {
-            labels: data?.items.map(item => item.name) || [],
-            datasets: [
-              {
-                label: '판매량',
-                data: data?.items.map(item => item.profit) || [],
-                backgroundColor: ['black'],
-                hoverBackgroundColor: ['white']
-              },
-            ],
-          };
-          setChartData(chartData);
-        };
+          setChartData([...filteredData, otherData]);
+        } else {
+          setChartData(filteredData);
+        }
       } catch (error) {
         console.log(error);
-      };
-    };
+      }
+    }
     fetchData();
   }, [date, selectedDashboardType]);
+
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const lineData = await LineGetApi(date);
+        setLineData(lineData?.total || []);
+
+        const graphData = lineData?.total.map((item) => ({
+          date: item.date,
+          value: selectedDashboardType === '매출' ? item.sales_volume : item.profit,
+        })) || [];
+        setGraphData(graphData);  
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [date, selectedDashboardType]);
+
+// 원형 차트 데이터 색깔
+const customColors = [
+  '#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6',
+  '#feef1f', '#27ae60', '#1cffca', '#1abc9c', '#d35400',
+  '#34495e', '#c0392b', '#7f8c8d', '#16a085', '#e74c68'
+  ];
+
+// 원형 차트 기타 색깔
+const otherColor = 'white'; // 검은색
+ 
+const customLabel = (props) => {
+  const RADIAN = Math.PI / 180;
+  const { cx, cy, midAngle, outerRadius, fill, payload, percent } = props;
+  const sin = Math.sin(-RADIAN * midAngle);
+  const cos = Math.cos(-RADIAN * midAngle);
+
+  // const로 선언하면 안 됨
+  let delta = Math.abs(1 / cos) + 10;
+
+  // 12시 방향(위) 가지 세로 길이 줄임
+  // if (midAngle > 70 && midAngle < 87) {
+  //   delta = Math.abs(1 / cos) + 10;
+  // };
+
+  // if (midAngle > 93 && midAngle < 115) {
+  //   delta = Math.abs(1 / cos) + 10;
+  // };
+
+  if (midAngle > 87 && midAngle < 93) {
+    delta = Math.abs(1 / cos) -50;
+  };
+
+  // 6시 방향(아래) 가지 세로 길이 줄임
+  // if (midAngle > 260 && midAngle < 280) {
+  //   delta = Math.abs(1 / cos);
+  // };
+
+  // if (midAngle > 260 && midAngle < 280) {
+  //   delta = Math.abs(1 / cos);
+  // };
+
+  // if (midAngle > 267 && midAngle < 280) {
+  //   delta = Math.abs(1 / cos) + 10;
+  // };
+
+  const sx = cx + outerRadius * cos;
+  const sy = cy + outerRadius * sin;
+  const mx = cx + (outerRadius + delta) * cos;
+  const my = cy + (outerRadius + delta) * sin;
+  const ex = mx + Number(cos.toFixed(1)) * 20;
+  const ey = my;
+  const textAnchor = cos >= 0 ? "start" : "end";
+
+  return (
+    <g>
+      <path
+        d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+        stroke='black'
+        fill="none"
+      />
+      <rect x={ex + (cos >= 0 ? 1 * 5 : -1 * 17)} y={ey - 4} width={12} height={8} fill={fill} />
+      <text
+        x={ex + (cos >= 0 ? 1 : -1) * 21}
+        y={ey + 4}
+        textAnchor={textAnchor}
+      >
+        {`${payload.name} ${(percent * 100).toFixed(2)}%`}
+      </text>
+    </g>
+  );
+};
 
   return (
     <ComponentDiv>
       <TitleDiv>
         <h1>대시보드</h1>
       </TitleDiv>
-      <DropdownDiv>
-        <MyCalendar date={date} onDateChange={handlerDateChange} />
-        <DropdownContainer>
-          <Dropdown onChange={handlerDashboardTypeSelect} value={selectedDashboardType}>
-            {dashboardType.map((type, idx) => (
-              <DropdownOption key={idx} value={type}>
-                {type}
-              </DropdownOption>
-            ))}
-          </Dropdown>
-        </DropdownContainer>
-      </DropdownDiv>
+      <CalendarTypeDiv>
+        <CalendarContainer>
+          <MyCalendar date={date} onDateChange={handlerDateChange}/>
+        </CalendarContainer>
+        <TypeContainer>
+          <TypeButton
+            active={selectedDashboardType === '매출'}
+            onClick={() => handlerButtonClick('매출')}
+          >
+            매출
+          </TypeButton>
+          <TypeButton
+            active={selectedDashboardType === '순이익'}
+            onClick={() => handlerButtonClick('순이익')}
+          >
+            순이익
+          </TypeButton>
+        </TypeContainer>
+      </CalendarTypeDiv>
       <DashboardDiv>
-        <DoughnutDiv>
-          <DoughnutContainer>
-            {chartData.labels && chartData.datasets && (
-              <Doughnut
+        <PieContainer>
+          {chartData.length > 0 && (
+            <PieChart width={1400} height={400} cursor="none">
+              <Pie
+                dataKey="value"
                 data={chartData}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                }}
+                cx="50%"
+                cy="50%"
+                outerRadius="80%"
+                fill="#8884d8"
+                label={customLabel}
+                labelLine={false}
+              >
+                {chartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.name === '기타' ? otherColor : customColors[index % customColors.length]}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          )}
+        </PieContainer>
+        <LineContainer>
+          {graphData.length > 0 && (
+            <LineChart width={1000} height={300} data={graphData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis tickFormatter={(value) => `${value / 1000}만`} />
+              <Legend wrapperStyle={{ fontSize: '150%' }} />
+              <Line
+                type="monotone"
+                dataKey="value"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+                name={selectedDashboardType === '매출' ? '매출' : '순이익'}
               />
-            )}
-          </DoughnutContainer>
-          <DoughnutTextContainer>
-            <h1>
-              여기는 도넛 텍스트
-            </h1>
-          </DoughnutTextContainer>
-        </DoughnutDiv>
-        <GraphDiv>
-          <GraphContainer>
-            <h1>
-              여기는 꺾은선 그래프
-            </h1>
-          </GraphContainer>
-          <GraphTextContainer>
-            <h1>
-              여기는 꺾은선 텍스트
-            </h1>
-          </GraphTextContainer>
-        </GraphDiv>
+            </LineChart>
+          )}
+        </LineContainer>
+        <ConsultContainer>
+          <h1>컨설팅</h1>
+        </ConsultContainer>
       </DashboardDiv>
-      <BottonDiv>
-        <Link to="/home">
-          <SubmitButton>홈으로</SubmitButton>
-        </Link>
-      </BottonDiv>
     </ComponentDiv>
   );
 };

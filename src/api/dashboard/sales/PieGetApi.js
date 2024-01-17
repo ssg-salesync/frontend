@@ -4,7 +4,7 @@ import { Token } from '../../Token';
 
 /* eslint-disable */
 
-export async function SalesGetApi(date) {
+export async function PieGetApi(date) {
 
   const headers = Token();
 

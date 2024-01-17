@@ -5,7 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { StoreState } from "../recoil/atoms/StoreState";
 import { StorePostApi } from "../api/auth/signup/StorePostApi";
 import { StoreTokenPostApi } from "../api/auth/signup/StoreTokenPostApi";
-import { TotalDiv, ComponentDiv, TitleDiv,InsertDiv } from "../styles/CommonStyle";
+import { TotalDiv, ComponentDiv, TitleDiv,InsertDiv,MsgDiv } from "../styles/CommonStyle";
 import { UserCheckState } from "../recoil/atoms/UserState";
 
 
@@ -173,6 +173,8 @@ const DropdownOption = styled.option`
 
 
 function StorePage() {
+  // 경고메세지
+  const [msg, setMsg] =useState("")
 
   // 회원가입 페이지에서 등록한 recoil 전역상태 데이터
   const signupData = useRecoilState(StoreState)
@@ -238,56 +240,67 @@ function StorePage() {
     // 다음 페이지 넘어가지 않는 조건 부여
     if (
       !data.store_name
-    ) { alert('매장명을 입력해주세요.'); 
+    ) { setMsg('매장명을 입력해주세요.'); 
     return; // 다음 페이지로 넘어가지 않음
     };
 
     if (
       !data.address
-    ) { alert('주소를 입력해주세요.'); 
+    ) { setMsg('주소를 입력해주세요.'); 
     return; // 다음 페이지로 넘어가지 않음
     };
 
     if (
       !data.store_type
-    ) { alert('업종을 선택해주세요.'); 
+    ) { setMsg('업종을 선택해주세요.'); 
     return; // 다음 페이지로 넘어가지 않음
     };
 
     // API 호출
     StorePostApi(data)
-    .then(res => {
-      console.log('StorePostApi complete');
+    .then(res =>{
+      console.log("res",res)
 
-      // 첫 번째 API 호출이 성공한 후에 두 번째 API 호출
-      const tokenData = {
-        username: storesData.username,
-        password: storesData.password
-      };
-      // 다음 페이지로 넘어감
-      // navigate('/signup/stores/pos');
-      console.log('StoreTokenPostApi complete');
-      return StoreTokenPostApi(tokenData);
+      if(res){
+        setUserCheck(true);
+        
+        setTimeout(() => {
+          navigate('/signup/stores/pos');
+        }, 500);
+
+      } else{
+        throw new Error("토큰이 없습니다")
+      }
     })
-    .then(async tokenRes => {
-      console.log('토큰 발급 성공: ', tokenRes);
-      setUserCheck(true)
-      console.log("토큰발급후 넘어가기 직전 userCheck")
+    .catch(err=>{
+      console.error('API 호출 또는 토큰 발급 실패:',err)
+    })
+
+    // StorePostApi(data).then(res => {
+    //   console.log('StorePostApi complete');
+    //   console.log("res",res)
+    //   // 첫 번째 API 호출이 성공한 후에 두 번째 API 호출
+    //   const tokenData = {
+    //     username: storesData.username,
+    //     password: storesData.password
+    //   };
+    //   return StoreTokenPostApi(tokenData);
+    // })
+    // .then(async tokenRes => {
+    // //   console.log('토큰 발급 성공: ', tokenRes);
+    //   setUserCheck(true)
+    // //   console.log("토큰발급후 넘어가기 직전 userCheck")
       
-      await tokenRes;
+    //   await tokenRes;
 
-      // 5초 후에 모달을 닫는 함수 호출
-      setTimeout(() => {
-        navigate('/signup/stores/pos');
-        console.log("=========================================")
-      },500);
-
-      // console.log("토큰발급후 넘어감")
-      // navigate('/signup/stores/pos');
-    })
-    .catch(err => {
-      console.error('API 호출 또는 토큰 발급 실패: ', err);
-    });
+    //   // 5초 후에 모달을 닫는 함수 호출
+    //   setTimeout(() => {
+    //     navigate('/signup/stores/pos');
+    //   },500);
+    // })
+    // .catch(err => {
+    //   console.error('API 호출 또는 토큰 발급 실패: ', err);
+    // });
 };
 
   // console.log('넘어온 데이터: ', signupData[0])
@@ -328,6 +341,8 @@ function StorePage() {
             ))}
           </Dropdown>
         </DropdownContainer>
+        <br/>
+        <MsgDiv>{msg}</MsgDiv>
       </InsertDiv>
       <ButtonDiv>
           <NextButton type="button" onClick={handlerNextClick}>다음</NextButton>
