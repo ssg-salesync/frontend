@@ -13,7 +13,7 @@ const ComponentDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: auto;
+  // overflow: auto;
 `;
 
 // 맨 위 글자 영역
@@ -40,21 +40,12 @@ const TitleDiv = styled.div`
 
 // 원가입력 전체 영역(위에 글자 제외)
 const CostDiv = styled.div`
- 
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
 `;
-
-// // 완료 버튼 영역
-// const ButtonDiv = styled.div`
-//   height: 20%;
-//   width: 80%;
-//   display: flex;
-//   justify-content: flex-end;
-// `;
-
 
 // 완료 버튼
 const SubmitButton = styled.button`
@@ -102,7 +93,7 @@ const Th = styled.th`
 
 const Td = styled.td`
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 2%;
   text-align: center;
 `;
 
@@ -126,12 +117,11 @@ const CostButton = styled.button`
 `;
 
 const InputField = styled.input`
-  width: 80%;
-  height: 50%;
-  resize: none;
+
+  // 입력칸 좌우크기 고정...
+  width: 100%;
+  height: 100%;
   text-align: center;
-  display: block;
-  margin: 0 auto;
 `;
 
 function CostPage() {
@@ -141,8 +131,7 @@ function CostPage() {
 
   // 아이템의 입력 상태 관리
   const [editingItem, setEditingItem] = useState(null);
-
-
+  
   // 수정된 값을 저장
   const handlerEdit = (itemId, updatedCost) => {
 
@@ -197,7 +186,7 @@ function CostPage() {
     try {
       const itemsToSend = costData
         .filter(item => item.cost !== null)
-        .map(item => ({ item_id: item.item_id, cost: parseInt(item.cost) }));   // Request Body에 맞게 파싱
+        .map(item => ({ item_id: item.item_id, cost: parseInt(item.cost) }));
 
       console.log('POST 데이터 확인: ', itemsToSend)
 
@@ -329,10 +318,11 @@ function CostPage() {
       </TitleDiv>
       <CostDiv>
         {renderCategories()}
-      </CostDiv>
-      <Link to="/home">
+        <Link to="/home">
         <SubmitButton type="button" onClick={handlerSubmit}>완료</SubmitButton>
       </Link>
+      </CostDiv>
+      
     </ComponentDiv>
   );
 };
