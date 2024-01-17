@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { InfoPutApi } from "../api/auth/info/InfoPutApi";
 import { InfoGetApi } from "../api/auth/info/InfoGetApi";
 import { InfoState } from "../recoil/atoms/InfoState";
-import { ComponentDiv, TotalDiv, UserDiv, EditTitleDiv} from "../styles/CommonStyle";
+import { ComponentDiv, TotalDiv, UserDiv, EditTitleDiv, MsgDiv} from "../styles/CommonStyle";
 
 /* eslint-disable */
 
@@ -91,6 +91,8 @@ const SubmitButton = styled.button`
 `;
 
 function InfoNpwPage() {
+  // 경고메세지
+  const [msg, setMsg] =useState("")
 
   // 비밀번호 확인에서 등록한 recoil 전역상태 데이터
   const password = useRecoilState(InfoState);
@@ -185,7 +187,7 @@ function InfoNpwPage() {
     // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림
     const isValid = isNewPasswordValid(newPasswordData.newPassword);
     if (!isValid) {
-      alert('비밀번호: 10~16자의 영문 대/소문자, 숫자, 특수문자를 최소 1개씩 사용해 주세요.');
+      setMsg('비밀번호: 10~16자의 영문 대/소문자, 숫자, 특수문자를 최소 1개씩 사용해 주세요.');
 
       // 입력칸 초기화
       setNewPasswordData({ ...newPasswordData, newPassword: ''});
@@ -208,7 +210,7 @@ function InfoNpwPage() {
 
     // 필드에 입력칸 조건 부여 | 조건 미충족시 경고창 알림 | 조건: 비밀번호랑 일치하는지
     if (confirmPasswordData.confirmPassword !== newPasswordData.newPassword) {
-      alert('새 비밀번호가 일치하지 않습니다.');
+      setMsg('새 비밀번호가 일치하지 않습니다.');
 
       // 입력칸의 상태 초기화
       setConfirmPasswordData({ ...confirmPasswordData, confirmPassword: ''});
@@ -240,7 +242,7 @@ function InfoNpwPage() {
 
     // 새 비밀번호가 기존 비밀번호와 같으면 경고창 및 입력칸 초기화
     if (newPasswordData.newPassword === passwordData.password) {
-      alert('기존 비밀번호와 같습니다.');
+      setMsg('기존 비밀번호와 같습니다.');
 
       setNewPasswordData({ ...newPasswordData, newPassword: ''});
       setConfirmPasswordData({ ...confirmPasswordData, confirmPassword: ''});
@@ -253,13 +255,13 @@ function InfoNpwPage() {
     
     // 새 비밀번호 필드가 입력되지 않으면 다음 페이지 안 넘어가게 조건 부여
     if (!newPasswordData.newPassword) {
-      alert('새 비밀번호를 입력해주세요.'); 
+      setMsg('새 비밀번호를 입력해주세요.'); 
       return;
     }
 
     // 새 비밀번호 확인 필드가 입력되지 않으면 다음 페이지 안 넘어가게 조건 부여
     if (!confirmPasswordData.confirmPassword) {
-      alert('새 비밀번호 확인을 입력해주세요.'); 
+      setMsg('새 비밀번호 확인을 입력해주세요.'); 
       return;
     }
   
@@ -304,6 +306,8 @@ function InfoNpwPage() {
           placeholder="새 비밀번호 확인"
           ref={confirmPasswordRef}
         />
+        <br/>
+        <MsgDiv>{msg}</MsgDiv>
         </InsertDiv>
       <ButtonDiv>
           <SubmitButton onClick={handlerSubmitClick}>완료</SubmitButton>
