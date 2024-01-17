@@ -11,7 +11,7 @@ export const TotalDiv = styled.div`
 
 // 회원가입/매장등록 박스
 export const ComponentDiv = styled.div`
-  width: 35%;
+  width: 50%;
   height: 80%;
 
   display: flex;
@@ -37,7 +37,7 @@ export const ComponentDiv = styled.div`
     }
   }
 
-  // 반응형에 맞게 폰트 크기 조정
+  // 반응형
   @media screen and (max-width: 768px) {
     width: 60%;
   }
@@ -45,7 +45,7 @@ export const ComponentDiv = styled.div`
     width: 50%;
   }
   @media screen and (min-width: 1025px) {
-    width: 35%;
+    width: 45%;
   }
 `;
 
@@ -71,7 +71,7 @@ export const TitleDiv = styled.div`
     font-size: 180%;
   }
   @media screen and (min-width: 1025px) {
-    font-size: 225%;
+    font-size: 210%;
   }
 `;
 
@@ -137,3 +137,18 @@ export const EditTitleDiv = styled.div`
     font-size: 230%;
   }
 `;
+
+export const MsgDiv = styled.div`
+font-size: 100%;
+
+// 반응형에 맞게 폰트 크기 조정
+@media screen and (max-width: 768px) {
+  font-size: 45%;
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  font-size: 80%;
+}
+@media screen and (min-width: 1025px) {
+  font-size: 95%;
+}
+`
