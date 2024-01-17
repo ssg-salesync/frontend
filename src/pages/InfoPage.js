@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { InfoPostApi } from "../api/auth/info/InfoPostApi";
 import { InfoGetApi } from "../api/auth/info/InfoGetApi";
 import { InfoState } from "../recoil/atoms/InfoState";
-import { ComponentDiv, TotalDiv, UserDiv, EditTitleDiv } from "../styles/CommonStyle";
+import { ComponentDiv, TotalDiv, UserDiv, EditTitleDiv, MsgDiv} from "../styles/CommonStyle";
 
 /* eslint-disable */
 
@@ -89,6 +89,8 @@ const NextButton = styled.button`
 `;
 
 function InfoPage() {
+  // 경고메세지
+  const [msg, setMsg] =useState("")
 
   // 기존 비밀번호에 입력한 데이터 상태 저장
   const [infoData, setInfoData] = useState({
@@ -112,7 +114,7 @@ function InfoPage() {
     try {
 
       if (infoData.password.trim() === '') {
-        alert('기존 비밀번호를 입력해주세요.')
+        setMsg('기존 비밀번호를 입력해주세요.')
         return;
       };
 
@@ -122,7 +124,7 @@ function InfoPage() {
 
       // 기존 비밀번호와 일치하지 않으면 다음 페이지 못 넘어감
       if (res.data.result === 'failed') {
-        alert('기존 비밀번호가 일치하지 않습니다.')
+        setMsg('기존 비밀번호가 일치하지 않습니다.')
 
         // 입력칸 초기화
         setInfoData({...infoData, password: ''})
@@ -177,6 +179,7 @@ function InfoPage() {
           ref={passwordRef}
         />
         <br/>
+        <MsgDiv>{msg}</MsgDiv>
       </InsertDiv>
       <ButtonDiv>
           <NextButton onClick={handlerPasswordCheck}>다음</NextButton>
