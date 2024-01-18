@@ -21,6 +21,7 @@ import Layout from "../components/common/Layout";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import { UserCheckState } from "../recoil/atoms/UserState";
+import ConsultingPage from "../pages/ConsultingPage";
 
 /* eslint-disable*/
 function Routing() {
@@ -39,6 +40,9 @@ function Routing() {
       <Route path="/mypage/info/newpassword" element={<PrivateRoute element={<InfoNpwPage />} />} />
       <Route path="/mypage/cost" element={<PrivateRoute element={<CostPage />} />} />
       <Route path="/mypage/dashboard" element={<PrivateRoute element={<DashboardPage />} />} />
+
+      <Route path="/mypage/dashboard/consulting" element={<PrivateRoute element={<ConsultingPage />} />} />
+
       <Route path="/order/:tableId" element={<PrivateRoute element={<OrderPopup />} />} />
       <Route path="/order/:tableId/payment" element={<PrivateRoute element={<PaymentPage />} />} />
       <Route path="/order/:tableId/payment/card" element={<PrivateRoute element={<CardPage />} />} />

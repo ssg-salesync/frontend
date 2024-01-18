@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 import moment from 'moment';
-import { PieGetApi } from '../api/dashboard/sales/PieGetApi';
+import { useNavigate } from 'react-router-dom';
+import { PieGetApi } from '../api/dashboard/chart/PieGetApi';
 import MyCalendar from '../components/dashboard/MyCalendar';
-import { LineGetApi } from '../api/dashboard/sales/LineGetApi';
+import { LineGetApi } from '../api/dashboard/chart/LineGetApi';
+import { ReqIdGetApi } from '../api/dashboard/consulting/ReqIdGetApi';
+import { WaitGetApi } from '../api/dashboard/consulting/WaitGetApi';
+import { ConsultingGetApi } from '../api/dashboard/consulting/ConsultingGetApi';
 
 /* eslint-disable */
 
@@ -127,13 +131,23 @@ const LineContainer = styled.div`
 `;
 
 // 컨설팅 컨테이너
-const ConsultContainer = styled.div`
+const ConsultingContainer = styled.div`
   height: 5%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
+
+const ConsultingButton = styled.button`
+  width: 10%;
+  height: 100%;
+  border-radius: 0.5625rem;
+  border:none;
+  background-color: #1D56A8;
+  cursor: pointer;
+  color: white;
+;`
 
 function DashboardPage() {
 
@@ -167,13 +181,22 @@ function DashboardPage() {
   // 그래프(라인) 데이터 상태 저장
   const [graphData, setGraphData] = useState([]);
   
+  
 
+
+  const navigate = useNavigate();
+
+  const handlerConsultingClick = () => {
+    navigate("/mypage/dashboard/consulting", { state: { date } })
+  }
+  
+  
   // 버튼 클릭 시 실행할 함수
   const handlerButtonClick = (e) => {
     setSelectedDashboardType(e);
   };
 
-  // Chart.js에 GET으로 가져온 데이터 보여주기
+  // 원형 그래프
   useEffect(() => {
     async function fetchData() {
       try {
@@ -207,7 +230,7 @@ function DashboardPage() {
   }, [date, selectedDashboardType]);
 
 
-
+  // 꺾은선 그래프
   useEffect(() => {
     async function fetchData() {
       try {
@@ -298,6 +321,12 @@ const customLabel = (props) => {
   );
 };
 
+
+
+
+// console.log('대시보드 date: ', date)
+
+
   return (
     <ComponentDiv>
       <TitleDiv>
@@ -363,9 +392,14 @@ const customLabel = (props) => {
             </LineChart>
           )}
         </LineContainer>
-        <ConsultContainer>
-          <h1>컨설팅</h1>
-        </ConsultContainer>
+        <ConsultingContainer>
+        <ConsultingButton
+          type='button'
+          onClick={handlerConsultingClick}
+        >
+        컨설팅
+        </ConsultingButton>
+        </ConsultingContainer>
       </DashboardDiv>
     </ComponentDiv>
   );
