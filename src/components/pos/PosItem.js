@@ -383,6 +383,7 @@ function PosItem({ itemData, selectedCategoryId }) {
 // console.log('아이템 이름: ', items.categories[0].items[0].name.trim() )
 // console.log('아이템 가격: ', items.categories[0].items[0].price )
 
+const navigate = useNavigate();
 // 수정, 완료 버튼 클릭 시 새로운 카테고리 등록
 const handlerEditMode = async (idx) => {
   try {
@@ -443,6 +444,11 @@ const handlerEditMode = async (idx) => {
     };
   } catch (err) {
     console.error(err);
+    if (err.response && err.response.status >= 500 && err.response.status < 600) {
+      // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+      navigate("/500");
+    }
+
   };
 };
 
@@ -534,6 +540,11 @@ useEffect(() => {
       setItems(itemData); // 가져온 아이템 목록으로 상태 업데이트
     } catch (err) {
       console.error(err);
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        navigate("/500");
+      }
+
     };
   };
 
@@ -592,6 +603,11 @@ const handlerRemoveItem = async (idx) => {
       alert('아이템이 삭제되었습니다.')
     } catch (err) {
       console.error(err);
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        navigate("/500");
+      }
+
     };
   } else {
     alert('아이템 삭제가 취소되었습니다.')
@@ -602,7 +618,6 @@ const handlerRemoveItem = async (idx) => {
 
 // console.log(editModes)
 // 회원가입 버튼 클릭
-const navigate = useNavigate();
 
 const handlerSubmitClick = () =>{
   navigate("/home")

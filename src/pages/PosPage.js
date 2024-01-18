@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import PosCategory from "../components/pos/PosCategory";
 import PosItem from "../components/pos/PosItem";
@@ -41,6 +41,8 @@ const PosItemDiv = styled.div`
 
 function PosPage() {
 
+  const navigate = useNavigate();
+
   // API 호출해서 가져온 카테고리 데이터 상태 저장
   const [categoryData, setCategoryData] = useState(null);
 
@@ -57,7 +59,6 @@ function PosPage() {
       try {
         const categoryResponse = await CategoryGetApi();   // [GET: 카테고리 정보]
         
-      
         if (categoryResponse && categoryResponse.categories) {
           setCategoryData(categoryResponse.categories);
           
@@ -76,6 +77,10 @@ function PosPage() {
         //   console.log('categoryResponse: ',categoryResponse)
       } catch (err) {
         console.error(err);
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        navigate("/500");
+      }
       };
     };
     fetchData();

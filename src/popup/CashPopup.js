@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import { useRecoilValue, useResetRecoilState, useRecoilState } from "recoil";   // 읽기 전용
 import { styled } from 'styled-components';
@@ -198,6 +199,7 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
         setChange(receiveAmount - totalPrice)
     },[receiveAmount]);
     
+    const navigate = useNavigate();
     const [closeAllPopup,setCloseAllPopup] = useRecoilState(PayCompleteState)
     async function payComplete(){
         // 버튼클릭 시
@@ -219,25 +221,30 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
 
         // const dataPost = OrdersPostApi(data);
         // console.log(dataPost)
-        if (receiveAmount >= totalPrice){
-            const data = {table_no:tableId,payment_type:"현금",total_price:totalPrice}
-            const dataPost = await PayPostApi(data)
-            console.log(dataPost)
-            // 결제 진행 메시지 활성화
-            setProcessingPayment(true);
-            // 몇 초 동안 결제 진행 메시지 활성후 팝업 닫음
-            setTimeout(() => {
-                setProcessingPayment(false);
-                setCloseAllPopup(true);
-                console.log("=>cashPopup closeAllPopup",closeAllPopup)
-                closeCashPopup();
-              }, 1500);
-        }else{
-            alert("받은 금액이 결제금액보다 적습니다.")
+        try {
+            if (receiveAmount >= totalPrice) {
+                const data = { table_no: tableId, payment_type: "현금", total_price: totalPrice }
+                const dataPost = await PayPostApi(data)
+                console.log(dataPost)
+                // 결제 진행 메시지 활성화
+                setProcessingPayment(true);
+                // 몇 초 동안 결제 진행 메시지 활성 후 팝업 닫음
+                setTimeout(() => {
+                    setProcessingPayment(false);
+                    setCloseAllPopup(true);
+                    console.log("=>cashPopup closeAllPopup", closeAllPopup)
+                    closeCashPopup();
+                }, 1500);
+            } else {
+                alert("받은 금액이 결제금액보다 적습니다.")
+            }
+        } catch (error) {
+            console.error(error);
+            if (error.response && error.response.status >= 500 && error.response.status < 600) {
+                // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+                navigate("/500");
+            }
         }
-            
-        // 2. 테이블 초기화
-        
     }
     return (
         <>

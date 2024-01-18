@@ -301,15 +301,19 @@ function SignupPage() {
         };
       } catch(err) {
         console.error(err);
+        if (err.response && err.response.status >= 500 && err.response.status < 600) {
+          // 500번대 에러가 발생하면 internalerror 페이지로 리다이렉트
+          navigate("/500");
+        }
       };
-    };
+    }
 
     // 다음 페이지로 넘어갈 데이터 상태 저장
     setStoreState({ ...storeState, ...signupData });
 
     // 다음 페이지로 넘어감
     navigate("/signup/stores");
-  };
+  }
 
   // console.log('넘길 데이터: ', signupData)
   // console.log('비밀번호 확인 데이터: ', passwordData)

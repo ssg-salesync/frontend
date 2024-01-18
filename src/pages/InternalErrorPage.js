@@ -1,15 +1,14 @@
+import React from 'react';
 import styled from 'styled-components';
 
-// 스타일을 정의
 const NotFoundContainer = styled.div`
   text-align: center;
-  margin: 0 auto; /* 상하 50px, 좌우 가운데 정렬 */
-  // background-color: #f7f7f7; /* 배경색을 변경합니다. */
-  background-image: url('/img/Beach.jpg');
+  margin: 0 auto;
+  background-image: url('/img/Clouds.jpg');
   background-size: cover;
   background-position: center;
-  padding: 0; /* 내용과의 간격을 추가합니다. */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과를 추가합니다. */
+  padding: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,19 +35,15 @@ const Paragraph = styled.p`
   font-size: 2em;
 `;
 
-
-/* eslint-disable */
-
-// 컴포넌트 정의
-function NotFoundPage() {
-
+function InternalErrorPage() {  
   return (
     <NotFoundContainer>
-      <Heading2>Uh-oh! Page not found.</Heading2>
-      <Heading1>404</Heading1>
-      <Paragraph>We could not find the page you are looking for.</Paragraph>
+      <Heading2>Internal Server Error</Heading2>
+      <Heading1>500</Heading1>
+      <Paragraph>The server encountered an internal error or misconfiguration</Paragraph>
+      <Paragraph>and was unable to complete your request.</Paragraph>
     </NotFoundContainer>
   );
-};
+}
 
-export default NotFoundPage;
+export default InternalErrorPage;

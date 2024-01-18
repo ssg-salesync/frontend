@@ -1,6 +1,6 @@
 import {React ,useState,useEffect} from "react";
-import { Link } from "react-router-dom";
-import styled from 'styled-components';
+import { Link, useNavigate } from "react-router-dom";
+import { styled, keyframes } from 'styled-components';
 import { useRecoilState,useResetRecoilState } from 'recoil';
 import { ItemsApi } from '../api/Items/ItemsApi';
 import OrderPopup from "../popup/OrderPopup";
@@ -8,6 +8,15 @@ import { PayCompleteState} from "../recoil/atoms/ItemState";
 import { deleteOrderState,deleteTotalPriceState } from "../components/func/AtomData";
 import { UnpaidGetApi } from "../api/pay/UnpaidGetApi";
 import { TotalDiv } from "../styles/CommonStyle";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const TableDiv = styled.div`
     height:95%;
@@ -17,6 +26,7 @@ const TableDiv = styled.div`
     grid-template-rows: repeat(2, 50%);
     justify-content: center;
     align-items: center;
+    animation: ${fadeIn} 1s ease-in-out;
     // row-gap: 1%;
     // height: calc((100vh - 40px) / 2);
     // padding: 20px 0;
@@ -35,6 +45,7 @@ const TableDiv = styled.div`
     // }
     
 `;
+
 const TableContainer = styled.div`
     // width: 13rem;
     // height: 13rem;
@@ -182,6 +193,7 @@ function Home() {
 
     const [ordersData,setOrdersData] = useState()
     const [loading,setLoading] = useState(false)
+    const navigate = useNavigate();
     const tableOrders=async()=>{
         try{
             const tableOrderData = await UnpaidGetApi()
@@ -190,7 +202,12 @@ function Home() {
             setLoading(true)
         }catch(error){
             console.log("tableOrders Error:",error)
-            setLoading(true)
+            setLoading(true);
+            if (error?.response?.status >= 500 && error?.response?.status < 600) {
+                // 500번대 상태코드에 대한 처리 (예: 페이지 이동)
+                // navigate 함수를 사용하여 페이지 이동
+                navigate('/500');
+              }
         }
     }
     const plusExistOrder = () =>{

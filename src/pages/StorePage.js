@@ -274,6 +274,10 @@ function StorePage() {
     })
     .catch(err=>{
       console.error('API 호출 또는 토큰 발급 실패:',err)
+      // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        navigate("/500");
+      }
     })
 
     // StorePostApi(data).then(res => {
@@ -292,6 +296,7 @@ function StorePage() {
     // //   console.log("토큰발급후 넘어가기 직전 userCheck")
       
     //   await tokenRes;
+
 
     //   // 5초 후에 모달을 닫는 함수 호출
     //   setTimeout(() => {

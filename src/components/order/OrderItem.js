@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
@@ -261,7 +262,7 @@ const OrderBt = styled.button`
 function OrderItem({tableId,closeOrderPopup}) {
     // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
     const [currentTab, setCurrentTab] = useState("");
-
+    const navigate = useNavigate();
     const [menu,setMenu] = useRecoilState(TableState)
     const [totalPrice,setTotalPrice] = useRecoilState(TotalPrice)
     //주문상태 체크(신규=true,기존=false)
@@ -287,6 +288,10 @@ function OrderItem({tableId,closeOrderPopup}) {
             getOrderTableData(defaultData)
         } catch(error){
             console.log("getDefaultData Error :", error)
+            if (error?.response?.status >= 500 && error?.response?.status < 600) {
+                // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+                navigate('/500');
+              }
         }
     }
     // 주문내역 가져오기
@@ -325,6 +330,10 @@ function OrderItem({tableId,closeOrderPopup}) {
             }           
         } catch(error){
             console.log("getOrderTableData Error :", error)
+            if (error?.response?.status >= 500 && error?.response?.status < 600) {
+                // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+                navigate('/500');
+              }
         }
     }
     // 초기메뉴세팅 / 주문내역 추가 / 처음 화면 렌더링될때 첫번째 탭에 focus

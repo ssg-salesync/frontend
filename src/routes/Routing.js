@@ -20,6 +20,7 @@ import WelcomePage from "../pages/WelcomePage";
 import Layout from "../components/common/Layout";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import InternalErrorPage from "../pages/InternalErrorPage";
 import { UserCheckState } from "../recoil/atoms/UserState";
 import ConsultingPage from "../pages/ConsultingPage";
 
@@ -53,6 +54,7 @@ function Routing() {
     <Route path="/login" element={<PublicRoute element={<LoginPage />} />} />
     <Route path="/signup" element={<PublicRoute element={<SignupPage />} />} />
     <Route path="/signup/stores" element={<PublicRoute element={<StorePage />} />} />
+    <Route path="/500" element={<InternalErrorPage />} />
     {/* NotFound 페이지를 가장 맨 아래에 위치 */}
     <Route path="/*" element={<NotFoundPage />} />
   </Routes>
