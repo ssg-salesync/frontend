@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import { CostsGetApi } from "../api/dashboard/costs/CostsGetApi";
@@ -164,7 +164,7 @@ function CostPage() {
     }
   };
 
-
+  const navigate = useNavigate();
   // GET 메서드로 기존 costData 가져옴
   useEffect(() => {
     async function fetchData() {
@@ -173,6 +173,10 @@ function CostPage() {
         setCostData(data.items);
       } catch (err) {
         console.error(err);
+        if (err.response && err.response.status >= 500 && err.response.status < 600) {
+          // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+          navigate("/500");
+        }
       }
     }
     fetchData();
@@ -193,6 +197,10 @@ function CostPage() {
       await CostsPostApi({ items: itemsToSend });
     } catch (err) {
       console.error(err);
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        navigate("/500");
+      }
     };
   };
 

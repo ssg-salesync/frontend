@@ -215,17 +215,19 @@ function LoginPage() {
           // alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
           setMsg('로그인에 실패했습니다.\n 아이디와 비밀번호를 확인해주세요.');
 
-    if (err.response.status === 400) {
-      alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+          setLoginData({ ...loginData, username: '', password: ''});
 
-      setLoginData({ ...loginData, username: '', password: '' });
+          if (usernameRef.current) {
+            usernameRef.current.focus();
+          };
 
-      if (usernameRef.current) {
-        usernameRef.current.focus();
-      };
-    } 
-  });
-};
+          return;
+        } else if (err.response.status >= 500 && err.response.status < 600) {
+          // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+          navigate('/500');
+        }
+    });
+  };
 
   // console.log('api통신할 전체 데이터: ', loginData)
 

@@ -78,6 +78,10 @@ function PosPage() {
         //   console.log('categoryResponse: ',categoryResponse)
       } catch (err) {
         console.error(err);
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        navigate("/500");
+      }
       };
     };
     fetchData();

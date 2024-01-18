@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { IoClose } from "react-icons/io5";
 import { useSetRecoilState } from 'recoil';
@@ -294,7 +295,7 @@ function PosCategory({ categoryData, setSelectedCategory }) {
 
   // console.log(editModes)
   // console.log('categories: ', categories)
-
+  const navigate = useNavigate();
   const setCategoryState = useSetRecoilState(CategoryState)
   // 수정, 완료 버튼 클릭 시 새로운 카테고리 등록
   const handlerEditMode = async (idx) => {
@@ -351,6 +352,10 @@ function PosCategory({ categoryData, setSelectedCategory }) {
         };
       } catch (err) {
         console.error(err);
+        if (err.response && err.response.status >= 500 && err.response.status < 600) {
+          // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+          navigate("/500");
+        }
       };
     } else {
       const newEditModes = [...editModes];
@@ -442,6 +447,10 @@ function PosCategory({ categoryData, setSelectedCategory }) {
         setSelectedCategory(null)
       } catch (err) {
           console.error(err);
+          if (err.response && err.response.status >= 500 && err.response.status < 600) {
+            // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+            navigate("/500");
+          }
       };
     } else {
       showAlert('카테고리 삭제가 취소되었습니다.')

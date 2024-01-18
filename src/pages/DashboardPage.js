@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 import moment from 'moment';
@@ -172,7 +173,7 @@ function DashboardPage() {
   const handlerButtonClick = (e) => {
     setSelectedDashboardType(e);
   };
-
+  const navigate = useNavigate();
   // Chart.js에 GET으로 가져온 데이터 보여주기
   useEffect(() => {
     async function fetchData() {
@@ -201,6 +202,10 @@ function DashboardPage() {
         }
       } catch (error) {
         console.log(error);
+         // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        if (error?.response?.status >= 500 && error?.response?.status < 600) {
+          navigate('/500');
+        }
       }
     }
     fetchData();
@@ -221,6 +226,10 @@ function DashboardPage() {
         setGraphData(graphData);  
       } catch (error) {
         console.log(error);
+        if (error?.response?.status >= 500 && error?.response?.status < 600) {
+          // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+          navigate('/500');
+        }
       }
     }
     fetchData();

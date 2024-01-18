@@ -140,6 +140,10 @@ function InfoPage() {
       }
     } catch (err) {
       console.log(err);
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        navigate('/500');
+      }
     };
   };
 
@@ -158,7 +162,7 @@ function InfoPage() {
       } catch(err) {
       console.log(err);
       if (err.response && err.response.status >= 500 && err.response.status < 600) {
-        // 500번대 에러가 발생하면 internalerror 페이지로 리다이렉트
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
         navigate('/500');
       }
     };

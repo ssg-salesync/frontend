@@ -91,6 +91,8 @@ const SubmitButton = styled.button`
 `;
 
 function InfoNpwPage() {
+  // 네비게이트 훅
+  const navigate = useNavigate();
 
   // 비밀번호 확인에서 등록한 recoil 전역상태 데이터
   const password = useRecoilState(InfoState);
@@ -147,6 +149,10 @@ function InfoNpwPage() {
         setOwnerName(ownerNameRes.owner_name)
       } catch(err) {
       console.log(err);
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        navigate("/500");
+      }
     };
   };
     fetchData();
@@ -166,6 +172,10 @@ function InfoNpwPage() {
         setStoreId(storeIdRes.store_id)
       } catch(err) {
       console.log(err);
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        navigate("/500");
+      }
     };
   };
     fetchData();
@@ -228,8 +238,7 @@ function InfoNpwPage() {
   console.log('새 비밀번호: ', newPasswordData.newPassword)
   // console.log('새 비밀번호 확인: ', passwordData.confirmPassword)
 
-  // 네비게이트 훅
-  const navigate = useNavigate();
+ 
 
   // console.log('storeId: ', storeId)
   // console.log('지금확인중1: ', newPasswordData.newPassword)
@@ -274,6 +283,10 @@ function InfoNpwPage() {
       navigate("/home");
     } catch (err) {
       console.error('새 비밀번호 업데이트에 실패했습니다.', err);
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        navigate('/500');
+      }
 
     }
   };
