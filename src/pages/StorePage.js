@@ -297,6 +297,7 @@ function StorePage() {
       
     //   await tokenRes;
 
+
     //   // 5초 후에 모달을 닫는 함수 호출
     //   setTimeout(() => {
     //     navigate('/signup/stores/pos');

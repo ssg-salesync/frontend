@@ -210,7 +210,6 @@ function Header() {
     }
     const logoClick=()=>{
         tokenCheckfunc()
-
         if(isKiosk){
             navigate('/kiosk')
         }

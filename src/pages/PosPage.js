@@ -59,7 +59,6 @@ function PosPage() {
       try {
         const categoryResponse = await CategoryGetApi();   // [GET: 카테고리 정보]
         
-      
         if (categoryResponse && categoryResponse.categories) {
           setCategoryData(categoryResponse.categories);
           
