@@ -139,6 +139,7 @@ function InfoNpwPage() {
   };
 
 
+  const navigate = useNavigate();
   // GET으로 가져올 아이디 저장할 상태
   const [ownerName, setOwnerName] = useState('');
 
