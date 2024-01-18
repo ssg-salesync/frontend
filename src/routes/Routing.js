@@ -56,7 +56,6 @@ function Routing() {
     <Route path="/signup/stores" element={<PublicRoute element={<StorePage />} />} />
     <Route path="/500" element={<InternalErrorPage />} />
     {/* NotFound 페이지를 가장 맨 아래에 위치 */}
-    <Route path="/*" element={<NotFoundPage />} />
   </Routes>
        
     // <Routes>

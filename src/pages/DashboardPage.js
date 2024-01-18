@@ -3,13 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
 import { PieGetApi } from '../api/dashboard/chart/PieGetApi';
 import MyCalendar from '../components/dashboard/MyCalendar';
 import { LineGetApi } from '../api/dashboard/chart/LineGetApi';
-import { ReqIdGetApi } from '../api/dashboard/consulting/ReqIdGetApi';
-import { WaitGetApi } from '../api/dashboard/consulting/WaitGetApi';
-import { ConsultingGetApi } from '../api/dashboard/consulting/ConsultingGetApi';
 
 /* eslint-disable */
 
@@ -197,7 +193,7 @@ function DashboardPage() {
     setSelectedDashboardType(e);
   };
 
-  const navigate = useNavigate();
+
   // Chart.js에 GET으로 가져온 데이터 보여주기
 
 
