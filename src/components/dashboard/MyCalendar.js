@@ -59,7 +59,7 @@ function MyCalendar({ date, onDateChange }) {
   // 드롭다운 클릭 시 상태 저장
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log('date: ', date)
+  // console.log('date: ', date)
 
   // 드롭다운 클릭 시 캘린더 나옴
   const handlerToggleCalendar = () => {

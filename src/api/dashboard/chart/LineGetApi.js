@@ -32,7 +32,7 @@ export async function LineGetApi(date) {
       },
     });
     // console.log('', typeof(formattedStartDate))
-    console.log('LINE res.data: ', res.data);
+    // console.log('LINE res.data: ', res.data);
     return res.data;
   } catch (err) {
     console.log(err);
