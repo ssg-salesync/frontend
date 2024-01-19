@@ -17,13 +17,16 @@ const ComponentDiv = styled.div`
   // overflow: hidden;
 `;
 const TotalDiv = styled.div`
-  height: 80%;
-  width: 80%;
+  height: 85%;
+  width: 60%;
   background-color: #fff;
-
+  border-radius: 1rem;
+  margin-bottom: 2%;
+  
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  align-items: center;
+  // flex-direction: column;
 `
 
 // 맨 위 글자 영역
@@ -44,7 +47,7 @@ const TitleDiv = styled.div`
   }
 
   @media screen and (min-width: 1025px) {
-    font-size: 100%;
+    font-size: 120%;
   }
 `;
 
@@ -59,9 +62,9 @@ const CostDiv = styled.div`
 `;
 const BtDiv = styled.div`
   width: 100%;
-  height: 10%;
+  height: 20%;
   display: flex;
-  justify-content: right;
+  justify-content: center;
 `
 const Item = styled.div`
   width: 100%;
@@ -69,14 +72,16 @@ const Item = styled.div`
   // border: 0.5rem;
   // background-color : gray;  
   display: flex;
-  flex-wrap: wrap;  /* 아이템들을 여러 줄로 나누기 위해 flex-wrap 추가 */
+  // flex-wrap: wrap;  /* 아이템들을 여러 줄로 나누기 위해 flex-wrap 추가 */
+  flex-direction: column;
   // justify-content: center;
+  align-items:center;
   text-align: center;
   overflow: auto;
 `
 const Menu = styled.div`
   // width: 25%;
-  width: calc(45% - 0.1rem);
+  width: 80%;
   // height: 100%;
   margin : 0.7rem;
   background-color : #FFF;
@@ -106,6 +111,34 @@ const MenuDtDiv = styled.div`
   justify-content: center;
   // flex-direction: row;
 `
+const MenuDtNameTitleDiv = styled.div`
+  height: 100%;
+  width: 80%;
+  border: 1px solid #ddd;
+  padding: 2%;
+  // margin: 2%;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  background: #1C395E;
+  color: #FFF;
+`
+const MenuDtPriceTitleDiv = styled.div`
+  height: 100%;
+  width: 20%;
+  border: 1px solid #ddd;
+  padding: 2%;
+  background: #1C395E;
+  color: #FFF;
+`
+const MenuDtCostTitleDiv = styled.div`
+  height: 100%;
+  width: 20%;
+  border: 1px solid #ddd;
+  padding: 2%;
+  background: #1C395E;
+  color: #FFF;
+`
 const MenuDtNameDiv = styled.div`
   height: 100%;
   width: 80%;
@@ -126,13 +159,19 @@ const MenuDtCostDiv = styled.div`
   height: 100%;
   width: 20%;
   border: 1px solid #ddd;
-  padding: 2%;
+  padding: 1.9%;    
+  
+  display:flex;
+  align-items:center;
+  justify-content: center;
 `
 const CostInput = styled.input`
   height: 100%;
-  width: 80%;
+  width: 100%;
   font-size: 90%;
   text-align: center;
+  box-sizing: content-box;
+
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -142,8 +181,9 @@ const CostInput = styled.input`
 // 완료 버튼
 const SubmitButton = styled.button`
   // margin-bottom: 50%;
-  width: 20%;
-  height: 75%;
+  // width: 10%;
+  // height: 100%;
+  padding: 10px 40px;
   border: none;
   border-radius: 8%;
   cursor: pointer;
@@ -436,21 +476,18 @@ function CostPage() {
               <h2>{cate.category_name}</h2>
               <MenuDiv>
               <MenuDtDiv>
-                  <MenuDtNameDiv>아이템 이름</MenuDtNameDiv>
-                  <MenuDtPriceDiv>가격</MenuDtPriceDiv>
-                  <MenuDtCostDiv>원가</MenuDtCostDiv>
+                  <MenuDtNameTitleDiv>아이템 이름</MenuDtNameTitleDiv>
+                  <MenuDtPriceTitleDiv>가격</MenuDtPriceTitleDiv>
+                  <MenuDtCostTitleDiv>원가</MenuDtCostTitleDiv>
               </MenuDtDiv>
               {cate.items.map((item)=>(
                 <MenuDtDiv key={item.item_id}>
                   {/* <MenuDtDiv> */}
                     <MenuDtNameDiv>{item.name}</MenuDtNameDiv>
                     <MenuDtPriceDiv>{item.price}</MenuDtPriceDiv>
-                    <MenuDtCostDiv><CostInput
-                    type="number"
-                    value={item.cost} // 현재는 editedCost를 사용했지만, 각 아이템마다 다른 값을 사용하려면 수정이 필요합니다.
-                    onChange={(e)=>handleCostChange(cate.category_id,item.item_id,e.target.value)}
-                    placeholder="원가"
-                  /></MenuDtCostDiv>
+                    <MenuDtCostDiv>
+                      <CostInput type="number" value={item.cost} onChange={(e)=>handleCostChange(cate.category_id,item.item_id,e.target.value)} placeholder="원가"/>
+                    </MenuDtCostDiv>
                   {/* </MenuDtDiv> */}
                 </MenuDtDiv>
               ))}
@@ -458,10 +495,10 @@ function CostPage() {
             </Menu>
           ))}
       </Item>
-      <BtDiv>
-          <SubmitButton type="button" onClick={handlerSubmit}>완료</SubmitButton>
-      </BtDiv>
     </TotalDiv>
+    <BtDiv>
+        <SubmitButton type="button" onClick={handlerSubmit}>완료</SubmitButton>
+    </BtDiv>
     </ComponentDiv>
 
     // 김상훈 코드

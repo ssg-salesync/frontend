@@ -56,7 +56,8 @@ const ButtonPay = styled.button`
     font-family: 'Pretendard-Regular';
     font-size: 130%;
     border-radius: 0.6rem;
-    background: #D9D9D9;
+    background: #1C395E;
+    color: #FFF;
     
     &:hover {
         filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
@@ -81,6 +82,7 @@ const ListDiv = styled.div`
     margin: 1%;
     border-radius: 0.6rem;
     font-size: 130%;
+    border: 1px solid rgba(185, 185, 185, 1);
 
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 768px) {
@@ -120,6 +122,12 @@ const ListContent = styled.input`
     outline: none;
     font-size: 130%;
     color: #000000;
+    
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
     
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 768px) {

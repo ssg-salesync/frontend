@@ -52,8 +52,9 @@ const TableContainer = styled.div`
     width: 90%;
     height: 70%;
     border-radius: 10%;
-    // border: 1px solid #ccc;
-    border:none;
+    border: none;
+    // border: 1px solid rgba(185, 185, 185, 1);
+    box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
     text-align: center;
