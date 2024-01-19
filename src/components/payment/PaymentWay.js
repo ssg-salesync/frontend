@@ -28,6 +28,7 @@ const ButtonDiv = styled.div`
 `
 const Button = styled.button`
     border: none;
+    box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
     border-radius: 0.625rem;
     padding: 0;
     width: 100%;

@@ -102,7 +102,8 @@ const ItemContainer = styled.div`
   height: 40%;
   border-radius: 5%;
   background: #FFF;
-
+  border: none;
+  box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,16 +135,25 @@ const ItemLabel = styled.label`
 // 아이템 정보 입력칸
 const InputField = styled.input`
   width: 50%;
-  height: 50%;
+  height: 100%;
   resize: none;
   text-align: center;
+
+  border-radius: 0.2rem;
+  background: #FFF;
+  border: 1px solid rgba(185, 185, 185, 1);
+  font-family: 'Pretendard-Regular';
+
+  &:focus {
+    outline: 1px solid rgba(185, 185, 185, 1);
+  }
 `;
-// 아이템 수정 버튼
+// 아이템 수정/등록 버튼
 const EditButton = styled.button`
   width: 40%;
   height: 18%;
   // border: 1px solid #ccc;
-  border: none;
+  border: 1px solid rgba(185, 185, 185, 1);
   border-radius: 0.3rem;
   font-family: Pretendard-Regular;
   cursor: pointer;
@@ -154,14 +164,14 @@ const EditButton = styled.button`
   }
 
   // 반응형에 맞게 폰트 크기 조정
-  @media screen and (max-width: 750px) {
-    font-size: 30%;
-  }
-  @media screen and (min-width: 750px) and (max-width: 1024px) {
+  @media screen and (max-width: 768px) {
     font-size: 50%;
   }
-  @media screen and (min-width: 1025px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 70%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 90%;
   }
 `;
 // 아이템 삭제 버튼
@@ -225,8 +235,9 @@ const AddButton = styled.button`
   width: 28%;
   height: 40%;
   border-radius: 3%;
-  // border: 1px solid #ccc;
   border: none;
+  // border: 1px solid rgba(185, 185, 185, 1);
+  box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -235,7 +246,7 @@ const AddButton = styled.button`
   background: #FFF;
 
   &:hover {
-    background-color: #B4E1FF;
+    filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
   }
 
   // 반응형에 맞게 폰트 크기 조정
@@ -646,7 +657,7 @@ return (
                 )}
             </ItemWrapper>
             <ItemWrapper>
-              <ItemLabel>가격: &nbsp;</ItemLabel>
+              <ItemLabel>&nbsp;&nbsp;가격: &nbsp;&nbsp;</ItemLabel>
                 {editModes[itemIndex] ? (
                   <InputField
                     type="text"

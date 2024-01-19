@@ -56,23 +56,23 @@ const CategoryContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:1%;
+  gap:2%;
 `;
 // 카테고리명 입력칸
 const InputField = styled.input`
   width: 100%;
-  height: 50%;
+  height: 64%;
   // margin-bottom: 5%;
   text-align: center;
-  border-radius: 0.2rem;
+  border-radius: 0.3rem;
   background: #FFF;
-  border: none;
+  border: 1px solid rgba(185, 185, 185, 1);
   font-family: 'Pretendard-Regular';
   font-size: 100%;
   white-space: nowrap;
 
   &:focus {
-    outline: none;
+    outline: 1px solid rgba(185, 185, 185, 1);
   }
 
   // 반응형에 맞게 폰트 크기 조정
@@ -94,8 +94,8 @@ const CategoryButton = styled.button`
   height: 70%;
   // margin-bottom: 5%;
   text-align: center;
-  border: none;
-  background-color: #B4E1FF;
+  background-color: rgba(171, 211, 246, 0.6);
+  border: 1px solid rgba(149, 195, 234, 1);
   border-radius: 0.3rem;
   cursor: pointer;
   font-family: 'Pretendard-Regular';
@@ -103,7 +103,7 @@ const CategoryButton = styled.button`
   white-space: nowrap;
 
   &:hover {
-    background-color: #e0e0e0;
+    background-color: rgba(180, 225, 255, 1);
   }
 
   &:focus {
@@ -127,14 +127,16 @@ const EditButton = styled.button`
   height: 70%;
   
   border-radius: 0.3rem;
-  border: none;
-  background-color: rgba(28, 57, 94, 0.50);
+  border: 1px solid rgba(185, 185, 185, 1);
+  background-color: rgba(221, 221, 221, 0.6);
   cursor: pointer;
   font-family: 'Pretendard-Regular';
   white-space: nowrap;
+  
   display: flex;
   align-items: center;
   justify-content: center;
+
   &:hover {
     background-color: #e0e0e0;
   }
@@ -157,16 +159,20 @@ const RemoveButton = styled.button`
   border-radius: 0.3rem;
   cursor: pointer;
 
-  background-color: rgba(0, 173, 239, 0.50);
-  border:none;
+  background-color: rgba(171, 211, 246, 0.6);
+  border: 1px solid rgba(149, 195, 234, 1);
 
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  &:hover {
+    background-color: rgba(180, 225, 255, 1);
+  }
 `;
 const RemoveIcon = styled(IoClose)`
-  width: 3em;
-  height: 3em;
+  width: 1.8em;
+  height: 1.8em;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
@@ -178,8 +184,8 @@ const RemoveIcon = styled(IoClose)`
     height: 1em;
   }
   @media screen and (min-width: 1025px) {
-    width: 2em;
-    height: 2em;
+    width: 1.8em;
+    height: 1.8em;
   }
 `;
 const AddButtonDiv = styled.div`
@@ -192,9 +198,10 @@ const AddButtonDiv = styled.div`
 // 카테고리 추가 버튼
 const AddButton = styled.button`
   width: 80%;
-  height: 8%;
+  height: 7%;
   border-radius: 0.3rem;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(185, 185, 185, 1);
+  background-color: rgba(221, 221, 221, 0.6);
 
   display: flex;
   align-items: center;
