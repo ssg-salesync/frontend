@@ -67,7 +67,7 @@ function PaymentWay({closePaymentPopup,tableId}) {
         setTimeout(() => {
             console.log("1-closeCardPopup")
             closeCardPopup();
-        }, 3000);
+        }, 5000);
     }
     const closeCardPopup =() =>{
         console.log("2-closePaymentPopup")
