@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, LabelList } from 'recharts';
 import moment from 'moment';
 import { PieGetApi } from '../api/dashboard/chart/PieGetApi';
 import MyCalendar from '../components/dashboard/MyCalendar';
 import { LineGetApi } from '../api/dashboard/chart/LineGetApi';
+import ConsultingPage from './ConsultingPage';
 
 /* eslint-disable */
 
@@ -160,6 +161,15 @@ const LineContainer = styled.div`
 `;
 
 function DashboardPage() {
+
+  const [consultOn, setConsultOn] = useState(false)
+  
+  const openConsult = () =>{
+    setConsultOn(true)
+  }
+  const closeConsult = () =>{
+    setConsultOn(false)
+  }
 
   // default 오늘 날짜
   const today = moment().format("YYYY-MM-DD");
@@ -376,7 +386,7 @@ const customLabel = (props) => {
         <ConsultingContainer>
         <ConsultingButton
           type='button'
-          onClick={handlerConsultingClick}
+          onClick={openConsult}
         >
         컨설팅
         </ConsultingButton>
@@ -409,7 +419,7 @@ const customLabel = (props) => {
         <LineContainer>
           {graphData.length > 0 && (
             <LineChart width={1000} height={300} data={graphData}>
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid strokeDasharray="4 4" />
               <XAxis dataKey="date" />
               <YAxis tickFormatter={(value) => `${value / 1000}만`} />
               <Legend wrapperStyle={{ fontSize: '150%' }} />
@@ -419,11 +429,25 @@ const customLabel = (props) => {
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
                 name={selectedDashboardType === '매출' ? '매출' : '순이익'}
-              />
+                >
+                <LabelList
+                  dataKey="value"
+                  position="top"
+                  content={(props) => {
+                    const { x, y, value } = props;
+                    return (
+                      <text x={x} y={y} dy={-10} fill="#8884d8" fontSize={16} textAnchor="middle">
+                        {`${value / 1000}만`}
+                      </text>
+                    );
+                  }}
+                />
+              </Line>
             </LineChart>
           )}
         </LineContainer>
       </DashboardDiv>
+      {consultOn && <ConsultingPage openConsult={openConsult} closeConsult={closeConsult} date={date}/>}
     </ComponentDiv>
   );
 };
