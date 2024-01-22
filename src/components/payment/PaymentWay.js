@@ -64,10 +64,10 @@ function PaymentWay({closePaymentPopup,tableId}) {
     const openCardPopup =() =>{
         setCardPopupOn(true);
         // 5초 후에 모달을 닫는 함수 호출
-        // setTimeout(() => {
-        //     console.log("1-closeCardPopup")
-        //     closeCardPopup();
-        // }, 5000);
+        setTimeout(() => {
+            console.log("1-closeCardPopup")
+            closeCardPopup();
+        }, 5000);
     }
     const closeCardPopup =() =>{
         console.log("2-closePaymentPopup")
