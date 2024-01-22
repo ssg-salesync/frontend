@@ -12,6 +12,7 @@ const ListTableDiv = styled.div`
 const ListTable = styled.table`
     width : 80%;
     height : 5%;
+    // border-collapse: collapse;
     border-collapse: separate;
     border-spacing: 0 10px;
     font-size: 1.2rem;
@@ -20,6 +21,7 @@ const ListTableTr = styled.tr`
     background: #FFF;
     margin-bottom: 1rem;
     border-radius: 0.5rem;
+    border: 1px solid #ddd
 `
 const ListTableTd = styled.td`
     line-height: 100%;
