@@ -155,7 +155,7 @@ function CardPopup({openCardPopup, closeCardPopup}) {
               {changeCard ? 
                 <PayIngDiv>
                     <Spinner />
-                    <div> ~결제중~ </div>
+                    <div> 카드 결제를 기다리는 중입니다. </div>
                 </PayIngDiv>
                 : <><CardImgDiv>
                   <Card>

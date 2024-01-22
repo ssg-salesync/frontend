@@ -197,7 +197,7 @@ const SubmitButton = styled.button`
   color: #FFF;
 
   &:hover {
-    background-color: #e0e0e0;
+    filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
   }
 
   // 반응형에 맞게 폰트 크기 조정
@@ -481,7 +481,7 @@ function CostPage() {
               <h2>{cate.category_name}</h2>
               <MenuDiv>
               <MenuDtDiv>
-                  <MenuDtNameTitleDiv>아이템 이름</MenuDtNameTitleDiv>
+                  <MenuDtNameTitleDiv>품목명</MenuDtNameTitleDiv>
                   <MenuDtPriceTitleDiv>가격</MenuDtPriceTitleDiv>
                   <MenuDtCostTitleDiv>원가</MenuDtCostTitleDiv>
               </MenuDtDiv>

@@ -81,10 +81,13 @@ const TypeButton = styled.button`
   height: 100%;
   font-family: Pretendard-Regular;
   font-size: 85%;
-  background-color: ${({ active }) => (active ? "#00ADEF" : "transparent")};
-  color: ${({ active }) => (active ? "white" : "#1C395E")};
+  background-color: ${({ active }) => (active ? "#1D56A8" : "#fff")};
+  color: ${({ active }) => (active ? "#fff" : "#1C395E")};
   cursor: pointer;
 
+  &:hover {
+    filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
+  }
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
     font-size: 60%;
@@ -111,7 +114,7 @@ const ConsultingContainer = styled.div`
 
 // 컨설팅버튼
 const ConsultingButton = styled.button`
-  width: 20%;
+  width: 25%;
   height: 100%;
   border-radius: 0.5625rem;
   border:none;
@@ -119,6 +122,10 @@ const ConsultingButton = styled.button`
   cursor: pointer;
   color: white;
   white-space: nowrap;
+
+  &:hover {
+    filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
+  }
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
@@ -402,7 +409,7 @@ const customLabel = (props) => {
         </TypeContainer>
         <ConsultingContainer>
           <ConsultingButton type='button' onClick={openConsult}>컨설팅</ConsultingButton>
-          <ConsultingButton type='button' onClick={calculate}>정산하기</ConsultingButton>
+          <ConsultingButton type='button' onClick={calculate}>정산</ConsultingButton>
         </ConsultingContainer>
       </TopDiv>
       <DashboardDiv>
