@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { IoCloseSharp } from "react-icons/io5";
 import { styled, keyframes } from 'styled-components';
+import { DNA } from 'react-loader-spinner'
 import { ReqIdGetApi } from '../api/dashboard/consulting/ReqIdGetApi';
 import { WaitGetApi } from '../api/dashboard/consulting/WaitGetApi';
 import { ConsultingGetApi } from '../api/dashboard/consulting/ConsultingGetApi';
@@ -167,7 +168,7 @@ const CloseBt = styled(IoCloseSharp)`
 `
 const SpinnerDiv = styled.div`
   width: 100%;
-  height: 50%;
+  height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -338,7 +339,15 @@ function ConsultingPage({openConsult,closeConsult,date}) {
       ) : result === 'not completed' ? (
           <>          
               <SpinnerDiv>
-                <Spinner/>
+                {/* <Spinner/> */}
+                <DNA
+                  visible={true}
+                  height="120px"
+                  width="250px"
+                  ariaLabel="dna-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="dna-wrapper"
+                />
                 <ResultDiv>
                   컨설팅 결과를 기다리는 중입니다.
                 </ResultDiv>
