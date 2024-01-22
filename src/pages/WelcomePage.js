@@ -50,8 +50,8 @@ const ProfDiv = styled.div`
 `
 // 로고 이미지
 const LogoImg = styled.img`
-  // width: 130%;
-  // height: 130%;
+  width: 75px;
+  height: 75px;
   transform: translate(-5%, -4%);
   animation: fadeIn 1s forwards;
 `
@@ -180,7 +180,7 @@ function WelcomePage() {
     <TotalDiv>
     <SplashDiv>
         <SplashTextDiv>
-          <LogoImg src="/img/Logo2.png" alt="logo"/>
+          <LogoImg src="/img/only_logo.png" alt="logo"/>
           {Array.from('Salesync').map((char, index) => (
             <FadeInItemDiv key={index} index={index}>
               {char}
@@ -197,7 +197,7 @@ function WelcomePage() {
     <UnderDiv style={{ animationDelay: `${0.15 * (Array.from('Sale').length + 3)}s` }}>
       <ProfDiv>
       스마트한 AI 클라우드 포스 <br/>
-      매장 관리를 하나의 패드로
+      어디서나 웹으로 간편하게
       </ProfDiv>
       <BtDiv>
         <Button onClick={moveLogin}>로그인</Button>
