@@ -66,6 +66,7 @@ const SubMenu = styled.li`
     font-size: 120%;
     transition: 0.5s;
     background-color : #FFF;
+    border: 1px solid rgba(185, 185, 185, 1);
     border-radius: 0.5rem;
     justify-content: center;
 
@@ -99,6 +100,7 @@ const Menu = styled.div`
     background-color : #FFF;
     border-radius: 0.5rem;
     font-size: 120%;
+    border: 1px solid rgba(185, 185, 185, 1);
 
     // 반응형
     @media screen and (max-width: 768px) {

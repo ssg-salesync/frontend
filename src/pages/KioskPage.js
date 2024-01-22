@@ -1,6 +1,8 @@
 import {useState,useEffect} from "react";
 import { useRecoilState} from 'recoil';
 import styled, {keyframes,css} from 'styled-components';
+import { MdOutlineTableBar} from "react-icons/md";
+import { IoBagHandleOutline} from "react-icons/io5";
 import { deleteOrderState,deleteTotalPriceState } from "../components/func/AtomData";
 import { PayCompleteState } from "../recoil/atoms/ItemState";
 import OrderPopup from "../popup/OrderPopup";
@@ -22,11 +24,13 @@ const BtDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 2%;
 `
 const OrderBt = styled.button`
-    height:20%;
-    width:20%;
+    height: 30%;
+    width: 20%;
     border: none;
+    box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
     font-family: 'Pretendard-Regular';
     font-size: 180%;
     font-weight: 800;
@@ -58,7 +62,44 @@ const OrderBt = styled.button`
         width:20%;
     }
 `
+const TableIcon = styled(MdOutlineTableBar)`
+  width: 1.8em;
+  height: 1.8em;
+  margin-bottom: 5%;
 
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    width: 1em;
+    height: 1em;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    width: 1em;
+    height: 1em;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 1.8em;
+    height: 1.8em;
+  }
+`;
+const TogoIcon = styled(IoBagHandleOutline)`
+  width: 1.8em;
+  height: 1.8em;
+  margin-bottom: 5%;
+  
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    width: 1em;
+    height: 1em;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    width: 1em;
+    height: 1em;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 1.8em;
+    height: 1.8em;
+  }
+`;
 function Kiosk(){
     const [orderModalOn, setOrderModalOn] = useState(false);
     // const [selectedTableId, setSelectedTableId] = useState(null);
@@ -89,7 +130,8 @@ function Kiosk(){
 
     return(
         <BtDiv>
-            <OrderBt type="button" onClick={(e) => { e.preventDefault(); openOrderPopup();}} visible={isButtonVisible} >주문하기</OrderBt>
+            <OrderBt type="button" onClick={(e) => { e.preventDefault(); openOrderPopup();}} visible={isButtonVisible} ><TableIcon/><br/>매장</OrderBt>
+            <OrderBt type="button" onClick={(e) => { e.preventDefault(); openOrderPopup();}} visible={isButtonVisible} ><TogoIcon/><br/>포장</OrderBt>
             {orderModalOn && <OrderPopup openOrderPopup={openOrderPopup} closeOrderPopup={closeOrderPopup} tableId={0}/>}
         </BtDiv>
     )

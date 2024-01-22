@@ -28,6 +28,7 @@ const ButtonDiv = styled.div`
 `
 const Button = styled.button`
     border: none;
+    box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
     border-radius: 0.625rem;
     padding: 0;
     width: 100%;
@@ -66,7 +67,7 @@ function PaymentWay({closePaymentPopup,tableId}) {
         setTimeout(() => {
             console.log("1-closeCardPopup")
             closeCardPopup();
-        }, 3000);
+        }, 5000);
     }
     const closeCardPopup =() =>{
         console.log("2-closePaymentPopup")

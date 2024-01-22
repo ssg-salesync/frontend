@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { styled } from 'styled-components';
 
@@ -26,6 +27,7 @@ const CardDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items : center;
+    flex-direction: column;
     width: 100%;
     height: '100%';
 `
@@ -84,25 +86,97 @@ const Spinner = styled.div`
   }
 `;
 
+const CardImgDiv = styled.div`
+  width: 35%;
+  height: 40%;
+  border-radius: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(62, 161, 219, 1) 11.2%,
+    rgba(93, 52, 236, 1) 100.2%
+  );
+`
+const Card = styled.div`
+  width: 90%;
+  height: 90%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  z-index: 1;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+`
+const VisaLogo = styled.div`
+  width: 20%;
+  height: 20%;
+  float: right;
+  padding: 10px;
+`
+const VisaLogoImg = styled.img`
+  width: 100%;
+  height: 100%;
+`
+const VisaInfo = styled.div`
+  padding: 5%;
+  margin-top: 3%;
+`
+const VisaInfoImg = styled.img`
+  width: 15%;
+  height: 10%;
+`
+const VisaInfoP = styled.p`
+  font-size: 130%;
+  padding: 2% 0;
+  letter-spacing: 2px;
+  color: #ffffff;
+`
+const VisaCrinfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4%;
+  color: #ffffff;
+`
+const CardFont = styled.div`
+  font-size: 150%;
+  margin: 5%;
+`
 function CardPopup({openCardPopup, closeCardPopup}) {
-    // const [cardModalOn, setCardModalOn] = useState(false);
-
-    // const openModal =() =>{
-    //     setCardModalOn(true);
-    // }
-
-    // const closeModal = () =>{
-    //     setCardModalOn(false);
-    // }
+    const [changeCard, setChangeCard] = useState(false)
+    useEffect(()=>{
+      setTimeout(()=>{
+        setChangeCard(true)
+      },2000)
+    },[])
     return (
         <Modal isOpen={openCardPopup} isClose={closeCardPopup} style={modalStyle} contentLabel="CardPopup">
             {/* <ModalContent/> */}
             <CardDiv style={{width: '100%', height: '100%', }}>
-            <PayIngDiv>
-                <div> 카드를 넣어주세요 </div>
-                <div> ~결제중~ </div>
-                <Spinner />
-            </PayIngDiv>
+              {changeCard ? 
+                <PayIngDiv>
+                    <div> ~결제중~ </div>
+                    <Spinner />
+                </PayIngDiv>
+                : <><CardImgDiv>
+                  <Card>
+                      <VisaLogo>
+                          <VisaLogoImg src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/visa.png" alt="VisaLogoImg"/>
+                      </VisaLogo>
+                      <VisaInfo>
+                          <VisaInfoImg src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" alt="VisaInfoImg"/>
+                          <VisaInfoP>4586 7985 9271 6388</VisaInfoP>
+                      </VisaInfo>
+                      <VisaCrinfo>
+                          <p>02/12</p>
+                          <p>Nikhil Bobade</p>
+                      </VisaCrinfo>
+                  </Card>
+                </CardImgDiv>
+                <CardFont> 카드를 넣어주세요</CardFont></>
+              }
             </CardDiv>
         </Modal>
     );

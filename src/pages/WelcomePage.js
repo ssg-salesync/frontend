@@ -57,7 +57,7 @@ const LogoImg = styled.img`
 const FadeInItemDiv = styled.div`
   opacity: 0;
   animation: fadeIn 1s forwards;
-  animation-delay: ${({ index }) => `${0.3 * (index + 1)}s`};
+  animation-delay: ${({ index }) => `${0.15 * (index + 1)}s`};
 `
 const SplashTextDiv = styled.div`
   text-align: center;
@@ -187,17 +187,20 @@ function WelcomePage() {
     <SplashDiv>
         <SplashTextDiv>
           <LogoImg src="/img/Logo2.png" alt="logo"/>
-          {Array.from('Sale').map((char, index) => (
+          {Array.from('Salesync').map((char, index) => (
             <FadeInItemDiv key={index} index={index}>
               {char}
             </FadeInItemDiv>
           ))}
-          <FadeInItemDiv style={{ animationDelay: `${0.3 * (Array.from('Sale').length + 1)}s` }}>
-            <span>sync</span>
+          <FadeInItemDiv style={{ animationDelay: `${0.15 * (Array.from('Salesync').length + 1)}s` }}>
+            {/* <span>sync</span> */}
           </FadeInItemDiv>
+          {/* <FadeInItemDiv style={{ animationDelay: `${0.3 * (Array.from('Sale').length + 1)}s` }}>
+            <span>sync</span>
+          </FadeInItemDiv> */}
         </SplashTextDiv>      
     </SplashDiv>
-    <UnderDiv style={{ animationDelay: `${0.3 * (Array.from('Sale').length + 3)}s` }}>
+    <UnderDiv style={{ animationDelay: `${0.15 * (Array.from('Sale').length + 3)}s` }}>
       <ProfDiv>
       스마트한 AI 클라우드 포스 <br/>
       매장 관리를 하나의 패드로

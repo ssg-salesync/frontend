@@ -9,7 +9,7 @@ export async function CostsGetApi(){
     const headers = Token();
 
     try{
-        const res = await axios.get(`${URL}/dashboard/costs`, {headers})
+        const res = await axios.get(`${URL}/bff/costs`, {headers})
         console.log('cost res: ', res.data)
         return res.data;        
     } catch(err) {

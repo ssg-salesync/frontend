@@ -38,12 +38,11 @@ const TitleDiv = styled.div`
 `;
 
 // 달력, 타입 영역
-const CalendarTypeDiv = styled.div`
+const TopDiv = styled.div`
   width: 100%;  
   height: 5%;
   display: flex;
-  align-items: flex-start;
-  justify-content: start;
+  justify-content: center;
 `;
 
 // 달력 컨테이너
@@ -51,7 +50,7 @@ const CalendarContainer = styled.div`
   width: 20%;
   height : 70%;
   margin-right: 10%;
-  margin-left: 5%;
+  // margin-left: -10%;
   text-align: center;
   display: flex;
   align-items: center;
@@ -65,7 +64,6 @@ const TypeContainer = styled.div`
   align-items: center;
   height: 100%;
   width: 30%;
-
 `;
 
 // 대시보드 타입 버튼
@@ -91,6 +89,40 @@ const TypeButton = styled.button`
     font-size: 100%;
   }
 `;
+
+// 컨설팅 컨테이너
+const ConsultingContainer = styled.div`
+  // margin-left: 10%;
+  // margin-right: -10%;
+  display: flex;
+  align-items: center;  
+  height: 100%;
+  width: 30%;
+  justify-content: center;
+`;
+
+// 컨설팅버튼
+const ConsultingButton = styled.button`
+  width: 20%;
+  height: 100%;
+  border-radius: 0.5625rem;
+  border:none;
+  background-color: #1D56A8;
+  cursor: pointer;
+  color: white;
+  white-space: nowrap;
+
+  // 반응형에 맞게 폰트 크기 조정
+  @media screen and (max-width: 768px) {
+    font-size: 80%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: 100%;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 120%;
+  }
+;`
 
 // 대시보드 영역
 const DashboardDiv = styled.div`
@@ -126,25 +158,6 @@ const LineContainer = styled.div`
   // 마우스 포인터 버그 해결을 위해 포인터 이벤트 비활성화
   pointer-events: none;
 `;
-
-// 컨설팅 컨테이너
-const ConsultingContainer = styled.div`
-  height: 5%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ConsultingButton = styled.button`
-  width: 10%;
-  height: 100%;
-  border-radius: 0.5625rem;
-  border:none;
-  background-color: #1D56A8;
-  cursor: pointer;
-  color: white;
-;`
 
 function DashboardPage() {
 
@@ -342,7 +355,7 @@ const customLabel = (props) => {
       <TitleDiv>
         <h1>대시보드</h1>
       </TitleDiv>
-      <CalendarTypeDiv>
+      <TopDiv>
         <CalendarContainer>
           <MyCalendar date={date} onDateChange={handlerDateChange}/>
         </CalendarContainer>
@@ -360,7 +373,15 @@ const customLabel = (props) => {
             순이익
           </TypeButton>
         </TypeContainer>
-      </CalendarTypeDiv>
+        <ConsultingContainer>
+        <ConsultingButton
+          type='button'
+          onClick={handlerConsultingClick}
+        >
+        컨설팅
+        </ConsultingButton>
+        </ConsultingContainer>
+      </TopDiv>
       <DashboardDiv>
         <PieContainer>
           {chartData.length > 0 && (
@@ -393,7 +414,7 @@ const customLabel = (props) => {
               <YAxis tickFormatter={(value) => `${value / 1000}만`} />
               <Legend wrapperStyle={{ fontSize: '150%' }} />
               <Line
-                type="monotone"
+                type="linear"
                 dataKey="value"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
@@ -402,14 +423,6 @@ const customLabel = (props) => {
             </LineChart>
           )}
         </LineContainer>
-        <ConsultingContainer>
-        <ConsultingButton
-          type='button'
-          onClick={handlerConsultingClick}
-        >
-        컨설팅
-        </ConsultingButton>
-        </ConsultingContainer>
       </DashboardDiv>
     </ComponentDiv>
   );
