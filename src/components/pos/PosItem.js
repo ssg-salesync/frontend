@@ -28,6 +28,8 @@ const TitleDiv = styled.div`
   border: 5%;
   font-weight: 900;
 
+  cursor: default;
+
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 750px) {
     font-size: 100%;
@@ -653,7 +655,7 @@ return (
                     onChange={(e) => handlerEditItem(itemIndex, e, 'name')}
                   />
                 ) : (
-                <div>{item.name}</div>
+                <div style={{ cursor: 'default' }}>{item.name}</div>
                 )}
             </ItemWrapper>
             <ItemWrapper>
@@ -666,7 +668,7 @@ return (
                     onChange={(e) => handlerEditItem(itemIndex, e, 'price')}
                   />
                 ) : (
-                <div>{item.price}</div>
+                <div style={{ cursor: 'default' }}>{item.price}</div>
                 )}
             </ItemWrapper>
             <EditButton onClick={() => handlerEditMode(itemIndex)}>

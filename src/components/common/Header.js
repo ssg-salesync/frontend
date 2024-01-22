@@ -20,6 +20,7 @@ const Logo = styled.img`
   width: 100%; /* 이미지를 부모 컨테이너에 맞게 크기 조절 */
   height: 100%; /* 이미지를 부모 컨테이너에 맞게 크기 조절 */
   object-fit: scale-down; /* 이미지가 컨테이너에 맞게 조절될 때 가로/세로 비율 유지 및 오버플로우 숨김 */
+  cursor: pointer;
 `;
 const BtDiv = styled.div`
     height: 100%;
@@ -86,6 +87,8 @@ const Bt = styled.button`
     align-items : center;
     background-color: #2D69C4;
     color: #FFF;
+
+    cursor: pointer;
 
     &:hover {
         filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
@@ -180,6 +183,8 @@ const Desc = styled.div`
   color: black;
   font-size: 110%;
   font-weight: 1000;
+
+  cursor: default;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {

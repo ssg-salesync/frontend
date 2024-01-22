@@ -19,6 +19,7 @@ const ListTr = styled.tr`
     border: 1px solid #ddd;
     background: #FFF;
     border-radius: 0.3rem;
+    
 
     &:not(:last-child) {
         margin: 1rem; /* 마지막 행을 제외한 모든 행에 간격을 주는 부분 */
@@ -38,6 +39,7 @@ const ListTr = styled.tr`
     }
 `
 const ListTd = styled.td`
+    cursor: default;
 `
 /* eslint-disable */
 function OrderList(){

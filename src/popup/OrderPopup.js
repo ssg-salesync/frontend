@@ -68,6 +68,8 @@ const PayLDiv = styled.div`
     white-space: nowrap;
     font-size: 120%;
 
+    cursor: default;
+
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 768px) {
       font-size: 90%;
@@ -95,6 +97,8 @@ const PayRDiv = styled.div`
     // margin:2%;
     white-space: nowrap;
     font-size: 120%;
+    
+    cursor: pointer;
 
     &:hover {
       filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
@@ -129,6 +133,7 @@ const RightDiv = styled.div`
 `
 const RightDivTitle = styled.h2`
     font-size: 100%;
+    cursor: default;
 
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 768px) {

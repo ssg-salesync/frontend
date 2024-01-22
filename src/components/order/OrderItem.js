@@ -16,6 +16,7 @@ const TabDiv = styled.div`
     height : 100%;
     width : 100%;
     background: linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%), #FFF;
+
     // margin-right: 1%;
     
     //슬라이드 애니메이션 효과
@@ -69,6 +70,8 @@ const SubMenu = styled.li`
     border: 1px solid rgba(185, 185, 185, 1);
     border-radius: 0.5rem;
     justify-content: center;
+
+    cursor: pointer;
 
     // 반응형
     @media screen and (max-width: 768px) {
@@ -126,6 +129,7 @@ const MenuDtDiv = styled.div`
 const MenuDtP =styled.p`
     margin: 0.4rem;
     white-space: nowrap;
+    cursor: default;
 `
 const BtDiv = styled.div`
     height: 20%;
@@ -212,6 +216,8 @@ const OrderBt = styled.button`
     font-size: 145%;
     margin: 1%;
     white-space: nowrap;
+
+    cursor: pointer;
 
     &:hover {
         filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));

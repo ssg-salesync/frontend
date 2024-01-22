@@ -37,6 +37,8 @@ const TitleDiv = styled.div`
   align-items: center;
   justify-content: center;
 
+  cursor: default;
+
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 480px) {
     font-size: 70%;
@@ -78,6 +80,8 @@ const Item = styled.div`
   align-items:center;
   text-align: center;
   overflow: auto;
+  cursor: default;
+
 `
 const Menu = styled.div`
   // width: 25%;
@@ -101,6 +105,7 @@ const Menu = styled.div`
   }
 `
 const MenuDiv = styled.div`
+  cursor: default;
 `
 const MenuDtDiv = styled.div`
   height: 5%;

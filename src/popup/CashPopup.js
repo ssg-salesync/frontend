@@ -39,8 +39,10 @@ const modalStyle ={
 };
 
 const BackBt = styled(IoArrowBackSharp)`
-  width:5%;
-  height:5%;
+  width: 5%;
+  height: 5%;
+
+  cursor: pointer;
 `
 // style요소에 css 애니메이션 요소를 추가
 const style = document.createElement('style');
@@ -59,6 +61,8 @@ const ButtonPay = styled.button`
     background: #1C395E;
     color: #FFF;
     
+    cursor: pointer;
+
     &:hover {
         filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
     }
@@ -83,6 +87,8 @@ const ListDiv = styled.div`
     border-radius: 0.6rem;
     font-size: 130%;
     border: 1px solid rgba(185, 185, 185, 1);
+
+    cursor: default;
 
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 768px) {
@@ -122,6 +128,8 @@ const ListContent = styled.input`
     outline: none;
     font-size: 130%;
     color: #000000;
+
+    cursor: default;
     
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {

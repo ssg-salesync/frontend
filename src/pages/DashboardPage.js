@@ -26,6 +26,8 @@ const TitleDiv = styled.div`
   align-items: center;
   justify-content: center;
 
+  cursor: default;
+
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
     font-size: 60%;
