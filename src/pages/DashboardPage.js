@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, LabelList, ResponsiveContainer, Tooltip } from 'recharts';
 import moment from 'moment';
+import { useSetRecoilState } from 'recoil';
+import { UserCheckState } from '../recoil/atoms/UserState';
 import { PieGetApi } from '../api/dashboard/chart/PieGetApi';
 import MyCalendar from '../components/dashboard/MyCalendar';
 import { LineGetApi } from '../api/dashboard/chart/LineGetApi';
 import ConsultingPage from './ConsultingPage';
+import { CaculateGetApi } from '../api/dashboard/costs/CalculateGetApi';
+
 
 /* eslint-disable */
 
@@ -100,6 +104,7 @@ const ConsultingContainer = styled.div`
   height: 100%;
   width: 30%;
   justify-content: center;
+  gap: 4%;
 `;
 
 // 컨설팅버튼
@@ -205,16 +210,27 @@ function DashboardPage() {
 
   const navigate = useNavigate();
 
-  const handlerConsultingClick = () => {
-    navigate("/mypage/dashboard/consulting", { state: { date } })
-  }
+  // const handlerConsultingClick = () => {
+  //   navigate("/mypage/dashboard/consulting", { state: { date } })
+  // }
   
   
   // 버튼 클릭 시 실행할 함수
   const handlerButtonClick = (e) => {
     setSelectedDashboardType(e);
   };
+  const setUserCheck = useSetRecoilState(UserCheckState)
 
+  // 정산하기
+  const calculate = () =>{
+    const caculate = CaculateGetApi(date);
+    console.log(caculate)
+    alert("정산이 완료되었습니다.")
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('csrf_token');
+    setUserCheck(false)
+    navigate('/')
+  }
 
   // Chart.js에 GET으로 가져온 데이터 보여주기
 
@@ -383,12 +399,8 @@ const customLabel = (props) => {
           </TypeButton>
         </TypeContainer>
         <ConsultingContainer>
-        <ConsultingButton
-          type='button'
-          onClick={openConsult}
-        >
-        컨설팅
-        </ConsultingButton>
+          <ConsultingButton type='button' onClick={openConsult}>컨설팅</ConsultingButton>
+          <ConsultingButton type='button' onClick={calculate}>정산하기</ConsultingButton>
         </ConsultingContainer>
       </TopDiv>
       <DashboardDiv>
