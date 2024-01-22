@@ -55,9 +55,9 @@ const TopDiv = styled.div`
 // 달력 컨테이너
 const CalendarContainer = styled.div`
   width: 20%;
-  height : 70%;
-  margin-right: 10%;
-  // margin-left: -10%;
+  height : 100%;
+  margin-right: 7%;
+  margin-left: 3%;
   text-align: center;
   display: flex;
   align-items: center;

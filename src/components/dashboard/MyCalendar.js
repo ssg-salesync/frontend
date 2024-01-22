@@ -11,24 +11,37 @@ const CalendarContainer = styled.div`
 `;
 
 const DropdownButton = styled.button`
-  margin-top: 20%;
   width: 100%;
-  height: 50%;
-  border: 0.8px solid var(--festie-gray-600, #949494);
-  border-radius: 0.6rem;
-  padding: 0px 12px;
-  color: var(--festie-gray-800, #3a3a3a);
-  font-family: SUIT Variable;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 140%;
-  text-align: start;
-  appearance: none;
-  background-color: white;
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 12px;
+  height: 100%;
+  border-radius: 0.5625rem;
+  border:none;
+  background-color: #1D56A8;
   cursor: pointer;
+  // text-color: white;
+  white-space: nowrap;
+  color: white;
+  font-family: Pretendard-Regular;
+
+  margin-top: 20%;
+  // width: 100%;
+  // height: 50%;
+  // border: 0.8px solid var(--festie-gray-600, #949494);
+  // border-radius: 0.6rem;
+  // padding: 0px 12px;
+  // // background-color: white;
+  // background-repeat: no-repeat;
+  // background-position: right 12px center;
+  // background-size: 12px;
+  // cursor: pointer;
+
+  // color: var(--festie-gray-800, #3a3a3a);
+  // font-family: SUIT Variable;
+  // font-style: normal;
+  // font-weight: 500;
+  // line-height: 140%;
+  // text-align: start;
+  // appearance: none;
+ 
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
@@ -46,7 +59,7 @@ const CalendarWrapper = styled.div`
   z-index: 11;
   position: absolute;
   top: 100%;
-  left: -90%;
+  left: -100%;
   display: ${(props) => (props.isOpen ? "block" : "none")};
 `;
 
