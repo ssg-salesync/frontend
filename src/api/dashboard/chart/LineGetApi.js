@@ -11,28 +11,28 @@ export async function LineGetApi(date) {
 
   // 시작 날짜를 오늘날짜 -3일로 등록
   const startDate = new Date(currentDate);
-  startDate.setDate(currentDate.getDate() - 3);
+  startDate.setDate(currentDate.getDate() - 5);
 
   // 끝 날짜를 오늘날짜 +3일로 등록
-  const endDate = new Date(currentDate);
-  endDate.setDate(currentDate.getDate() + 3);
+  // const endDate = new Date(currentDate);
+  // endDate.setDate(currentDate.getDate() + 3);
 
   // 날짜를 API 요청에 맞게 변환
   const start = startDate.toISOString().split('T')[0];
-  const end = endDate.toISOString().split('T')[0];
+  // const end = endDate.toISOString().split('T')[0];
 
   const headers = Token();
 
   try {
-    const res = await axios.get(`${URL}/dashboard/volumes`, {
+    const res = await axios.get(`${URL}/bff/volumes`, {
       headers,
       params: {
         start: start,
-        end: end,
+        end: date,
       },
     });
     // console.log('', typeof(formattedStartDate))
-    // console.log('LINE res.data: ', res.data);
+    console.log('LINE res.data: ', res.data);
     return res.data;
   } catch (err) {
     console.log(err);
