@@ -9,8 +9,48 @@ export const TotalDiv = styled.div`
   justify-content: center;
 `;
 
-// 회원가입/매장등록 박스
+// 회원가입/매장등록 박스 애니메이션 슬라이드인 효과
 export const ComponentDiv = styled.div`
+  width: 50%;
+  height: 80%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 2.125rem;
+  border: 2px solid #FFF;
+  background: rgba(255, 255, 255);
+  box-shadow: 3px 4px 12.6px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+
+  // 슬라이드 애니매이션 효과
+  transform: translateX(100%);
+  animation: slideIn 0.5s forwards;
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  // 반응형
+  @media screen and (max-width: 768px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 45%;
+  }
+`;
+
+// 로그인, 마이페이지 애니메이션 슬라이드 업 효과
+export const ComponentDivUp = styled.div`
   width: 50%;
   height: 80%;
 

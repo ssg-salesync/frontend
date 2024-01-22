@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import styled from 'styled-components';
-import { ComponentDiv, TitleDiv, TotalDiv } from "../styles/CommonStyle";
+import { ComponentDivUp, TitleDiv, TotalDiv } from "../styles/CommonStyle";
 
 /* eslint-disable */
 
@@ -101,7 +101,7 @@ function MyPage() {
   }
   return (
     <TotalDiv>
-    <ComponentDiv>
+    <ComponentDivUp>
       <TitleDiv>마이페이지</TitleDiv>
       <MyPageContainer>
         {/* <MyPageButtonDiv><Link to="/mypage/info">
@@ -131,7 +131,7 @@ function MyPage() {
             </MyPageButton>
         </MyPageButtonDiv>
       </MyPageContainer>
-    </ComponentDiv>
+    </ComponentDivUp>
     </TotalDiv>    
   );
 };
