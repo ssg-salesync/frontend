@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { UserCheckState } from '../recoil/atoms/UserState';
+import "../fonts/fonts.css"
 
 /* eslint-disable */
 const TotalDiv = styled.div`
@@ -61,19 +62,12 @@ const FadeInItemDiv = styled.div`
 `
 const SplashTextDiv = styled.div`
   text-align: center;
-  font-family: 'Giants-Regular';
+  font-family: 'GiantsRegular', sans-serif;
   font-size: 5em;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
-  @font-face {
-    font-family: 'Giants-Regular';
-    src: url("../fonts/Giants-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-  }
 `;
 const BtDiv = styled.div`
   height: 30%;
