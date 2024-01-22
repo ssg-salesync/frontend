@@ -11,7 +11,7 @@ export async function LineGetApi(date) {
 
   // 시작 날짜를 오늘날짜 -3일로 등록
   const startDate = new Date(currentDate);
-  startDate.setDate(currentDate.getDate() - 5);
+  startDate.setDate(currentDate.getDate() - 3);
 
   // 끝 날짜를 오늘날짜 +3일로 등록
   // const endDate = new Date(currentDate);

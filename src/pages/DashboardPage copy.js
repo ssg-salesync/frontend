@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, LabelList, ResponsiveContainer, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 import moment from 'moment';
 import { PieGetApi } from '../api/dashboard/chart/PieGetApi';
 import MyCalendar from '../components/dashboard/MyCalendar';
@@ -69,7 +69,7 @@ const TypeContainer = styled.div`
 // 대시보드 타입 버튼
 const TypeButton = styled.button`
   border: none;
-  // border-bottom: 2px solid #1C395E;
+  border-bottom: 2px solid #1C395E;
   width: 50%;
   height: 100%;
   font-family: Pretendard-Regular;
@@ -148,6 +148,7 @@ const PieContainer = styled.div`
 
 // 라인 컨테이너
 const LineContainer = styled.div`
+  margin-top: -5%;
   height: 100%;
   width: 100%;
   display: flex;
@@ -155,19 +156,10 @@ const LineContainer = styled.div`
   align-items: center;
 
   // 마우스 포인터 버그 해결을 위해 포인터 이벤트 비활성화
-  // pointer-events: none;
+  pointer-events: none;
 `;
 
 function DashboardPage() {
-
-  const [consultOn, setConsultOn] = useState(false)
-  
-  const openConsult = () =>{
-    setConsultOn(true)
-  }
-  const closeConsult = () =>{
-    setConsultOn(false)
-  }
 
   // default 오늘 날짜
   const today = moment().format("YYYY-MM-DD");
@@ -415,57 +407,23 @@ const customLabel = (props) => {
           )}
         </PieContainer>
         <LineContainer>
-          <ResponsiveContainer width="70%" height="70%">
-            {graphData.length > 0 && (
-              <LineChart width={800} height={300} data={graphData} margin={{ right: 30 }}>
-                <CartesianGrid strokeDasharray="3 3"/>
-                <XAxis dataKey="date"/>
-                <YAxis tickFormatter={(value) => `${value / 1000}`}/>
-                <Legend  formatter={(value) => [`${value}`, '']} wrapperStyle={{color:"#1C395E", fontSize: '150%', left: '4%', top: '-18%' }}/>
-                <Tooltip formatter={(value) => `${value / 1000}`} labelFormatter={(label) => `${label}`} />
-                <Line
-                  type="linear"
-                  dataKey="value"
-                  stroke="#1C395E"
-                  strokeWidth={3}
-                  activeDot={{ r: 8 }}
-                  name={selectedDashboardType === '매출' ? '매출 (단위: 만원)' : '순이익 (단위: 만원)'}
-                  >
-                  {/* <LabelList
-                    dataKey="value"
-                    position="top"
-                    content={(props) => {
-                      const { x, y, value } = props;
-                      const bgColor = '#FFFFFF80';
-                      const borderRadius = 5;
-                      return (
-                        <>
-                          <rect
-                            x={x - 30}
-                            y={y - 25}
-                            width={60}
-                            height={20}
-                            rx={borderRadius}
-                            ry={borderRadius}
-                            fill={bgColor}
-                          />
-                          <text x={x} y={y} dy={-10} fill="#1C395E" fontSize={16} textAnchor="middle">
-                            {`${value / 1000}`}
-                          </text>
-                        </>
-                      );
-                    }}
-                  /> */}
-                </Line>
-              </LineChart>
-            )}
-          </ResponsiveContainer>
+          {graphData.length > 0 && (
+            <LineChart width={1000} height={300} data={graphData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis tickFormatter={(value) => `${value / 1000}만`} />
+              <Legend wrapperStyle={{ fontSize: '150%' }} />
+              <Line
+                type="linear"
+                dataKey="value"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+                name={selectedDashboardType === '매출' ? '매출' : '순이익'}
+              />
+            </LineChart>
+          )}
         </LineContainer>
-        
       </DashboardDiv>
-      <button>
-      {consultOn && <ConsultingPage openConsult={openConsult} closeConsult={closeConsult}/>}
-      </button>
     </ComponentDiv>
   );
 };
