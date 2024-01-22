@@ -40,6 +40,8 @@ const modalStyle ={
 const BackBt = styled(IoArrowBackSharp)`
   width:5%;
   height:5%;
+
+  cursor: pointer;
 `
 // style요소에 css 애니메이션 요소를 추가
 const style = document.createElement('style');

@@ -27,6 +27,9 @@ const ListTableTd = styled.td`
     line-height: 100%;
     padding: 0.8rem;
     white-space: nowrap;
+
+    cursor: default;
+
     // border-radius: 0.5rem;
 
     // 반응형에 맞게 폰트 크기 조정
@@ -63,6 +66,8 @@ const PayContentDiv = styled.div`
 
     font-size: 150%;
     white-space: nowrap;
+
+    cursor: default;
 
     // 반응형에 맞게 폰트 크기 조정
     @media screen and (max-width: 768px) {

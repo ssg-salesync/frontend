@@ -20,11 +20,14 @@ const ComponentDiv = styled.div`
   padding-right: 7%;
   padding-left: 7%;
 `;
+
 // 맨 위 카테고리 글자 영역
 const TitleDiv = styled.div`
   height: 10%;
   margin-top: 3%;
   width: 80%;
+
+  cursor: default;
 
   display: flex;
   align-items: center;

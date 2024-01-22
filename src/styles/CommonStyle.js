@@ -103,6 +103,8 @@ export const TitleDiv = styled.div`
   text-align: center;
   white-space: nowrap;
 
+  cursor: default;
+
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
     font-size: 140%;
@@ -140,6 +142,8 @@ export const UserDiv = styled.div`
   font-weight: 600;
   text-align: center;
 
+  cursor: default;
+
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
     font-size: 100%;
@@ -165,6 +169,8 @@ export const EditTitleDiv = styled.div`
   font-weight: 600;
   text-align: center;
   white-space: nowrap;
+
+  cursor: default;
 
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {

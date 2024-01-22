@@ -93,6 +93,7 @@ const CardImgDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: default;
   background-image: linear-gradient(
     109.6deg,
     rgba(62, 161, 219, 1) 11.2%,
@@ -143,6 +144,8 @@ const VisaCrinfo = styled.div`
 const CardFont = styled.div`
   font-size: 150%;
   margin: 5%;
+
+  cursor: default;
 `
 function CardPopup({openCardPopup, closeCardPopup}) {
     const [changeCard, setChangeCard] = useState(false)

@@ -38,6 +38,8 @@ const Button = styled.button`
     font-size: 150%;
     white-space: nowrap;
 
+    cursor: pointer;
+
     &:hover {
         filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
     }
