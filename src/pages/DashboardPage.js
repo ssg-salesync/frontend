@@ -6,6 +6,7 @@ import moment from 'moment';
 import { PieGetApi } from '../api/dashboard/chart/PieGetApi';
 import MyCalendar from '../components/dashboard/MyCalendar';
 import { LineGetApi } from '../api/dashboard/chart/LineGetApi';
+import ConsultingPage from './ConsultingPage';
 
 /* eslint-disable */
 
@@ -384,7 +385,7 @@ const customLabel = (props) => {
         <ConsultingContainer>
         <ConsultingButton
           type='button'
-          onClick={handlerConsultingClick}
+          onClick={openConsult}
         >
         컨설팅
         </ConsultingButton>
@@ -463,9 +464,7 @@ const customLabel = (props) => {
         </LineContainer>
         
       </DashboardDiv>
-      <button>
-      {consultOn && <ConsultingPage openConsult={openConsult} closeConsult={closeConsult}/>}
-      </button>
+      {consultOn && <ConsultingPage openConsult={openConsult} closeConsult={closeConsult} date={date}/>}
     </ComponentDiv>
   );
 };
