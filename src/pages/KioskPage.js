@@ -39,6 +39,8 @@ const OrderBt = styled.button`
     white-space: nowrap;
     color: #000000;
 
+    cursor: pointer;
+
     // 애니메이션 적용
     opacity: 0;
     ${({ visible }) =>
