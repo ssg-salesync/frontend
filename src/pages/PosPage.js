@@ -52,7 +52,6 @@ function PosPage() {
   // 해당하는 카테고리에 대한 아이템만 나오게 조건 부여 상태 저장
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-
   // API 호출해서 가져온 카테고리, 아이템 데이터
   useEffect(() => {
     const fetchData = async () => {
@@ -62,6 +61,10 @@ function PosPage() {
         if (categoryResponse && categoryResponse.categories) {
           setCategoryData(categoryResponse.categories);
           
+            if (categoryResponse.categories.length > 0) {
+              setSelectedCategory(categoryResponse.categories[0]);
+            }
+
         } else {
           setCategoryData([]); // 데이터가 없을 경우 빈 배열 설정
         };
