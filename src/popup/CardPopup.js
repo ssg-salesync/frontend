@@ -17,12 +17,6 @@ const modalStyle ={
         background: 'linear-gradient(130deg, #E4F4FF, #E0F6FF, #84BDFF)',
       },
 };
-const Button = styled.button`
-    border: none;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-`
 const CardDiv = styled.div`
     display: flex;
     justify-content: center;
@@ -32,7 +26,7 @@ const CardDiv = styled.div`
     height: '100%';
 `
 const PayIngDiv = styled.div`
-    background: #fff;
+    // background: #fff;
     width: 60%;
     height: 50%;
 
@@ -60,9 +54,9 @@ const Spinner = styled.div`
   border: 8px solid rgba(0, 0, 0, 0.1);
   border-left: 8px solid #000;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  margin-top: 3%;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 3%;
   animation: spin 1s linear infinite;
 
   @keyframes spin {
@@ -77,19 +71,19 @@ const Spinner = styled.div`
     height: 40px;
   }
   @media screen and (min-width: 768px) and (max-width: 1024px) {
-    width: 50px;
-    height: 50px;
-  }
-  @media screen and (min-width: 1025px) {
     width: 60px;
     height: 60px;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 90px;
+    height: 90px;
   }
 `;
 
 const CardImgDiv = styled.div`
   width: 530px;
   height: 350px;
-  border-radius: 0.6rem;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,8 +94,8 @@ const CardImgDiv = styled.div`
   );
 `
 const Card = styled.div`
-  width: 98%;
-  height: 98%;
+  width: 528px;
+  height: 348px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
@@ -146,19 +140,19 @@ const CardFont = styled.div`
 `
 function CardPopup({openCardPopup, closeCardPopup}) {
     const [changeCard, setChangeCard] = useState(false)
-    // useEffect(()=>{
-    //   setTimeout(()=>{
-    //     setChangeCard(true)
-    //   },2000)
-    // },[])
+    useEffect(()=>{
+      setTimeout(()=>{
+        setChangeCard(true)
+      },2000)
+    },[])
     return (
         <Modal isOpen={openCardPopup} isClose={closeCardPopup} style={modalStyle} contentLabel="CardPopup">
             {/* <ModalContent/> */}
             <CardDiv style={{width: '100%', height: '100%', }}>
               {changeCard ? 
                 <PayIngDiv>
-                    <div> ~결제중~ </div>
                     <Spinner />
+                    <div> ~결제중~ </div>
                 </PayIngDiv>
                 : <><CardImgDiv>
                   <Card>
