@@ -64,10 +64,11 @@ const ConsultCompleteDiv = styled.div`
 `
 const ConsultBtDiv = styled.div`
   width: 100%;
-  height: 90%;
+  height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `
 const ConsultBt = styled.button`
     border: none;
@@ -166,7 +167,7 @@ const CloseBt = styled(IoCloseSharp)`
 `
 const SpinnerDiv = styled.div`
   width: 100%;
-  height: 70%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -201,7 +202,18 @@ const Spinner = styled.div`
     height: 110px;
   }
 `;
-
+// 로고 이미지
+const LogoImg = styled.img`
+  width: 100px;
+  height: 100px;
+  margin-bottom: 2%;
+  // transform: translate(-5%, -4%);
+  // animation: fadeIn 1s forwards;
+`
+const ResultDiv = styled.div`
+  font-size: 180%;
+  margin-top:3%;
+`
 /* eslint-disable */
 // 모달을 위한 루트 엘리먼트 설정
 // Modal.setAppElement('#root');
@@ -324,20 +336,20 @@ function ConsultingPage({openConsult,closeConsult,date}) {
               </ConsultCompleteDiv> */}
           </>
       ) : result === 'not completed' ? (
-          <>
-              
+          <>          
               <SpinnerDiv>
                 <Spinner/>
-                <ConsultIngBt disabled>
-                  결과 기다리는 중....
-                </ConsultIngBt>
+                <ResultDiv>
+                  컨설팅 결과를 기다리는 중입니다.
+                </ResultDiv>
               </SpinnerDiv>
           </>
       ) : (
           <>
               {/* <p>컨설팅 시작 버튼을 눌러주세요</p> */}
             <ConsultBtDiv>
-              <ConsultBt onClick={handlerConsultingStart}>컨설팅 시작</ConsultBt>
+              <LogoImg src="/img/gptLogo.png" alt="logo"/>
+              <ConsultBt onClick={handlerConsultingStart}>AI 컨설팅 받기</ConsultBt>
             </ConsultBtDiv>
           </>
       )}
