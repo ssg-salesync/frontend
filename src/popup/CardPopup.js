@@ -87,8 +87,8 @@ const Spinner = styled.div`
 `;
 
 const CardImgDiv = styled.div`
-  width: 35%;
-  height: 40%;
+  width: 530px;
+  height: 350px;
   border-radius: 0.6rem;
   display: flex;
   justify-content: center;
@@ -100,8 +100,8 @@ const CardImgDiv = styled.div`
   );
 `
 const Card = styled.div`
-  width: 90%;
-  height: 90%;
+  width: 98%;
+  height: 98%;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
@@ -146,11 +146,11 @@ const CardFont = styled.div`
 `
 function CardPopup({openCardPopup, closeCardPopup}) {
     const [changeCard, setChangeCard] = useState(false)
-    useEffect(()=>{
-      setTimeout(()=>{
-        setChangeCard(true)
-      },2000)
-    },[])
+    // useEffect(()=>{
+    //   setTimeout(()=>{
+    //     setChangeCard(true)
+    //   },2000)
+    // },[])
     return (
         <Modal isOpen={openCardPopup} isClose={closeCardPopup} style={modalStyle} contentLabel="CardPopup">
             {/* <ModalContent/> */}

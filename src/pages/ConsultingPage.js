@@ -312,10 +312,6 @@ function ConsultingPage({openConsult,closeConsult,date}) {
       
       {!reqId ? (
           <>
-              <p>잠시만 기다려주세요</p>
-              <button onClick={handlerConsultingStart} disabled>
-                  컨설팅 대기중
-              </button>
           </>
       ) : result === 'success' ? (
           <>
