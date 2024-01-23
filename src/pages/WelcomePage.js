@@ -186,18 +186,12 @@ function WelcomePage() {
               {char}
             </FadeInItemDiv>
           ))}
-          <FadeInItemDiv style={{ animationDelay: `${0.15 * (Array.from('Salesync').length + 1)}s` }}>
-            {/* <span>sync</span> */}
-          </FadeInItemDiv>
-          {/* <FadeInItemDiv style={{ animationDelay: `${0.3 * (Array.from('Sale').length + 1)}s` }}>
-            <span>sync</span>
-          </FadeInItemDiv> */}
         </SplashTextDiv>      
     </SplashDiv>
     <UnderDiv style={{ animationDelay: `${0.15 * (Array.from('Sale').length + 3)}s` }}>
       <ProfDiv>
-      스마트한 AI 클라우드 포스 <br/>
-      어디서나 웹으로 간편하게
+        스마트한 AI 클라우드 포스 <br/>
+        어디서나 웹으로 간편하게
       </ProfDiv>
       <BtDiv>
         <Button onClick={moveLogin}>로그인</Button>

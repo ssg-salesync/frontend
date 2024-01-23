@@ -150,7 +150,7 @@ function SignupPage() {
     const isValid = isUsernameValid(signupData.username);
     if (!isValid) {
       // alert('아이디: 8~16자의 영문 대/소문자, 숫자를 사용해 주세요.');
-      setMsg('아이디: 8~16자의 영문 대/소문자, 숫자를 사용해 주세요.');
+      setMsg('아이디: 8~16자의 영문, 숫자를 사용해 주세요.');
 
       // 입력칸 초기화
       setSignupData({ ...signupData, username: ''});
