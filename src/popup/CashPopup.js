@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import { useRecoilValue, useResetRecoilState, useRecoilState } from "recoil";   // 읽기 전용
+import { DNA } from 'react-loader-spinner'
 import { styled } from 'styled-components';
 import { IoArrowBackSharp } from "react-icons/io5";
 import { PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
@@ -291,7 +292,14 @@ function CashPopup({openCashPopup, closeCashPopup, tableId}) {
                 </div>
                 {processingPayment && ( // 결제 진행 중 상태가 true일 때 로딩바를 표시합니다.
                 <PaymentProcessingMessage>
-                    <Spinner />
+                    <DNA
+                      visible
+                      height="120px"
+                      width="250px"
+                      ariaLabel="dna-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="dna-wrapper"
+                    />
                     {/* <p>결제 중</p> */}
                 </PaymentProcessingMessage>
                 )}

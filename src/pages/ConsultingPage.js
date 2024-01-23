@@ -32,37 +32,20 @@ const LeftDiv = styled.div`
 const Title = styled.h1`
   margin: 0;
 `
-const TypedOut = styled.div`
-  width: 95%;
-  height: 80%;
-  background: #fff;
-  overflow: auto;
-  // border: .15em solid orange;
-  font-size: 120%;
-  white-space: pre-line;
-  border-radius: 0.5rem;
-  padding: 2%;
-
-  // animation: typing 1s steps(20, end) forwards, blink .8s infinite;
-
-  // @keyframes typing {
-  //   from { width: 0 }
-  //   to { width: 100% }
-  // }
-
-  // 타이핑 노란색 커서
-  // @keyframes blink {
-  //   from { border-color: transparent }
-  //   to { border-color: orange; }
-  // }
-`;
 const ConsultCompleteDiv = styled.div`
   width: 100%;
-  height: 20%;
+  height: 88%;
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  background: #fff;
+  border-radius: 0.5rem;
 `
+const ResDiv = styled.div`
+  overflow: auto;
+  font-size: 120%;
+  white-space: pre-line;
+  padding: 2%;
+`;
 const ConsultBtDiv = styled.div`
   width: 100%;
   height: 70%;
@@ -216,15 +199,8 @@ const ResultDiv = styled.div`
   margin-top:3%;
 `
 /* eslint-disable */
-// 모달을 위한 루트 엘리먼트 설정
-// Modal.setAppElement('#root');
 function ConsultingPage({openConsult,closeConsult,date}) {
-
-  // 대시보드 페이지에서 컨설팅페이지 넘어오는 버튼 클릭하면서 넘기는 props
-  // (하위 컴포넌트가 아니기 때문에 uselocation에 저장된 state 가져옴)
-  const location = useLocation();
-  // const date = location.state.date;
-
+  
   // date로 GPT 시작용 request ID 상태 저장
   const [reqId, setReqId] = useState();
 
@@ -249,7 +225,7 @@ function ConsultingPage({openConsult,closeConsult,date}) {
     };
     fetchData();
     return;
-  }, [date]);
+  }, []);
 
   // interval(타이머 시간 당 반복)을 돌릴 때, 일반 변수로 하면 렌더링 사이클에 유지되지 않음
   // 리렌더링시마다 초기화되서 날라감
@@ -327,9 +303,20 @@ function ConsultingPage({openConsult,closeConsult,date}) {
           <>
           </>
       ) : result === 'success' ? (
-          <>
+          <><ConsultCompleteDiv>
               {/* <p>컨설팅이 성공적으로 완료되었습니다.</p> */}
-              <TypedOut>{consulting}</TypedOut>
+              <ResDiv>{consulting}</ResDiv>
+              {/* {consulting && Array.from(consulting).map((char, index) => (
+              <FadeInItemDiv key={index} index={index}>
+                {char}
+              </FadeInItemDiv>
+              ))} */}
+              {/* {Array.from(consulting).map((char, index) => (
+                <FadeInItemDiv key={index} index={index}>
+                  {char}
+                </FadeInItemDiv>
+            ))} */}
+            </ConsultCompleteDiv>
               {/* <ConsultCompleteDiv>
               <ConsultBt onClick={handlerConsultingStart} disabled>
                   컨설팅 완료
