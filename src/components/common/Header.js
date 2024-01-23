@@ -200,19 +200,22 @@ const Desc = styled.div`
 /* eslint-disable */ 
 function Header() {
     console.log("Header.js open")
-    // const location = useLocation();
+
     const navigate = useNavigate();
 
-    const [userCheck,setUserCheck]=useRecoilState(UserCheckState)
+    const [userCheck,setUserCheck] = useRecoilState(UserCheckState)
+    
     const logout=()=>{
         localStorage.removeItem('access_token');
         localStorage.removeItem('csrf_token');
         setUserCheck(false)
         navigate('/')
     }
+
     const myPage=()=>{
         navigate('/mypage');
     }
+
     const logoClick=()=>{
         tokenCheckfunc()
         if(isKiosk){
@@ -227,6 +230,7 @@ function Header() {
         //     navigate('/home');
         // }
     }
+
     const tokenCheckfunc=()=>{
         const tokenCheck = localStorage.getItem('access_token')
         console.log("tokenCheckfunc",tokenCheck)
@@ -268,8 +272,10 @@ function Header() {
 
     //kiosk 상태
     const [isKiosk , setIsKiosk] = useRecoilState(KioskState)
+
     // 카테고리 데이터 상태 체크 [0인경우 true]
     const [categoryState, setCategoryState] = useRecoilState(CategoryState)
+
     useEffect(()=>{
         const checkCategory = async () => {
             try{
@@ -296,7 +302,6 @@ function Header() {
         }else{
             setIsKiosk(!isKiosk)
         }
-        // setIsKiosk(!isKiosk)
     }
 
     useEffect(() => {
