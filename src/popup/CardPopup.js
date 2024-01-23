@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { DNA } from 'react-loader-spinner'
 import { styled } from 'styled-components';
 
 const modalStyle ={
@@ -154,7 +155,14 @@ function CardPopup({openCardPopup, closeCardPopup}) {
             <CardDiv style={{width: '100%', height: '100%', }}>
               {changeCard ? 
                 <PayIngDiv>
-                    <Spinner />
+                    <DNA
+                      visible
+                      height="120px"
+                      width="250px"
+                      ariaLabel="dna-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="dna-wrapper"
+                    />
                     <div> 카드 결제를 기다리는 중입니다. </div>
                 </PayIngDiv>
                 : <><CardImgDiv>
