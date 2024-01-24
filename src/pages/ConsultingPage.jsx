@@ -300,7 +300,7 @@ function ConsultingPage({openConsult,closeConsult,date}) {
   });
 
   const [blogTitle, setBlogTitle] = useState('');
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(-1);
   
   useEffect(() => {
     const typingInterval = setInterval(() => {
@@ -310,24 +310,25 @@ function ConsultingPage({openConsult,closeConsult,date}) {
           // let result = prevTitleValue ? prevTitleValue + consulting[newCount] : consulting[0]
           let result = prevTitleValue + consulting[newCount];
           // console.log("result",result)
-
-          if (newCount === 0) {
+  
+          if (newCount === consulting.length - 1) {
             clearInterval(typingInterval);
           } else {
             setCount(newCount);
           }
-
+  
           return result;
         } else {
           return prevTitleValue;
         }
       });
     }, 50);
-
+  
     return () => {
       clearInterval(typingInterval);
     };
   }, [consulting, count]);
+
 
   return (
     <Modal isOpen={openConsult} isClose={closeConsult} style={modalStyle} contentLabel="consult">
