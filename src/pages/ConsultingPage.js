@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IoCloseSharp } from "react-icons/io5";
 import { styled, keyframes } from 'styled-components';
 import { DNA } from 'react-loader-spinner'
@@ -45,7 +45,9 @@ const ResDiv = styled.div`
   font-size: 120%;
   white-space: pre-line;
   padding: 2%;
-`;
+  `;
+
+  
 const ConsultBtDiv = styled.div`
   width: 100%;
   height: 70%;
@@ -107,38 +109,7 @@ const ConsultIngBt = styled.button`
       font-size: 100%;
     }
 `
-// const typingAnimation = keyframes`
-//   from {
-//     width: 0;
-//   }
-//   to {
-//     width: 100%;
-//   }
-// `;
 
-// const TypingText = styled.p`
-//   overflow: hidden;
-//   white-space: pre-line;
-//   animation: ${typingAnimation} 4s linear;
-// `;
-
-// const TypingText = styled.p`
-//   overflow: hidden;
-//   white-space: pre-line;
-//   animation: typing 5s steps(31) infinite;
-
-  
-
-//   @keyframes typing {
-//     0% {
-//       width: 0%;
-//     }
-   
-//     100% {
-//       width: 100%;
-//     }
-//   }
-// `;
 const CloseBt = styled(IoCloseSharp)`
     // background: url("/img/Close.png"), #FFF 90%/ contain no-repeat;
     background-size: cover;
@@ -198,9 +169,10 @@ const ResultDiv = styled.div`
   font-size: 180%;
   margin-top:3%;
 `
+
 /* eslint-disable */
 function ConsultingPage({openConsult,closeConsult,date}) {
-  
+  const navigate = useNavigate();
   // date로 GPT 시작용 request ID 상태 저장
   const [reqId, setReqId] = useState();
 
@@ -211,7 +183,6 @@ function ConsultingPage({openConsult,closeConsult,date}) {
 
   // 컨설팅 완료 시 해당 내용 상태 저장
   const [consulting, setConsulting] = useState();
-
   // date로 GPT 시작용 request ID 받아옴 - [GET]
   useEffect(() => {
     const fetchData = async () => {
@@ -221,6 +192,10 @@ function ConsultingPage({openConsult,closeConsult,date}) {
         setReqId(reqIdRes.req_id);
       } catch (err) {
         console.log(err);
+        if (err.response && err.response.status >= 500 && err.response.status < 600) {
+          // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+          navigate("/500");
+        }
       }
     };
     fetchData();
@@ -267,6 +242,10 @@ function ConsultingPage({openConsult,closeConsult,date}) {
       }
     } catch (err) {
       console.log(err);
+      if (err.response && err.response.status >= 500 && err.response.status < 600) {
+        // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+        navigate("/500");
+      }
     }
   };
 
@@ -289,6 +268,37 @@ function ConsultingPage({openConsult,closeConsult,date}) {
     },
   });
 
+  const [blogTitle, setBlogTitle] = useState('');
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    const typingInterval = setInterval(() => {
+      setBlogTitle((prevTitleValue) => {
+        if (consulting && consulting.length > 0) {
+          let newCount = (count + 1) % consulting.length;
+          // let result = prevTitleValue ? prevTitleValue + consulting[newCount] : consulting[0]
+          let result = prevTitleValue + consulting[newCount];
+          // console.log("result",result)
+
+          if (newCount === 0) {
+            clearInterval(typingInterval);
+          } else {
+            setCount(newCount);
+          }
+
+          return result;
+        } else {
+          return prevTitleValue;
+        }
+      });
+    }, 50);
+
+    return () => {
+      clearInterval(typingInterval);
+    };
+  }, [consulting, count]);
+  
+
   return (
     <Modal isOpen={openConsult} isClose={closeConsult} style={modalStyle} contentLabel="consult">
     <TotalDiv>
@@ -305,7 +315,10 @@ function ConsultingPage({openConsult,closeConsult,date}) {
       ) : result === 'success' ? (
           <><ConsultCompleteDiv>
               {/* <p>컨설팅이 성공적으로 완료되었습니다.</p> */}
-              <ResDiv>{consulting}</ResDiv>
+              {/* <ResDiv>{consulting}</ResDiv> */}
+              <ResDiv typedText={blogTitle} typedWidth={count * 20}>
+                {/* {consulting && consulting[0]} */}
+              {blogTitle}</ResDiv>
               {/* {consulting && Array.from(consulting).map((char, index) => (
               <FadeInItemDiv key={index} index={index}>
                 {char}
