@@ -1,5 +1,5 @@
-import { useEffect,useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import {useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { UserCheckState } from "../../recoil/atoms/UserState";
@@ -247,7 +247,7 @@ function Header() {
     // },[userCheck])
 
     // category가 빈 값인 경우 true
-    const [categoryCheck,setCategoryCheck] = useState([])
+    // const [categoryCheck,setCategoryCheck] = useState([])
 
     // API 호출해서 가져온 카테고리, 아이템 데이터
     // useEffect(() => {
