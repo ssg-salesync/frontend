@@ -35,8 +35,8 @@ const Title = styled.h1`
 const ConsultCompleteDiv = styled.div`
   width: 100%;
   height: 88%;
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
   background: #fff;
   border-radius: 0.5rem;
 `
