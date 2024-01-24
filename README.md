@@ -93,13 +93,16 @@
 - .prettierrc: 가독성 좋은 코드를 위한 컨벤션을 정의
 - package(-lock).json: 프로젝트 이름, 버전 및 라이브러리 목록이 표기
 
-## 디자인 이야기
+## 디자인보드
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/designBoard.png" alt = "designBoard gif" style="max-width: 45%;">
+
+### 디자인 이야기
 
 &nbsp;&nbsp;POS는 거래 및 결제를 처리하는 비즈니스 도구로, 사용자들이 서비스를 사용하면서 안정적이고 신뢰감을 주기위해 블루 계열인 **#00ADEF**를 브랜드 색상으로 선택했습니다.
 <br/>
 &nbsp;&nbsp;전체적인 애플리케이션 무드도 편안하고 안정된 환경을 제공하기 위해 눈에 부담을 주지 않는 블루 계열로 설정했습니다.
 
-## 로고 이야기
+### 로고 이야기
 
 &nbsp;&nbsp;Salesync는 커스터마이징 가능한 웹 기반 POS를 제공합니다. sales는 판매, Sync는 Synchronization의 줄임말로 데이터 및 정보를 효율적으로 동기화하고 연동함을 의미합니다. 따라서 주문과 매출데이터를 강조하는 브랜드명으로 Salesync로 정했습니다.
 <br/>
