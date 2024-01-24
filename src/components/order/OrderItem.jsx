@@ -6,10 +6,10 @@ import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
 import { getAtom } from "../func/AtomData";
 import { OrderCheckState, TableState, TotalPrice} from "../../recoil/atoms/ItemState";
 import { ItemsApi } from "../../api/Items/ItemsApi";
-import { OrderGetTableApi } from "../../api/Orders/OrderGetTableApi";
-import { OrdersPutApi } from "../../api/Orders/OrdersPutApi";
-import { OrdersPostApi } from "../../api/Orders/OrdersPostApi";
-import { OrderCancelApi } from "../../api/Orders/OrderCancelApi";
+import { OrderGetTableApi } from "../../api/orders/OrderGetTableApi";
+import { OrdersPutApi } from "../../api/orders/OrdersPutApi";
+import { OrdersPostApi } from "../../api/orders/OrdersPostApi";
+import { OrderCancelApi } from "../../api/orders/OrderCancelApi";
 import { KioskState } from "../../recoil/atoms/KioskState";
 
 const TabDiv = styled.div`

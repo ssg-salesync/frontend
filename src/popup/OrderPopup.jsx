@@ -9,8 +9,8 @@ import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
 import PaymentPopup from './PaymentPopup';
 import { getAtom } from '../components/func/AtomData';
-import { OrderGetTableApi } from '../api/Orders/OrderGetTableApi';
-import { OrdersPostApi } from '../api/Orders/OrdersPostApi';
+import { OrderGetTableApi } from '../api/orders/OrderGetTableApi';
+import { OrdersPostApi } from '../api/orders/OrdersPostApi';
 
 // 애니메이션 키프레임
 const slideUpAnimation = `

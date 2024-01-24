@@ -45,9 +45,7 @@ const ResDiv = styled.div`
   font-size: 120%;
   white-space: pre-line;
   padding: 2%;
-  `;
-
-  
+`
 const ConsultBtDiv = styled.div`
   width: 100%;
   height: 70%;
@@ -109,7 +107,38 @@ const ConsultIngBt = styled.button`
       font-size: 100%;
     }
 `
+// const typingAnimation = keyframes`
+//   from {
+//     width: 0;
+//   }
+//   to {
+//     width: 100%;
+//   }
+// `;
 
+// const TypingText = styled.p`
+//   overflow: hidden;
+//   white-space: pre-line;
+//   animation: ${typingAnimation} 4s linear;
+// `;
+
+// const TypingText = styled.p`
+//   overflow: hidden;
+//   white-space: pre-line;
+//   animation: typing 5s steps(31) infinite;
+
+  
+
+//   @keyframes typing {
+//     0% {
+//       width: 0%;
+//     }
+   
+//     100% {
+//       width: 100%;
+//     }
+//   }
+// `;
 const CloseBt = styled(IoCloseSharp)`
     // background: url("/img/Close.png"), #FFF 90%/ contain no-repeat;
     background-size: cover;
@@ -173,6 +202,7 @@ const ResultDiv = styled.div`
 /* eslint-disable */
 function ConsultingPage({openConsult,closeConsult,date}) {
   const navigate = useNavigate();
+
   // date로 GPT 시작용 request ID 상태 저장
   const [reqId, setReqId] = useState();
 
@@ -183,6 +213,7 @@ function ConsultingPage({openConsult,closeConsult,date}) {
 
   // 컨설팅 완료 시 해당 내용 상태 저장
   const [consulting, setConsulting] = useState();
+
   // date로 GPT 시작용 request ID 받아옴 - [GET]
   useEffect(() => {
     const fetchData = async () => {
@@ -297,7 +328,6 @@ function ConsultingPage({openConsult,closeConsult,date}) {
       clearInterval(typingInterval);
     };
   }, [consulting, count]);
-  
 
 
   return (
@@ -316,10 +346,12 @@ function ConsultingPage({openConsult,closeConsult,date}) {
       ) : result === 'success' ? (
           <><ConsultCompleteDiv>
               {/* <p>컨설팅이 성공적으로 완료되었습니다.</p> */}
+
               {/* <ResDiv>{consulting}</ResDiv> */}
               <ResDiv typedText={blogTitle} typedWidth={count * 20}>
                 {/* {consulting && consulting[0]} */}
               {blogTitle}</ResDiv>
+
               {/* {consulting && Array.from(consulting).map((char, index) => (
               <FadeInItemDiv key={index} index={index}>
                 {char}
