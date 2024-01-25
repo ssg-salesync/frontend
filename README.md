@@ -133,7 +133,7 @@
 
 |Tech|Explanation|
 |:---:|:---|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techStack/logo/React.png" alt = "react" style="width: 25px;">|재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/react.png" alt = "react" style="width: 25px;">|재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
 |왼쪽정렬|오른쪽정렬|
 |왼쪽정렬|오른쪽정렬|
 <br>
