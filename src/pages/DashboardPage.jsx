@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { UserCheckState } from '../recoil/atoms/UserState';
 import { PieGetApi } from '../api/dashboard/chart/PieGetApi';
 import MyCalendar from '../components/dashboard/MyCalendar';
-import { LineGetApi } from '../api/dashboard/chart/LineGetApi';
+// import { LineGetApi } from '../api/dashboard/chart/LineGetApi';
 import ConsultingPage from './ConsultingPage';
 import { CaculateGetApi } from '../api/dashboard/costs/CalculateGetApi';
 
@@ -207,8 +207,8 @@ function DashboardPage() {
   const [chartData, setChartData] = useState([]);
 
 
-  // 라인 데이터 상태저장
-  const [lineData, setLineData] = useState([]);
+  // // 라인 데이터 상태저장
+  // const [lineData, setLineData] = useState([]);
 
   
   // 그래프(라인) 데이터 상태 저장
@@ -283,18 +283,52 @@ function DashboardPage() {
   }, [date, selectedDashboardType]);
 
 
-  // 꺾은선 그래프
+  // // 꺾은선 그래프
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const lineData = await LineGetApi(date);
+  //       setLineData(lineData?.total || []);
+
+  //       const graphData = lineData?.total.map((item) => ({
+  //         date: item.date,
+  //         value: selectedDashboardType === '매출' ? item.sales_volume : item.profit,
+  //       })) || [];
+  //       setGraphData(graphData);  
+  //     } catch (error) {
+  //       console.log(error);
+  //       if (error?.response?.status >= 500 && error?.response?.status < 600) {
+  //         // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
+  //         navigate('/500');
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, [date, selectedDashboardType]);
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const lineData = await LineGetApi(date);
-        setLineData(lineData?.total || []);
-
-        const graphData = lineData?.total.map((item) => ({
+        const dummyData = {
+          end_date: "Thu, 25 Jan 2024 00:00:00 GMT",
+          message: "기간별 매출 조회 성공",
+          result: "success",
+          start_date: "Mon, 22 Jan 2024 00:00:00 GMT",
+          total: [
+            { date: '2024-01-12', profit: 684200, sales_volume: 884200 },
+            { date: '2024-01-13', profit: 514090, sales_volume: 714090 },
+            { date: '2024-01-14', profit: 684920, sales_volume: 884920 },
+            { date: '2024-01-15', profit: 401240, sales_volume: 601240 },
+            { date: '2024-01-16', profit: 354640, sales_volume: 554640 },
+            { date: '2024-01-17', profit: 223112, sales_volume: 423112 },
+            { date: '2024-01-18', profit: 464672, sales_volume: 664672 },
+          ]
+        };
+        const graphData = dummyData.total.map((item) => ({
           date: item.date,
           value: selectedDashboardType === '매출' ? item.sales_volume : item.profit,
         })) || [];
-        setGraphData(graphData);  
+        setGraphData(graphData);
       } catch (error) {
         console.log(error);
         if (error?.response?.status >= 500 && error?.response?.status < 600) {
@@ -306,77 +340,81 @@ function DashboardPage() {
     fetchData();
   }, [date, selectedDashboardType]);
 
-// 원형 차트 데이터 색깔
-const customColors = [
-  '#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6',
-  '#feef1f', '#27ae60', '#1cffca', '#1abc9c', '#d35400',
-  '#34495e', '#c0392b', '#7f8c8d', '#16a085', '#e74c68'
-  ];
 
-// 원형 차트 기타 색깔
-const otherColor = 'white'; // 검은색
- 
-const customLabel = (props) => {
-  const RADIAN = Math.PI / 180;
-  const { cx, cy, midAngle, outerRadius, fill, payload, percent } = props;
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
 
-  // const로 선언하면 안 됨
-  let delta = Math.abs(1 / cos) + 10;
+  // 원형 차트 데이터 색깔
+  const customColors = [
+    '#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6',
+    '#feef1f', '#27ae60', '#1cffca', '#1abc9c', '#d35400',
+    '#34495e', '#c0392b', '#7f8c8d', '#16a085', '#e74c68'
+    ];
 
-  // 12시 방향(위) 가지 세로 길이 줄임
-  // if (midAngle > 70 && midAngle < 87) {
-  //   delta = Math.abs(1 / cos) + 10;
-  // };
+    
 
-  // if (midAngle > 93 && midAngle < 115) {
-  //   delta = Math.abs(1 / cos) + 10;
-  // };
+  // 원형 차트 기타 색깔
+  const otherColor = 'white'; // 검은색
+  
+  const customLabel = (props) => {
+    const RADIAN = Math.PI / 180;
+    const { cx, cy, midAngle, outerRadius, fill, payload, percent } = props;
+    const sin = Math.sin(-RADIAN * midAngle);
+    const cos = Math.cos(-RADIAN * midAngle);
 
-  if (midAngle > 87 && midAngle < 93) {
-    delta = Math.abs(1 / cos) -50;
+    // const로 선언하면 안 됨
+    let delta = Math.abs(1 / cos) + 10;
+
+    // 12시 방향(위) 가지 세로 길이 줄임
+    // if (midAngle > 70 && midAngle < 87) {
+    //   delta = Math.abs(1 / cos) + 10;
+    // };
+
+    // if (midAngle > 93 && midAngle < 115) {
+    //   delta = Math.abs(1 / cos) + 10;
+    // };
+
+    if (midAngle > 87 && midAngle < 93) {
+      delta = Math.abs(1 / cos) -50;
+    };
+
+    // 6시 방향(아래) 가지 세로 길이 줄임
+    // if (midAngle > 260 && midAngle < 280) {
+    //   delta = Math.abs(1 / cos);
+    // };
+
+    // if (midAngle > 260 && midAngle < 280) {
+    //   delta = Math.abs(1 / cos);
+    // };
+
+    // if (midAngle > 267 && midAngle < 280) {
+    //   delta = Math.abs(1 / cos) + 10;
+    // };
+
+    const sx = cx + outerRadius * cos;
+    const sy = cy + outerRadius * sin;
+    const mx = cx + (outerRadius + delta) * cos;
+    const my = cy + (outerRadius + delta) * sin;
+    const ex = mx + Number(cos.toFixed(1)) * 20;
+    const ey = my;
+    const textAnchor = cos >= 0 ? "start" : "end";
+
+    return (
+      <g>
+        <path
+          d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+          stroke='black'
+          fill="none"
+        />
+        <rect x={ex + (cos >= 0 ? 1 * 5 : -1 * 17)} y={ey - 4} width={12} height={8} fill={fill} />
+        <text
+          x={ex + (cos >= 0 ? 1 : -1) * 21}
+          y={ey + 4}
+          textAnchor={textAnchor}
+        >
+          {`${payload.name} ${(percent * 100).toFixed(2)}%`}
+        </text>
+      </g>
+    );
   };
-
-  // 6시 방향(아래) 가지 세로 길이 줄임
-  // if (midAngle > 260 && midAngle < 280) {
-  //   delta = Math.abs(1 / cos);
-  // };
-
-  // if (midAngle > 260 && midAngle < 280) {
-  //   delta = Math.abs(1 / cos);
-  // };
-
-  // if (midAngle > 267 && midAngle < 280) {
-  //   delta = Math.abs(1 / cos) + 10;
-  // };
-
-  const sx = cx + outerRadius * cos;
-  const sy = cy + outerRadius * sin;
-  const mx = cx + (outerRadius + delta) * cos;
-  const my = cy + (outerRadius + delta) * sin;
-  const ex = mx + Number(cos.toFixed(1)) * 20;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "start" : "end";
-
-  return (
-    <g>
-      <path
-        d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-        stroke='black'
-        fill="none"
-      />
-      <rect x={ex + (cos >= 0 ? 1 * 5 : -1 * 17)} y={ey - 4} width={12} height={8} fill={fill} />
-      <text
-        x={ex + (cos >= 0 ? 1 : -1) * 21}
-        y={ey + 4}
-        textAnchor={textAnchor}
-      >
-        {`${payload.name} ${(percent * 100).toFixed(2)}%`}
-      </text>
-    </g>
-  );
-};
 
 
 

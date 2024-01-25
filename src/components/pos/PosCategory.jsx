@@ -228,7 +228,7 @@ const AddButton = styled.button`
   }
 `;
 
-function PosCategory({ categoryData, setSelectedCategory }) {
+function PosCategory({ categoryData, setSelectedCategory, selectedCategory }) {
 
   // 카테고리 데이터가 로딩 중인 동안 보여줄 내용 (PosPage가 무거워서 랜더링 좀 걸릴 수도 있음)
   if (!categoryData) {
@@ -453,8 +453,11 @@ function PosCategory({ categoryData, setSelectedCategory }) {
         setEditModes(newEditModes);
         showAlert('카테고리가 삭제되었습니다.')
 
-        // 카테고리를 삭제하면 선택된 카테고리도 null로 하여 PosItem 초기화 리렌더링
-        setSelectedCategory(null)
+        // 현재 선택된 카테고리가 삭제될 카테고리랑 같으면 초기 빈 화면 출력 | 다르면 현재 선택된 카테고리 유지
+        if (selectedCategory.id === deleteCategory) {
+          setSelectedCategory(null);
+        }
+        
       } catch (err) {
           console.error(err);
           if (err.response && err.response.status >= 500 && err.response.status < 600) {

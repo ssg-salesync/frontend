@@ -109,7 +109,7 @@ function PosPage() {
   return (
     <ComponentDiv>
       <PosCategoryDiv>
-        <PosCategory categoryData={categoryData} setSelectedCategory={setSelectedCategory}/>
+        <PosCategory categoryData={categoryData} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory}/>
       </PosCategoryDiv>
       <PosItemDiv>
         <PosItem itemData={itemData} selectedCategoryId={selectedCategory ? selectedCategory.id : null}/>

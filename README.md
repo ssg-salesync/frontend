@@ -85,13 +85,29 @@
   - recoil: 전역으로 상태를 관리하기 위헤 사용한 recoil이 위치
   - routes: 라우팅 컨벤션을 정의
   - styles: 모든 페이지에 공용으로 사용되는 UI/UX들이 위치
-  - App.css:
+  - App.css: 화면 렌더링시에 보여지는 초기 css
   - App.jsx: 화면 렌더링시에 보여지는 초기 컴포넌트
-  - index.css:
-  - index.jsx:
+  - index.css: 컴포넌트를 document에서 id값이 root인 태그 안에 렌더링되는 css
+  - index.jsx:App 컴포넌트를 document에서 id값이 root인 태그 안에 렌더링
 - .eslintrc.js: eslint(airbnb형) 컨벤션을 정의
 - .prettierrc: 가독성 좋은 코드를 위한 컨벤션을 정의
 - package(-lock).json: 프로젝트 이름, 버전 및 라이브러리 목록이 표기
+
+## 네이밍 룰
+- 컴포넌트, 페이지, 팝업,  API, 스타일: PascalCase
+- 리코일: {기능}State.jsx
+- 라우팅: Private(Public)Route.jsx
+- CSS: styled-components(CSS-in-JS)
+- 함수, 변수, 상수: camelCase
+- 익명 함수: arrow function
+- 이벤트 함수: on{이벤트}{기능}
+- API: {기능}{요청방식}Api.jsx
+- ESLint: .eslintrc.js에 airbnb 형식 적용
+- 컴포넌트 작성할 때 ⇒ 함수형 컴포넌트 사용
+- 이벤트핸들러는 handler로 시작하도록 작성
+- 변수명 작성할 때 이름 길어지더라도 무슨 뜻인지 의미를 나타내도록 작성
+    - handlerConfirm(x): 함수명만 보고 정확히 어떤 일을 하는지 알기 어려움
+    - handlerConfirmPasswordBlur: 함수명만 보고도 이 함수의 역할을 알 수 있음
 
 ## 디자인보드
 <img src="https://github.com/ssg-salesync/.github/blob/main/assets/designBoard.png" alt = "designBoard gif" style="max-width: 45%;">
