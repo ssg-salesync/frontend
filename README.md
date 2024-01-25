@@ -131,6 +131,10 @@
 라이브러리: react-calender, react-modal, recharts
 ```
 
+| tech   |  explanation  |
+| :—: | :—: |
+| <img src="https://github.com/ssg-salesync/.github/blob/main/assets/techStack/logo/React.png" alt = "react" style="width: 25px;"> | 재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다. React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다. |
+
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/>&nbsp;&nbsp;재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다. React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.
 <br/>
 <br/>
