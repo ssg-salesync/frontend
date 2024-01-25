@@ -41,9 +41,9 @@ const ConsultCompleteDiv = styled.div`
   // justify-content: center;
   background: #fff;
   border-radius: 0.5rem;
+  overflow-y: auto;
 `
 const ResDiv = styled.div`
-  overflow: auto;
   font-size: 120%;
   white-space: pre-line;
   padding: 2%;
@@ -272,7 +272,7 @@ function ConsultingPage({openConsult,closeConsult,date}) {
           return prevTitleValue;
         }
       });
-    }, 50);
+    }, 20);
   
     return () => {
       clearInterval(typingInterval);
