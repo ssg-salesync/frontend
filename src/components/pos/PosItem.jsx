@@ -413,21 +413,23 @@ const handlerEditMode = async (idx) => {
           const updatedItem = { name: newItemName, price: newItemPrice };
           await ItemPutApi(itemId, updatedItem);
 
-          const updatedItems = getItemsBySelectedCategory().map((item, index) => {
-            if (index === idx) {
-              return { ...item, name: newItemName, price: newItemPrice };
-            };
-            return item;
-          });
+          const latestItems = await ItemGetApi();
+          setItems(latestItems);
+          // const updatedItems = getItemsBySelectedCategory().map((item, index) => {
+          //   if (index === idx) {
+          //     return { ...item, name: newItemName, price: newItemPrice };
+          //   };
+          //   return item;
+          // });
 
-          const updatedCategories = itemData.categories.map((category) => {
-            if (category.category_id === selectedCategoryId) {
-              return { ...category, items: updatedItems };
-            };
-            return category;
-          });
+          // const updatedCategories = itemData.categories.map((category) => {
+          //   if (category.category_id === selectedCategoryId) {
+          //     return { ...category, items: updatedItems };
+          //   };
+          //   return category;
+          // });
 
-          setItems({ categories: updatedCategories });
+          // setItems({ categories: updatedCategories });
 
           const newEditModes = [...editModes];
           newEditModes[idx] = false;

@@ -4,14 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { IoCloseSharp } from "react-icons/io5";
 import { styled } from 'styled-components';
 import { DNA } from 'react-loader-spinner'
-import { ReqIdGetApi } from '../api/dashboard/consulting/ReqIdGetApi';
-import { WaitGetApi } from '../api/dashboard/consulting/WaitGetApi';
-import { ConsultingGetApi } from '../api/dashboard/consulting/ConsultingGetApi';
+// import { ReqIdGetApi } from '../api/dashboard/consulting/ReqIdGetApi';
+// import { WaitGetApi } from '../api/dashboard/consulting/WaitGetApi';
+// import { ConsultingGetApi } from '../api/dashboard/consulting/ConsultingGetApi';
 
 // 테스트용 api
-// import { ReqIdTestGetApi } from '../api/dashboard/consulting/test/ReqIdTestGetApi';
-// import { WaitTestGetApi } from '../api/dashboard/consulting/test/WaitTestGetApi';
-// import { ConsultingTestGetApi } from '../api/dashboard/consulting/test/ConsultingTestGetApi';
+import { ReqIdTestGetApi } from '../api/dashboard/consulting/test/ReqIdTestGetApi';
+import { WaitTestGetApi } from '../api/dashboard/consulting/test/WaitTestGetApi';
+import { ConsultingTestGetApi } from '../api/dashboard/consulting/test/ConsultingTestGetApi';
+
 const TotalDiv = styled.div`
   width: 100%;
   height: 98%;
@@ -31,6 +32,7 @@ const LeftDiv = styled.div`
 `
 const Title = styled.h1`
   margin: 0;
+  cursor: default;
 `
 const ConsultCompleteDiv = styled.div`
   width: 100%;
@@ -66,6 +68,7 @@ const ConsultBt = styled.button`
     font-size: 100%;
     margin-top: 1%;
     white-space: nowrap;
+    cursor: pointer;
 
     &:hover {
         filter: drop-shadow(0px 7px 10px rgba(29, 86, 168, 0.30));
@@ -164,7 +167,7 @@ function ConsultingPage({openConsult,closeConsult,date}) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const reqIdRes = await ReqIdGetApi(date);
+        const reqIdRes = await ReqIdTestGetApi(date);
         console.log('reqIdRes :', reqIdRes)
         setReqId(reqIdRes.req_id);
       } catch (err) {
@@ -189,7 +192,7 @@ function ConsultingPage({openConsult,closeConsult,date}) {
 
       // 최초 클릭 시에는 즉시 결과를 받아오도록 설정 (맨 밑에 JSX를 위해 초기 not completed 받아오기 위함)
       console.log("reqId",reqId)
-      const waitRes = await WaitGetApi(reqId);
+      const waitRes = await WaitTestGetApi(reqId);
       console.log("waitRes",waitRes)
       const newResult = waitRes.result;
       setResult(newResult);
@@ -197,21 +200,21 @@ function ConsultingPage({openConsult,closeConsult,date}) {
       // success가 날아오면 컨설팅 요청보내고 타이머 종료 - [GET]
       if (newResult === 'success') {
         clearInterval(intervalRef.current);
-        const consultingRes = await ConsultingGetApi(reqId);
+        const consultingRes = await ConsultingTestGetApi(reqId);
         const consulting = consultingRes.consulting;
         setConsulting(consulting);
       } else {
 
         // 즉시 받아온 결과가 'not completed'일 경우 5초마다 갱신하는 타이머 설정 (맨 밑에 JSX를 위해 초기 not completed 받아오기 위함)
         intervalRef.current = setInterval(async () => {
-          const waitRes = await WaitGetApi(reqId);
+          const waitRes = await WaitTestGetApi(reqId);
           const updatedResult = waitRes.result;
           setResult(updatedResult);
 
           // success가 날아오면 컨설팅 요청보내고 타이머 종료 - [GET]
           if (updatedResult === 'success') {
             clearInterval(intervalRef.current);
-            const consultingRes = await ConsultingGetApi(reqId);
+            const consultingRes = await ConsultingTestGetApi(reqId);
             const consulting = consultingRes.consulting;
             setConsulting(consulting);
           }
@@ -242,6 +245,7 @@ function ConsultingPage({openConsult,closeConsult,date}) {
       flexDirection: 'row',
       background: 'linear-gradient(130deg, #E4F4FF, #E0F6FF, #84BDFF)',
       animation: 'slideUp 0.5s forwards', // 기존 애니메이션 유지
+      cursor: 'default'
     },
   });
 
