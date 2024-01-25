@@ -4,13 +4,13 @@ import Footer from './Footer';
 
 
 const Layout = () => (
-    <>
-      <Header />
-      <main style={{height: '80vh', width: '100%'}}>
-        <Outlet />
-      </main>
-      <Footer />
-    </>    
-  );
+  <>
+    <Header />
+    <main style={{height: '80vh', width: '100%'}}>
+      <Outlet />
+    </main>
+    <Footer />
+  </>    
+);
 
 export default Layout;

@@ -1,16 +1,12 @@
 import Modal from 'react-modal';
 import { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { IoCloseSharp } from "react-icons/io5";
 import { OrderCheckState, PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
 import OrderItem from '../components/order/OrderItem';
 import OrderList from '../components/order/OrderList';
 import PaymentPopup from './PaymentPopup';
-import { getAtom } from '../components/func/AtomData';
-import { OrderGetTableApi } from '../api/orders/OrderGetTableApi';
-import { OrdersPostApi } from '../api/orders/OrdersPostApi';
 
 // 애니메이션 키프레임
 const slideUpAnimation = `

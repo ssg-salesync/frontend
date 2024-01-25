@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
-import { getAtom } from "../func/AtomData";
 import { OrderCheckState, TableState, TotalPrice} from "../../recoil/atoms/ItemState";
 import { ItemsApi } from "../../api/Items/ItemsApi";
 import { OrderGetTableApi } from "../../api/orders/OrderGetTableApi";

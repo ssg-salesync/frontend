@@ -1,5 +1,5 @@
 import {useState,useEffect} from "react";
-import { useRecoilState} from 'recoil';
+import { useSetRecoilState} from 'recoil';
 import styled, {keyframes,css} from 'styled-components';
 import { MdOutlineTableBar} from "react-icons/md";
 import { IoBagHandleOutline} from "react-icons/io5";
@@ -104,9 +104,7 @@ const TogoIcon = styled(IoBagHandleOutline)`
 `;
 function Kiosk(){
     const [orderModalOn, setOrderModalOn] = useState(false);
-    // const [selectedTableId, setSelectedTableId] = useState(null);
-    const [closeAllPopup,setCloseAllPopup] = useRecoilState(PayCompleteState)
-    
+    const setCloseAllPopup = useSetRecoilState(PayCompleteState)
     const deleteOrder = deleteOrderState()
     const deleteTotalPrice= deleteTotalPriceState()
     const openOrderPopup = () => {

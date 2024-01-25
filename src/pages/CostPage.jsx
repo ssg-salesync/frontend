@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import { CostsGetApi } from "../api/dashboard/costs/CostsGetApi";

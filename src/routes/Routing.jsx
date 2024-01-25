@@ -1,5 +1,4 @@
-import { Navigate, Route, Router, Routes} from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { Route, Routes} from "react-router-dom";
 import Home from "../pages/Home";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
@@ -15,13 +14,11 @@ import CashPage from "../popup/CashPopup";
 import CostPage from "../pages/CostPage";
 import InfoNpwPage from "../pages/InfoNpwPage";
 import KioskPage from "../pages/KioskPage";
-import NotFoundPage from "../pages/NotFoundPage";
 import WelcomePage from "../pages/WelcomePage";
 import Layout from "../components/common/Layout";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import InternalErrorPage from "../pages/InternalErrorPage";
-import { UserCheckState } from "../recoil/atoms/UserState";
 import ConsultingPage from "../pages/ConsultingPage";
 
 /* eslint-disable*/
