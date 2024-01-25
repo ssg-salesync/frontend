@@ -133,44 +133,15 @@
 
 |Tech|Explanation|
 |:---:|:---|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/react.png" alt = "react" style="width: 30px;">|재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/recoil.png" alt = "recoil" style="width: 30px;">|코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/Axios.png" alt = "Axios" style="width: 30px;">|API 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. 서버와의 데이터 통신을 비동기적으로 처리했습니다.|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/styled components.png" alt = "styled components" style="width: 30px;">|CSS를 별도의 파일로 두지 않고 하나의 모듈로 관리하기 위해 **CSS-in-JS** 방식을 채택했습니다. 컴포넌트의 재사용을 위해 styled-components를 선정했습니다.|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/aws s3.png" alt = "aws s3" style="width: 30px;">|정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. 가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/cloudfront.jpeg" alt = "cloudfront" style="width: 30px;">|Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/GitHubActions.png" alt = "GitHubActions" style="width: 30px;">|손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.|
-
-<br>
-
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/>&nbsp;&nbsp;재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다. React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.
-<br/>
-<br/>
-<img src="https://img.shields.io/badge/Recoil-0075EB?style=flat-square&logo=Recoil&logoColor=white"/>&nbsp;&nbsp;코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.
-<br/>
-<br/>
-<img src="https://img.shields.io/badge/axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/>&nbsp;&nbsp;API 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. 서버와의 데이터 통신을 비동기적으로 처리했습니다.
-<br/>
-<br/>
-<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>&nbsp;&nbsp;CSS를 별도의 파일로 두지 않고 하나의 모듈로 관리하기 위해 **CSS-in-JS** 방식을 채택했습니다. 컴포넌트의 재사용을 위해 styled-components를 선정했습니다.
-<br/>
-<br/>
-Amazon S3&nbsp;&nbsp;정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. 가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.
-<br/>
-<br/>
-AWS CloudFront&nbsp;&nbsp;Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.
-<br/>
-<br/>
-GitHub Actions&nbsp;&nbsp;손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.
-<br/>
-<br/>
-BFF&nbsp;&nbsp;응답 데이터를 클라이언트에서 요구되는 데이터로 파싱했습니다. 데이터를 전송하는 과정에서 민감하거니 불필요한 데이터를 숨겼습니다.
-<br/>
-<br/>
-react-calendar&nbsp;&nbsp;월별, 주별, 일별 등 다양한 표현 방식과 달력의 상태 관리를 용이하게 하기 위해 react-calendar를 선택했습니다. 사용자에게 달력으로서 최적의 편리함을 제공합니다.
-<br/>
-<br/>
-react-modal&nbsp;&nbsp;각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다.
-<br/>
-<br/>
-recharts&nbsp;&nbsp;원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다.
+| jsx | dd |
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/react.png" alt = "react" style="width: 30px;"> React|재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/recoil.png" alt = "recoil" style="width: 30px;"> Recoil|코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/Axios.png" alt = "Axios" style="width: 30px;"> Axios|API 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. 서버와의 데이터 통신을 비동기적으로 처리했습니다.|
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/styled components.png" alt = "styled components" style="width: 30px;"> styled components|CSS를 별도의 파일로 두지 않고 하나의 모듈로 관리하기 위해 **CSS-in-JS** 방식을 채택했습니다. 컴포넌트의 재사용을 위해 styled-components를 선정했습니다.|
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/aws s3.png" alt = "aws s3" style="width: 30px;"> AWS S3|정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. 가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.|
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/cloudfront.jpeg" alt = "cloudfront" style="width: 30px;"> CloudFront|Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/GitHubActions.png" alt = "GitHubActions" style="width: 30px;">GitHub Actions|손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.|
+| BFF | 응답 데이터를 클라이언트에서 요구되는 데이터로 파싱했습니다. 데이터를 전송하는 과정에서 민감하거니 불필요한 데이터를 숨겼습니다. |
+| react-calendar | 월별, 주별, 일별 등 다양한 표현 방식과 달력의 상태 관리를 용이하게 하기 위해 react-calendar를 선택했습니다. 사용자에게 달력으로서 최적의 편리함을 제공합니다. |
+| react-modal | 각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다. |
+| recharts | 원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
