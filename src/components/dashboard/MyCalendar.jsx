@@ -17,32 +17,11 @@ const DropdownButton = styled.button`
   border:none;
   background-color: #1D56A8;
   cursor: pointer;
-  // text-color: white;
   white-space: nowrap;
   color: white;
   font-family: Pretendard-Regular;
-
   margin-top: 20%;
-  // width: 100%;
-  // height: 50%;
-  // border: 0.8px solid var(--festie-gray-600, #949494);
-  // border-radius: 0.6rem;
-  // padding: 0px 12px;
-  // // background-color: white;
-  // background-repeat: no-repeat;
-  // background-position: right 12px center;
-  // background-size: 12px;
-  // cursor: pointer;
-
-  // color: var(--festie-gray-800, #3a3a3a);
-  // font-family: SUIT Variable;
-  // font-style: normal;
-  // font-weight: 500;
-  // line-height: 140%;
-  // text-align: start;
-  // appearance: none;
  
-
   // 반응형에 맞게 폰트 크기 조정
   @media screen and (max-width: 768px) {
     font-size: 80%;
@@ -63,16 +42,12 @@ const CalendarWrapper = styled.div`
   display: ${(props) => (props.isOpen ? "block" : "none")};
 `;
 
-
 function MyCalendar({ date, onDateChange }) {
-
   // 드롭다운과 캘린더 매핑하기 위한 상태 저장
   const [value, onChange] = useState();
 
   // 드롭다운 클릭 시 상태 저장
   const [isOpen, setIsOpen] = useState(false);
-
-  // console.log('date: ', date)
 
   // 드롭다운 클릭 시 캘린더 나옴
   const handlerToggleCalendar = () => {
@@ -90,10 +65,7 @@ function MyCalendar({ date, onDateChange }) {
     <CalendarContainer>
       <DropdownButton onClick={handlerToggleCalendar}>{date}</DropdownButton>
       <CalendarWrapper isOpen={isOpen}>
-        <Calendar
-        onChange={handlerDateChange}
-        value={value}
-        formatDay={(locale, date) => moment(date).format("DD")}>
+        <Calendar onChange={handlerDateChange} value={value} formatDay={(locale, date) => moment(date).format("DD")}>
         </Calendar>
       </CalendarWrapper>
     </CalendarContainer>

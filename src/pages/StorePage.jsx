@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { StoreState } from "../recoil/atoms/StoreState";
 import { StorePostApi } from "../api/auth/signup/StorePostApi";
-import { StoreTokenPostApi } from "../api/auth/signup/StoreTokenPostApi";
 import { TotalDiv, ComponentDiv, TitleDiv,InsertDiv,MsgDiv } from "../styles/CommonStyle";
 import { UserCheckState } from "../recoil/atoms/UserState";
 

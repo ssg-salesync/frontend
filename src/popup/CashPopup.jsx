@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
-import { useRecoilValue, useResetRecoilState, useRecoilState } from "recoil";   // 읽기 전용
+import { useRecoilValue, useRecoilState } from "recoil";   // 읽기 전용
 import { DNA } from 'react-loader-spinner'
 import { styled } from 'styled-components';
 import { IoArrowBackSharp } from "react-icons/io5";
-import { PayCompleteState, TableState, TotalPrice } from '../recoil/atoms/ItemState';
-import { getAtom } from '../components/func/AtomData';
+import { PayCompleteState, TotalPrice } from '../recoil/atoms/ItemState';
 import { PayPostApi } from '../api/pay/PayPostApi';
 
 const slideInAnimation = `
@@ -159,21 +158,6 @@ const PaymentProcessingMessage = styled.div`
 //   flex-direction: column;
 //   align-items: center;
 //   font-size: 3rem;
-`;
-
-const Spinner = styled.div`
-  border: 8px solid rgba(0, 0, 0, 0.1);
-  border-left: 8px solid #000;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  animation: spin 1s linear infinite;
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
 `;
 
 /* eslint-disable */

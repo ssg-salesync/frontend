@@ -1,8 +1,8 @@
 import Modal from 'react-modal';
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IoCloseSharp } from "react-icons/io5";
-import { styled, keyframes } from 'styled-components';
+import { styled } from 'styled-components';
 import { DNA } from 'react-loader-spinner'
 import { ReqIdGetApi } from '../api/dashboard/consulting/ReqIdGetApi';
 import { WaitGetApi } from '../api/dashboard/consulting/WaitGetApi';
@@ -82,31 +82,6 @@ const ConsultBt = styled.button`
       font-size: 120%;
     }
 `
-const ConsultIngBt = styled.button`
-    border: none;
-    border-radius: 0.5rem;
-    background: #1C395E;
-    color: #FFF;
-    // width: 15%;
-    // height: 60%;
-    padding: 10px 18px;
-    font-family: Pretendard-Regular;
-    font-size: 100%;
-    margin-top: 1%;
-    white-space: nowrap;
-    margin-top: 5%;
-
-    // 반응형에 맞게 폰트 크기 조정
-    @media screen and (max-width: 750px) {
-      font-size: 70%;
-    }
-    @media screen and (min-width: 750px) and (max-width: 1024px) {
-      font-size: 80%;
-    }
-    @media screen and (min-width: 1025px) {
-      font-size: 100%;
-    }
-`
 // const typingAnimation = keyframes`
 //   from {
 //     width: 0;
@@ -157,35 +132,6 @@ const SpinnerDiv = styled.div`
   align-items: center;
   flex-direction: column;
 `
-const Spinner = styled.div`
-  border: 8px solid rgba(0, 0, 0, 0.1);
-  border-left: 8px solid #000;
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  margin-top: 15%;
-  animation: spin 1s linear infinite;
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  // 반응형
-  @media screen and (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    width: 50px;
-    height: 50px;
-  }
-  @media screen and (min-width: 1025px) {
-    width: 110px;
-    height: 110px;
-  }
-`;
 // 로고 이미지
 const LogoImg = styled.img`
   width: 100px;

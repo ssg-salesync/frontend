@@ -1,5 +1,5 @@
-import { Route, Navigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { Navigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import { CategoryGetApi } from '../api/pos/category/CategoryGetApi';
 import { CategoryState } from '../recoil/atoms/CategoryState';
 

@@ -51,36 +51,6 @@ const PayIngDiv = styled.div`
       font-size: 180%;
     }
 `
-const Spinner = styled.div`
-  border: 8px solid rgba(0, 0, 0, 0.1);
-  border-left: 8px solid #000;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  margin-bottom: 3%;
-  animation: spin 1s linear infinite;
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  // 반응형
-  @media screen and (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    width: 60px;
-    height: 60px;
-  }
-  @media screen and (min-width: 1025px) {
-    width: 90px;
-    height: 90px;
-  }
-`;
-
 const CardImgDiv = styled.div`
   width: 530px;
   height: 350px;

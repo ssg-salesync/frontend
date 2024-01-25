@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import PosCategory from "../components/pos/PosCategory";
 import PosItem from "../components/pos/PosItem";

@@ -1,8 +1,7 @@
 import {React ,useState,useEffect} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { styled, keyframes } from 'styled-components';
-import { useRecoilState,useResetRecoilState } from 'recoil';
-import { ItemsApi } from '../api/Items/ItemsApi';
+import { useRecoilState } from 'recoil';
 import OrderPopup from "../popup/OrderPopup";
 import { PayCompleteState} from "../recoil/atoms/ItemState";
 import { deleteOrderState,deleteTotalPriceState } from "../components/func/AtomData";
