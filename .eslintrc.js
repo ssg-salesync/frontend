@@ -30,6 +30,7 @@ module.exports = {
     "react/prop-types": 'off',
     'react/no-array-index-key': 'off',  // 배열 내부 요소 고유한 키 없어서 각 요소 추적 어려움 무시
     'import/prefer-default-export': 'off',
-    "no-alert": "off"
+    "no-alert": "off",
+    "camelcase": "off",
   },
 };

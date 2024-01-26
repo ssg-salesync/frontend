@@ -15,22 +15,8 @@ const TabDiv = styled.div`
     height : 100%;
     width : 100%;
     background: linear-gradient(100deg, #E4F4FF 9.3%, #E0F6FF 55.65%, #D2E5FC 99.2%), #FFF;
+`;
 
-    // margin-right: 1%;
-    
-    //슬라이드 애니메이션 효과
-    // animation: slideUp 0.5s forwards;
-    // @keyframes slideUp {
-    //     from {
-    //     transform: translateY(100%);
-    //     opacity: 0;
-    //     }
-    //     to {
-    //     transform: translateY(0);
-    //     opacity: 1;
-    //     }
-    // }
-`
 const TabMemu = styled.ul`
     height : 9%;
     width : 100%;
@@ -48,13 +34,14 @@ const TabMemu = styled.ul`
 
     white-space: nowrap;
 
-    //선택된 tab에 적용되는 css
+    // 선택된 tab에 적용되는 css
     .focused{
         background-color : #D9D9D9;
         color: black;
         border-radius: 0.5rem;
     }
-`
+`;
+
 const SubMenu = styled.li`
     display: flex;
     width: 10%;
@@ -82,7 +69,8 @@ const SubMenu = styled.li`
     @media screen and (min-width: 1025px) {
       font-size: 120%;
     }
-`
+`;
+
 const Item = styled.div`
     width: 100%;
     height: 80%;
@@ -93,7 +81,8 @@ const Item = styled.div`
     // justify-content: center;
     text-align: center;
     overflow:auto;
-`
+`;
+
 const Menu = styled.div`
     // width: 25%;
     width: calc(30% - 0.7rem);
@@ -115,7 +104,8 @@ const Menu = styled.div`
     @media screen and (min-width: 1025px) {
       font-size: 120%;
     }
-`
+`;
+
 const MenuDtDiv = styled.div`
     height: 60%;
     width:100%;
@@ -124,12 +114,14 @@ const MenuDtDiv = styled.div`
     align-items:center;
     justify-content: center;
     flex-direction: column;
-`
+`;
+
 const MenuDtP =styled.p`
     margin: 0.4rem;
     white-space: nowrap;
     cursor: default;
-`
+`;
+
 const BtDiv = styled.div`
     height: 20%;
     width:100%;
@@ -137,7 +129,8 @@ const BtDiv = styled.div`
     display:flex;
     align-items:center;
     justify-content: center;
-`
+`;
+
 const QuantityBt = styled.button`
     width: 3rem;
     height: 1.5rem;
@@ -156,10 +149,9 @@ const QuantityBt = styled.button`
     @media screen and (min-width: 768px) and (max-width: 1024px) {
         width: 1.5rem;
     }
-`
+`;
+
 const MinusBt = styled(FaRegMinusSquare)`
-    // background: url("/img/MinusBt.png") no-repeat center center;
-    // background: url("/img/MinusBt.png"), lightgray 50% / contain no-repeat;
     background-size: cover;
     cursor: pointer;
     width: 1.5rem;
@@ -175,11 +167,9 @@ const MinusBt = styled(FaRegMinusSquare)`
         width: 1.3rem;
         height: 1.3rem;
     }
-`
-// const PlusBt = styled.button`
+`;
+
 const PlusBt = styled(FaRegPlusSquare)`
-    // background: url("/img/PlusBt.png") no-repeat center center;
-    // background: url("/img/PlusBt.png"), lightgray 50% / contain no-repeat;
     background-size: cover;
     cursor: pointer;
     width: 1.5rem;
@@ -195,14 +185,16 @@ const PlusBt = styled(FaRegPlusSquare)`
         width: 1.3rem;
         height: 1.3rem;
     }
-`
+`;
+
 const OrderBtDiv = styled.div`
     width: 97%;
     height: 10%;
     display: flex;
     justify-content: right;
     align-items: center;
-`
+`;
+
 const OrderBt = styled.button`
     border: none;
     border-radius: 0.5rem;
@@ -232,39 +224,8 @@ const OrderBt = styled.button`
     @media screen and (min-width: 1025px) {
     font-size: 120%;
     }
-`
-// const OrderCheckBt = styled.button`
-//     border: none;
-//     border-radius: 0.5rem;
-//     background: #1C395E;
-//     color: #FFF;
-//     width: 15%;
-//     height: 60%;
-//     font-family: Pretendard-Regular;
-//     font-size: 110%;
-//     margin: 1%;
-//     white-space: nowrap;
+`;
 
-//     &:hover {
-//         background-color: #e0e0e0;
-//     }
-// `
-// const OrderCancelBt = styled.button`
-//     border: none;
-//     border-radius: 0.5rem;
-//     background: #1C395E;
-//     color: #FFF;
-//     width: 15%;
-//     height: 60%;
-//     font-family: Pretendard-Regular;
-//     font-size: 110%;
-//     margin: 1%;
-//     white-space: nowrap;
-
-//     &:hover {
-//         background-color: #e0e0e0;
-//     }
-// `
 /* eslint-disable */
 function OrderItem({tableId,closeOrderPopup}) {
     // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
@@ -279,7 +240,6 @@ function OrderItem({tableId,closeOrderPopup}) {
     const kioskState = useRecoilValue(KioskState)
     // 메뉴 가져오기 
     const getDefaultData = async() =>{
-        console.log("getDefaultData-start")
         try{
             // const defaultItems = await ItemsApi();
             // const dataDummy = defaultItems.categories
@@ -291,10 +251,8 @@ function OrderItem({tableId,closeOrderPopup}) {
                     quantity:0, //quantity : 0 추가
                 })),
             }));
-            console.log("getDefaultData-complete")
             getOrderTableData(defaultData)
         } catch(error){
-            console.log("getDefaultData Error :", error)
             if (error?.response?.status >= 500 && error?.response?.status < 600) {
                 // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
                 navigate('/500');
@@ -303,17 +261,12 @@ function OrderItem({tableId,closeOrderPopup}) {
     }
     // 주문내역 가져오기
     const getOrderTableData = async(defaultData) =>{
-        console.log("getOrderTableData-start")
         try{
             const orderItems = await OrderGetTableApi(tableId);
-            console.log("getOrderTableData-start===>",orderItems.carts.length)
             if(orderItems.carts.length === 0){
-                console.log("orderItems 0")
                 setNewOrder(true)
-                console.log("newOrder",newOrder)
                 setCurrentTab(defaultData[0].category_id)              
                 setMenu(defaultData)
-                console.log("getOrderTableData-complete/menu",menu)
             }else{
                 // 총 결제금액 세팅
                 setOrderCheckBt(true)
@@ -330,13 +283,10 @@ function OrderItem({tableId,closeOrderPopup}) {
                     })
                     return {...cate, items:updatedMenus}
                 })
-                console.log("getOrderTableData-complete/updateData",updateData)
                 setCurrentTab(updateData[0].category_id)
                 setMenu(updateData)
-                console.log("getOrderTableData-complete/menu",menu)
             }           
         } catch(error){
-            console.log("getOrderTableData Error :", error)
             if (error?.response?.status >= 500 && error?.response?.status < 600) {
                 // 500번대 에러가 발생하면 InternalError 페이지로 리다이렉트
                 navigate('/500');
@@ -345,22 +295,8 @@ function OrderItem({tableId,closeOrderPopup}) {
     }
     // 초기메뉴세팅 / 주문내역 추가 / 처음 화면 렌더링될때 첫번째 탭에 focus
     useEffect(()=>{
-        console.log("OrderItem.js open")
         getDefaultData()
-        console.log("menu first setting",menu)
     },[])
-    
-    // const [menu,setMenu] = getAtom(tableId)
-
-    //console.log("menu",menu)
-    // const menu = menuAll[tableId-1]
-    // if(tableId === 1){
-    //     const [menu,setMenu] = useRecoilState(Table1State)    
-    //     // console.log("menu",menu)
-    // }
-    // else if(tableId === 2){
-    //     const [menu,setMenu] = useRecoilState(Table2State)
-    // }
     
     const selectMenuHandler = (category) => {
         // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
@@ -388,7 +324,6 @@ function OrderItem({tableId,closeOrderPopup}) {
           }));        
         setMenu(newData);
         setOrderCheckBt(false)
-        console.log(orderCheckBt)
     };
     const quantityPlus = (itemIdx,cateIdx)=>{
         const newData = menu?.map(category => ({
@@ -407,23 +342,13 @@ function OrderItem({tableId,closeOrderPopup}) {
           }));
         setMenu(newData);
         setOrderCheckBt(false)
-        console.log(orderCheckBt)
     };
 
-    // 처음 화면 렌더링될때 첫번째 탭에 focus
-    // useEffect(()=>{
-    //     console.log("tableId" ,tableId)
-    //     setCurrentTab(menu?.[0].category_id)
-    // },[])
-
     useEffect(()=>{
-        console.log("메뉴 변경됨")
     },[menu])
 
     // 주문 저장하기
-//    const async orderSend=() =>{
    async function orderSend(){
-        console.log("orderSend-newOrder",newOrder)
         const orderItems = []
         menu.forEach(category => {
             category.items.forEach(item => {
@@ -438,11 +363,10 @@ function OrderItem({tableId,closeOrderPopup}) {
             table_no : tableId,
             carts: orderItems
         }
-        console.log(data)
+
         // 신규주문
         if(newOrder === true){
             const dataPost = await OrdersPostApi(data);
-            console.log("post",dataPost)
             if(dataPost.result === "failed"){
                 setNewOrder(true)
             }
@@ -450,14 +374,10 @@ function OrderItem({tableId,closeOrderPopup}) {
         }
         else{ // 기존 주문 수정
             const dataPut = await OrdersPutApi(data);
-            console.log("put",dataPut)
             if(dataPut.result === "cancelled"){
                 setNewOrder(true)
             }
             else{setNewOrder(false)}
-            // OrdersPutApi(data)
-            // .then((res)=> console.log(res))
-            // .catch((err)=>console.log(err))
         }
         setOrderCheckBt(true)
         if(kioskState !== true){
@@ -466,7 +386,6 @@ function OrderItem({tableId,closeOrderPopup}) {
     }
     const orderCancel=()=>{
         const cancelOrder = OrderCancelApi(tableId);
-        console.log("cancelOrder",cancelOrder)
         if(kioskState !== true){
             closeOrderPopup();
         }        
@@ -475,24 +394,13 @@ function OrderItem({tableId,closeOrderPopup}) {
     return(
         <TabDiv>
             <TabMemu>
-                {/* 아래 하드코딩된 내용 대신에, map을 이용한 반복으로 코드를 수정 */}
-                {/* li 엘리먼트의 class명의 경우 선택된 tab 은 'submenu focused', 나머지 2개의 tab은 'submenu'  */}
-                {/* <li className="submenu">{menuArr[0].name}</li>
-                    <li className="submenu">{menuArr[1].name}</li>
-                    <li className="submenu">{menuArr[2].name}</li> */}
                 {menu.map((cate) => (
                     <SubMenu key={cate.category_id} className={cate.category_id === currentTab ? "tab focused" : "tab"} onClick={() => selectMenuHandler(cate.category_id)}>{cate.category_name}</SubMenu>
                 ))}
-
-                {/* {uniqueCategories.map(categoryId => (
-                    <SubMenu key={categoryId} onClick={() => setActiveCategory(categoryId)}>
-                        Category {categoryId}
-                    </SubMenu>
-                ))} */}
             </TabMemu>
-            {menu.map((cate, cateIdx) => (cate.category_id === currentTab && (
+            {menu.map((cate) => (cate.category_id === currentTab && (
             <Item key={cate.category_id}>
-                {cate.items.map((item,itemIdx) => (
+                {cate.items.map((item) => (
                     <Menu key={item.item_id}>
                         <MenuDtDiv>
                             <MenuDtP>{item.name}</MenuDtP>
