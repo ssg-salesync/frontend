@@ -124,24 +124,32 @@
 <br/>
 &nbsp;&nbsp;두 단어의 첫 글자인 S를 강조하여 브랜드의 시각적인 식별성을 높여 쉽게 기억하도록 설정했습니다. 로고의 색상을 블루로 선택하여 전체적인 브랜드 컬러와의 일관성을 유지하고 안정성과 신뢰성을 전달했습니다.
 
-## 기술 스택
+## ⚒기술 스택
 
-```
-주요 기술: JavaScript(ES6+), React(v18.2.0), Recoil, Axios, styled components, Amazon S3, AWS CloudFront, GitHub Actions, BFF
-라이브러리: react-calender, react-modal, recharts
-```
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/frontTechStack.png" alt = "payCard gif" style="width: 600px;">
+
+### 📃기술 스택 Detail
 
 |Tech|Explanation|
 |:---:|:---|
 | jsx | dd |
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/react.png" alt = "react" style="width: 30px;"> <br> React|재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
+|React|-재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> -React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
+|Recoil|-코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
+|Axios|-API 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. <br>-서버와의 데이터 통신을 비동기적으로 처리했습니다.|
+|styled components|-CSS를 별도의 파일로 두지 않고 하나의 모듈로 관리하기 위해 **CSS-in-JS** 방식을 채택했습니다. <br>-컴포넌트의 재사용을 위해 styled-components를 선정했습니다.|
+|AWS S3|-정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. <br>-가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.|
+|CloudFront|-Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
+|GitHub Actions|-손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.|
+| BFF | -응답 데이터를 클라이언트에서 요구되는 데이터로 파싱했습니다. <br>-데이터를 전송하는 과정에서 민감하거니 불필요한 데이터를 숨겼습니다. |
+| react-calendar | -월별, 주별, 일별 등 다양한 표현 방식과 달력의 상태 관리를 용이하게 하기 위해 react-calendar를 선택했습니다. <br> -사용자에게 달력으로서 최적의 편리함을 제공합니다. |
+| react-modal | -각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다. |
+| recharts | -원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
+
+
+<!-- |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/react.png" alt = "react" style="width: 30px;"> <br> React|재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/recoil.png" alt = "recoil" style="width: 30px;"> <br> Recoil|코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/Axios.png" alt = "Axios" style="width: 30px;"> <br>Axios|API 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. 서버와의 데이터 통신을 비동기적으로 처리했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/styled components.png" alt = "styled components" style="width: 30px;"> <br> styled components|CSS를 별도의 파일로 두지 않고 하나의 모듈로 관리하기 위해 **CSS-in-JS** 방식을 채택했습니다. 컴포넌트의 재사용을 위해 styled-components를 선정했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/aws s3.png" alt = "aws s3" style="width: 30px;"> <br> AWS S3|정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. 가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/cloudfront.jpeg" alt = "cloudfront" style="width: 30px;"> CloudFront|Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
-|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/GitHubActions.png" alt = "GitHubActions" style="width: 30px;">GitHub Actions|손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.|
-| BFF | 응답 데이터를 클라이언트에서 요구되는 데이터로 파싱했습니다. 데이터를 전송하는 과정에서 민감하거니 불필요한 데이터를 숨겼습니다. |
-| react-calendar | 월별, 주별, 일별 등 다양한 표현 방식과 달력의 상태 관리를 용이하게 하기 위해 react-calendar를 선택했습니다. 사용자에게 달력으로서 최적의 편리함을 제공합니다. |
-| react-modal | 각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다. |
-| recharts | 원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/GitHubActions.png" alt = "GitHubActions" style="width: 30px;">GitHub Actions|손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.| -->
