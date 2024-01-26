@@ -1,6 +1,6 @@
 # frontend
 
-## 디렉터리 구조
+## 📁디렉터리 구조
 
 ```
 📁 frontend
@@ -93,40 +93,24 @@
 - .prettierrc: 가독성 좋은 코드를 위한 컨벤션을 정의
 - package(-lock).json: 프로젝트 이름, 버전 및 라이브러리 목록이 표기
 
-## 네이밍 룰
-- 컴포넌트, 페이지, 팝업,  API, 스타일: PascalCase
-- 리코일: {기능}State.jsx
-- 라우팅: Private(Public)Route.jsx
-- CSS: styled-components(CSS-in-JS)
-- 함수, 변수, 상수: camelCase
-- 익명 함수: arrow function
-- 이벤트 함수: on{이벤트}{기능}
-- API: {기능}{요청방식}Api.jsx
-- ESLint: .eslintrc.js에 airbnb 형식 적용
-- 컴포넌트 작성할 때 ⇒ 함수형 컴포넌트 사용
-- 이벤트핸들러는 handler로 시작하도록 작성
-- 변수명 작성할 때 이름 길어지더라도 무슨 뜻인지 의미를 나타내도록 작성
-    - handlerConfirm(x): 함수명만 보고 정확히 어떤 일을 하는지 알기 어려움
-    - handlerConfirmPasswordBlur: 함수명만 보고도 이 함수의 역할을 알 수 있음
-
-## 디자인보드
+## 🎨디자인보드
 <img src="https://github.com/ssg-salesync/.github/blob/main/assets/designBoard.png" alt = "designBoard gif" style="max-width: 45%;">
 
 ### 디자인 이야기
 
-&nbsp;&nbsp;POS는 거래 및 결제를 처리하는 비즈니스 도구로, 사용자들이 서비스를 사용하면서 안정적이고 신뢰감을 주기위해 블루 계열인 **#00ADEF**를 브랜드 색상으로 선택했습니다.
+>&nbsp;&nbsp;POS는 거래 및 결제를 처리하는 비즈니스 도구로, 사용자들이 서비스를 사용하면서 안정적이고 신뢰감을 주기위해 블루 계열인 **#00ADEF**를 브랜드 색상으로 선택했습니다.
 <br/>
 &nbsp;&nbsp;전체적인 애플리케이션 무드도 편안하고 안정된 환경을 제공하기 위해 눈에 부담을 주지 않는 블루 계열로 설정했습니다.
 
 ### 로고 이야기
 
-&nbsp;&nbsp;Salesync는 커스터마이징 가능한 웹 기반 POS를 제공합니다. sales는 판매, Sync는 Synchronization의 줄임말로 데이터 및 정보를 효율적으로 동기화하고 연동함을 의미합니다. 따라서 주문과 매출데이터를 강조하는 브랜드명으로 Salesync로 정했습니다.
+>&nbsp;&nbsp;Salesync는 커스터마이징 가능한 웹 기반 POS를 제공합니다. sales는 판매, Sync는 Synchronization의 줄임말로 데이터 및 정보를 효율적으로 동기화하고 연동함을 의미합니다. 따라서 주문과 매출데이터를 강조하는 브랜드명으로 Salesync로 정했습니다.
 <br/>
 &nbsp;&nbsp;두 단어의 첫 글자인 S를 강조하여 브랜드의 시각적인 식별성을 높여 쉽게 기억하도록 설정했습니다. 로고의 색상을 블루로 선택하여 전체적인 브랜드 컬러와의 일관성을 유지하고 안정성과 신뢰성을 전달했습니다.
 
 ## ⚒기술 스택
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/frontTechStack.png" alt = "payCard gif" style="width: 600px;">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/frontTechStack.png" alt = "frontTechStack" style="width: 600px;">
 
 ### 📃기술 스택 Detail
 
@@ -145,7 +129,21 @@
 | react-modal | -각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다. |
 | recharts | -원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
 
-
+## ✏️네이밍 룰
+- 컴포넌트, 페이지, 팝업,  API, 스타일: PascalCase
+- 리코일: {기능}State.jsx
+- 라우팅: Private(Public)Route.jsx
+- CSS: styled-components(CSS-in-JS)
+- 함수, 변수, 상수: camelCase
+- 익명 함수: arrow function
+- 이벤트 함수: on{이벤트}{기능}
+- API: {기능}{요청방식}Api.jsx
+- ESLint: .eslintrc.js에 airbnb 형식 적용
+- 컴포넌트 작성할 때 ⇒ 함수형 컴포넌트 사용
+- 이벤트핸들러는 handler로 시작하도록 작성
+- 변수명 작성할 때 이름 길어지더라도 무슨 뜻인지 의미를 나타내도록 작성
+    - handlerConfirm(x): 함수명만 보고 정확히 어떤 일을 하는지 알기 어려움
+    - handlerConfirmPasswordBlur: 함수명만 보고도 이 함수의 역할을 알 수 있음
 <!-- |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/react.png" alt = "react" style="width: 30px;"> <br> React|재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/recoil.png" alt = "recoil" style="width: 30px;"> <br> Recoil|코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/Axios.png" alt = "Axios" style="width: 30px;"> <br>Axios|API 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. 서버와의 데이터 통신을 비동기적으로 처리했습니다.|
