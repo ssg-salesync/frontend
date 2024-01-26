@@ -4,8 +4,6 @@ import Calendar from 'react-calendar';
 import './MyCalendar.css';
 import moment from 'moment';
 
-/* eslint-disable */
-
 const CalendarContainer = styled.div`
   position: relative;
 `;
@@ -65,8 +63,7 @@ function MyCalendar({ date, onDateChange }) {
     <CalendarContainer>
       <DropdownButton onClick={handlerToggleCalendar}>{date}</DropdownButton>
       <CalendarWrapper isOpen={isOpen}>
-        <Calendar onChange={handlerDateChange} value={value} formatDay={(locale, date) => moment(date).format("DD")}>
-        </Calendar>
+        <Calendar onChange={handlerDateChange} value={value} formatDay={(locale, day) => moment(day).format("DD")}/>
       </CalendarWrapper>
     </CalendarContainer>
   );

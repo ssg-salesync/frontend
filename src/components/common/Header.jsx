@@ -217,7 +217,7 @@ function Header() {
 
         if(tokenCheck !== null){
             setUserCheck(true)
-        }else{
+        } else{
             setUserCheck(false)
         }
     }
@@ -248,7 +248,7 @@ function Header() {
                 const category = await CategoryGetApi();
                 if(category.categories.length !== 0){
                     setCategoryState(false)
-                }else{
+                } else{
                     setCategoryState(true)
                 }            
             } catch(err){

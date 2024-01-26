@@ -193,19 +193,6 @@ function OrderPopup ({openOrderPopup,closeOrderPopup,tableId}) {
     // const [menu,setMenu] = getAtom(tableId)
     
     const totalPrice = useRecoilValue(TotalPrice)
-    
-    const totalAmountCalculate = () =>{
-
-        // let newTotalPrice =0 
-
-        // menu.forEach((category) => {
-        //     category.items.forEach((item) => {
-        //       newTotalPrice += item.price * item.count;
-        //     });
-        //   });
-          
-        // setTotalPrice(newTotalPrice)
-    };
 
      // 모달이 닫힐 때 애니메이션을 적용하는 스타일로 변경
      const closeBtClick = () => {
