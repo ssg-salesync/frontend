@@ -346,7 +346,8 @@ useEffect(() => {
 useEffect(() => {
   const fetchItems = async () => {
     try {
-      const itemData = await ItemGetApi();    // [GET: 카테고리,  실시간 렌더링]
+      const itemData = await ItemGetApi();
+      
       setItems(itemData); // 가져온 아이템 목록으로 상태 업데이트
     } catch (err) {
       console.error(err);
@@ -537,15 +538,14 @@ env:
 ```jsx
 :
 // PublicRoute.js
-  const userCheck = useRecoilValue(UserCheckState)
-  
-  return userCheck ? element : <Navigate replace to="/"/>;
+const userCheck = useRecoilValue(UserCheckState)
+
+return userCheck ? element : <Navigate replace to="/"/>;
 
 // 수정
+const tokenCheck = localStorage.getItem('access_token')
 
-  const tokenCheck = localStorage.getItem('access_token')
-  
-  return tokenCheck !==null ? element : <Navigate replace to="/"/>;
+return tokenCheck !==null ? element : <Navigate replace to="/"/>;
 :
 ```
 
@@ -572,18 +572,18 @@ const logout=()=>{
   
   tokenCheckfunc()
 }
+
 const tokenCheckfunc=()=>{
   const tokenCheck = localStorage.getItem('access_token')
 
   if(tokenCheck !== null){
       setUserCheck(true)
-  }else{
+  } else{
       setUserCheck(false)
   }
 }
 
-수정
-
+// 수정
 const logout=()=>{
   localStorage.removeItem('access_token');
   localStorage.removeItem('csrf_token');
@@ -616,42 +616,45 @@ useEffect(()=>{
 },[categories])
 
 // Header.js
-//kiosk 상태
+// kiosk 상태
 const [isKiosk , setIsKiosk] = useRecoilState(KioskState)
+
 // 카테고리 데이터 상태 체크 [0인경우 true]
 const [categoryState, setCategoryState] = useRecoilState(CategoryState)
+
 useEffect(()=>{
-    const checkCategory = async () => {
-        try{
-            const category = await CategoryGetApi();
-            if(category.categories.length !== 0){
-                setCategoryState(false)
-            }else{
-                setCategoryState(true)
-            }
-        } catch(err){
-            console.log(err)
-        }
-    }
-    checkCategory()
+  const checkCategory = async () => {
+      try{
+          const category = await CategoryGetApi();
+          if(category.categories.length !== 0){
+              setCategoryState(false)
+          }else{
+              setCategoryState(true)
+          }
+      } catch(err){
+          console.log(err)
+      }
+  }
+
+  checkCategory()
 },[])
 
 useEffect(() => {
   // isKiosk 값이 변경될 때마다 실행되는 useEffect를 이용하여 라우팅을 수행합니다.
   if (isKiosk) {
-    naviQgate('/kiosk');
-
+    navigate('/kiosk');
   } else if(!isKiosk && !categoryState){
     navigate('/home')
-  }}, [isKiosk]);
+  }
+}, [isKiosk]);
 
-  // CategoryState.js - recoil
-  import { atom } from "recoil";
+// CategoryState.js
+import { atom } from "recoil";
 
-  export const CategoryState = atom({
-      key: "CategoryState",
-      default: false
-  });
+export const CategoryState = atom({
+    key: "CategoryState",
+    default: false
+});
 :
 ```
 
