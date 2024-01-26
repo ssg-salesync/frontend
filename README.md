@@ -87,8 +87,8 @@
   - styles: 모든 페이지에 공용으로 사용되는 UI/UX들이 위치
   - App.css: 화면 렌더링시에 보여지는 초기 css
   - App.jsx: 화면 렌더링시에 보여지는 초기 컴포넌트
-  - index.css: 컴포넌트를 document에서 id값이 root인 태그 안에 렌더링되는 css
-  - index.jsx:App 컴포넌트를 document에서 id값이 root인 태그 안에 렌더링
+  - index.css: App 컴포넌트를 document에서 id값이 root인 태그 안에 렌더링되는 css
+  - index.jsx: App 컴포넌트를 document에서 id값이 root인 태그 안에 렌더링
 - .eslintrc.js: eslint(airbnb형) 컨벤션을 정의
 - .prettierrc: 가독성 좋은 코드를 위한 컨벤션을 정의
 - package(-lock).json: 프로젝트 이름, 버전 및 라이브러리 목록이 표기
@@ -152,3 +152,562 @@
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/aws s3.png" alt = "aws s3" style="width: 30px;"> <br> AWS S3|정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. 가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/cloudfront.jpeg" alt = "cloudfront" style="width: 30px;"> CloudFront|Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/GitHubActions.png" alt = "GitHubActions" style="width: 30px;">GitHub Actions|손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.| -->
+
+## Trouble Shooting
+
+<details>
+
+<summary>Case1. ESLint</summary>
+
+### 1-1. 상황: ESLint으로 코드 셋업
+
+#### 1-1.1. .eslintrc.js로 컨벤션 정의
+
+##### 1-1.1.1. 문제 발생: GitHub Actions로 배포시 Lint 에러로 인해 컴파일 불가
+
+![https://media.discordapp.net/attachments/1181071567963312128/1181546686074601523/Untitled.png?ex=65c20d9a&is=65af989a&hm=45804aaf1f5d36656350ad6c38fc8dae6eaf0da956a2d39d70957f9b72310109&=&format=webp&quality=lossless&width=687&height=386](https://media.discordapp.net/attachments/1181071567963312128/1181546686074601523/Untitled.png?ex=65c20d9a&is=65af989a&hm=45804aaf1f5d36656350ad6c38fc8dae6eaf0da956a2d39d70957f9b72310109&=&format=webp&quality=lossless&width=687&height=386)
+
+```
+Failed to compile.
+
+[eslint]
+src/App.js
+  Line 3:5:  Fragments should contain more than one child - otherwise, there’s no need for a Fragment at all  react/jsx-no-useless-fragment
+  Line 3:5:  'React' must be in scope when using JSX                                                          react/react-in-jsx-scope
+  Line 3:5:  JSX not allowed in files with extension '.js'                                                    react/jsx-filename-extension
+  Line 4:7:  'React' must be in scope when using JSX                                                          react/react-in-jsx-scope
+
+src/index.js
+  Line 9:3:  JSX not allowed in files with extension '.js'  react/jsx-filename-extension
+```
+
+### 1-2. 해결
+
+#### 1-2.1. 해결시도1 (해결완료): Fragment 제거 및 rules 추가
+
+##### 1-2.1.1. App.jsx 수정
+
+###### ./src/App.jsx
+
+- 수정 후
+
+```jsx
+function App() {
+  return <h1>GitHub Actions test v1</h1>;
+}
+
+export default App;
+```
+
+##### 1-2.1.2. .eslintrc.js 수정
+
+###### ./src/.eslintrc.js
+
+- 수정 후
+
+```jsx
+:
+rules: {
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-filename-extension': 'off'
+  },
+:
+```
+
+##### 1-2.1.3. 결과1: 정상 배포 완료
+
+- 재배포
+
+![https://media.discordapp.net/attachments/1181071567963312128/1181546927901380748/Untitled.png?ex=65c20dd3&is=65af98d3&hm=ed6f5fecd275d9c31db4cc70de152cd80b58ea1a7fb02ae2f6afbf93c068c915&=&format=webp&quality=lossless&width=687&height=81](https://media.discordapp.net/attachments/1181071567963312128/1181546927901380748/Untitled.png?ex=65c20dd3&is=65af98d3&hm=ed6f5fecd275d9c31db4cc70de152cd80b58ea1a7fb02ae2f6afbf93c068c915&=&format=webp&quality=lossless&width=687&height=81)
+
+![https://media.discordapp.net/attachments/1181071567963312128/1181546960801505360/Untitled.png?ex=65c20ddb&is=65af98db&hm=70cfb34c66aafddb204317dd2d790b889e8358235e890221634e4ee4e030f08d&=&format=webp&quality=lossless&width=511&height=437](https://media.discordapp.net/attachments/1181071567963312128/1181546960801505360/Untitled.png?ex=65c20ddb&is=65af98db&hm=70cfb34c66aafddb204317dd2d790b889e8358235e890221634e4ee4e030f08d&=&format=webp&quality=lossless&width=511&height=437)
+
+- 버킷 웹 사이트 엔드포인트로 접근
+
+![https://media.discordapp.net/attachments/1181071567963312128/1181547189453979708/Untitled.png?ex=65c20e12&is=65af9912&hm=f7b4e35d3058e9b3f2a2c8b359cbfa385d24e3864b77cb2cbaa23106007582dd&=&format=webp&quality=lossless&width=687&height=241](https://media.discordapp.net/attachments/1181071567963312128/1181547189453979708/Untitled.png?ex=65c20e12&is=65af9912&hm=f7b4e35d3058e9b3f2a2c8b359cbfa385d24e3864b77cb2cbaa23106007582dd&=&format=webp&quality=lossless&width=687&height=241)
+![Untitled](ESLint%20f65e20751f2843dda647a638fadb57df/Untitled.png)
+
+</details>
+
+<details>
+
+<summary>Case2. API response</summary>
+
+### 2-1. 상황: API관련 JSX 파일 분리
+
+#### 2-1.1. 분리 후 Axios의 응답을 console에서 확인
+
+##### 2-1.1.1. 문제 발생: console에서 조회 불가
+
+- 분리된 API 파일(StorePostApi.jsx)에서는 response 로그를 남길 경우 나오지만react파일(StorePage.jsx)에서 res 값을 찍을 경우 나오지 않음
+
+##### 2-1.1.2. StorePostApi.jsx 확인
+
+###### ./src/api/auth/signup/StorePostApi.jsx
+
+```jsx
+:
+StorePostApi(data)
+.then(res =>{
+  console.log("res",res)
+
+  if(res){
+    setUserCheck(true);
+
+    setTimeout(() => {
+      navigate('/signup/stores/pos');
+    }, 500);
+
+  } else{
+    throw new Error("토큰이 없습니다")
+  }
+})
+.catch(err=>{
+  console.error('API 호출 또는 토큰 발급 실패:',err)
+})
+:
+```
+
+![https://blog.kakaocdn.net/dn/eckGyz/btsDuTJWyrJ/jPOgBwb8RKIHjrgs7hwfC1/img.png](https://blog.kakaocdn.net/dn/eckGyz/btsDuTJWyrJ/jPOgBwb8RKIHjrgs7hwfC1/img.png)
+
+![https://blog.kakaocdn.net/dn/cisp1c/btsDBwzaHnE/UIskKatU9i2wic8pYsq84k/img.png](https://blog.kakaocdn.net/dn/cisp1c/btsDBwzaHnE/UIskKatU9i2wic8pYsq84k/img.png)
+
+### 2-2. 해결
+
+#### 2-2.1. 해결시도1 (해결완료): StorePostApi.jsx에서 직접적으로 응답을 사용
+
+##### 2-2.1.1. **StorePostApi.jsx 수정**
+
+##### ./src/api/auth/signup/StorePostApi.jsx
+
+- 수정 후
+
+![https://blog.kakaocdn.net/dn/wNQrn/btsDAbvNRUL/JVZWzVzCeX0D3haYIK34P0/img.png](https://blog.kakaocdn.net/dn/wNQrn/btsDAbvNRUL/JVZWzVzCeX0D3haYIK34P0/img.png)
+
+##### 2-2.1.2. 결과: Axios의 응답이 console에서 정상 출력되는걸 확인
+
+![https://blog.kakaocdn.net/dn/bZef7N/btsDBQK8sS1/itXmK8mpXKtaa56BjnETD1/img.png](https://blog.kakaocdn.net/dn/bZef7N/btsDBQK8sS1/itXmK8mpXKtaa56BjnETD1/img.png)
+
+</details>
+
+<details>
+
+<summary>Case3. useEffect</summary>
+
+### 3-1. useEffect를 이용하여 PosItem 컴포넌트 렌더링 설정
+
+#### 3-1.1. PosCategory 새로 등록
+
+##### 3-1.1.1. 문제발생: 카테고리를 새로 등록하고 해당 카테고리를 클릭하면 정보가 안 나옴
+
+###### ./src/components/pos/PosItem.jsx
+
+```jsx
+:
+useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const itemData = await ItemGetApi();    // [GET: 카테고리,  실시간 렌더링]
+      setItems(itemData); // 가져온 아이템 목록으로 상태 업데이트
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // selectedCategoryId가 변경될 때마다 새로운 아이템 목록을 가져옴
+  fetchItems();
+}, [selectedCategoryId]);
+:
+```
+
+### 3-2. 해결
+
+#### 3-2.1. 해결시도1 : 예외 처리
+
+##### 3-2.1.1. 해결 아이디어
+
+- PosPage내에서 상태 변동이 있으니 그 props를 받아오는 PosItem에서 한 번 더 useEffect 해야댐
+- 새로운 계정으로 회원가입하면 category, item이 빈 배열로 생성
+  -> null, undefined 등의 예외처리를 해야함
+
+##### 3-2.1.2. PosItem.jsx 수정
+
+###### ./src/components/pos/PosItem.jsx
+
+```jsx
+:
+useEffect(() => {
+  if (selectedCategoryId !== null && items && items.categories && items.categories.length > 0) {
+    // 선택된 카테고리 또는 아이템 배열의 길이가 변경될 때 editModes를 false 값으로 초기화
+    setEditModes(Array(items.categories.length).fill(false));
+  }
+}, [selectedCategoryId, items?.categories?.length]);
+
+useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const itemData = await ItemGetApi();    // [GET: 카테고리,  실시간 렌더링]
+      setItems(itemData); // 가져온 아이템 목록으로 상태 업데이트
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // selectedCategoryId가 변경될 때마다 새로운 아이템 목록을 가져옴
+  fetchItems();
+}, [selectedCategoryId]);
+:
+```
+
+#### 3-2.2. 해결시도2: 비동기 처리
+
+##### 3-2.2.1. 해결 아이디어
+
+- useEffect가 한 파일 내에 여러 개 일때는 위에서부터 아래로 진행된다 (비동기적으로)
+
+##### 3-2.2.2. PosItem.jsx 수정
+
+###### ./src/components/pos/PosItem.jsx
+
+```jsx
+:
+useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const itemData = await ItemGetApi();    // [GET: 카테고리,  실시간 렌더링]
+      setItems(itemData); // 가져온 아이템 목록으로 상태 업데이트
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // selectedCategoryId가 변경될 때마다 새로운 아이템 목록을 가져옴
+  fetchItems();
+}, [selectedCategoryId]);
+
+useEffect(() => {
+  if (selectedCategoryId !== null && items && items.categories && items.categories.length > 0) {
+    // 선택된 카테고리 또는 아이템 배열의 길이가 변경될 때 editModes를 false 값으로 초기화
+    setEditModes(Array(items.categories.length).fill(false));
+  }
+}, [selectedCategoryId, items?.categories?.length]);
+:
+```
+
+</details>
+
+<details>
+
+<summary>Case4. CloudFront</summary>
+
+### 4-1. 상황: SSL 인증서를 적용하여 통신 URI가 `https://api.salesync.site`로 변경됨
+
+#### 4-1.1. 해당하는 URI에 맞춰 JS 요청 엔드포인트 변경
+
+##### 4-1.1.1. BaseUrl.jsx 수정
+
+###### ./src/api/BaseUrl.jsx
+
+- 수정 전
+
+```jsx
+const URL = "http://api.salesync.site";
+
+export default URL;
+```
+
+- 수정 후
+
+```jsx
+const URL = "https://api.salesync.site";
+
+export default URL;
+```
+
+##### 4-1.1.2.문제 발생: 통신 오류 및 데이터 조회 불가
+
+- 분명 `https`로 변경했으나 `http`로 통신이 감
+
+![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled.png)
+
+![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled%201.png)
+
+### 4-2. 해결
+
+#### 4-2.1. 해결시도1: URI를 `//`로 시작하도록 변경
+
+- 참조: [https://velog.io/@shin6949/HTTPS에서-HTTP-요청-블락-에러-해결하기](https://velog.io/@shin6949/HTTPS%EC%97%90%EC%84%9C-HTTP-%EC%9A%94%EC%B2%AD-%EB%B8%94%EB%9D%BD-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0)\*\*
+
+##### 4-2.1.1. BaseUrl.jsx 재수정
+
+###### ./src/api/BaseUrl.jsx
+
+- 수정 후
+
+```jsx
+const URL = "//api.salesync.site";
+
+export default URL;
+```
+
+##### 4-2.1.2. 결과1: 여전히 `http`로 통신이 되는 문제 발생
+
+![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled%202.png)
+
+![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled%203.png)
+
+#### 4-2.2. 해결시도2 (해결완료): CloudFront 캐시 제거
+
+##### 4-2.2.1. 해결 아이디어
+
+- CloudFront는 CDN으로 정적 파일이 남아있어서 이전에 사용한 **`http`** 주소로 캐시된 것이 업데이트 되지 않음.
+
+##### 4-2.2.2. BaseUrl.jsx 수정
+
+###### ./src/api/BaseUrl.js
+
+- 수정 후
+
+```jsx
+const URL = "https://api.salesync.site";
+
+export default URL;
+```
+
+##### 4-2.2.3. CloudFront 캐시 제거 스크립트 추가
+
+###### ./.github/workflows/deploy.yml
+
+- 수정 후
+
+```yaml
+name: Deploy to Amazon S3 bucket
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  AWS_REGION: ap-northeast-2
+  S3_BUCKET_NAME: salesync.site
+
+  CLOUDFRONT_NAME: E3P5E4B2X3UGOU
+
+: - name: CloudFront delete cache
+    uses: chetan/invalidate-cloudfront-action@v2
+    env:
+      DISTRIBUTION: ${{ env.CLOUDFRONT_NAME }}
+      PATHS: "/*"
+      AWS_REGION: ${{ env.AWS_REGION }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+```
+
+##### 4-2.2.4. 결과2: `https` 통신되며 정상 작동 확인
+
+![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled%204.png)
+
+</details>
+
+<details>
+
+<summary>Case5. Recoil</summary>
+
+### 5-1. **Recoil을 사용하여 전역 상태 관리**
+
+#### 5-1.1 Route 관련 JSX 파일에서 useRecoilState를 사용
+
+##### 5-1.1.1. 문제 발생: 원치 않는 페이지로 이동
+
+- 회원가입 이후 Recoil을 활용하여 회원 여부를 확인하고, PrivateRoute 및 PublicRoute에서 useRecoilState를 사용
+
+- → 렌더링된 페이지 이후에 PrivateRoute와 PublicRoute가 다시 실행되어 의도치 않은 페이지로 이동하는 문제가 발생
+
+### 5-2. 해결
+
+#### 5-2.1. 해결시도1: Recoil 변수를 사용하지 않고 token의 유무로 판단
+
+##### 5-2.1.1. PrivateRoute.jsx PublicRoute.jsx 수정
+
+###### ./src/routes/PrivateRoute.jsx ./src/routes/PublicRoute.jsx
+
+- 수정 후
+
+```jsx
+:
+// PublicRoute.jsconst userCheck = useRecoilValue(UserCheckState)
+    return userCheck ? element : <Navigate replace to="/"/>;
+
+// 수정
+
+    const tokenCheck = localStorage.getItem('access_token')
+    return tokenCheck !==null ? element : <Navigate replace to="/"/>;
+:
+```
+
+##### 5-2.1.2. 결과1: PrivateRoute와 로그아웃 오류
+
+- PrivateRoute가 2번 실행됨
+- 로그아웃 기능이 안됨
+
+![https://blog.kakaocdn.net/dn/Qysjj/btsDrmZAXiZ/1AFkX1W0zjL5yN7gOYYnrK/img.png](https://blog.kakaocdn.net/dn/Qysjj/btsDrmZAXiZ/1AFkX1W0zjL5yN7gOYYnrK/img.png)
+
+#### 5-2.2. 해결시도2 (해결완료): 로그인 부분 및 특정 조건 추가
+
+##### 5-2.2.1. Header.jsx 수정
+
+###### ./src/componenets/common/Header.jsx
+
+- 수정 후
+
+```jsx
+:
+const logout=()=>{
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('csrf_token');
+    tokenCheckfunc()
+}
+const tokenCheckfunc=()=>{
+    const tokenCheck = localStorage.getItem('access_token')
+    console.log("tokenCheckfunc",tokenCheck)
+
+    if(tokenCheck !== null){
+        setUserCheck(true)
+    }else{
+        setUserCheck(false)
+    }
+}
+
+// useEffect(()=>{//     tokenCheckfunc()// },[userCheck])
+
+수정
+
+ const logout=()=>{
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('csrf_token');
+    setUserCheck(false)
+    navigate('/')
+}
+:
+```
+
+##### 5-2.2.2. 해결 아이디어
+
+- userCheck를 true로 변경 후 useEffect 가 실행되기때문에 privateRoute가 실행되어 home으로 라우팅 됨
+- 조건을 추가하여 카테고리 비어있을 경우 pospage 머뭄
+
+##### 5-2.2.3. PosCategory.jsx 수정
+
+###### ./src/componenets/pos/PosCategory.jsx
+
+- 수정 후
+
+```jsx
+:
+  useEffect(()=>{
+    if(categories.length == 0){
+      setCategoryState(true)
+      console.log("setCategoryState(true)",categories.length)
+    }else{
+      setCategoryState(false)
+      console.log("setCategoryState(false)",categories.length)
+    }
+  },[categories])
+
+// Header.js//kiosk 상태const [isKiosk , setIsKiosk] = useRecoilState(KioskState)
+// 카테고리 데이터 상태 체크 [0인경우 true]const [categoryState, setCategoryState] = useRecoilState(CategoryState)
+useEffect(()=>{
+    const checkCategory = async () => {
+        try{
+            const category = await CategoryGetApi();
+            if(category.categories.length !== 0){
+                setCategoryState(false)
+            }else{
+                setCategoryState(true)
+            }
+        } catch(err){
+            console.log(err)
+        }
+    }
+    checkCategory()
+},[])
+
+useEffect(() => {
+
+// isKiosk 값이 변경될 때마다 실행되는 useEffect를 이용하여 라우팅을 수행합니다.if (isKiosk) {
+        navigate('/kiosk');
+
+    else if(!isKiosk && !categoryState){
+        console.log("Header.js - useEffect[isKiosk] - !isKiosk")
+        navigate('/home')
+    }
+
+}, [isKiosk]);
+
+// CategoryState.js - recoilimport { atom } from "recoil";
+
+export const CategoryState = atom({
+    key: "CategoryState",
+    default: false
+});
+:
+```
+
+</details>
+
+<details>
+
+<summary>Case6. Rendering</summary>
+
+### 6-1. 상황: DashboardPage에서 Consulting 컴포넌트를 적용
+
+#### 6-1.1. 버튼에 OnClick 이벤트를 이용해 Consulting 활성화
+
+##### 6-1.1.1. DashboardPage.jsx 수정
+
+###### ./src/pages/DashboardPage.jsx
+
+- 수정 후
+
+```
+:
+   </LineContainer>
+  </DashboardDiv>
+  <ConsultingButton type='button' onClick={handlerConsulting}>컨설팅</ConsultingButton>
+</ComponentDiv>
+:
+```
+
+##### 6-1.1.2. 문제 발생: 너무 많은 리렌더링
+
+![Untitled](Rendering%204b74e38669074613a25ad69d733518a8/Untitled.png)
+
+### 6-2. 해결
+
+#### 6-2.1. 해결시도1: date의 값을 확정짓고 다음 컴포넌트의 props로 넘겨줌
+
+##### 6-2.1.1. 해결 아이디어
+
+- useState로 상태관리하는 date가 여기저기 걸려있음 - Calendar, PieChart, LineChart, Consulting API(3개)
+- date를 props로 다른 페이지(or 컴포넌트)에 고정된 상수로 전달
+  → 변수 date의 의존성을 제거하여 렌더링 문제 해결
+
+##### 6-2.1.2. DashboardPage.jsx 수정
+
+###### ./src/pages/DashboardPage.jsx
+
+- 수정 후
+
+```jsx
+<ConsultingContainer>
+  <ConsultingButton type="button" onClick={openConsult}>
+    컨설팅
+  </ConsultingButton>
+</ConsultingContainer>
+```
+
+##### 6-2.1.3. 결과1: 새로운 페이지(팝업 형식)으로 렌더링하고 고정된 상수(date)를 전달하니 정상 작동
+
+![Untitled](Rendering%204b74e38669074613a25ad69d733518a8/Untitled%201.png)
+
+</details>
