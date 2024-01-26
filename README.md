@@ -119,7 +119,7 @@
 | JSX |- 보기 쉽고 가독성이 좋은 JSX 형식의 코드를 사용했습니다. <br>- 높은 활용도를 위해 JSX로 일부 컴포넌트 로직을 구현했습니다.  |
 |React|- 재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> - React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
 |Recoil|- 코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
-|Axios|-A PI 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. <br>- 서버와의 데이터 통신을 비동기적으로 처리했습니다.|
+|Axios|- API 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. <br>- 서버와의 데이터 통신을 비동기적으로 처리했습니다.|
 |styled components|- CSS를 별도의 파일로 두지 않고 하나의 모듈로 관리하기 위해 **CSS-in-JS** 방식을 채택했습니다. <br>- 컴포넌트의 재사용을 위해 styled-components를 선정했습니다.|
 |AWS S3|- 정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. <br>- 가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.|
 |CloudFront|- Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
@@ -165,7 +165,7 @@
 
 ##### 1-1.1.1. 문제 발생: GitHub Actions로 배포시 Lint 에러로 인해 컴파일 불가
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-1.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-1.jpg">
 
 ```
 Failed to compile.
@@ -218,15 +218,15 @@ rules: {
 
 - 재배포
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-2.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-2.jpg">
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-3.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-3.jpg">
 
 - 버킷 웹 사이트 엔드포인트로 접근
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-4.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-4.jpg">
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-5.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-5.jpg">
 
 </details>
 
@@ -269,9 +269,9 @@ StorePostApi(data)
 :
 ```
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-1.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-1.jpg">
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-2.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-2.jpg">
 
 ### 2-2. 해결
 
@@ -283,11 +283,11 @@ StorePostApi(data)
 
 - 수정 후
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-3.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-3.jpg">
 
 ##### 2-2.1.2. 결과: Axios의 응답이 console에서 정상 출력되는걸 확인
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-4.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-4.jpg">
 
 </details>
 
@@ -429,9 +429,9 @@ export default URL;
 
 - 분명 `https`로 변경했으나 `http`로 통신이 감
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-1.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-1.jpg">
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-2.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-2.jpg">
 
 ### 4-2. 해결
 
@@ -453,9 +453,9 @@ export default URL;
 
 ##### 4-2.1.2. 결과1: 여전히 `http`로 통신이 되는 문제 발생
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-3.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-3.jpg">
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-4.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-4.jpg">
 
 #### 4-2.2. 해결시도2 (해결완료): CloudFront 캐시 제거
 
@@ -506,7 +506,7 @@ env:
 
 ##### 4-2.2.4. 결과2: `https` 통신되며 정상 작동 확인
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-5.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-5.jpg">
 
 </details>
 
@@ -551,7 +551,7 @@ env:
 - PrivateRoute가 2번 실행됨
 - 로그아웃 기능이 안됨
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting5-1.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting5-1.jpg">
 
 #### 5-2.2. 해결시도2 (해결완료): 로그인 부분 및 특정 조건 추가
 
@@ -681,7 +681,7 @@ export const CategoryState = atom({
 
 ##### 6-1.1.2. 문제 발생: 너무 많은 리렌더링
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting6-1.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting6-1.jpg">
 
 ### 6-2. 해결
 
@@ -709,6 +709,6 @@ export const CategoryState = atom({
 
 ##### 6-2.1.3. 결과1: 새로운 페이지(팝업 형식)으로 렌더링하고 고정된 상수(date)를 전달하니 정상 작동
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting6-2.jpg"
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting6-2.jpg">
 
 </details>
