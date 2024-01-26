@@ -250,8 +250,6 @@ rules: {
 :
 StorePostApi(data)
 .then(res =>{
-  console.log("res",res)
-
   if(res){
     setUserCheck(true);
 
@@ -308,7 +306,8 @@ StorePostApi(data)
 useEffect(() => {
   const fetchItems = async () => {
     try {
-      const itemData = await ItemGetApi();    // [GET: 카테고리,  실시간 렌더링]
+      const itemData = await ItemGetApi();
+
       setItems(itemData); // 가져온 아이템 목록으로 상태 업데이트
     } catch (err) {
       console.error(err);
@@ -375,7 +374,8 @@ useEffect(() => {
 useEffect(() => {
   const fetchItems = async () => {
     try {
-      const itemData = await ItemGetApi();    // [GET: 카테고리,  실시간 렌더링]
+      const itemData = await ItemGetApi();
+
       setItems(itemData); // 가져온 아이템 목록으로 상태 업데이트
     } catch (err) {
       console.error(err);
@@ -536,13 +536,16 @@ env:
 
 ```jsx
 :
-// PublicRoute.jsconst userCheck = useRecoilValue(UserCheckState)
-    return userCheck ? element : <Navigate replace to="/"/>;
+// PublicRoute.js
+  const userCheck = useRecoilValue(UserCheckState)
+  
+  return userCheck ? element : <Navigate replace to="/"/>;
 
 // 수정
 
-    const tokenCheck = localStorage.getItem('access_token')
-    return tokenCheck !==null ? element : <Navigate replace to="/"/>;
+  const tokenCheck = localStorage.getItem('access_token')
+  
+  return tokenCheck !==null ? element : <Navigate replace to="/"/>;
 :
 ```
 
@@ -564,30 +567,29 @@ env:
 ```jsx
 :
 const logout=()=>{
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('csrf_token');
-    tokenCheckfunc()
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('csrf_token');
+  
+  tokenCheckfunc()
 }
 const tokenCheckfunc=()=>{
-    const tokenCheck = localStorage.getItem('access_token')
-    console.log("tokenCheckfunc",tokenCheck)
+  const tokenCheck = localStorage.getItem('access_token')
 
-    if(tokenCheck !== null){
-        setUserCheck(true)
-    }else{
-        setUserCheck(false)
-    }
+  if(tokenCheck !== null){
+      setUserCheck(true)
+  }else{
+      setUserCheck(false)
+  }
 }
-
-// useEffect(()=>{//     tokenCheckfunc()// },[userCheck])
 
 수정
 
- const logout=()=>{
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('csrf_token');
-    setUserCheck(false)
-    navigate('/')
+const logout=()=>{
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('csrf_token');
+
+  setUserCheck(false)
+  navigate('/')
 }
 :
 ```
@@ -605,18 +607,19 @@ const tokenCheckfunc=()=>{
 
 ```jsx
 :
-  useEffect(()=>{
-    if(categories.length == 0){
-      setCategoryState(true)
-      console.log("setCategoryState(true)",categories.length)
-    }else{
-      setCategoryState(false)
-      console.log("setCategoryState(false)",categories.length)
-    }
-  },[categories])
+useEffect(()=>{
+  if(categories.length == 0){
+    setCategoryState(true)
+  } else{
+    setCategoryState(false)
+  }
+},[categories])
 
-// Header.js//kiosk 상태const [isKiosk , setIsKiosk] = useRecoilState(KioskState)
-// 카테고리 데이터 상태 체크 [0인경우 true]const [categoryState, setCategoryState] = useRecoilState(CategoryState)
+// Header.js
+//kiosk 상태
+const [isKiosk , setIsKiosk] = useRecoilState(KioskState)
+// 카테고리 데이터 상태 체크 [0인경우 true]
+const [categoryState, setCategoryState] = useRecoilState(CategoryState)
 useEffect(()=>{
     const checkCategory = async () => {
         try{
@@ -634,23 +637,21 @@ useEffect(()=>{
 },[])
 
 useEffect(() => {
+  // isKiosk 값이 변경될 때마다 실행되는 useEffect를 이용하여 라우팅을 수행합니다.
+  if (isKiosk) {
+    naviQgate('/kiosk');
 
-// isKiosk 값이 변경될 때마다 실행되는 useEffect를 이용하여 라우팅을 수행합니다.if (isKiosk) {
-        navigate('/kiosk');
+  } else if(!isKiosk && !categoryState){
+    navigate('/home')
+  }}, [isKiosk]);
 
-    else if(!isKiosk && !categoryState){
-        console.log("Header.js - useEffect[isKiosk] - !isKiosk")
-        navigate('/home')
-    }
+  // CategoryState.js - recoil
+  import { atom } from "recoil";
 
-}, [isKiosk]);
-
-// CategoryState.js - recoilimport { atom } from "recoil";
-
-export const CategoryState = atom({
-    key: "CategoryState",
-    default: false
-});
+  export const CategoryState = atom({
+      key: "CategoryState",
+      default: false
+  });
 :
 ```
 
@@ -670,7 +671,7 @@ export const CategoryState = atom({
 
 - 수정 후
 
-```
+```jsx
 :
    </LineContainer>
   </DashboardDiv>
