@@ -116,18 +116,18 @@
 
 |Tech|Explanation|
 |:---:|:---|
-| jsx | dd |
-|React|-재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> -React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
-|Recoil|-코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
-|Axios|-API 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. <br>-서버와의 데이터 통신을 비동기적으로 처리했습니다.|
-|styled components|-CSS를 별도의 파일로 두지 않고 하나의 모듈로 관리하기 위해 **CSS-in-JS** 방식을 채택했습니다. <br>-컴포넌트의 재사용을 위해 styled-components를 선정했습니다.|
-|AWS S3|-정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. <br>-가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.|
-|CloudFront|-Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
-|GitHub Actions|-손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.|
-| BFF | -응답 데이터를 클라이언트에서 요구되는 데이터로 파싱했습니다. <br>-데이터를 전송하는 과정에서 민감하거니 불필요한 데이터를 숨겼습니다. |
-| react-calendar | -월별, 주별, 일별 등 다양한 표현 방식과 달력의 상태 관리를 용이하게 하기 위해 react-calendar를 선택했습니다. <br> -사용자에게 달력으로서 최적의 편리함을 제공합니다. |
-| react-modal | -각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다. |
-| recharts | -원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
+| JSX |- 보기 쉽고 가독성이 좋은 JSX 형식의 코드를 사용했습니다. <br>- 높은 활용도를 위해 JSX로 일부 컴포넌트 로직을 구현했습니다.  |
+|React|- 재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> - React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
+|Recoil|- 코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
+|Axios|-A PI 호출을 위해 내장함수인 FETCH 대신 Axios를 선정했습니다. <br>- 서버와의 데이터 통신을 비동기적으로 처리했습니다.|
+|styled components|- CSS를 별도의 파일로 두지 않고 하나의 모듈로 관리하기 위해 **CSS-in-JS** 방식을 채택했습니다. <br>- 컴포넌트의 재사용을 위해 styled-components를 선정했습니다.|
+|AWS S3|- 정적 파일로 구성된 React를 쉽게 호스팅할 수 있는 플랫폼인 Amazon S3 Bucket을 사용했습니다. <br>- 가용성이 용이하며, 사용자에게 빠른 성능을 제공합니다.|
+|CloudFront|- Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
+|GitHub Actions|- 손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.|
+| BFF | - 응답 데이터를 클라이언트에서 요구되는 데이터로 파싱했습니다. <br>- 데이터를 전송하는 과정에서 민감하거니 불필요한 데이터를 숨겼습니다. |
+| react-calendar | - 월별, 주별, 일별 등 다양한 표현 방식과 달력의 상태 관리를 용이하게 하기 위해 react-calendar를 선택했습니다. <br> - 사용자에게 달력으로서 최적의 편리함을 제공합니다. |
+| react-modal | - 각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다. |
+| recharts | - 원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
 
 ## ✏️ 네이밍 룰
 - 컴포넌트, 페이지, 팝업,  API, 스타일: PascalCase
@@ -165,7 +165,7 @@
 
 ##### 1-1.1.1. 문제 발생: GitHub Actions로 배포시 Lint 에러로 인해 컴파일 불가
 
-![https://media.discordapp.net/attachments/1181071567963312128/1181546686074601523/Untitled.png?ex=65c20d9a&is=65af989a&hm=45804aaf1f5d36656350ad6c38fc8dae6eaf0da956a2d39d70957f9b72310109&=&format=webp&quality=lossless&width=687&height=386](https://media.discordapp.net/attachments/1181071567963312128/1181546686074601523/Untitled.png?ex=65c20d9a&is=65af989a&hm=45804aaf1f5d36656350ad6c38fc8dae6eaf0da956a2d39d70957f9b72310109&=&format=webp&quality=lossless&width=687&height=386)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-1.jpg"
 
 ```
 Failed to compile.
@@ -218,14 +218,15 @@ rules: {
 
 - 재배포
 
-![https://media.discordapp.net/attachments/1181071567963312128/1181546927901380748/Untitled.png?ex=65c20dd3&is=65af98d3&hm=ed6f5fecd275d9c31db4cc70de152cd80b58ea1a7fb02ae2f6afbf93c068c915&=&format=webp&quality=lossless&width=687&height=81](https://media.discordapp.net/attachments/1181071567963312128/1181546927901380748/Untitled.png?ex=65c20dd3&is=65af98d3&hm=ed6f5fecd275d9c31db4cc70de152cd80b58ea1a7fb02ae2f6afbf93c068c915&=&format=webp&quality=lossless&width=687&height=81)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-2.jpg"
 
-![https://media.discordapp.net/attachments/1181071567963312128/1181546960801505360/Untitled.png?ex=65c20ddb&is=65af98db&hm=70cfb34c66aafddb204317dd2d790b889e8358235e890221634e4ee4e030f08d&=&format=webp&quality=lossless&width=511&height=437](https://media.discordapp.net/attachments/1181071567963312128/1181546960801505360/Untitled.png?ex=65c20ddb&is=65af98db&hm=70cfb34c66aafddb204317dd2d790b889e8358235e890221634e4ee4e030f08d&=&format=webp&quality=lossless&width=511&height=437)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-3.jpg"
 
 - 버킷 웹 사이트 엔드포인트로 접근
 
-![https://media.discordapp.net/attachments/1181071567963312128/1181547189453979708/Untitled.png?ex=65c20e12&is=65af9912&hm=f7b4e35d3058e9b3f2a2c8b359cbfa385d24e3864b77cb2cbaa23106007582dd&=&format=webp&quality=lossless&width=687&height=241](https://media.discordapp.net/attachments/1181071567963312128/1181547189453979708/Untitled.png?ex=65c20e12&is=65af9912&hm=f7b4e35d3058e9b3f2a2c8b359cbfa385d24e3864b77cb2cbaa23106007582dd&=&format=webp&quality=lossless&width=687&height=241)
-![Untitled](ESLint%20f65e20751f2843dda647a638fadb57df/Untitled.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-4.jpg"
+
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/1-5.jpg"
 
 </details>
 
@@ -268,9 +269,9 @@ StorePostApi(data)
 :
 ```
 
-![https://blog.kakaocdn.net/dn/eckGyz/btsDuTJWyrJ/jPOgBwb8RKIHjrgs7hwfC1/img.png](https://blog.kakaocdn.net/dn/eckGyz/btsDuTJWyrJ/jPOgBwb8RKIHjrgs7hwfC1/img.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-1.jpg"
 
-![https://blog.kakaocdn.net/dn/cisp1c/btsDBwzaHnE/UIskKatU9i2wic8pYsq84k/img.png](https://blog.kakaocdn.net/dn/cisp1c/btsDBwzaHnE/UIskKatU9i2wic8pYsq84k/img.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-2.jpg"
 
 ### 2-2. 해결
 
@@ -282,11 +283,11 @@ StorePostApi(data)
 
 - 수정 후
 
-![https://blog.kakaocdn.net/dn/wNQrn/btsDAbvNRUL/JVZWzVzCeX0D3haYIK34P0/img.png](https://blog.kakaocdn.net/dn/wNQrn/btsDAbvNRUL/JVZWzVzCeX0D3haYIK34P0/img.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-3.jpg"
 
 ##### 2-2.1.2. 결과: Axios의 응답이 console에서 정상 출력되는걸 확인
 
-![https://blog.kakaocdn.net/dn/bZef7N/btsDBQK8sS1/itXmK8mpXKtaa56BjnETD1/img.png](https://blog.kakaocdn.net/dn/bZef7N/btsDBQK8sS1/itXmK8mpXKtaa56BjnETD1/img.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/2-4.jpg"
 
 </details>
 
@@ -428,15 +429,15 @@ export default URL;
 
 - 분명 `https`로 변경했으나 `http`로 통신이 감
 
-![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-1.jpg"
 
-![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled%201.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-2.jpg"
 
 ### 4-2. 해결
 
 #### 4-2.1. 해결시도1: URI를 `//`로 시작하도록 변경
 
-- 참조: [https://velog.io/@shin6949/HTTPS에서-HTTP-요청-블락-에러-해결하기](https://velog.io/@shin6949/HTTPS%EC%97%90%EC%84%9C-HTTP-%EC%9A%94%EC%B2%AD-%EB%B8%94%EB%9D%BD-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0)\*\*
+- 참조: [https://velog.io/@shin6949/HTTPS에서-HTTP-요청-블락-에러-해결하기](https://velog.io/@shin6949/HTTPS%EC%97%90%EC%84%9C-HTTP-%EC%9A%94%EC%B2%AD-%EB%B8%94%EB%9D%BD-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0)
 
 ##### 4-2.1.1. BaseUrl.jsx 재수정
 
@@ -452,9 +453,9 @@ export default URL;
 
 ##### 4-2.1.2. 결과1: 여전히 `http`로 통신이 되는 문제 발생
 
-![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled%202.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-3.jpg"
 
-![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled%203.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-4.jpg"
 
 #### 4-2.2. 해결시도2 (해결완료): CloudFront 캐시 제거
 
@@ -505,7 +506,7 @@ env:
 
 ##### 4-2.2.4. 결과2: `https` 통신되며 정상 작동 확인
 
-![Untitled](CloudFront%2091e87e1137ed4d8eadb667e5ec548cae/Untitled%204.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-5.jpg"
 
 </details>
 
@@ -550,7 +551,7 @@ env:
 - PrivateRoute가 2번 실행됨
 - 로그아웃 기능이 안됨
 
-![https://blog.kakaocdn.net/dn/Qysjj/btsDrmZAXiZ/1AFkX1W0zjL5yN7gOYYnrK/img.png](https://blog.kakaocdn.net/dn/Qysjj/btsDrmZAXiZ/1AFkX1W0zjL5yN7gOYYnrK/img.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting5-1.jpg"
 
 #### 5-2.2. 해결시도2 (해결완료): 로그인 부분 및 특정 조건 추가
 
@@ -680,7 +681,7 @@ export const CategoryState = atom({
 
 ##### 6-1.1.2. 문제 발생: 너무 많은 리렌더링
 
-![Untitled](Rendering%204b74e38669074613a25ad69d733518a8/Untitled.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting6-1.jpg"
 
 ### 6-2. 해결
 
@@ -708,6 +709,6 @@ export const CategoryState = atom({
 
 ##### 6-2.1.3. 결과1: 새로운 페이지(팝업 형식)으로 렌더링하고 고정된 상수(date)를 전달하니 정상 작동
 
-![Untitled](Rendering%204b74e38669074613a25ad69d733518a8/Untitled%201.png)
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting6-2.jpg"
 
 </details>
