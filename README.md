@@ -429,9 +429,9 @@ export default URL;
 
 - 분명 `https`로 변경했으나 `http`로 통신이 감
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-1.jpg">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/4-1.jpg">
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-2.jpg">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/4-2.jpg">
 
 ### 4-2. 해결
 
@@ -453,9 +453,9 @@ export default URL;
 
 ##### 4-2.1.2. 결과1: 여전히 `http`로 통신이 되는 문제 발생
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-3.jpg">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/4-3.jpg">
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-4.jpg">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/4-4.jpg">
 
 #### 4-2.2. 해결시도2 (해결완료): CloudFront 캐시 제거
 
@@ -506,7 +506,7 @@ env:
 
 ##### 4-2.2.4. 결과2: `https` 통신되며 정상 작동 확인
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting4-5.jpg">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/4-5.jpg">
 
 </details>
 
@@ -551,7 +551,7 @@ env:
 - PrivateRoute가 2번 실행됨
 - 로그아웃 기능이 안됨
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting5-1.jpg">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/5-1.jpg">
 
 #### 5-2.2. 해결시도2 (해결완료): 로그인 부분 및 특정 조건 추가
 
@@ -681,7 +681,7 @@ export const CategoryState = atom({
 
 ##### 6-1.1.2. 문제 발생: 너무 많은 리렌더링
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting6-1.jpg">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/6-1.jpg">
 
 ### 6-2. 해결
 
@@ -709,6 +709,6 @@ export const CategoryState = atom({
 
 ##### 6-2.1.3. 결과1: 새로운 페이지(팝업 형식)으로 렌더링하고 고정된 상수(date)를 전달하니 정상 작동
 
-<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting6-2.jpg">
+<img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/6-2.jpg">
 
 </details>
