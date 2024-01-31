@@ -177,7 +177,7 @@
 
 <img src="https://github.com/ssg-salesync/.github/blob/main/assets/troubleshooting/githubflow.PNG">
 
-## Trouble Shooting
+## 🔧 Trouble Shooting
 
 <details>
 
