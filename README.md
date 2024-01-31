@@ -106,7 +106,7 @@
 >&nbsp;&nbsp;Salesync는 커스터마이징 가능한 웹 기반 POS를 제공합니다. sales는 판매, Sync는 Synchronization의 줄임말로 데이터 및 정보를 효율적으로 동기화하고 연동함을 의미합니다. 따라서 주문과 매출데이터를 강조하는 브랜드명으로 Salesync로 정했습니다.<br/>
 &nbsp;&nbsp;두 단어의 첫 글자인 S를 강조하여 브랜드의 시각적인 식별성을 높여 쉽게 기억하도록 설정했습니다. 로고의 색상을 블루로 선택하여 전체적인 브랜드 컬러와의 일관성을 유지하고 안정성과 신뢰성을 전달했습니다.
 
-## UI/UX
+## 🔍 Overview
 
 | 웰컴 페이지 | 회원가입 |
 | :--: | :--: |
@@ -171,7 +171,7 @@
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/cloudfront.jpeg" alt = "cloudfront" style="width: 30px;"> CloudFront|Amazon S3와 CDN을 구성하여 성능을 최적화하고, ACM을 사용하여 SSL 인증서를 관리하기 위해 AWS CloudFront를 사용했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/GitHubActions.png" alt = "GitHubActions" style="width: 30px;">GitHub Actions|손쉽게 워크플로우를 설정하고, 다양한 이벤트에 대한 트리거로 각 종 이슈의 원인을 탐색하기 위해 GitHub Actions로 파이프라인을 구성했습니다.| -->
 
-## 협업 전략
+## 🤼‍♂️ 협업 전략
 
 ### GitHub flow 방식 이용
 
