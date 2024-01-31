@@ -106,6 +106,26 @@
 >&nbsp;&nbsp;Salesync는 커스터마이징 가능한 웹 기반 POS를 제공합니다. sales는 판매, Sync는 Synchronization의 줄임말로 데이터 및 정보를 효율적으로 동기화하고 연동함을 의미합니다. 따라서 주문과 매출데이터를 강조하는 브랜드명으로 Salesync로 정했습니다.<br/>
 &nbsp;&nbsp;두 단어의 첫 글자인 S를 강조하여 브랜드의 시각적인 식별성을 높여 쉽게 기억하도록 설정했습니다. 로고의 색상을 블루로 선택하여 전체적인 브랜드 컬러와의 일관성을 유지하고 안정성과 신뢰성을 전달했습니다.
 
+## UI/UX
+
+| 웰컴 페이지 | 회원가입 |
+| :--: | :--: |
+| <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/welcome.gif" alt = "welcome gif" style="width: 450px;"> | <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/signup.gif" alt = "signup gif" style="width: 450px;"> |
+| **로그인** | **POS 커스터마이징 - 카테고리 등록** |
+| <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/login.gif" alt = "login gif" style="width: 450px;"> | <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/categoryAdd.gif" alt = "categoryAd gif" style="width: 450px;"> |
+| **POS 커스터마이징 - 아이템 등록** | **POS 메인 - 주문 내역 조회** |
+| <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/itemAdd.gif" alt = "itemAdd gif" style="width: 450px;"> | <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/orderList.gif" alt = "orederList gif" style="width: 450px;"> |
+| **POS 메인 - 주문 신규 등록** | **POS 결제 - 현금** |
+| <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/orderAdd.gif" alt = "orderAdd gif" style="width: 450px;"> | <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/payCash.gif" alt = "payCash gif" style="width: 450px;"> |
+| **POS 결제 - 카드** | **대시보드** |
+| <img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/payCard.gif" alt = "payCard gif" style="width: 450px;"> |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/dashboardSales.gif" alt = "dashboardSales gif" style="width: 450px;">|
+| **AI 컨설팅** ||
+|<img src="https://github.com/ssg-salesync/.github/blob/main/assets/page/consulting.gif" alt = "consulting gif" style="width: 450px;">||
+<p align="center">
+    <b>Salesync</b>는 MSA 기반 Cloud POS 서비스로 <b>어디서나 매장 관리를 할 수 있는 서비스</b>입니다.<br><br>
+    <a href=데모풀버전유튜브링크>Demo (Full ver.) 바로가기</a>
+</p>
+
 ## ⚒ 기술 스택
 
 <img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/frontTechStack.png" alt = "frontTechStack" style="width: 600px;">
