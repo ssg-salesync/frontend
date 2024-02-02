@@ -148,7 +148,7 @@
 | recharts | - 원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
 
 ## 📚 ERD
-<img src="sources/salesyncdb.png">
+<img src="https://github.com/ssg-salesync/backend/blob/main/sources/salesyncdb.png">
 각 서비스의 데이터베이스는 논리적으로 분리되어 있어, 다른 서비스의 데이터가 필요한 경우 내부 통신을 통해 이용
 
 ## ✏️ 네이밍 룰
