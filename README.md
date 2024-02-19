@@ -93,6 +93,22 @@
 - .prettierrc: 가독성 좋은 코드를 위한 컨벤션을 정의
 - package(-lock).json: 프로젝트 이름, 버전 및 라이브러리 목록이 표기
 
+## ✏️ 네이밍 룰
+- 컴포넌트, 페이지, 팝업,  API, 스타일: PascalCase
+- Recoil: {기능}State.jsx
+- Routing: Private(Public)Route.jsx
+- CSS: styled-components(CSS-in-JS)
+- 함수, 변수, 상수: camelCase
+- 익명 함수: arrow function
+- 이벤트 함수: on{이벤트}{기능}
+- API: {기능}{요청방식}Api.jsx
+- ESLint: .eslintrc.js에 airbnb 형식 적용
+- 컴포넌트 작성할 때 ⇒ 함수형 컴포넌트 사용
+- 이벤트핸들러는 handler로 시작하도록 작성
+- 변수명 작성할 때 이름 길어지더라도 무슨 뜻인지 의미를 나타내도록 작성
+    - handlerConfirm(x): 함수명만 보고 정확히 어떤 일을 하는지 알기 어려움
+    - handlerConfirmPasswordBlur: 함수명만 보고도 이 함수의 역할을 알 수 있음
+
 ## 🎨 디자인보드
 <img src="https://github.com/ssg-salesync/.github/blob/main/assets/designBoard.png" alt = "designBoard gif" style="max-width: 45%;">
 
@@ -237,22 +253,6 @@
 ## Amazon Web Service
 
 ![](https://github.com/ssg-salesync/.github/blob/main/assets/aws.png)
-
-## ✏️ 네이밍 룰
-- 컴포넌트, 페이지, 팝업,  API, 스타일: PascalCase
-- Recoil: {기능}State.jsx
-- Routing: Private(Public)Route.jsx
-- CSS: styled-components(CSS-in-JS)
-- 함수, 변수, 상수: camelCase
-- 익명 함수: arrow function
-- 이벤트 함수: on{이벤트}{기능}
-- API: {기능}{요청방식}Api.jsx
-- ESLint: .eslintrc.js에 airbnb 형식 적용
-- 컴포넌트 작성할 때 ⇒ 함수형 컴포넌트 사용
-- 이벤트핸들러는 handler로 시작하도록 작성
-- 변수명 작성할 때 이름 길어지더라도 무슨 뜻인지 의미를 나타내도록 작성
-    - handlerConfirm(x): 함수명만 보고 정확히 어떤 일을 하는지 알기 어려움
-    - handlerConfirmPasswordBlur: 함수명만 보고도 이 함수의 역할을 알 수 있음
 
 <!-- |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/react.png" alt = "react" style="width: 30px;"> <br> React|재사용 가능한 컴포넌트를 작성하여 개발 효율성을 높였습니다.<br> React Router를 사용하여 업데이트 된 부분만 새로 렌더링했습니다.|
 |<img src="https://github.com/ssg-salesync/.github/blob/main/assets/techstack/logo/recoil.png" alt = "recoil" style="width: 30px;"> <br> Recoil|코드 분할을 손상시키지 않고 앱 전역의 상태 관리하기 위해 Recoil을 선택했습니다.|
