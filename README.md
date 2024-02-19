@@ -147,7 +147,7 @@
 | react-modal | - 각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다. |
 | recharts | - 원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
 
-## Services
+## ✨ Services
 ### Store Service
 
 - 로그인
@@ -232,6 +232,11 @@
 ## 📚 ERD
 <img src="https://github.com/ssg-salesync/backend/blob/main/sources/salesyncdb.png">
 각 서비스의 데이터베이스는 논리적으로 분리되어 있어, 다른 서비스의 데이터가 필요한 경우 내부 통신을 통해 이용
+
+## ☁️ Infrastructures
+## Amazon Web Service
+
+![](https://github.com/ssg-salesync/.github/blob/main/assets/aws.png)
 
 ## ✏️ 네이밍 룰
 - 컴포넌트, 페이지, 팝업,  API, 스타일: PascalCase
