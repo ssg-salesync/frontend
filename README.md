@@ -147,6 +147,88 @@
 | react-modal | - 각 종 팝업을 위해 사용했으며, 이벤트 핸들링의 용이성과 중첩되어 열리는 것을 방지하는 모달 스택을 지원하는 react-modal을 사용했습니다. |
 | recharts | - 원형 그래프, 꺾은선 그래프 등 사용자가 직관적으로 이해하기 쉬운 대시보드 서비스를 위해 recharts를 사용했습니다. |
 
+## Services
+### Store Service
+
+- 로그인
+- 회원 가입 및 매장 정보 등륵
+- 매장 정보 조회 및 수정
+- 로그인 시 JWT 토큰 발급
+
+<details>
+<summary> Store 서비스 API 명세서</summary>
+<div markdown="1">
+    <img src="https://github.com/ssg-salesync/backend/blob/main/sources/store.png">
+</div>
+</details>
+
+### Item Service
+- 카테고리 및 아이템 등록
+- 카테고리 및 아이템 조회
+- 카테고리 및 아이템 수정
+- 카테고리 및 아이템 삭제
+
+<details>
+<summary> Item 서비스 API 명세서</summary>
+<div markdown="1">
+    <img src="https://github.com/ssg-salesync/backend/blob/main/sources/item.png">
+</div>
+</details>
+
+### Order Service
+- 주문 등록 및 수정
+- 미결제 테이블 조회
+- 주문 전체 취소
+- 일별 혹은 기간별 주문량 조회
+- Item 서비스와 내부 통신
+
+<details>
+<summary> Order 서비스 API 명세서</summary>
+<div markdown="1">
+    <img src="https://github.com/ssg-salesync/backend/blob/main/sources/order.png">
+</div>
+</details>
+
+### Sale Service
+- 전체 매출 조회
+- 일별 및 기간별 매출 조회
+- Order 서비스와 내부 통신
+
+<details>
+<summary> Sale 서비스 API 명세서</summary>
+<div markdown="1">
+    <img src="https://github.com/ssg-salesync/backend/blob/main/sources/sale.png">
+</div>
+</details>
+
+### Dashboard Service
+- 아이템 원가 입력 및 수정
+- 기간별 전체 매출 및 순이익 조회
+- 컨설팅 조회
+- Sale, Order, Item 서비스와 내부 통신
+- Consulting 서비스의 Kafka Producer가 송신한 이벤트 수신하는 Kafka Consumer
+- 하루 매출 정산 문자 전송
+
+<details>
+<summary> Dashboard 서비스 API 명세서</summary>
+<div markdown="1">
+    <img src="https://github.com/ssg-salesync/backend/blob/main/sources/dashboard.png">
+</div>
+</details>
+
+### Consulting Service
+- 컨설팅
+- Dashboard 서비스와 내부 통신
+- 비동기 처리 후 결과값 이벤트 버스로 송신하는 Kafka Producer
+- OpenAI API 사용을 위한 비동기 실행
+
+<details>
+<summary> Consulting 서비스 API 명세서</summary>
+<div markdown="1">
+    <img src="https://github.com/ssg-salesync/backend/blob/main/sources/consulting.png">
+</div>
+</details>
+
 ## 📚 ERD
 <img src="https://github.com/ssg-salesync/backend/blob/main/sources/salesyncdb.png">
 각 서비스의 데이터베이스는 논리적으로 분리되어 있어, 다른 서비스의 데이터가 필요한 경우 내부 통신을 통해 이용
